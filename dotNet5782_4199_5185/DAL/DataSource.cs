@@ -54,9 +54,9 @@ namespace IDAL.DO.DalObject
         internal static List<Customer> CustomersList = new List<Customer>();
         internal static List<Parcel> ParcelsList = new List<Parcel>();
 
-
-        const int MinRange = 111111111;
-        const int MaxRange = 999999999;
+           
+            const int MinRange = 111111111;
+            const int MaxRange = 999999999;
 
 
       
@@ -123,8 +123,13 @@ namespace IDAL.DO.DalObject
 
                 });
 
+                 internal class Config
+        {
+            public int RunIdParcel = 100001;
+        }
 
-            }
+    }
+}
         }
     }
 }
