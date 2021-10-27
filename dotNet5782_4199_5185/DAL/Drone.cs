@@ -13,7 +13,7 @@ namespace IDAL
             public int Id { get; set; }
             public string Model { get; set; }
             public string MaxWeight { get; set; }
-            public string Status { get; set; }
+            public string Status { get; set; } 
             public double Battary { get; set; }
         }
         
