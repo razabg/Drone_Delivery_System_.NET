@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IDAL.DO.DalObject;
+using System;
 
 
 
@@ -28,12 +29,14 @@ namespace ConsoleUI{
                             case MenuOptions.Add:
                                 Console.WriteLine("I want to add:\n1 - A station\n2 - A drone\n3 - A customer\n4 - A parcel\n 0 - Exit\n");
                                 EntitiesOptions entityChoceOption = (EntitiesOptions)int.Parse(Console.ReadLine());
+                                Functions func = new Functions();
                                 switch (entityChoceOption)
                                 {
                                     case EntitiesOptions.Station:
-                                       
+                                        func.AddStation();
                                         break;
                                     case EntitiesOptions.Drone:
+                                        func.AddDrone();
                                         break;
                                     case EntitiesOptions.Customer:
                                         break;

@@ -109,9 +109,13 @@ namespace IDAL.DO.DalObject
     
                 });
 
+                 internal class Config
+        {
+            public int RunIdParcel = 100001;
+        }
 
-                }
-            }
+    }
+}
         }
     }
 }
