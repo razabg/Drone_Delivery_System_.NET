@@ -7,9 +7,15 @@ namespace IDAL.DO
 {
     namespace DalObject
     {
-        
-       
-            internal class Config
+        public class Functions
+        {
+            static void AddStation()
+            {
+                DataSource.StationsList.Add(new Station());
+            }
+        }
+
+        internal class Config
             {
                 public int RunIdParcel = 100001;
             }
