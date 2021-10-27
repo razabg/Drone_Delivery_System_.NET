@@ -9,6 +9,9 @@ namespace Targil0
             Welcome4199();
             Welcome5185();
             Console.ReadKey();
+            int[] arr = new int[4] { 1, 2, 3, 4 };
+            arr[5] = 2;
+            Console.WriteLine($"{arr[5]}");
         }
 
         static partial void Welcome5185();
