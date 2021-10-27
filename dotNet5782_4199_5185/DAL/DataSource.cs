@@ -9,11 +9,27 @@ namespace IDAL.DO.DalObject
 {
     class DataSource
     {
-        public static Random rand = new Random();
-        //public string CarringAbility()
+        public enum TopWeight { Heavy = 1, Average = 2, Light = 3 };
+        public static Enum genRandTop()
+        {
+          
+        Random rand2 = new Random();
+            TopWeight RandomEnum = (TopWeight)rand2.Next(1, Enum.GetNames(typeof(TopWeight)).Length);
+            return RandomEnum;
+        }
         public enum DroneStatus { Available = 1, Busy = 2, TreatmentMode = 3 }
-        public enum MaxWeight { Heavy = 1, Average = 2, Light = 3 }
-        static MaxWeight RandomEnum = (MaxWeight)rand.Next(1, Enum.GetNames(typeof(string)).Length);
+        public static Enum genRandStatus()
+        {
+            Random rand3 = new Random();
+            DroneStatus RandomEnum = (DroneStatus)rand3.Next(1, Enum.GetNames(typeof(DroneStatus)).Length);
+            return RandomEnum;
+        }
+
+
+        public static Random rand = new Random();
+        
+        //TopWeight RandomEnum = (TopWeight)rand.Next(1, Enum.GetValues(typeof(string)).Length);
+
 
         internal static List<Drone> DronesList = new List<Drone>();
         internal static List<Station> StationsList = new List<Station>();
@@ -24,6 +40,7 @@ namespace IDAL.DO.DalObject
         const int MinRange = 111111111;
         const int MaxRange = 999999999;
 
+
         //public static string Status { get; private set; }
         public static int RandomIdFunc()
         {
@@ -33,9 +50,11 @@ namespace IDAL.DO.DalObject
         {
             return rand.Next(111111111, 999999999);
         }
+      
         static void Initialize()
         {
-
+    
+           
             for (int i = 0; i < 10; i++)
             {
                 StationsList.Add(new Station()
@@ -47,15 +66,18 @@ namespace IDAL.DO.DalObject
                     Lattitude = Coordinates()
                 });
 
+
                 DronesList.Add(new Drone()
                 {
                     Id = RandomIdFunc(),
-                    //Model = 
-                    MaxWeight = RandomEnum.ToString(),//(string)rand.Next((MaxWeight.Heavy, MaxWeight.Light),// have to check if the return value is a string type
+                    MaxWeight = genRandTop().ToString(),
+                    Status = genRandStatus().ToString(),
 
-                    Status = (string)(Enum.GetValues((Type)MaxWeight)[rand.Next(0, 2)]),//MaxWeight.[rand.Next(1,3)],
-                    Battary = (double)rand.Next(0, 100)
-                });
+
+                    // have to check if the return value is a string type
+
+
+                }) ;
 
                 CustomersList.Add(new Customer()
                 {
