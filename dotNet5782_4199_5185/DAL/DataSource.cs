@@ -13,21 +13,18 @@ namespace IDAL.DO.DalObject
         //public string CarringAbility()
         public enum MaxWeight { Heavy = 1, Average = 2, Light = 3 }
         static MaxWeight RandomEnum = (MaxWeight)rand.Next(1, Enum.GetNames(typeof(string)).Length);
-        
-            
+
+        public enum DroneStatus { Available = 1, Busy = 2, TreatmentMode = 3 }
+        internal static List<Drone> DronesList = new List<Drone>();
+        internal static List<Station> StationsList = new List<Station>();
+        internal static List<Customer> CustomersList = new List<Customer>();
+        internal static List<Parcel> ParcelsList = new List<Parcel>();
 
 
-    public enum DroneStatus { Available = 1, Busy = 2, TreatmentMode = 3 }
-            internal static List<Drone> DronesList = new List<Drone>();
-            internal static List<Station> StationsList = new List<Station>();
-            internal static List<Customer> CustomersList = new List<Customer>();
-            internal static List<Parcel> ParcelsList = new List<Parcel>();
+        const int MinRange = 111111111;
+        const int MaxRange = 999999999;
 
-
-            const int MinRange = 111111111;
-            const int MaxRange = 999999999;
-
-            //public static string Status { get; private set; }
+        //public static string Status { get; private set; }
         public static int RandomIdFunc()
         {
             return rand.Next(MinRange, MaxRange);
@@ -62,30 +59,30 @@ namespace IDAL.DO.DalObject
 
                 CustomersList.Add(new Customer()
                 {
-                    Id= RandomIdFunc(),
+                    Id = RandomIdFunc(),
                     Name = ,
-                    Phone=,
+                    Phone =,
                     Longitude = Coordinates(),
                     Latitude = Coordinates()
                 });
 
                 ParcelsList.Add(new Parcel
                 {
-                    Id= RandomIdFunc(),
+                    Id = RandomIdFunc(),
                     SenderId = RandomIdFunc(),
-                    TargetId = RandomIdFunc(), 
+                    TargetId = RandomIdFunc(),
                     Weight =
-                    Priority=
-                    DroneId= RandomIdFunc(),
+                    Priority =
+                    DroneId = RandomIdFunc(),
                     Scheduled =
-                    PickedUp=
-                    Delivered=
-                    Requested=
+                    PickedUp =
+                    Delivered =
+                    Requested =
 
                 });
 
 
             }
-        }   
-    }        
+        }
+    }
 }
