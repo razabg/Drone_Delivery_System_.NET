@@ -7,8 +7,12 @@ namespace IDAL.DO
 {
     namespace DalObject
     {
-        
-       
+
+
+        class MyClass
+        {
+            
+        }
             internal class Config
             {
                 public int RunIdParcel = 100001;

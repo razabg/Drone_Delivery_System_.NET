@@ -7,8 +7,21 @@ using System.Threading.Tasks;
 
 namespace IDAL.DO.DalObject
 {
-    class DataSource
+    class DataSource 
     {
+        /// random intel:
+        /// we made a few random functions in order to generate random information. like id,locations,phone number etc.
+        /// 
+        public enum PriorityStatus { fast=1,regular,emergency };                                                     
+
+        public static int genRandPriority()
+        {
+            Random rand4 = new Random();
+            int RandPri = (int)rand4.Next(1, Enum.GetNames(typeof(PriorityStatus)).Length);
+            return RandPri;
+        }
+
+
         public enum CustomerName { david  , shlomo, brook,barak,rachel,pnina,eyal,yosi,winston,leo,ayelet,rico,raz,addie };
 
         public static Enum genRandCustomer()
@@ -17,10 +30,6 @@ namespace IDAL.DO.DalObject
             CustomerName RandCustomer = (CustomerName)rand3.Next(1, Enum.GetNames(typeof(CustomerName)).Length);
             return RandCustomer;
         }
-
-
-
-
 
         public enum TopWeight { Heavy = 1, Average = 2, Light = 3 };
         public static Enum genRandTop()
@@ -50,7 +59,7 @@ namespace IDAL.DO.DalObject
         const int MaxRange = 999999999;
 
 
-        //public static string Status { get; private set; }
+      
         public static int RandomIdFunc()
         {
             return rand.Next(MinRange, MaxRange);
@@ -60,6 +69,10 @@ namespace IDAL.DO.DalObject
             return rand.Next(111111111, 999999999);
         }
       
+
+       /// <summary>
+       /// the initialize func making a fast inizialization of objects.
+       /// </summary>
         static void Initialize()
         {
     
@@ -94,18 +107,19 @@ namespace IDAL.DO.DalObject
                     Latitude = Coordinates()
                 });
 
+                DateTime currentDate = DateTime.Now;
                 ParcelsList.Add(new Parcel
                 {
                     Id = RandomIdFunc(),
                     SenderId = RandomIdFunc(),
                     TargetId = RandomIdFunc(),
-                    Weight =
-                    Priority =
+                    Weight = rand.Next(1, 300),
+                    Priority = genRandPriority(),
                     DroneId = RandomIdFunc(),
-                    Scheduled =
-                    PickedUp =
-                    Delivered =
-                    Requested =
+                    Scheduled = currentDate,
+                    PickedUp = currentDate,
+                    Delivered = currentDate,
+                    Requested = currentDate
 
                 });
 
