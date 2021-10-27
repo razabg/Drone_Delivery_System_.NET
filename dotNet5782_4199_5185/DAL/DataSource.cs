@@ -8,13 +8,12 @@ namespace IDAL.DO.DalObject
 {
     class DataSource
     {
-
         public static Random rand = new Random();
         //public string CarringAbility()
+        public enum DroneStatus { Available = 1, Busy = 2, TreatmentMode = 3 }
         public enum MaxWeight { Heavy = 1, Average = 2, Light = 3 }
         static MaxWeight RandomEnum = (MaxWeight)rand.Next(1, Enum.GetNames(typeof(string)).Length);
 
-        public enum DroneStatus { Available = 1, Busy = 2, TreatmentMode = 3 }
         internal static List<Drone> DronesList = new List<Drone>();
         internal static List<Station> StationsList = new List<Station>();
         internal static List<Customer> CustomersList = new List<Customer>();

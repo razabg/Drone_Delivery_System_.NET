@@ -18,7 +18,13 @@ namespace IDAL
 
             public override string ToString()
             {
-                return base.ToString();
+                string printDroneInfo = "";
+                printDroneInfo += $" the Id is {Id},\n";
+                printDroneInfo += $"the model is{Model},\n";
+                printDroneInfo += $"the MaxWeight is{MaxWeight},\n";
+                printDroneInfo += $"the Status is {Status},\n";
+                printDroneInfo += $"Battary left {Battary},\n";
+                return printDroneInfo;
             }
         }
         

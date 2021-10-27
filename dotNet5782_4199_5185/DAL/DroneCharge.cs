@@ -12,6 +12,16 @@ namespace IDAL
         {
             public int DroneId { get; set; }
             public int StationId { get; set; }
+
+            public override string ToString()
+            {
+                string printChargeInfo = "";
+                printChargeInfo += $" the DroneId is {DroneId},\n";
+                printChargeInfo += $"the StationId is{StationId},\n";
+                return printChargeInfo;
+            }
+
         }
+
     }
 }
