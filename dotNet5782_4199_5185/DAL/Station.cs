@@ -21,9 +21,9 @@ namespace IDAL
                 string printStationInfo = "";
                 printStationInfo += $" the Id is {Id},\n";
                 printStationInfo += $"the name is{Name},\n";
-                printStationInfo += $"Longitude {Phone},\n";
-                printStationInfo += $"Lattitude {Longitude},\n";
-                printStationInfo += $"ChargeSlots {Latitude},\n";
+                printStationInfo += $"Longitude {Longitude},\n";
+                printStationInfo += $"Lattitude {Lattitude},\n";
+                printStationInfo += $"ChargeSlots {ChargeSlots},\n";
                 return printStationInfo;
             }
 
