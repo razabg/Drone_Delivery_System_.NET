@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace IDAL.DO.DalObject
 {
     class DataSource
@@ -11,7 +12,7 @@ namespace IDAL.DO.DalObject
 
         public static Random rand = new Random();
         //public string CarringAbility()
-        public enum MaxWeight { Heavy = 1, Average = 2, Light = 3 }
+        enum MaxWeight { Heavy = 1, Average = 2, Light = 3 }
         static MaxWeight RandomEnum = (MaxWeight)rand.Next(1, Enum.GetNames(typeof(string)).Length);
 
         public enum DroneStatus { Available = 1, Busy = 2, TreatmentMode = 3 }
