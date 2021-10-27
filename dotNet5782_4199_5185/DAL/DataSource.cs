@@ -32,7 +32,7 @@ namespace IDAL.DO.DalObject
         {
             return rand.Next(MinRange, MaxRange);
         }
-        public static double coordinates()
+        public static double Coordinates()
         {
             return rand.Next(111111111, 999999999);
         }
@@ -46,8 +46,8 @@ namespace IDAL.DO.DalObject
                     Id = RandomIdFunc(),
                     Name = rand.Next(MinRange / 3, MaxRange / 3),
                     ChargeSlots = rand.Next(1, 100),
-                    Longitude = coordinates(),
-                    Lattitude = coordinates()
+                    Longitude = Coordinates(),
+                    Lattitude = Coordinates()
                 });
 
                 DronesList.Add(new Drone()
@@ -65,11 +65,24 @@ namespace IDAL.DO.DalObject
                     Id= RandomIdFunc(),
                     Name = ,
                     Phone=,
-                    Longitude = coordinates(),
-                    Latitude = coordinates()
+                    Longitude = Coordinates(),
+                    Latitude = Coordinates()
                 });
 
+                ParcelsList.Add(new Parcel
+                {
+                    Id= RandomIdFunc(),
+                    SenderId = RandomIdFunc(),
+                    TargetId = RandomIdFunc(), 
+                    Weight =
+                    Priority=
+                    DroneId= RandomIdFunc(),
+                    Scheduled =
+                    PickedUp=
+                    Delivered=
+                    Requested=
 
+                });
 
 
             }
