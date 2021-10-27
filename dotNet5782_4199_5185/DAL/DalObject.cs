@@ -27,9 +27,10 @@ namespace IDAL.DO
                     {
                         Id = rand.Next(MinRange, MaxRange),
                         Name = rand.Next(MinRange / 3, MaxRange / 3),
-                        ChargeSlots= rand.Next(1, 100),
-                        Longitude=rand.Next(111111111,999999999)
-                    }) 
+                        ChargeSlots = rand.Next(1, 100),
+                        Longitude = rand.Next(111111111, 999999999),
+                        Lattitude = rand.Next(111111111, 999999999)
+                    }); 
                 }
                 
 
