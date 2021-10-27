@@ -7,7 +7,9 @@ namespace IDAL.DO
 {
     namespace DalObject
     {
+        
         public enum MaxWeight { Heavy =1, Average=2, Light=3 }
+        
         public enum DroneStatus {Available=1, Busy=2, TreatmentMode=3 }
         public class DataSource
         {
