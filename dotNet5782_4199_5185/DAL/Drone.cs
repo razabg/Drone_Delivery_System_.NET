@@ -14,8 +14,7 @@ namespace IDAL
             public string Model { get; set; }
             public string MaxWeight { get; set; }
             public string Status { get; set; } 
-            public double Battary { get; set; }
-
+            
             public override string ToString()
             {
                 string printDroneInfo = "";

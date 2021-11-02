@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace IDAL.DO.DalObject
 {
-    class DataSource 
+    class DataSource
     {
         /// random intel:
         /// we made a few random functions in order to generate random information. like id,locations,phone number etc.
         /// 
-        public enum PriorityStatus { fast=1,regular,emergency };                                                     
+        public enum PriorityStatus { fast = 1, regular, emergency };
 
         public static int genRandPriority()
         {
@@ -22,7 +22,7 @@ namespace IDAL.DO.DalObject
         }
 
 
-        public enum CustomerName { david  , shlomo, brook,barak,rachel,pnina,eyal,yosi,winston,leo,ayelet,rico,raz,addie };
+        public enum CustomerName { david, shlomo, brook, barak, rachel, pnina, eyal, yosi, winston, leo, ayelet, rico, raz, addie };
 
         public static Enum genRandCustomer()
         {
@@ -34,8 +34,8 @@ namespace IDAL.DO.DalObject
         public enum TopWeight { Heavy = 1, Average = 2, Light = 3 };
         public static Enum genRandTop()
         {
-          
-        Random rand2 = new Random();
+
+            Random rand2 = new Random();
             TopWeight RandomEnum = (TopWeight)rand2.Next(1, Enum.GetNames(typeof(TopWeight)).Length);
             return RandomEnum;
         }
@@ -48,7 +48,7 @@ namespace IDAL.DO.DalObject
         }
         public static Random rand = new Random();
 
-     
+
         internal static List<Drone> DronesList = new List<Drone>();
         internal static List<Station> StationsList = new List<Station>();
         internal static List<Customer> CustomersList = new List<Customer>();
@@ -59,7 +59,7 @@ namespace IDAL.DO.DalObject
             const int MaxRange = 9999999;
 
 
-      
+
         public static int RandomIdFunc()
         {
             return rand.Next(MinRange, MaxRange);
@@ -68,16 +68,16 @@ namespace IDAL.DO.DalObject
         {
             return rand.Next(111111111, 999999999);
         }
-      
 
-       /// <summary>
-       /// the initialize func making a fast inizialization of objects.
-       /// </summary>
+
+        /// <summary>
+        /// the initialize func making a fast inizialization of objects.
+        /// </summary>
         static void Initialize()
         {
-    
-           
-            for (int i = 0; i < 10; i++)
+
+
+            for (int i = 0; i < 2; ++i)
             {
                 StationsList.Add(new Station()
                 {
@@ -87,17 +87,20 @@ namespace IDAL.DO.DalObject
                     Longitude = Coordinates(),
                     Lattitude = Coordinates()
                 });
-
-
+            }
+            for (int i = 0; i < 5; ++i)
+            {
                 DronesList.Add(new Drone()
                 {
                     Id = RandomIdFunc(),
                     MaxWeight = genRandTop().ToString(),
                     Status = genRandStatus().ToString(),
-                    Model =RandomIdFunc().ToString(),
-                    Battary = rand.Next(0,100)
-                }) ;
+                    Model = RandomIdFunc().ToString(),
 
+                });
+            }
+            for (int i = 0; i < 10; i++)
+            {
                 CustomersList.Add(new Customer()
                 {
                     Id = RandomIdFunc(),
@@ -122,14 +125,15 @@ namespace IDAL.DO.DalObject
                     Requested = currentDate
 
                 });
+            }
+        }
 
-                 internal class Config
+        internal class Config
         {
             public int RunIdParcel = 10000001;
         }
 
     }
 }
-        }
-    }
-}
+
+
