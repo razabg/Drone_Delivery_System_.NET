@@ -12,21 +12,21 @@ namespace IDAL.DO
             public void AddStation()
             {
                 Console.WriteLine("Please enter the station's ID:\n");
-                object ID = Console.ReadLine();
+                int ID = int.Parse(Console.ReadLine());
                 Console.WriteLine("Please enter the station's name:\n");
-                object NAME= Console.ReadLine();
+                int NAME= int.Parse(Console.ReadLine());
                 Console.WriteLine("Please enter the station's longitube:\n");
-                object LONGITUDE = Console.ReadLine();
+                double LONGITUDE =double.Parse( Console.ReadLine());
                 Console.WriteLine("Please enter the station's lattitude:\n");
-                object LATTITUDE = Console.ReadLine();
+                double LATTITUDE = double.Parse(Console.ReadLine());
                 Console.WriteLine("Please enter the station's chargeSlots:\n");
-                object CHARGESLOTS = Console.ReadLine();
+                int CHARGESLOTS = int.Parse(Console.ReadLine());
                 DataSource.StationsList.Add(new Station(){
-                    Id=(int)ID,
-                    Name= (int)NAME,
-                    Longitude= (double)LONGITUDE,
-                    Lattitude= (double)LATTITUDE,
-                    ChargeSlots=(int)CHARGESLOTS 
+                    Id=ID,
+                    Name= NAME,
+                    Longitude= LONGITUDE,
+                    Lattitude= LATTITUDE,
+                    ChargeSlots=CHARGESLOTS 
                 });
             }
             public void AddDrone()
