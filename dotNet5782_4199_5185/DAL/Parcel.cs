@@ -16,9 +16,9 @@ namespace IDAL
             public float Weight { get; set; }
             public int Priority { get; set; }
             public int DroneId { get; set; }
-            public DateTime Scheduled { get; set; }//drone pair
-            public DateTime PickedUp { get; set; }//time of collection
-            public DateTime Delivered { get; set; }//time of getting the parcel
+            public DateTime? Scheduled { get; set; }//drone pair
+            public DateTime? PickedUp { get; set; }//time of collection
+            public DateTime? Delivered { get; set; }//time of getting the parcel
             public DateTime Requested { get; set; }//time of creation
 
 
