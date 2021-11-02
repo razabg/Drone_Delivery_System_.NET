@@ -130,7 +130,7 @@ namespace IDAL.DO.DalObject
 
         internal class Config
         {
-            public int RunIdParcel = 10000001;
+            public static int RunIdParcel = 10000001;
         }
 
     }
