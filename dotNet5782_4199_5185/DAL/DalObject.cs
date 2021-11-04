@@ -101,6 +101,28 @@ namespace IDAL
                         Latitude = latitude,
                     });
                 }
+
+                public static void findAndPrint_Drone(int key) {
+                    Drone ForPrint= DataSource.DronesList.Find(x => x.Id == key);
+                    Console.WriteLine(ForPrint);
+                }
+                public static void findAndPrint_Customer(int key) {
+                    Customer ForPrint = DataSource.CustomersList.Find(x => x.Id == key);
+                    Console.WriteLine(ForPrint);
+                }
+                public static void findAndPrint_Parcel(int key) {
+                    Parcel ForPrint = DataSource.ParcelsList.Find(x => x.Id == key);
+                    Console.WriteLine(ForPrint);
+                }
+                public static void findAndPrint_Station(int key) {
+                    Station ForPrint = DataSource.StationsList.Find(x => x.Id == key);
+                    Console.WriteLine(ForPrint);
+                }
+                
+
+
+
+
             }
         }
     }
