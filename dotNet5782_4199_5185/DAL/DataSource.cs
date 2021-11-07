@@ -73,7 +73,7 @@ namespace IDAL.DO.DalObject
         /// <summary>
         /// the initialize func making a fast inizialization of objects.
         /// </summary>
-        static void Initialize()
+         static void Initialize()
         {
 
 
