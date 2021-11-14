@@ -14,11 +14,18 @@ namespace IDAL
             class DataSource
             {
 
+                /// <summary>
+                /// the lists of the entities
+                /// </summary>
+
                 internal static List<Drone> DronesList = new List<Drone>();
                 internal static List<Station> StationsList = new List<Station>();
                 internal static List<Customer> CustomersList = new List<Customer>();
                 internal static List<Parcel> ParcelsList = new List<Parcel>();
 
+                /// <summary>
+                /// the class config hold the variable run id parcel in order to give every new parcel its new id number
+                /// </summary>
                 internal class Config
                 {
                     public static int RunIdParcel = 10000001;

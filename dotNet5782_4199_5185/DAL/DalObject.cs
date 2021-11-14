@@ -13,7 +13,11 @@ namespace IDAL
         {
             public class DalObject
             {
-                public DalObject() { DataSource.Initialize(); }
+                public DalObject() { DataSource.Initialize(); } //ctor initialize the class and also run the initialize method. 
+
+                /// <summary>
+                /// method that add new station to stations list
+                /// </summary>
                 public void AddStation()
                 {
                     Console.WriteLine("Please enter the station's ID:\n");
@@ -35,6 +39,10 @@ namespace IDAL
                         ChargeSlots = CHARGESLOTS
                     });
                 }
+
+                /// <summary>
+                /// method that add new drone to drones list
+                /// </summary>
                 public void AddDrone()
                 {
                     Console.WriteLine("Please enter the drone's ID:\n");
