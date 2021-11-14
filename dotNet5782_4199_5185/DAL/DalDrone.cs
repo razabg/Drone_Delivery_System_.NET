@@ -35,7 +35,7 @@ namespace DalObject
             Drone ForPrint = DataSource.DronesList.Find(x => x.Id == key);
             Console.WriteLine(ForPrint);
         }
-
+       
 
     }
 
