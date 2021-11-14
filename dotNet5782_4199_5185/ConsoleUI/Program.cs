@@ -1,5 +1,4 @@
-﻿using IDAL.DO.DalObject;
-using IDAL.DO;
+﻿using IDAL.DO;
 using IDAL;
 using System;
 
@@ -99,29 +98,29 @@ namespace DalObject
                         }
                         break;
 
-                            case MenuOptions.ShowLists:
-                                Console.WriteLine("Which list from the follow lists are you looking for:\n");
-                                Console.WriteLine("1 - Stations\n2 - Drones\n3 - Customers\n4 - Parcels\n5 - UnAssignmentParcels\n6 - AvailableChargingStations\n0 - Exit\n");
-                                ListOptions listChoceOption = (ListOptions)int.Parse(Console.ReadLine());
-                                switch (listChoceOption)
-                                {
-                                    case ListOptions.Exit:
-                                        break;
-                                    case ListOptions.Stations:
-                                        
-                                        break;
-                                    case ListOptions.Drones:
-                                        break;
-                                    case ListOptions.Customers:
-                                        break;
-                                    case ListOptions.Parcels:
-                                        break;
-                                    case ListOptions.UnAssgnmentParcels:
-                                        break;
-                                    case ListOptions.AvailableChagingStations:
-                                        break;
-                                    default:
-                                        break;
+                    case MenuOptions.ShowLists:
+                        Console.WriteLine("Which list from the follow lists are you looking for:\n");
+                        Console.WriteLine("1 - Stations\n2 - Drones\n3 - Customers\n4 - Parcels\n5 - UnAssignmentParcels\n6 - AvailableChargingStations\n0 - Exit\n");
+                        ListOptions listChoceOption = (ListOptions)int.Parse(Console.ReadLine());
+                        switch (listChoceOption)
+                        {
+                            case ListOptions.Exit:
+                                break;
+                            case ListOptions.Stations:
+
+                                break;
+                            case ListOptions.Drones:
+                                break;
+                            case ListOptions.Customers:
+                                break;
+                            case ListOptions.Parcels:
+                                break;
+                            case ListOptions.UnAssgnmentParcels:
+                                break;
+                            case ListOptions.AvailableChagingStations:
+                                break;
+                            default:
+                                break;
 
                         }
                         break;
@@ -140,5 +139,5 @@ namespace DalObject
 
     }
 }
-    
+
 

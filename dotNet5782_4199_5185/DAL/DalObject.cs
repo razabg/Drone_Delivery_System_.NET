@@ -7,53 +7,50 @@ using IDAL;
 using IDAL.DO;
 
 
-namespace IDAL
+
+namespace DalObject
 {
-    namespace DO
+    public class DalObject
     {
-        namespace DalObject
+        public DalObject() { DataSource.Initialize(); } //ctor initialize the class and also run the initialize method. 
+
+        /// <summary>
+        /// method that add new station to stations list
+        /// </summary>
+        public void AddStation()
         {
-            public class DalObject
+            Console.WriteLine("Please enter the station's ID:\n");
+            int ID = int.Parse(Console.ReadLine());
+            Console.WriteLine("Please enter the station's name:\n");
+            int NAME = int.Parse(Console.ReadLine());
+            Console.WriteLine("Please enter the station's longitube:\n");
+            double LONGITUDE = double.Parse(Console.ReadLine());
+            Console.WriteLine("Please enter the station's lattitude:\n");
+            double LATTITUDE = double.Parse(Console.ReadLine());
+            Console.WriteLine("Please enter the station's chargeSlots:\n");
+            int CHARGESLOTS = int.Parse(Console.ReadLine());
+            DataSource.StationsList.Add(new Station()
             {
-                public DalObject() { DataSource.Initialize(); } //ctor initialize the class and also run the initialize method. 
+                Id = ID,
+                Name = NAME,
+                Longitude = LONGITUDE,
+                Lattitude = LATTITUDE,
+                ChargeSlots = CHARGESLOTS
+            });
+        }
 
-                /// <summary>
-                /// method that add new station to stations list
-                /// </summary>
-                public void AddStation()
-                {
-                    Console.WriteLine("Please enter the station's ID:\n");
-                    int ID = int.Parse(Console.ReadLine());
-                    Console.WriteLine("Please enter the station's name:\n");
-                    int NAME = int.Parse(Console.ReadLine());
-                    Console.WriteLine("Please enter the station's longitube:\n");
-                    double LONGITUDE = double.Parse(Console.ReadLine());
-                    Console.WriteLine("Please enter the station's lattitude:\n");
-                    double LATTITUDE = double.Parse(Console.ReadLine());
-                    Console.WriteLine("Please enter the station's chargeSlots:\n");
-                    int CHARGESLOTS = int.Parse(Console.ReadLine());
-                    DataSource.StationsList.Add(new Station()
-                    {
-                        Id = ID,
-                        Name = NAME,
-                        Longitude = LONGITUDE,
-                        Lattitude = LATTITUDE,
-                        ChargeSlots = CHARGESLOTS
-                    });
-                }
-
-                /// <summary>
-                /// method that add new drone to drones list
-                /// </summary>
-                public void AddDrone()
-                {
-                    Console.WriteLine("Please enter the drone's ID:\n");
-                    object ID = Console.ReadLine();
-                    Console.WriteLine("Please enter the drone's model:\n");
-                    object MODEL = Console.ReadLine();
-                    Console.WriteLine("Please enter the drone's maxWeight:\n");
-                    object MAXWEIGHT = Console.ReadLine();
-                    Console.WriteLine("Please enter the drone's status:\n");
+        /// <summary>
+        /// method that add new drone to drones list
+        /// </summary>
+        public void AddDrone()
+        {
+            Console.WriteLine("Please enter the drone's ID:\n");
+            object ID = Console.ReadLine();
+            Console.WriteLine("Please enter the drone's model:\n");
+            object MODEL = Console.ReadLine();
+            Console.WriteLine("Please enter the drone's maxWeight:\n");
+            object MAXWEIGHT = Console.ReadLine();
+            Console.WriteLine("Please enter the drone's status:\n");
 
             DataSource.DronesList.Add(new Drone()
             {
@@ -135,10 +132,9 @@ namespace IDAL
             Console.WriteLine(ForPrint);
         }
 
-
-
-
-
     }
 }
+
+
+
 
