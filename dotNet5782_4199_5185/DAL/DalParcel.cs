@@ -41,6 +41,6 @@ namespace DalObject
             Console.WriteLine(ForPrint);
         }
 
-
+        
     }
 }
