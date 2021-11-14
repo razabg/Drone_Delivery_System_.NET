@@ -18,6 +18,16 @@ namespace DalObject
         internal class Config
         {
             public static int RunIdParcel = 10000001;
+
+            public enum Weight { available, light , average,heavy };
+            static string Available = Weight.available.ToString();
+            static string Light = Weight.light.ToString();
+            static string Average = Weight.average.ToString();
+            static string Heavy = Weight.heavy.ToString();
+
+            int ChargingPaceDrone;
+
+
         }
 
 

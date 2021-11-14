@@ -10,7 +10,7 @@ using IDAL.DO;
 
 namespace DalObject
 {
-    public partial class DalObject
+    public partial class DalObject : IDal
     {
         public DalObject() { DataSource.Initialize(); } //ctor initialize the class and also run the initialize method. 
 

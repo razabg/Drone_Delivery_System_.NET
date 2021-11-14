@@ -107,7 +107,6 @@ namespace DalObject
                             case ListOptions.Exit:
                                 break;
                             case ListOptions.Stations:
-
                                 break;
                             case ListOptions.Drones:
                                 break;
