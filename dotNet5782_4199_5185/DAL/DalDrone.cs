@@ -35,7 +35,18 @@ namespace DalObject
             Drone ForPrint = DataSource.DronesList.Find(x => x.Id == key);
             Console.WriteLine(ForPrint);
         }
-       
+
+        /// <summary>
+        /// /// uses foreach loop to print the list of the entity' type the user asked
+        /// </summary>
+        public static void show_drone_list()
+        {
+            foreach (Drone item in DataSource.DronesList)
+            { 
+                Console.WriteLine(item);
+                Console.WriteLine($"\n");
+            }
+        }
 
     }
 

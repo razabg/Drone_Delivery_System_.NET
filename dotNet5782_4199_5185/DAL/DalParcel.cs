@@ -40,7 +40,34 @@ namespace DalObject
             Parcel ForPrint = DataSource.ParcelsList.Find(x => x.Id == key);
             Console.WriteLine(ForPrint);
         }
+        /// <summary>
+        /// uses foreach loop to print the list of the entity' type the user asked
+        /// </summary>
+        public static void show_parcel_list()
+        {
+            foreach (Parcel item in DataSource.ParcelsList)
+            {
+                Console.WriteLine(item);
+                Console.WriteLine($"\n");
+            }
+        }
+        /// <summary>
+        /// run on the items of ParcelsList - checks the drone-id - and print every parcel that her droneid' isn't equal to one from the drones
+        /// </summary>
+        public static void show_AssignmentParcel_list()
+        {
+            foreach (Parcel parcel in DataSource.ParcelsList)
+            {
+                foreach (drone in DataSource.DronesList)
+                    if (parcel.DroneId.Equals(drone.Id))
+                    {
+                        continue;
+                    }
 
-        
+                Console.WriteLine(parcel);
+                Console.WriteLine($"\n");
+            }
+
+        }
     }
 }

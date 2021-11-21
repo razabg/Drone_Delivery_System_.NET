@@ -39,6 +39,17 @@ namespace DalObject
             Station ForPrint = DataSource.StationsList.Find(x => x.Id == key);
             Console.WriteLine(ForPrint);
         }
+        /// <summary>
+        /// uses foreach loop to print the list of the entity' type the user asked
+        /// </summary>
+        public static void show_station_list()
+        {
+            foreach (Station item in DataSource.StationsList)
+            {
+                Console.WriteLine(item);
+                Console.WriteLine($"\n");
+            }
+        }
 
     }
   

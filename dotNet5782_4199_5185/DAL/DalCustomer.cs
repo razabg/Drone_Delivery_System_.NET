@@ -37,7 +37,23 @@ namespace DalObject
             Customer ForPrint = DataSource.CustomersList.Find(x => x.Id == key);
             Console.WriteLine(ForPrint);
         }
+        /// <summary>
+        /// uses foreach loop to print the list of the entity' type the user asked
+        /// </summary>
+        /// <param name="key"></param>
+        public static void show_customer_list()
+        {
+
+            foreach (Customer item in DataSource.CustomersList)
+            {
+                Console.WriteLine(item);
+                Console.WriteLine($"\n");
+            }
+        }
+
 
     }
+
+}
 
 }

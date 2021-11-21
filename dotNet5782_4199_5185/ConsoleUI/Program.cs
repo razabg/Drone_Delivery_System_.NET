@@ -11,7 +11,7 @@ namespace DalObject
         enum MenuOptions { Exit, Add, Update, ShowEntities, ShowLists }
         enum EntitiesOptions { Exit, Station, Drone, Customer, Parcel }
         enum UpdateOptions { Exit, Assignment, PickedUp, Dalivary, Recharge }
-        enum ListOptions { Exit, Stations, Drones, Customers, Parcels, UnAssgnmentParcels, AvailableChagingStations }
+        enum ListOptions { Exit, Stations, Drones, Customers, Parcels, UnAssignmentParcels, AvailableChagingStations }
 
         static void Main(string[] args)
         {
@@ -107,16 +107,22 @@ namespace DalObject
                             case ListOptions.Exit:
                                 break;
                             case ListOptions.Stations:
+                                DalObject.show_station_list();
                                 break;
                             case ListOptions.Drones:
+                                DalObject.show_drone_list();
                                 break;
                             case ListOptions.Customers:
+                                DalObject.show_customer_list();
                                 break;
                             case ListOptions.Parcels:
+                                DalObject.show_parcel_list();
                                 break;
-                            case ListOptions.UnAssgnmentParcels:
+                            case ListOptions.UnAssignmentParcels:
+                                DalObject.show_AssignmentParcel_list();
                                 break;
                             case ListOptions.AvailableChagingStations:
+                                DalObject.show_drone_list();
                                 break;
                             default:
                                 break;
