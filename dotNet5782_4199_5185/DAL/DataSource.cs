@@ -87,7 +87,6 @@ namespace DalObject
             return rand.Next(111111111, 999999999);
         }
 
-
         /// <summary>
         /// the initialize func making a fast inizialization of objects.
         /// </summary>

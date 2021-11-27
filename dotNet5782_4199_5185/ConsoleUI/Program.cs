@@ -79,8 +79,7 @@ namespace DalObject
 
                         switch (entityChoice)
                         {
-                            case EntitiesOptions.Exit:
-                                break;
+                           
                             case EntitiesOptions.Station:
                                 DalObject.findAndPrint_Station(key);
                                 break;
@@ -92,6 +91,8 @@ namespace DalObject
                                 break;
                             case EntitiesOptions.Parcel:
                                 DalObject.findAndPrint_Parcel(key);
+                                break;
+                            case EntitiesOptions.Exit:
                                 break;
                             default:
                                 break;
@@ -122,7 +123,7 @@ namespace DalObject
                                 DalObject.show_AssignmentParcel_list();
                                 break;
                             case ListOptions.AvailableChagingStations:
-                                DalObject.show_drone_list();
+                                DalObject.show_AvailableChagingStations_list();
                                 break;
                             default:
                                 break;
