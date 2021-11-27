@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +8,12 @@ namespace IBL.BO
 {
     class Customer
     {
-        public int Id ;
-        public string Name;
-        public int PhoneNumber;
-        public Location location;
-        public List<ParcelAtCustomer> FromCustomer;
-        public List<ParcelAtCustomer> ToCustomer;
+        public int Id{ get; set; }
+        public string Name{ get; set; }
+        public int PhoneNumber{ get; set; }
+        public Location location{ get; set; }
+        public List<ParcelAtCustomer> FromCustomer{ get; set; }
+        public List<ParcelAtCustomer> ToCustomer{ get; set; }
 
         public override string ToString()
         {

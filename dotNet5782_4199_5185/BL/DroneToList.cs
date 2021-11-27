@@ -8,5 +8,26 @@ namespace IBL.BO
 {
     class DroneToList
     {
+        public int Id{ get; set; }
+        public string Model{ get; set; }
+        public string Weight{ get; set; }
+        public int Battary{ get; set; }
+        public string Status{ get; set; }
+        public Location CurrentLocation{ get; set; }
+        public int IdOfParcelInTransfer {get;set; }
+
+        public override string ToString()
+        {
+            string printInfo = "";
+            printInfo += $" the ID is {Id}\n";
+            printInfo += $"the Name is{Model},\n";
+            printInfo += $"the weight is{Weight},\n";
+            printInfo += $"the battary status is{Battary},\n";
+            printInfo += $"the status is{Status},\n";
+            printInfo += $"the location is{CurrentLocation},\n";
+            printInfo += $"the id of the parcel in transport is{IdOfParcelInTransfe},\n";
+            return printInfo;
+        }
+
     }
 }
