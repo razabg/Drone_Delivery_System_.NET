@@ -8,5 +8,15 @@ namespace IBL.BO
 {
     class DroneInCharging
     {
+        public int Id {get;set; }
+        public int Battary {get;set; }
+
+        public override string ToString()
+        {
+              string printInfo = "";
+            printInfo += $" the ID is {Id}\n";
+            printInfo += $"the battary status is{Battary},\n";
+            return printInfo;
+        }
     }
 }

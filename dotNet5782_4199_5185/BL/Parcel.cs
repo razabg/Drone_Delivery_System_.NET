@@ -8,16 +8,16 @@ namespace IBL.BO
 {
     class Parcel
     {
-        public int Id;
-        public CustomerAtParcel sender;
-        public CustomerAtParcel target;
-        public string Weight;//NEED TO MAKE ENUM CLASS FOR BOTH ATTRIBUTES
-        public string Priority;
-        public DroneAtParcel DroneParcel;
-        public DateTime TimeOfCreation;
-        public DateTime PairTime;
-        public DateTime CollectTime;
-        public DateTime DeliveryTime;
+        public int Id{ get; set; }
+        public CustomerAtParcel sender{ get; set; }
+        public CustomerAtParcel target{ get; set; }
+        public string Weight{ get; set; }//NEED TO MAKE ENUM CLASS FOR BOTH ATTRIBUTES
+        public string Priority{ get; set; }
+        public DroneAtParcel DroneParcel{ get; set; }
+        public DateTime? TimeOfCreation{ get; set; }
+        public DateTime? PairTime{ get; set; }
+        public DateTime? CollectTime{ get; set; }
+        public DateTime? DeliveryTime{ get; set; }
 
         public override string ToString()
         {
