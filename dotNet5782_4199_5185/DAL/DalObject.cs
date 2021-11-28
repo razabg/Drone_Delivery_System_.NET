@@ -19,21 +19,46 @@ namespace DalObject
         /// </summary>
         /// <param name="p"></param>
         /// <param name="d"></param>
-        public void UpdateAssignment(Parcel p, Drone d)
+        public void  UpdateAssignment(int p, int d) 
         {
-            p.DroneId = d.Id;
-            d.Status= DataSource.DroneStatus.Busy.ToString();
+           var indexParcel  = DataSource.ParcelsList.FindIndex(x => x.Id == p);
+            var indexDrone  = DataSource.DronesList.FindIndex(x => x.Id == d);
+            if (indexDrone != -1 &&indexParcel != -1)
+            {
+                return; //חריגה בהמשך לבדוק שקיימים החבילה והרחפן ולבדוק שהרחפן פנוי ושהחבילה לא משוייכת
+            }
+            Parcel  helper = (DataSource.ParcelsList[indexParcel]); //in order to update the idrone in parcel.droneid we used helper to get the right id .
+            helper.DroneId = DataSource.DronesList[indexDrone].Id;
+            helper.ParingTime = DateTime.Now;
+            (DataSource.ParcelsList[indexParcel]) = helper;
+
+
+            Drone helper2 = DataSource.DronesList[indexDrone];//update the status of the drone
+            helper2.Status = DataSource.DroneStatus.Busy.ToString();
+            DataSource.DronesList[indexDrone] = helper2;
+
         }
-        
+
         /// <summary>
         /// Update the time - when the drone picked the parcel
         /// </summary>
         /// <param name="p"></param>
         /// <param name="d"></param>
-        public void UpdatePickedUp(Parcel p, Drone d)
+        public void UpdatePickedUp(int p, int d)
         {
-            DateTime picked = DateTime.Now;
-            p.PickedUp = picked;
+            var indexParcel = DataSource.ParcelsList.FindIndex(x => x.Id == p);
+            var indexDrone = DataSource.DronesList.FindIndex(x => x.Id == d);
+            if (indexDrone != -1 && indexParcel != -1)
+            {
+                return; 
+            }
+            Parcel helper = (DataSource.ParcelsList[indexParcel]); //in order to update the idrone in parcel.droneid we used helper to get the right id .
+            helper.PickedUp = DateTime.Now ;
+            (DataSource.ParcelsList[indexParcel]) = helper;
+
+
+            //DateTime picked = DateTime.Now;
+            //p.PickedUp = picked;
         }
 
         /// <summary>
@@ -44,7 +69,7 @@ namespace DalObject
         public void Delivery(Parcel p, Drone d)
         {
             DateTime delivery = DateTime.Now;
-            d.Status = DataSource.DroneStatus.Busy.ToString();
+            d.Status = DataSource.DroneStatus.Available.ToString();
         }
 
         /// <summary>
@@ -53,7 +78,7 @@ namespace DalObject
         /// </summary>
         /// <param name="s"></param>
         /// <param name="d"></param>
-        public void UpdateRecharge(Station s, Drone d)
+        public void UpdateRecharge(Station s, Drone d) //need to do here exeption  חריגה למקרה של אין מספיק עמדות טעינה
         {
             d.Status = DataSource.DroneStatus.TreatmentMode.ToString();
             DroneCharge DCharge = default;

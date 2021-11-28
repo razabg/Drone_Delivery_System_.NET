@@ -8,11 +8,11 @@ namespace IBL.BO
 {
     class ParcelAtCustomer
     {
-        public int Id {set;get: }
-        public string Weight {set;get: }
-        public string Priority {set;get: }
-        public string Status {set;get: }
-        public CustomerAtParcel DestOrSrc {set;get: }
+        public int Id { set; get; }
+        public string Weight { set; get; }
+        public string Priority { set; get; }
+        public string Status { set; get; }
+        public CustomerAtParcel DestOrSrc { set; get; }
 
 
              public override string ToString()

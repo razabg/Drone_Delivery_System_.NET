@@ -16,10 +16,10 @@ namespace IDAL
             public float Weight { get; set; }
             public int Priority { get; set; }
             public int DroneId { get; set; }
-            public DateTime? Scheduled { get; set; }//drone pair
+            public DateTime? ParingTime { get; set; }//drone pair
             public DateTime? PickedUp { get; set; }//time of collection
-            public DateTime? Delivered { get; set; }//time of getting the parcel
-            public DateTime Requested { get; set; }//time of creation
+            public DateTime? ArrivedTime { get; set; }//time of getting the parcel
+            public DateTime? CreationTime { get; set; }//time of creation
 
 
             public override string ToString()
@@ -31,10 +31,10 @@ namespace IDAL
                 printParcelInfo += $"the Weight is {Weight},\n";
                 printParcelInfo += $"Priority {Priority},\n";
                 printParcelInfo += $"the DroneId is {DroneId},\n";
-                printParcelInfo += $"Connection time between the drone and the parcel{Scheduled },\n";
+                printParcelInfo += $"Connection time between the drone and the parcel{ParingTime },\n";
                 printParcelInfo += $" Picked up time{PickedUp},\n";
-                printParcelInfo += $"Delivery time {Delivered},\n";
-                printParcelInfo += $"Request time {Requested},\n";
+                printParcelInfo += $"Delivery time {ArrivedTime},\n";
+                printParcelInfo += $"Request time {CreationTime},\n";
                 return printParcelInfo;
             }
 

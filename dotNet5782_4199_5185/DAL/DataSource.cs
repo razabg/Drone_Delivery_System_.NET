@@ -110,7 +110,7 @@ namespace DalObject
             {
                 DronesList.Add(new Drone()
                 {
-                    Id = RandomIdFunc(),
+                    Id = 0,    //RandomIdFunc(),
                     MaxWeight = genRandTop().ToString(),
                     Status = genRandStatus().ToString(),
                     Model = RandomIdFunc().ToString(),
@@ -131,16 +131,16 @@ namespace DalObject
                 DateTime currentDate = DateTime.Now;
                 ParcelsList.Add(new Parcel
                 {
-                    Id = RandomIdFunc(),
+                    Id =  0,      // RandomIdFunc(),
                     SenderId = RandomIdFunc(),
                     TargetId = RandomIdFunc(),
                     Weight = rand.Next(1, 300),
                     Priority = genRandPriority(),
                     DroneId = RandomIdFunc(),
-                    Scheduled = currentDate,
+                    ParingTime = currentDate,
                     PickedUp = currentDate,
-                    Delivered = currentDate,
-                    Requested = currentDate
+                    ArrivedTime = currentDate,
+                    CreationTime = currentDate
 
                 });
             }

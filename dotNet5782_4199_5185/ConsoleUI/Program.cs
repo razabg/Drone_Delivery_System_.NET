@@ -54,11 +54,20 @@ namespace DalObject
                         Console.WriteLine("Which entity from the follow list do you want to update:\n");
                         Console.WriteLine("1 - An assignment\n2 - A pickedup\n3 - A dalivary\n4 - A recharge\n0 - Exit\n");
                         UpdateOptions updateChoceOption = (UpdateOptions)int.Parse(Console.ReadLine());
+                        var UpdateFunc = new DalObject();
                         switch (updateChoceOption)
                         {
                             case UpdateOptions.Assignment:
+                                int drone_id=0;
+                                int parcel_id=0;
+                                Console.WriteLine("insert drone id");
+                                drone_id = int.Parse(Console.ReadLine());
+                                Console.WriteLine("insert parcel id");
+                                parcel_id = int.Parse(Console.ReadLine());
+                                UpdateFunc.UpdateAssignment(parcel_id,drone_id);
                                 break;
                             case UpdateOptions.PickedUp:
+                                
                                 break;
                             case UpdateOptions.Dalivary:
                                 break;
