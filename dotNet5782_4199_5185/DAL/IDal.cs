@@ -15,17 +15,32 @@ namespace DalObject
         void AddDrone();
         void AddParcel();
         void AddStation();
-        #endregion 
-        double[] PowerConsumptionRequestDrone();
-       //void  findAndPrint_Customer(int key);
-       //void  findAndPrint_Drone(int key);
-       // void findAndPrint_Parcel(int key);
-       // void findAndPrint_Station(int key);
-        //public static void show_drone_list();
+        #endregion
+
+        #region FIND AND PRINT METHODS
+        void findAndPrint_Customer(int key);
+       void  findAndPrint_Drone(int key);
+        void findAndPrint_Parcel(int key);
+        void findAndPrint_Station(int key);
+        #endregion
+
+        #region UPDATE STATUS METHODS
         public void UpdateRecharge(Station s, Drone d);
         public void UpdateParing(int p, int d);
-        public void Arrived(int p);
+        public void UpdateArrived(int p);
+        public void UpdatePickedUp(int p);
+        #endregion
 
+        #region SHOW LISTS METHODS
+        public void show_station_list();
+        public void show_drone_list();
+        public void show_parcel_list();
+        public void show_customer_list();
+        public void show_AvailableChargingStations_list();
+        public void show_UnassignmentParcel_list();
+        #endregion
+
+        //double[] PowerConsumptionRequestDrone();
 
 
     }

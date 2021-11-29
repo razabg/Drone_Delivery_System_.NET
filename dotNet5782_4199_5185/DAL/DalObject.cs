@@ -58,7 +58,7 @@ namespace DalObject
         /// </summary>
         /// <param name="p"></param>
         /// <param name="d"></param>
-        public void Arrived(int p)
+        public void UpdateArrived(int p)
         {//לבדוק מצב סוללה של הרחפן
             var indexParcel = DataSource.ParcelsList.FindIndex(x => x.Id == p);
    

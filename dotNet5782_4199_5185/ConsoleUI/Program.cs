@@ -76,7 +76,7 @@ namespace DalObject
                             case UpdateOptions.Arrived:
                                 Console.WriteLine("insert parcel id");
                                 parcel_id = int.Parse(Console.ReadLine());
-                                UpdateFunc.Arrived(parcel_id);
+                                UpdateFunc.UpdateArrived(parcel_id);
                                 break;
                             case UpdateOptions.Recharge:
                                 break;
@@ -92,21 +92,22 @@ namespace DalObject
                         EntitiesOptions entityChoice = (EntitiesOptions)int.Parse(Console.ReadLine()); // Creatint a variable of enum- "EntitiesOptions" for the user choice
                         Console.WriteLine("Please enter the entetity's Id:\n");
                         int key = int.Parse(Console.ReadLine());
+                        var ShowEntites = new DalObject();
 
                         switch (entityChoice)
                         {
                            
                             case EntitiesOptions.Station:
-                                DalObject.findAndPrint_Station(key);
+                                ShowEntites.findAndPrint_Station(key);
                                 break;
                             case EntitiesOptions.Drone:
-                                DalObject.findAndPrint_Drone(key);
+                                ShowEntites.findAndPrint_Drone(key);
                                 break;
                             case EntitiesOptions.Customer:
-                                DalObject.findAndPrint_Customer(key);
+                                ShowEntites.findAndPrint_Customer(key);
                                 break;
                             case EntitiesOptions.Parcel:
-                                DalObject.findAndPrint_Parcel(key);
+                                ShowEntites.findAndPrint_Parcel(key);
                                 break;
                             case EntitiesOptions.Exit:
                                 break;
@@ -119,27 +120,28 @@ namespace DalObject
                         Console.WriteLine("Which list from the follow lists are you looking for:\n");
                         Console.WriteLine("1 - Stations\n2 - Drones\n3 - Customers\n4 - Parcels\n5 - UnAssignmentParcels\n6 - AvailableChargingStations\n0 - Exit\n");
                         ListOptions listChoceOption = (ListOptions)int.Parse(Console.ReadLine()); // Creatint a variable of enum- "ListOptions" for the user choice
+                        var ShowLists = new DalObject();
                         switch (listChoceOption)
                         {
                             case ListOptions.Exit:
                                 break;
                             case ListOptions.Stations:
-                                DalObject.show_station_list();
+                                ShowLists.show_station_list();
                                 break;
                             case ListOptions.Drones:
-                                DalObject.show_drone_list();
+                                ShowLists.show_drone_list();
                                 break;
                             case ListOptions.Customers:
-                                DalObject.show_customer_list();
+                                ShowLists.show_customer_list();
                                 break;
                             case ListOptions.Parcels:
-                                DalObject.show_parcel_list();
+                                ShowLists.show_parcel_list();
                                 break;
                             case ListOptions.UnAssignmentParcels:
-                                DalObject.show_UnassignmentParcel_list();
+                                ShowLists.show_UnassignmentParcel_list();
                                 break;
                             case ListOptions.AvailableChagingStations:
-                                DalObject.show_AvailableChagingStations_list();
+                                ShowLists.show_AvailableChargingStations_list();
                                 break;
                             default:
                                 break;

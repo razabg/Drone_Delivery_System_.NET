@@ -32,7 +32,7 @@ namespace DalObject
                 Latitude = latitude,
             });
         }
-        public static void findAndPrint_Customer(int key)
+        public  void findAndPrint_Customer(int key)
         {
             Customer ForPrint = DataSource.CustomersList.Find(x => x.Id == key);
             Console.WriteLine(ForPrint);
@@ -41,7 +41,7 @@ namespace DalObject
         /// uses foreach loop to print the list of the entity' type the user asked
         /// </summary>
         /// <param name="key"></param>
-        public static void show_customer_list()
+        public  void show_customer_list()
         {
 
             foreach (Customer item in DataSource.CustomersList)
