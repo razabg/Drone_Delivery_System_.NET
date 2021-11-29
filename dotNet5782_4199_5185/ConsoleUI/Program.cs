@@ -8,10 +8,10 @@ namespace DalObject
     class Program
     {
      
-    enum MenuOptions { Exit, Add, Update, ShowEntities, ShowLists }
-        enum EntitiesOptions { Exit, Station, Drone, Customer, Parcel }
-        enum UpdateOptions { Exit, Paring, PickedUp, Arrived, Recharge }
-        enum ListOptions { Exit, Stations, Drones, Customers, Parcels, UnAssignmentParcels, AvailableChagingStations }
+    enum MenuOptions { Exit, Add, Update, ShowEntities, ShowLists } // First options list for the user
+        enum EntitiesOptions { Exit, Station, Drone, Customer, Parcel } // In case that the user' choice was "ShowEntities" 
+        enum UpdateOptions { Exit, Paring, PickedUp, Arrived, Recharge } // In case that the user' choice was "Update"
+        enum ListOptions { Exit, Stations, Drones, Customers, Parcels, UnAssignmentParcels, AvailableChagingStations } // In case that the user' choice was "ShowLists"
 
         static void Main(string[] args)
         {
@@ -19,7 +19,7 @@ namespace DalObject
             Console.WriteLine("welcome!\n");
             Console.WriteLine("Menu Options:\n1 - Add\n2 - Update\n3 - Show entities\n4 - Show lists\n0 - Exit\n");
 
-            MenuOptions menuChoiceOption = (MenuOptions)int.Parse(Console.ReadLine());
+            MenuOptions menuChoiceOption = (MenuOptions)int.Parse(Console.ReadLine()); // Creatint a variable of enum- "MenuOptions" for the user choice 
             do
             {
 
@@ -28,7 +28,7 @@ namespace DalObject
                 {
                     case MenuOptions.Add:
                         Console.WriteLine("I want to add:\n1 - A station\n2 - A drone\n3 - A customer\n4 - A parcel\n 0 - Exit\n");
-                        EntitiesOptions entityChoiceOption = (EntitiesOptions)int.Parse(Console.ReadLine());
+                        EntitiesOptions entityChoiceOption = (EntitiesOptions)int.Parse(Console.ReadLine()); // Creatint a variable of enum- "EntitiesOptions" for the user choice
                         DalObject addFunc = new DalObject();
                         switch (entityChoiceOption)
                         {
@@ -56,7 +56,7 @@ namespace DalObject
                         int parcel_id = 0;
                         Console.WriteLine("Which entity from the follow list do you want to update:\n");
                         Console.WriteLine("1 - An assignment\n2 - A pickedup\n3 - A dalivary\n4 - A recharge\n0 - Exit\n");
-                        UpdateOptions updateChoceOption = (UpdateOptions)int.Parse(Console.ReadLine());
+                        UpdateOptions updateChoceOption = (UpdateOptions)int.Parse(Console.ReadLine()); // Creatint a variable of enum- "UpdateOptions" for the user choice
                         var UpdateFunc = new DalObject();
                         switch (updateChoceOption)
                         {
@@ -89,14 +89,13 @@ namespace DalObject
 
                     case MenuOptions.ShowEntities:
                         Console.WriteLine("Which entity would you like to see?:\n1 - Station\n2 - Drone\n3 - Customer\n4 - Parcel\n0- Exit\n");
-                        EntitiesOptions entityChoice = (EntitiesOptions)int.Parse(Console.ReadLine());
+                        EntitiesOptions entityChoice = (EntitiesOptions)int.Parse(Console.ReadLine()); // Creatint a variable of enum- "EntitiesOptions" for the user choice
                         Console.WriteLine("Please enter the entetity's Id:\n");
                         int key = int.Parse(Console.ReadLine());
 
                         switch (entityChoice)
                         {
-                            case EntitiesOptions.Exit:
-                                break;
+                           
                             case EntitiesOptions.Station:
                                 DalObject.findAndPrint_Station(key);
                                 break;
@@ -109,6 +108,8 @@ namespace DalObject
                             case EntitiesOptions.Parcel:
                                 DalObject.findAndPrint_Parcel(key);
                                 break;
+                            case EntitiesOptions.Exit:
+                                break;
                             default:
                                 break;
                         }
@@ -117,7 +118,7 @@ namespace DalObject
                     case MenuOptions.ShowLists:
                         Console.WriteLine("Which list from the follow lists are you looking for:\n");
                         Console.WriteLine("1 - Stations\n2 - Drones\n3 - Customers\n4 - Parcels\n5 - UnAssignmentParcels\n6 - AvailableChargingStations\n0 - Exit\n");
-                        ListOptions listChoceOption = (ListOptions)int.Parse(Console.ReadLine());
+                        ListOptions listChoceOption = (ListOptions)int.Parse(Console.ReadLine()); // Creatint a variable of enum- "ListOptions" for the user choice
                         switch (listChoceOption)
                         {
                             case ListOptions.Exit:
@@ -138,7 +139,7 @@ namespace DalObject
                                 DalObject.show_UnassignmentParcel_list();
                                 break;
                             case ListOptions.AvailableChagingStations:
-                                DalObject.show_drone_list();
+                                DalObject.show_AvailableChagingStations_list();
                                 break;
                             default:
                                 break;

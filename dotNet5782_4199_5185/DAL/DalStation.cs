@@ -51,6 +51,19 @@ namespace DalObject
             }
         }
 
+        public static void show_AvailableChagingStations_list()
+        {
+            foreach (Station item in DataSource.StationsList)
+            {
+                if (item.ChargeSlots > 0)
+                {
+                    Console.WriteLine(item);
+                    Console.WriteLine($"\n");
+                }
+            }
+
+        }
+
     }
   
 }
