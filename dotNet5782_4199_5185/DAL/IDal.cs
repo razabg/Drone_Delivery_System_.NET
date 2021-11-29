@@ -24,7 +24,7 @@ namespace DalObject
         //public static void show_drone_list();
         public void UpdateRecharge(Station s, Drone d);
         public void UpdateParing(int p, int d);
-        public void Delivery(int p, int d);
+        public void Arrived(int p);
 
 
 

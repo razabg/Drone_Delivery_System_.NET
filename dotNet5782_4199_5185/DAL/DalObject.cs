@@ -61,8 +61,8 @@ namespace DalObject
         public void Arrived(int p)
         {//לבדוק מצב סוללה של הרחפן
             var indexParcel = DataSource.ParcelsList.FindIndex(x => x.Id == p);
-            var indexDrone = DataSource.DronesList.FindIndex(x => x.Id == d);
-            if (indexDrone != -1 && indexParcel != -1)
+   
+            if ( indexParcel != -1)
             {
                 return; 
             }
