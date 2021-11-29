@@ -33,7 +33,7 @@ namespace IDAL
                 printParcelInfo += $"the DroneId is {DroneId},\n";
                 printParcelInfo += $"Connection time between the drone and the parcel{ParingTime },\n";
                 printParcelInfo += $" Picked up time{PickedUp},\n";
-                printParcelInfo += $"Arrived time {ArrivedTime},\n";
+                printParcelInfo += $"UpdateArrived time {ArrivedTime},\n";
                 printParcelInfo += $"Request time {CreationTime},\n";
                 return printParcelInfo;
             }

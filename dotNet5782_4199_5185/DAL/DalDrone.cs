@@ -30,7 +30,7 @@ namespace DalObject
                 MaxWeight = (string)MAXWEIGHT,
             });
         }
-        public static void findAndPrint_Drone(int key)
+        public  void findAndPrint_Drone(int key)
         {
             Drone ForPrint = DataSource.DronesList.Find(x => x.Id == key);
             Console.WriteLine(ForPrint);
@@ -39,7 +39,7 @@ namespace DalObject
         /// <summary>
         /// /// uses foreach loop to print the list of the entity' type the user asked
         /// </summary>
-        public static void show_drone_list()
+        public  void show_drone_list()
         {
             foreach (Drone item in DataSource.DronesList)
             { 

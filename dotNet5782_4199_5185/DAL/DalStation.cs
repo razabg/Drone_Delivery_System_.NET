@@ -34,7 +34,7 @@ namespace DalObject
                 ChargeSlots = CHARGESLOTS
             });
         }
-        public static void findAndPrint_Station(int key)
+        public  void findAndPrint_Station(int key)
         {
             Station ForPrint = DataSource.StationsList.Find(x => x.Id == key);
             Console.WriteLine(ForPrint);
@@ -42,7 +42,7 @@ namespace DalObject
         /// <summary>
         /// uses foreach loop to print the list of the entity' type the user asked
         /// </summary>
-        public static void show_station_list()
+        public  void show_station_list()
         {
             foreach (Station item in DataSource.StationsList)
             {
@@ -51,7 +51,7 @@ namespace DalObject
             }
         }
 
-        public static void show_AvailableChagingStations_list()
+        public  void show_AvailableChargingStations_list()
         {
             foreach (Station item in DataSource.StationsList)
             {
