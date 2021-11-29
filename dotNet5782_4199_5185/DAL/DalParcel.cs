@@ -28,10 +28,10 @@ namespace DalObject
                 TargetId = TargetId,
                 Weight = Weight,
                 Priority = Priority,
-                Requested = DateTime.Now,
-                Scheduled = null,
+                CreationTime = DateTime.Now,
+                ParingTime = null,
                 PickedUp = null,
-                Delivered = null,
+                ArrivedTime = null,
             });
 
         }
@@ -54,20 +54,16 @@ namespace DalObject
         /// <summary>
         /// run on the items of ParcelsList - checks the drone-id - and print every parcel that her droneid' isn't equal to one from the drones
         /// </summary>
-        public static void show_AssignmentParcel_list()
+        public static void show_UnassignmentParcel_list()
         {
             foreach (Parcel parcel in DataSource.ParcelsList)
             {
-                foreach (drone in DataSource.DronesList)
-                    if (parcel.DroneId.Equals(drone.Id))
-                    {
-                        continue;
-                    }
-
-                Console.WriteLine(parcel);
-                Console.WriteLine($"\n");
+                if (parcel.Id == 0)
+                {
+                    Console.WriteLine(parcel);
+                    Console.WriteLine($"\n");
+                }
             }
-
         }
     }
 }
