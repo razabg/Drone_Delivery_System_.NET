@@ -30,7 +30,7 @@ namespace DalObject
 
         }
 
-
+        #region initialize rand method
         /// random intel:
         /// we made a few random functions in order to generate random information. like id,locations,phone number etc.
         /// 
@@ -86,7 +86,7 @@ namespace DalObject
         {
             return rand.Next(111111111, 999999999);
         }
-
+        #endregion
 
         /// <summary>
         /// the initialize func making a fast inizialization of objects.
@@ -112,7 +112,6 @@ namespace DalObject
                 {
                     Id = 0,    //RandomIdFunc(),
                     MaxWeight = genRandTop().ToString(),
-                    Status = genRandStatus().ToString(),
                     Model = RandomIdFunc().ToString(),
 
                 });

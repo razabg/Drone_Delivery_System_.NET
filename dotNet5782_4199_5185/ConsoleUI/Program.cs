@@ -15,6 +15,7 @@ namespace DalObject
 
         static void Main(string[] args)
         {
+            bool Flag = true;
             Console.WriteLine("welcome!\n");
             Console.WriteLine("Menu Options:\n1 - Add\n2 - Update\n3 - Show entities\n4 - Show lists\n0 - Exit\n");
 
@@ -134,7 +135,7 @@ namespace DalObject
                                 DalObject.show_parcel_list();
                                 break;
                             case ListOptions.UnAssignmentParcels:
-                                DalObject.show_AssignmentParcel_list();
+                                DalObject.show_UnassignmentParcel_list();
                                 break;
                             case ListOptions.AvailableChagingStations:
                                 DalObject.show_drone_list();
@@ -146,6 +147,7 @@ namespace DalObject
                         break;
 
                     case MenuOptions.Exit:
+                        Flag = false;
 
                         break;
 
@@ -154,7 +156,7 @@ namespace DalObject
                         break;
 
                 };
-            } while ();
+            } while (Flag);
         }
 
     }
