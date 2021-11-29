@@ -147,7 +147,7 @@ namespace DalObject
                         }
                         break;
 
-                    case MenuOptions.Exit:
+                    case MenuOptions.Exit: // while the user ask for finish we change Flag to false and the program will finish - {while(false)} 
                         Flag = false;
 
                         break;
