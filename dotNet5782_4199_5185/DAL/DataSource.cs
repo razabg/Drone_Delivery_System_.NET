@@ -19,13 +19,13 @@ namespace DalObject
         {
             public static int RunIdParcel = 10000001;
 
-            public enum Weight { available, light , average,heavy };
-            static string Available = Weight.available.ToString();
-            static string Light = Weight.light.ToString();
-            static string Average = Weight.average.ToString();
-            static string Heavy = Weight.heavy.ToString();
 
-            int ChargingPaceDrone;
+            internal static double Available  { get{return 5; } }
+            internal static double Light { get { return 10; } }
+            internal static double Average { get { return 15; } }
+            internal static double Heavy { get { return 20; } }
+
+            internal static double ChargingPaceDrone = 40;//the charging pace is percentage per hour,2.5 hour to fully charged
 
 
         }

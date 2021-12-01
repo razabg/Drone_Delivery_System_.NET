@@ -87,7 +87,16 @@ namespace DalObject
             s.ChargeSlots--;
         }
 
+        public IEnumerable<double> PowerConsumptionRequestDrone()
+        {
+            double[] arr = new double[] { DataSource.Config.Available, DataSource.Config.Light, DataSource.Config.Average, DataSource.Config.Heavy, DataSource.Config.ChargingPaceDrone };
+
+            return arr ;
+        }
+
     }
+
+
 }
 
 

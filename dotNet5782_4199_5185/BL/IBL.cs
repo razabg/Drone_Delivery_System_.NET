@@ -8,6 +8,6 @@ namespace IBL.BO
 {
     interface IBL
     {
-
+        
     }
 }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using IDAL;
 using IDAL.DO;
 
-namespace DalObject
+namespace IDAL.DO
 {
-    interface IDal
+   public interface IDal
     {
         #region *Add Functions*
         void AddCustomer();
@@ -40,7 +40,7 @@ namespace DalObject
         public void show_UnassignmentParcel_list();
         #endregion
 
-        //double[] PowerConsumptionRequestDrone();
+        IEnumerable<double> PowerConsumptionRequestDrone();
 
 
     }

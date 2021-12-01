@@ -11,7 +11,7 @@ namespace IBL.BO
          public int Id { get; set; }
             public string Model { get; set; }
             public string MaxWeight { get; set; }
-            public string Battary { get; set; } 
+            public string Battery { get; set; } 
             public string Status { get; set; } 
             public ParcelInTransfer Parcel { get; set; } 
             public Location CurrentLocation { get; set; } 
