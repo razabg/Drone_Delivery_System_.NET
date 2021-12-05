@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    class ParceToList
+    class ParcelToList
     {
         public int Id { set; get;}
         public string SenderName { set; get;}

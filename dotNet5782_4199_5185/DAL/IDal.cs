@@ -42,6 +42,10 @@ namespace IDAL.DO
 
         IEnumerable<double> PowerConsumptionRequestDrone();
 
+         IEnumerable<Drone> ReturnDroneList();
+        
+        IEnumerable<Parcel> ReturnParcelList();
+      int ReturnParcelStatus(Parcel par);
 
     }
 }
