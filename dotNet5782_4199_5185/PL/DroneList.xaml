@@ -6,7 +6,11 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="DroneList" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="99*"/>
+            <RowDefinition Height="335*"/>
+        </Grid.RowDefinitions>
     </Grid>
+
 </Window>
