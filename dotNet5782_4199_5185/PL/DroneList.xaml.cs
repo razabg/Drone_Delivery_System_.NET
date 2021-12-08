@@ -19,9 +19,17 @@ namespace PL
     /// </summary>
     public partial class DroneList : Window
     {
-        public DroneList()
+        
+        private IBL.BO.IBL BLAccess;//access to bl layer through ibl interface
+        public DroneList(IBL.BO.IBL BLAccess)
         {
+            BLAccess = new IBL.BO.BLObject();
             InitializeComponent();
+        }
+
+        private void DroneListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DroneListView.ItemsSource = BLAccess.GetDrones();//add the fuc
         }
     }
 }

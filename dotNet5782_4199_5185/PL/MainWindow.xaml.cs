@@ -29,7 +29,7 @@ namespace PL
 
         private void DroneList_click(object sender, RoutedEventArgs e)
         {
-
+            new DroneList(BLAccess).Show();
         }
 
        
