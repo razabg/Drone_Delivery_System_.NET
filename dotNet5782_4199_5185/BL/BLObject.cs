@@ -14,9 +14,9 @@ namespace IBL.BO
         public BLObject()
         {
             AccessToDataMethods = new DalObject.DalObject();
-            IEnumerable<double> PowerConsumption = AccessToDataMethods.PowerConsumptionRequestDrone();            
-                                                                         
-            
+            IEnumerable<double> PowerConsumption = AccessToDataMethods.PowerConsumptionRequestDrone();     //requset power consume;       
+
+           internal List<Drone> DroneListFromDataSource = 
 
 
 
