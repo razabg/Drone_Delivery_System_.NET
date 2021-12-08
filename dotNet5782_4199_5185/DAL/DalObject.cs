@@ -94,7 +94,38 @@ namespace DalObject
             return arr ;
         }
 
+
+        public IEnumerable<Drone> ReturnDroneList()
+        {
+            return DataSource.DronesList;
+        }
+
+        public IEnumerable<Parcel> ReturnParcelList()
+        {
+            return DataSource.ParcelsList;
+        }
+
+
+        public int ReturnParcelStatus(Parcel par)
+        {
+            if (par.ArrivedTime != null)
+            {
+                return 3;
+            }
+            if (par.PickedUp != null)
+            {
+                return 2;
+            }
+            if (par.ParingTime != null)
+            {
+                return 1;
+            }
+            return 0;
+        }
+
+
     }
+
 
 
 }
