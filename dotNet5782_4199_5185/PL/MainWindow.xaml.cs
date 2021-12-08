@@ -20,9 +20,18 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        IBL.BO.IBL BLAccess = new IBL.BO.BLObject(); //access to bl layer through ibl interface
+        public MainWindow(/*ref*/ IBL.BO.IBL  BLAccess)
         {
+            
             InitializeComponent();
         }
+
+        private void DroneList_click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+       
     }
 }
