@@ -40,14 +40,14 @@ namespace IDAL.DO
         public void show_UnassignmentParcel_list();
         #endregion
 
-        double[] PowerConsumptionRequestDrone();
-        int ReturnParcelStatus(Parcel par);
+        public double[] PowerConsumptionRequestDrone();
+        public int ReturnParcelStatus(Parcel par);
 
-        IEnumerable<Drone> ReturnDroneList();
-        
-        IEnumerable<Parcel> ReturnParcelList();
-     
-        IEnumerable<Station> ReturnStationList();
-        IEnumerable<Customer> ReturnCustomerList();
+        public IEnumerable<Drone> ReturnDroneList();
+
+        public IEnumerable<Parcel> ReturnParcelList();
+
+        public IEnumerable<Station> ReturnStationList();
+        public IEnumerable<Customer> ReturnCustomerList();
     }
 }

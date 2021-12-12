@@ -19,15 +19,15 @@ namespace DalObject
         /// </summary>
         /// <param name="p"></param>
         /// <param name="d"></param>
-        public void  UpdateParing(int p, int d) //לבדוק האם זה מטפל רק בישות  אחת
+        public void UpdateParing(int p, int d) //לבדוק האם זה מטפל רק בישות  אחת
         {
-           var indexParcel  = DataSource.ParcelsList.FindIndex(x => x.Id == p);
-            var indexDrone  = DataSource.DronesList.FindIndex(x => x.Id == d);
-            if (indexDrone != -1 &&indexParcel != -1)
+            var indexParcel = DataSource.ParcelsList.FindIndex(x => x.Id == p);
+            var indexDrone = DataSource.DronesList.FindIndex(x => x.Id == d);
+            if (indexDrone != -1 && indexParcel != -1)
             {
                 return; //חריגה בהמשך לבדוק שקיימים החבילה והרחפן ולבדוק שהרחפן פנוי ושהחבילה לא משוייכת,לוודא שמשקל מתאים לרחפן
             }
-            Parcel  helper = (DataSource.ParcelsList[indexParcel]); //in order to update the idrone in parcel.droneid we used helper to get the right id .
+            Parcel helper = (DataSource.ParcelsList[indexParcel]); //in order to update the idrone in parcel.droneid we used helper to get the right id .
             helper.DroneId = DataSource.DronesList[indexDrone].Id;
             helper.ParingTime = DateTime.Now;
             (DataSource.ParcelsList[indexParcel]) = helper;
@@ -43,12 +43,12 @@ namespace DalObject
         public void UpdatePickedUp(int p)
         {
             var indexParcel = DataSource.ParcelsList.FindIndex(x => x.Id == p);
-            if ( indexParcel != -1)
+            if (indexParcel != -1)
             {
-                return; 
+                return;
             }
             Parcel helper = (DataSource.ParcelsList[indexParcel]); //in order to update the idrone in parcel.droneid we used helper to get the right id .
-            helper.PickedUp = DateTime.Now ;
+            helper.PickedUp = DateTime.Now;
             (DataSource.ParcelsList[indexParcel]) = helper;
 
         }
@@ -61,15 +61,15 @@ namespace DalObject
         public void UpdateArrived(int p)
         {//לבדוק מצב סוללה של הרחפן
             var indexParcel = DataSource.ParcelsList.FindIndex(x => x.Id == p);
-   
-            if ( indexParcel != -1)
+
+            if (indexParcel != -1)
             {
-                return; 
+                return;
             }
             Parcel helper = (DataSource.ParcelsList[indexParcel]);
             helper.ArrivedTime = DateTime.Now; //update the arrival time of the parcel
             (DataSource.ParcelsList[indexParcel]) = helper;
-           
+
         }
 
         /// <summary>
@@ -80,18 +80,18 @@ namespace DalObject
         /// <param name="d"></param>
         public void UpdateRecharge(Station s, Drone d) //need to do here exeption  חריגה למקרה של אין מספיק עמדות טעינה
         {
-           
+
             DroneCharge DCharge = default;
-            DCharge.DroneId=d.Id;
+            DCharge.DroneId = d.Id;
             DCharge.StationId = s.Id;
             s.ChargeSlots--;
         }
 
-        public IEnumerable<double> PowerConsumptionRequestDrone()
+        public double[] PowerConsumptionRequestDrone()
         {
             double[] arr = new double[] { DataSource.Config.Available, DataSource.Config.Light, DataSource.Config.Average, DataSource.Config.Heavy, DataSource.Config.ChargingPaceDrone };
 
-            return arr ;
+            return arr;
         }
 
 
@@ -105,11 +105,11 @@ namespace DalObject
             return DataSource.ParcelsList;
         }
 
-        IEnumerable<Station> ReturnStationList()
+        public IEnumerable<Station> ReturnStationList()
         {
             return DataSource.StationsList;
         }
-        IEnumerable<Customer> ReturnCustomerList()
+        public IEnumerable<Customer> ReturnCustomerList()
         {
             return DataSource.CustomersList;
         }

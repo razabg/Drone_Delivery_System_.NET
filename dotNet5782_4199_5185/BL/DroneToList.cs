@@ -11,7 +11,7 @@ namespace IBL.BO
         public int Id{ get; set; }
         public string Model{ get; set; }
         public string Weight{ get; set; }
-        public int Battery{ get; set; }
+        public double Battery{ get; set; }
         public string Status{ get; set; }
         public Location CurrentLocation{ get; set; }
         public int IdOfParcelInTransfer {get;set; }

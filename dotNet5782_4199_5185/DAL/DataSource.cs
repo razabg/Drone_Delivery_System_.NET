@@ -19,13 +19,13 @@ namespace DalObject
         {
             public static int RunIdParcel = 10000001;
 
-
+            // the battery numbers refers  to cunsmption  % per km
             internal static double Available  { get{return 5; } }
             internal static double Light { get { return 10; } }
             internal static double Average { get { return 15; } }
             internal static double Heavy { get { return 20; } }
 
-            internal static double ChargingPaceDrone = 40;//the charging pace is percentage per hour,2.5 hour to fully charged
+            internal static double ChargingPaceDrone = 40;
 
 
         }
@@ -53,7 +53,7 @@ namespace DalObject
             return RandCustomer;
         }
 
-        public enum TopWeight { Heavy = 1, Average = 2, Light = 3 };
+        public enum TopWeight { Light, Average, heavy };
         public static Enum genRandTop()
         {
 
