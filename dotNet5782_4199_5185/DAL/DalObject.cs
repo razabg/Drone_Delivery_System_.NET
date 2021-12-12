@@ -105,6 +105,15 @@ namespace DalObject
             return DataSource.ParcelsList;
         }
 
+        IEnumerable<Station> ReturnStationList()
+        {
+            return DataSource.StationsList;
+        }
+        IEnumerable<Customer> ReturnCustomerList()
+        {
+            return DataSource.CustomersList;
+        }
+
 
         public int ReturnParcelStatus(Parcel par)
         {

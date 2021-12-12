@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    class StationBaseToList
+    public class StationBaseToList
     {
         public int Id {  set; get;}
         public string Name{  set; get;}
@@ -18,8 +18,8 @@ namespace IBL.BO
              string printInfo = "";
             printInfo += $" the ID is {Id}\n";
             printInfo += $"the name is{Name},\n";
-              printInfo += $"the number of available charging stations is{NumOfAvailableCharghingStations},\n";
-              printInfo += $"the number of unavailable charging stations is{NumOfUnavailableCharghingStations},\n";
+              printInfo += $"the number of available charging stations is{NumOfAvailableChargingStations},\n";
+              printInfo += $"the number of unavailable charging stations is{NumOfUnavailableChargingStations},\n";
             return printInfo;
         }
 

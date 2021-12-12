@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    class Enum
+    public class Enum
     {
         public enum Weight { available, light, average, heavy }
         public enum PriorityStatus { fast = 1, regular, emergency }

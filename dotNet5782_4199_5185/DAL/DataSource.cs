@@ -136,10 +136,10 @@ namespace DalObject
                     Weight = rand.Next(1, 300),
                     Priority = genRandPriority(),
                     DroneId = RandomIdFunc(),
-                    ParingTime = currentDate,
-                    PickedUp = currentDate,
-                    ArrivedTime = currentDate,
-                    CreationTime = currentDate
+                    ParingTime = null,
+                    PickedUp = null,
+                    ArrivedTime =null,
+                    CreationTime = null
 
                 });
             }

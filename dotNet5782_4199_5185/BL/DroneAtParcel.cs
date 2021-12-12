@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    class DroneAtParcel
+    public class DroneAtParcel
     {
         public int Id { get; set; }
-        public int Battary   { get; set; }
+        public int Battary { get; set; }
         public Location CurrentLocation { get; set; }
 
-          public override string ToString()
+        public override string ToString()
         {
             string printInfo = "";
             printInfo += $" the ID is {Id}\n";

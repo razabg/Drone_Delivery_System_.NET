@@ -9,52 +9,90 @@ namespace IBL.BO
     public partial class BLObject : IBL
     {
         public IDAL.DO.IDal AccessToDataMethods;
-        internal List<DroneToList> ListDroneBL = new List<DroneToList>();
-        internal List<ParcelToList> ListParcelBL = new List<ParcelToList>();
+        public static Random rand = new();
+        public List<DroneToList> ListDroneBL = new List<DroneToList>();
+       public List<ParcelToList> ListParcelBL = new List<ParcelToList>();
+
+
+        public double AvailableWeightConsump;
+        public double LightWeightConsump;
+        public double AverageWeightConsump;
+        public double HeavyWeightConsump;
+        public double ChargingPaceDrone;
+
 
         public BLObject()
         {
             AccessToDataMethods = new DalObject.DalObject();
-            IEnumerable<double> PowerConsumption = AccessToDataMethods.PowerConsumptionRequestDrone();
-            IEnumerable <IDAL.DO.Drone> DroneListDal = AccessToDataMethods.ReturnDroneList();
+            double[] PowerConsumption = AccessToDataMethods.PowerConsumptionRequestDrone();
+            AvailableWeightConsump = PowerConsumption[0];
+            LightWeightConsump = PowerConsumption[1];
+            AverageWeightConsump = PowerConsumption[2];
+            HeavyWeightConsump = PowerConsumption[3];
+            ChargingPaceDrone = PowerConsumption[4];
+
+            // init the data layer entities;
+            IEnumerable<IDAL.DO.Drone> DroneListDal = AccessToDataMethods.ReturnDroneList();
             IEnumerable<IDAL.DO.Parcel> ParcelListDal = AccessToDataMethods.ReturnParcelList();
+            IEnumerable<IDAL.DO.Station> StationListDal = AccessToDataMethods.ReturnStationList();
+            IEnumerable<IDAL.DO.Customer> CustomerListDal = AccessToDataMethods.ReturnCustomerList();
+
+
             foreach (var item in DroneListDal)
             {
                 ListDroneBL.Add(new DroneToList()
                 {
                     Id = item.Id,
-                    Weight =item.MaxWeight,
-                    Model =item.Model,
+                    Weight = item.MaxWeight,
+                    Model = item.Model,
+                    CurrentLocation =new(),
                 });
 
             }
 
-
-
-            Enum ParS = new Enum();
-            
-            foreach (var item in ParcelListDal)
+            foreach (var drone in ListDroneBL)
             {
-                ParS =(ParS)AccessToDataMethods.ReturnParcelStatus(item);
-                ListParcelBL.Add(new ParcelToList
+                foreach (var parcel in ParcelListDal)
                 {
-                    Id = item.Id,
-                    SenderName = item.SenderId.ToString(),
-                    ReceiverName =item.TargetId.ToString(),
-                    Weight = item.Weight.ToString(),
-                    Priority = item.Priority.ToString(),
-                     = AccessToDataMethods.ReturnParcelStatus(item),
-                });
+                    if (parcel.DroneId == drone.Id && parcel.ArrivedTime == null)//in case the parcel is already paird but didnt arrived yet
+                    {
+                        drone.Status = Enum.DroneStatus.Busy.ToString();
+                        if (parcel.ParingTime != null && parcel.PickedUp == null)   { //in case the parcel is already paird but didnt picked up yet
+                            double senderLon = GetCustomerDetails(parcel.SenderId).Longitude;
+                            double senderLat = GetCustomerDetails(parcel.SenderId).Latitude;
+                            drone.CurrentLocation = ClosetStation(senderLon, senderLat, AccessToDataMethods.ReturnStationList()).Location;
+                        }
+
+
+                    }
+
+
+
+
+
+
+
+
+                    }
+
+
+
+                }
+
 
             }
-          
-
-
-
 
 
 
             }
+
+
+
+
+
+
+
+        }
 
 
 

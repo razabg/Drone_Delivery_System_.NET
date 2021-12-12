@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    class ParcelAtCustomer
+    public class ParcelAtCustomer
     {
         public int Id { set; get; }
         public string Weight { set; get; }
@@ -15,7 +15,7 @@ namespace IBL.BO
         public CustomerAtParcel DestOrSrc { set; get; }
 
 
-             public override string ToString()
+        public override string ToString()
         {
             string printInfo = "";
             printInfo += $" the ID is {Id}\n";
