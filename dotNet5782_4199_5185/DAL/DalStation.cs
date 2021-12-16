@@ -13,28 +13,19 @@ namespace DalObject
     /// </summary>
     public partial class DalObject
     {
-        public void AddStation()
+        public void AddStation(Station tolist)
         {
-            Console.WriteLine("Please enter the station's ID:\n");
-            int ID = int.Parse(Console.ReadLine());
-            Console.WriteLine("Please enter the station's name:\n");
-            int NAME = int.Parse(Console.ReadLine());
-            Console.WriteLine("Please enter the station's longitube:\n");
-            double LONGITUDE = double.Parse(Console.ReadLine());
-            Console.WriteLine("Please enter the station's lattitude:\n");
-            double LATTITUDE = double.Parse(Console.ReadLine());
-            Console.WriteLine("Please enter the station's chargeSlots:\n");
-            int CHARGESLOTS = int.Parse(Console.ReadLine());
+         
             DataSource.StationsList.Add(new Station()
             {
-                Id = ID,
-                Name = NAME,
-                Longitude = LONGITUDE,
-                Lattitude = LATTITUDE,
-                ChargeSlots = CHARGESLOTS
+                Id = tolist.Id,
+                Name = tolist.Name,
+                Longitude = tolist.Longitude,
+                Lattitude = tolist.Lattitude,
+                ChargeSlots = tolist.ChargeSlots
             });
         }
-        public  void findAndPrint_Station(int key)
+        public void findAndPrint_Station(int key)
         {
             Station ForPrint = DataSource.StationsList.Find(x => x.Id == key);
             Console.WriteLine(ForPrint);
@@ -42,7 +33,7 @@ namespace DalObject
         /// <summary>
         /// uses foreach loop to print the list of the entity' type the user asked
         /// </summary>
-        public  void show_station_list()
+        public void show_station_list()
         {
             foreach (Station item in DataSource.StationsList)
             {
@@ -51,7 +42,7 @@ namespace DalObject
             }
         }
 
-        public  void show_AvailableChargingStations_list()
+        public void show_AvailableChargingStations_list()
         {
             foreach (Station item in DataSource.StationsList)
             {
@@ -65,5 +56,5 @@ namespace DalObject
         }
 
     }
-  
+
 }
