@@ -113,9 +113,9 @@ namespace IBL.BO
                 }
                 if (drone.Status == Enum.DroneStatus.Available.ToString())
                 {
-                    List<IDAL.DO.Parcel>ParcelList = (List<IDAL.DO.Parcel>)ParcelListDal;
+                    List<IDAL.DO.Parcel> ParcelList = (List<IDAL.DO.Parcel>)ParcelListDal;
                     List<IDAL.DO.Parcel> ArrivedParcels = ParcelList.FindAll(x => x.ArrivedTime != null);
-                    List<IDAL.DO.Customer> CustomerThatReceiveParcels =new();
+                    List<IDAL.DO.Customer> CustomerThatReceiveParcels = new();
                     foreach (var parcel in ArrivedParcels)
                     {
                         foreach (var customer in CustomerThatReceiveParcels)
@@ -134,9 +134,9 @@ namespace IBL.BO
                     }
                     else    //rand a base station from the list and set the location of the drone in the station
                     {
-                        List < IDAL.DO.Station > stations = (List < IDAL.DO.Station > )StationListDal;
+                        List<IDAL.DO.Station> stations = (List<IDAL.DO.Station>)StationListDal;
                         int index = rand.Next(0, stations.Count);
-                        drone.CurrentLocation.Latitude =stations[index].Lattitude;
+                        drone.CurrentLocation.Latitude = stations[index].Lattitude;
                         drone.CurrentLocation.Longitude = stations[index].Longitude;
 
                     }
@@ -151,37 +151,11 @@ namespace IBL.BO
                     drone.Battery = Math.Round(rand.NextDouble() * (100 - MinBattery1) + MinBattery1);
 
                 }
-
-
-
-
-
-
-
-
-
             }
-
-
-
         }
-
-
-    }
-
-
-
-}
-
-
-
-
-
-
-
-        }
-
-
-
     }
 }
+
+
+
+
