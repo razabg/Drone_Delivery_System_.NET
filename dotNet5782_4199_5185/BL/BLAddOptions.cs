@@ -13,8 +13,8 @@ namespace IBL.BO
         public void AddStation(BaseStation BaseToAdd)
         {
             IDAL.DO.Station station_to_list = new();
-            station_to_list.Id = BaseToAdd.Id
-            station_to_list
+            station_to_list.Id = BaseToAdd.Id;
+            station_to_list.
             station_to_list
             station_to_list
             station_to_list

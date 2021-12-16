@@ -10,17 +10,17 @@ namespace DalObject
 {
     public partial class DalObject
     {
-        public void AddParcel()
+        public void AddParcel(Parcel parcel)
         {
 
-            Console.WriteLine("Please enter the sender's ID:\n");
-            int SenderId = int.Parse(Console.ReadLine());
-            Console.WriteLine("Please enter the target ID:\n");
-            int TargetId = int.Parse(Console.ReadLine());
-            Console.WriteLine("Please enter the parcel's weight:\n");
-            float Weight = float.Parse(Console.ReadLine());
-            Console.WriteLine("Please enter the parcel's priority:\n");
-            int Priority = int.Parse(Console.ReadLine());
+            //Console.WriteLine("Please enter the sender's ID:\n");
+            //int SenderId = int.Parse(Console.ReadLine());
+            //Console.WriteLine("Please enter the target ID:\n");
+            //int TargetId = int.Parse(Console.ReadLine());
+            //Console.WriteLine("Please enter the parcel's weight:\n");
+            //float Weight = float.Parse(Console.ReadLine());
+            //Console.WriteLine("Please enter the parcel's priority:\n");
+            //int Priority = int.Parse(Console.ReadLine());
             DataSource.ParcelsList.Add(new Parcel
             {
                 Id = DataSource.Config.RunIdParcel++,

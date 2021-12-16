@@ -14,7 +14,7 @@ namespace IDAL.DO
         void AddCustomer();
         void AddDrone();
         void AddParcel();
-        void AddStation();
+        void AddStation(Station sta);
         #endregion
 
         #region FIND AND PRINT METHODS
