@@ -51,8 +51,23 @@ namespace IBL.BO
 
 
         } // need to take care in case of charge slot or name is empty
+        void UpdateCustomerData (int CustomerId, string customerName,string phoneNumber)
+        {
+            List<IDAL.DO.Customer> StationListDal = AccessToDataMethods.ReturnCustomerList().ToList();
+            var customerUpdate = AccessToDataMethods.ReturnCustomerList().ToList().Find(x => x.Id == CustomerId);
+            var index = AccessToDataMethods.ReturnCustomerList().ToList().FindIndex(x => x.Id == CustomerId);
+            if (index == -1)
+            {
+                throw new NotExistsException();
+            }
+            if (customerName.Length > 0 && phoneNumber.Length < 0)
+            {
+                customerUpdate.Name = customerName;
+                customerUpdate.Phone = phoneNumber;
+            }
 
 
+        }
 
     }
 
