@@ -13,22 +13,19 @@ namespace DalObject
         /// <summary>
         /// method that add new drone to drones list
         /// </summary>
-        public void AddDrone()
+        public void AddDrone(Drone drone_add)
         {
-            Console.WriteLine("Please enter the drone's ID:\n");
-            object ID = Console.ReadLine();
-            Console.WriteLine("Please enter the drone's model:\n");
-            object MODEL = Console.ReadLine();
-            Console.WriteLine("Please enter the drone's maxWeight:\n");
-            object MAXWEIGHT = Console.ReadLine();
-            Console.WriteLine("Please enter the drone's status:\n");
+            if (!DataSource.DronesList.ToList().Exists(x=>x.Id==drone_add.Id))
+            {
+                throw new AlreadyExistsException("the drone is alreay exists");
+            }
 
             DataSource.DronesList.Add(new Drone()
             {
-                Id = (int)ID,
-                Model = (string)MODEL,
-                MaxWeight = (string)MAXWEIGHT,
-            });
+                Id = drone_add.Id,
+                Model = drone_add.Model,
+                MaxWeight = drone_add.MaxWeight,
+            }); ;
         }
         public  void findAndPrint_Drone(int key)
         {

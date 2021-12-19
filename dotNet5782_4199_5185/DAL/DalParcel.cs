@@ -12,27 +12,25 @@ namespace DalObject
     {
         public void AddParcel(Parcel parcel)
         {
+            if (!DataSource.ParcelsList.ToList().Exists(x => x.Id == parcel.Id))
+            {
+                throw new AlreadyExistsException("the parcel is alreay exists");
+            }
 
-            //Console.WriteLine("Please enter the sender's ID:\n");
-            //int SenderId = int.Parse(Console.ReadLine());
-            //Console.WriteLine("Please enter the target ID:\n");
-            //int TargetId = int.Parse(Console.ReadLine());
-            //Console.WriteLine("Please enter the parcel's weight:\n");
-            //float Weight = float.Parse(Console.ReadLine());
-            //Console.WriteLine("Please enter the parcel's priority:\n");
-            //int Priority = int.Parse(Console.ReadLine());
+
             DataSource.ParcelsList.Add(new Parcel
             {
                 Id = DataSource.Config.RunIdParcel++,
-                SenderId = SenderId,
-                TargetId = TargetId,
-                Weight = Weight,
-                Priority = Priority,
+                SenderId = parcel.SenderId,
+                TargetId = parcel.TargetId,
+                Weight = parcel.Weight,
+                Priority = parcel.Priority,
+                DroneId = null,
                 CreationTime = DateTime.Now,
                 ParingTime = null,
                 PickedUp = null,
                 ArrivedTime = null,
-            });
+            }) ;
 
         }
         public  void findAndPrint_Parcel(int key)
