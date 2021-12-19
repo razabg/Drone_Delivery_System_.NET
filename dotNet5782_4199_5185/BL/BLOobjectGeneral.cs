@@ -14,6 +14,10 @@ namespace IBL.BO
         {
             List<IDAL.DO.Customer> CustomerListDal = AccessToDataMethods.ReturnCustomerList().ToList();
             int index = CustomerListDal.FindIndex(x => x.Id == id);
+            if (index == -1)
+            {
+                throw new NotExistsException();
+            }
             return CustomerListDal[index];
         }
 

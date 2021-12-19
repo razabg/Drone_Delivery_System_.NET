@@ -15,10 +15,10 @@ namespace DalObject
     {
         public void AddStation(Station tolist)
         {
-            int IDexc = tolist.Id;
-            if (!DataSource.StationsList.Contains(tolist))
+           
+            if (!DataSource.StationsList.ToList().Exists(x=>x.Id==tolist.Id))
             {
-                throw new AlreadyExistException("the station is already exists");
+                throw new AlreadyExistsException("the station is already exists");
             }
 
             DataSource.StationsList.Add(new Station()

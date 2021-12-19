@@ -14,12 +14,12 @@ namespace DalObject
         internal static List<Station> StationsList = new List<Station>();
         internal static List<Customer> CustomersList = new List<Customer>();
         internal static List<Parcel> ParcelsList = new List<Parcel>();
-
+        internal static List<DroneINCharge> DroneChargeList = new List<DroneINCharge>();
         internal class Config
         {
             public static int RunIdParcel = 10000001;
 
-            // the battery numbers refers  to cunsmption  % per km
+            // the battery numbers refers  to consumption  % per km
             internal static double Available  { get{return 5; } }
             internal static double Light { get { return 10; } }
             internal static double Average { get { return 15; } }
@@ -105,6 +105,12 @@ namespace DalObject
                     Longitude = Coordinates(),
                     Lattitude = Coordinates()
                 });
+                DroneChargeList.Add(new DroneINCharge()
+                {
+                    DroneId = 0,
+                    StationId = 0,
+                });
+                    
             }
             for (int i = 0; i < 5; ++i)
             {

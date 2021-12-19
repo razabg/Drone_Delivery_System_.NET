@@ -21,7 +21,7 @@ namespace IBL.BO
         public double ChargingPaceDrone;
 
 
-        public BLObject()
+        public BLObject() //ctor
         {
             AccessToDataMethods = new DalObject.DalObject();
             double[] PowerConsumption = AccessToDataMethods.PowerConsumptionRequestDrone();

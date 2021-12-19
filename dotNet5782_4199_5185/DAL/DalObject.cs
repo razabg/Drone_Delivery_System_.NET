@@ -81,7 +81,7 @@ namespace DalObject
         public void UpdateRecharge(Station s, Drone d) //need to do here exeption  חריגה למקרה של אין מספיק עמדות טעינה
         {
 
-            DroneCharge DCharge = default;
+            DroneINCharge DCharge = default;
             DCharge.DroneId = d.Id;
             DCharge.StationId = s.Id;
             s.ChargeSlots--;
@@ -112,6 +112,11 @@ namespace DalObject
         public IEnumerable<Customer> ReturnCustomerList()
         {
             return DataSource.CustomersList;
+        }
+
+        public IEnumerable<DroneINCharge> ReturnDroneChargeList()
+        {
+            return DataSource.DroneChargeList;
         }
 
 

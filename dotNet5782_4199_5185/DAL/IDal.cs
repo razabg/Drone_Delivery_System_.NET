@@ -11,9 +11,9 @@ namespace IDAL.DO
    public interface IDal
     {
         #region *Add Functions*
-        void AddCustomer();
-        void AddDrone();
-        void AddParcel();
+        void AddCustomer(Customer AddCustomer);
+        void AddDrone(Drone AddDrone);
+        void AddParcel(Parcel AddParcel);
         void AddStation(Station sta);
         #endregion
 
@@ -46,6 +46,8 @@ namespace IDAL.DO
         public IEnumerable<Drone> ReturnDroneList();
 
         public IEnumerable<Parcel> ReturnParcelList();
+
+        public IEnumerable<DroneINCharge> ReturnDroneChargeList();
 
         public IEnumerable<Station> ReturnStationList();
         public IEnumerable<Customer> ReturnCustomerList();
