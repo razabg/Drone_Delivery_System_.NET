@@ -16,8 +16,6 @@ namespace DalObject
             {
                 throw new AlreadyExistsException("the parcel is alreay exists");
             }
-
-
             DataSource.ParcelsList.Add(new Parcel
             {
                 Id = DataSource.Config.RunIdParcel++,

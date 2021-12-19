@@ -44,11 +44,8 @@ namespace IDAL.DO
         public int ReturnParcelStatus(Parcel par);
 
         public IEnumerable<Drone> ReturnDroneList();
-
         public IEnumerable<Parcel> ReturnParcelList();
-
         public IEnumerable<DroneINCharge> ReturnDroneChargeList();
-
         public IEnumerable<Station> ReturnStationList();
         public IEnumerable<Customer> ReturnCustomerList();
     }

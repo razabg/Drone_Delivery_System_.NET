@@ -10,7 +10,7 @@ namespace DalObject
 {
     public partial class DalObject
     {
-
+      
 
     }
 }

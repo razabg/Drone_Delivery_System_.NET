@@ -32,18 +32,61 @@ namespace IBL.BO
         public IDAL.DO.Station NearestStation(double longi, double lati, IEnumerable<IDAL.DO.Station> station)
         {
             double MinDist = CalcDistanceBetweenTwoCoordinates(longi, lati, station.First().Longitude, station.First().Lattitude);
-            IDAL.DO.Station StationToreturn = station.First();
+            IDAL.DO.Station StationToReturn = station.First();
             foreach (var item in station)
             {
                 double temp = CalcDistanceBetweenTwoCoordinates(longi, lati, item.Longitude, item.Lattitude);
                 if (MinDist > temp)
                 {
                     MinDist = temp;
-                    StationToreturn = item;
+                    StationToReturn = item;
                 }
             }
-            return StationToreturn;
+            return StationToReturn;
 
         }
+
+        public IDAL.DO.Station NearestStationToChargeDrone(double longi, double lati, IEnumerable<IDAL.DO.Station> station)
+        {
+
+            double MinDist = CalcDistanceBetweenTwoCoordinates(longi, lati, station.First().Longitude, station.First().Lattitude);
+            bool flag = true;
+            List<IDAL.DO.Station> StationToskip = new List<IDAL.DO.Station>();
+            IDAL.DO.Station StationToReturn = station.First();
+            while (flag == true) //iterate on the stations list until we will find the nearest station that has free charge slot
+            {
+                foreach (var item in station)
+                {
+                    double temp = CalcDistanceBetweenTwoCoordinates(longi, lati, item.Longitude, item.Lattitude);
+                    if (MinDist > temp)
+                    {
+                        if (!StationToskip.Contains(item)) //it the specific item is on the "black" list which contains the full stations skip to the next station
+                        {
+                            MinDist = temp;
+                            StationToReturn = item;
+                        }
+
+                    }
+                }
+                int numOfDronesInCharge = AccessToDataMethods.ReturnDroneChargeList().Count(x => x.StationId == StationToReturn.Id);// num of the drones that getting charged in the station
+                if (numOfDronesInCharge < StationToReturn.ChargeSlots) // if the station has room for another drone
+                {
+                    return StationToReturn;
+                    flag = false; //stop the outer while loop
+                }
+                else if (numOfDronesInCharge >= StationToReturn.ChargeSlots)  // if there is no room in the station add the station to the "black list
+                {
+                    StationToskip.Add(StationToReturn);
+                    flag = true;
+                }
+                else if (StationToskip.Equals(station))
+                {
+                    throw new NoStationsWithFreeChargeException( );
+                }
+          
+            }
+            return StationToReturn;
+        }
     }
+
 }

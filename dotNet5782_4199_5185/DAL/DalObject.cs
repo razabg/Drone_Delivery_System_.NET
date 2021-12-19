@@ -84,6 +84,7 @@ namespace DalObject
             DroneINCharge DCharge = default;
             DCharge.DroneId = d.Id;
             DCharge.StationId = s.Id;
+            ReturnDroneChargeList().ToList().Add(DCharge);
             s.ChargeSlots--;
         }
 

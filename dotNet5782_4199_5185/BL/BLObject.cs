@@ -6,7 +6,7 @@ using System.Collections;
 
 namespace IBL.BO
 {
-    public partial class BLObject : IBL
+    public partial class BLObject : Ibl
     {
         public IDAL.DO.IDal AccessToDataMethods;
         public static Random rand = new();
@@ -45,7 +45,7 @@ namespace IBL.BO
                     Id = item.Id,
                     Weight = item.MaxWeight,
                     Model = item.Model,
-                    CurrentLocation = new(),
+                    CurrentLocation = new (),
                 });
 
             }
