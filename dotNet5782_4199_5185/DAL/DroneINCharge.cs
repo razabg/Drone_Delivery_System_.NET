@@ -12,7 +12,7 @@ namespace IDAL
         {
             public int DroneId { get; set; }
             public int StationId { get; set; }
-
+            public TimeSpan ChargeTime { get; set; }
             public override string ToString()
             {
                 string printChargeInfo = "";

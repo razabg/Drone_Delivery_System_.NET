@@ -41,7 +41,7 @@ namespace IBL.BO
 
             if (!AccessToDataMethods.ReturnStationList().ToList().Exists(x => x.Id == StationId))//check if the given station id is exist;
             {
-                throw new NotExistsException();
+                throw new AlreadyExistsException();
             }
 
             try

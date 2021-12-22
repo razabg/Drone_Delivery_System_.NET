@@ -9,7 +9,7 @@ namespace IBL.BO
     public partial class BLObject
     {
 
-        public void UpdateDroneName(int droneid, string NewModel)
+        public void UpdateDroneName(int droneid, string NewModel) //shuld i 
         {
             List<IDAL.DO.Drone> DroneListDal = AccessToDataMethods.ReturnDroneList().ToList();
             var index = DroneListDal.FindIndex(x => x.Id == droneid);
@@ -119,8 +119,7 @@ namespace IBL.BO
             AccessToDataMethods.UpdateRecharge(StationForCharge, DalDrone);//check if we need list of drone charge
 
         }
-
-        void ReleaseDroneFromChargh(int drone_id,double SumCharge)
+        void ReleaseDroneFromChargh(int drone_id/*,double SumCharge*/)
         {
             if (!ListDroneBL.Exists(x=>x.Id ==drone_id))
             {
@@ -130,6 +129,25 @@ namespace IBL.BO
             {
                 throw new DroneIsNotAvailable(drone_id);
             }
+            
+            var DroneToRelease = ListDroneBL.Find(x => x.Id == drone_id);
+            DroneToRelease.Status = Enum.DroneStatus.Available.ToString();
+            DroneToRelease.Battery = 100;//check this because its not acurrate,need to calc the time the drone was in charge
+            var DroneCharge = AccessToDataMethods.ReturnDroneChargeList().ToList().Find(x => x.DroneId == drone_id);
+            var stationIndex = AccessToDataMethods.ReturnStationList().ToList().FindIndex(x => x.Id == DroneCharge.StationId);
+            var station = AccessToDataMethods.ReturnStationList().ToList().Find(x => x.Id == DroneCharge.StationId);
+            station.ChargeSlots++;
+            AccessToDataMethods.ReturnStationList().ToList()[stationIndex] = station;//struct
+            AccessToDataMethods.ReturnDroneChargeList().ToList().RemoveAll(x => x.DroneId == drone_id);
+
+
+        }
+
+        void ParingParcelToDrone(int drone_id)
+        {
+
+
+
 
 
 
