@@ -100,7 +100,7 @@ namespace IBL.BO
             int index = ListDroneBL.FindIndex(x => x.Id == droneid);
             DroneToList drone_to_charge = ListDroneBL.Find(x => x.Id == droneid);
             IDAL.DO.Station StationForCharge = NearestStationToChargeDrone(drone_to_charge.CurrentLocation.Longitude, drone_to_charge.CurrentLocation.Latitude, AccessToDataMethods.ReturnStationList().ToList());
-            double DistFromStation = CalcDistanceBetweenTwoCoordinates(drone_to_charge.CurrentLocation.Longitude, drone_to_charge.CurrentLocation.Latitude, StationForCharge.Longitude, StationForCharge.Lattitude);
+            double DistFromStation = CalcDistanceBetweenTwoCoordinates(drone_to_charge.CurrentLocation.Longitude, drone_to_charge.CurrentLocation.Latitude, StationForCharge.Longitude, StationForCharge.Latitude);
             double MinBattery = AccessToDataMethods.PowerConsumptionRequestDrone()[int.Parse(drone_to_charge.Weight) + 1] * DistFromStation;//The battery consumption that let the drone to get to station  successfully
 
             if (drone_to_charge.Battery < MinBattery)// check if there is enough battery to get the station
@@ -111,7 +111,7 @@ namespace IBL.BO
 
             drone_to_charge.Battery = MinBattery;// is it ok? reference? will the insert the value onto the list
             drone_to_charge.CurrentLocation.Longitude = StationForCharge.Longitude;
-            drone_to_charge.CurrentLocation.Latitude = StationForCharge.Lattitude;
+            drone_to_charge.CurrentLocation.Latitude = StationForCharge.Latitude;
             drone_to_charge.Status = Enum.DroneStatus.TreatmentMode.ToString();
             ListDroneBL[index] = drone_to_charge;
             var DalDrone = AccessToDataMethods.ReturnDroneList().ToList().Find(x => x.Id == drone_to_charge.Id);
@@ -119,17 +119,17 @@ namespace IBL.BO
             AccessToDataMethods.UpdateRecharge(StationForCharge, DalDrone);//check if we need list of drone charge
 
         }
-        void ReleaseDroneFromChargh(int drone_id/*,double SumCharge*/)
+        void ReleaseDroneFromCharge(int drone_id/*,double SumCharge*/)
         {
-            if (!ListDroneBL.Exists(x=>x.Id ==drone_id))
+            if (!ListDroneBL.Exists(x => x.Id == drone_id))
             {
                 throw new NotExistsException();
             }
-            if (!ListDroneBL.Exists(x => x.Status==Enum.DroneStatus.TreatmentMode.ToString()))
+            if (!ListDroneBL.Exists(x => x.Status == Enum.DroneStatus.TreatmentMode.ToString()))
             {
                 throw new DroneIsNotAvailable(drone_id);
             }
-            
+
             var DroneToRelease = ListDroneBL.Find(x => x.Id == drone_id);
             DroneToRelease.Status = Enum.DroneStatus.Available.ToString();
             DroneToRelease.Battery = 100;//check this because its not acurrate,need to calc the time the drone was in charge
@@ -145,8 +145,39 @@ namespace IBL.BO
 
         void ParingParcelToDrone(int drone_id)
         {
+            if (!ListDroneBL.Exists(x => x.Id == drone_id))
+            {
+                throw new NotExistsException();
+            }
+            if (!ListDroneBL.Exists(x => x.Status == Enum.DroneStatus.Available.ToString()))
+            {
+                throw new DroneIsNotAvailable(drone_id);
 
 
+            }
+
+            var droneToPare = ListDroneBL.Find(x => x.Id == drone_id);
+
+            //list sorted by priority
+            IEnumerable<IDAL.DO.Parcel> EmergencyParcel = AccessToDataMethods.ReturnParcelList().ToList().Where(x => x.Priority == int.Parse(Enum.PriorityStatus.emergency.ToString())).Where(x => x.Weight == int.Parse(droneToPare.Weight));
+            IEnumerable<IDAL.DO.Parcel> FastParcel = AccessToDataMethods.ReturnParcelList().ToList().Where(x => x.Priority == int.Parse(Enum.PriorityStatus.fast.ToString())).Where(x => x.Weight == int.Parse(droneToPare.Weight));
+            IEnumerable<IDAL.DO.Parcel> RegualrParcel = AccessToDataMethods.ReturnParcelList().ToList().Where(x => x.Priority == int.Parse(Enum.PriorityStatus.regular.ToString())).Where(x => x.Weight == int.Parse(droneToPare.Weight));
+
+            if (EmergencyParcel.Any())
+            {
+                IDAL.DO.Customer nearestCustomer = NearestParcel_customer(droneToPare.CurrentLocation.Longitude, droneToPare.CurrentLocation.Latitude,EmergencyParcel);//the function returns first of all the cloesest customer for calc the distance
+                var NearestParcel = EmergencyParcel.Where(x => x.SenderId == nearestCustomer.Id);//this the actual the nearset parcel
+                IDAL.DO.Station nearestStaion = NearestStation(droneToPare.CurrentLocation.Longitude, droneToPare.CurrentLocation.Latitude, AccessToDataMethods.ReturnStationList().ToList());
+
+
+                double DistFromCustomer = CalcDistanceBetweenTwoCoordinates(droneToPare.CurrentLocation.Longitude, droneToPare.CurrentLocation.Latitude, nearestCustomer.Longitude, nearestCustomer.Latitude);
+                double DistFromTarget = CalcDistanceBetweenTwoCoordinates(droneToPare.CurrentLocation.Longitude, droneToPare.CurrentLocation.Latitude, nearestCustomer.Longitude, nearestCustomer.Latitude);
+                double DistFromStation = CalcDistanceBetweenTwoCoordinates(droneToPare.CurrentLocation.Longitude, droneToPare.CurrentLocation.Latitude, nearestStaion.Longitude, nearestStaion.Latitude);
+                double MinBattery_to_get_customer = AccessToDataMethods.PowerConsumptionRequestDrone()[int.Parse(droneToPare.Weight) + 1] * DistFromCustomer;//The battery consumption that let the drone to get to the closest customer successfully
+                double MinBattery_to_get_target = AccessToDataMethods.PowerConsumptionRequestDrone()[int.Parse(droneToPare.Weight) + 1] * DistFromCustomer;//The battery consumption that let the drone to get to the traget successfully
+                double MinBattery_to_get_station = AccessToDataMethods.PowerConsumptionRequestDrone()[int.Parse(droneToPare.Weight) + 1] * DistFromCustomer;//The battery consumption that let the drone to get to the closest station successfully
+
+            }
 
 
 
@@ -161,5 +192,10 @@ namespace IBL.BO
 
 
 
+
 }
+
+
+
+
 

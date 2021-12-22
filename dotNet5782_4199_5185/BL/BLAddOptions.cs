@@ -9,12 +9,13 @@ namespace IBL.BO
 {
     public partial class BLObject
     {
+
         public void AddStation(BaseStation BaseToAdd)
         {
             IDAL.DO.Station station_to_list = new IDAL.DO.Station();
 
             station_to_list.Id = BaseToAdd.Id;
-            station_to_list.Lattitude = BaseToAdd.location.Latitude;
+            station_to_list.Latitude = BaseToAdd.location.Latitude;
             station_to_list.Longitude = BaseToAdd.location.Longitude;
             station_to_list.Name = BaseToAdd.Name;
             station_to_list.ChargeSlots = new();
@@ -53,7 +54,7 @@ namespace IBL.BO
 
                 Console.WriteLine(ex1); ;
             }
-            DroneToBl.CurrentLocation = new(TempStation.Longitude, TempStation.Lattitude);
+            DroneToBl.CurrentLocation = new(TempStation.Longitude, TempStation.Latitude);
             DroneToBl.Battery = rand.Next(20, 40);
             DroneToBl.Status = Enum.DroneStatus.TreatmentMode.ToString();
             ListDroneBL.Add(DroneToBl); //the bl drone list which hold the specific drone with its location
