@@ -45,7 +45,7 @@ namespace IBL.BO
             return StationToReturn;
 
         }
-
+        
         public IDAL.DO.Station NearestStationToChargeDrone(double longi, double lati, IEnumerable<IDAL.DO.Station> station)
         {
 
@@ -88,7 +88,7 @@ namespace IBL.BO
             return StationToReturn;
         }
 
-        public IDAL.DO.Customer NearestParcel_customer(double longi, double lati, IEnumerable<IDAL.DO.Parcel> parceList)
+        public IDAL.DO.Customer NearestParcel_SenderIdcustomer(double longi, double lati, IEnumerable<IDAL.DO.Parcel> parceList)
         {
             List<IDAL.DO.Customer> SenderOfTheParcel = new List<IDAL.DO.Customer>();//this list going to contain the customers so that we will know the location of the parcels
             List<IDAL.DO.Parcel> helpList = parceList.ToList();//help us in the end to extract the closest parcel
@@ -125,6 +125,11 @@ namespace IBL.BO
             return customerToReturn;
 
 
+        }
+
+        public IDAL.DO.Customer returnTargetCustomer(IDAL.DO.Parcel parcel)
+        {
+            return AccessToDataMethods.ReturnCustomerList().ToList().Find(x => x.Id == parcel.TargetId);
         }
     }
 
