@@ -26,7 +26,7 @@ namespace DalObject
                 Id = tolist.Id,
                 Name = tolist.Name,
                 Longitude = tolist.Longitude,
-                Lattitude = tolist.Lattitude,
+                Latitude = tolist.Latitude,
                 ChargeSlots = tolist.ChargeSlots
             });
         }

@@ -97,7 +97,7 @@ namespace IBL.BO
                     { //in case the parcel is already paird but didnt picked up yet
                         double senderLon = GetCustomerDetails(parcel.SenderId).Longitude;
                         double senderLat = GetCustomerDetails(parcel.SenderId).Latitude;
-                        drone.CurrentLocation.Latitude = NearestStation(senderLon, senderLat, AccessToDataMethods.ReturnStationList()).Lattitude;
+                        drone.CurrentLocation.Latitude = NearestStation(senderLon, senderLat, AccessToDataMethods.ReturnStationList()).Latitude;
                         drone.CurrentLocation.Longitude = NearestStation(senderLon, senderLat, AccessToDataMethods.ReturnStationList()).Longitude;
                     }
                     if (parcel.PickedUp != null && parcel.ArrivedTime == null)
@@ -111,7 +111,7 @@ namespace IBL.BO
                     double MinBattery1 = PowerConsumption[int.Parse(drone.Weight) + 1] * TargetDist;//The battery consumption that enables the drone to supply the parcel successfully
                     Location nearestStation = new Location();
                     nearestStation.Longitude = NearestStation(drone.CurrentLocation.Longitude, drone.CurrentLocation.Latitude, AccessToDataMethods.ReturnStationList()).Longitude;
-                    nearestStation.Latitude = NearestStation(drone.CurrentLocation.Longitude, drone.CurrentLocation.Latitude, AccessToDataMethods.ReturnStationList()).Lattitude;
+                    nearestStation.Latitude = NearestStation(drone.CurrentLocation.Longitude, drone.CurrentLocation.Latitude, AccessToDataMethods.ReturnStationList()).Latitude;
                     double MinBattery2 = AvailableWeightConsump * CalcDistanceBetweenTwoCoordinates(drone.CurrentLocation.Longitude, drone.CurrentLocation.Latitude, nearestStation.Longitude, nearestStation.Latitude);//The battery consumption that enables to the drone to arrive the station for charge
                     drone.Battery = Math.Round(rand.NextDouble() * (MinBattery1 + MinBattery2) + (100 - (MinBattery1 + MinBattery2)));
                 }
@@ -139,7 +139,7 @@ namespace IBL.BO
                     if (count2 == index)
                     {
                         longi = item.Longitude;
-                        latit = item.Lattitude;
+                        latit = item.Latitude;
                     }
                 }
                 drone.CurrentLocation.Longitude = longi;
@@ -172,7 +172,7 @@ namespace IBL.BO
                 {
                     List<IDAL.DO.Station> stations = (List<IDAL.DO.Station>)StationListDal;
                     int index = rand.Next(0, stations.Count);
-                    drone.CurrentLocation.Latitude = stations[index].Lattitude;
+                    drone.CurrentLocation.Latitude = stations[index].Latitude;
                     drone.CurrentLocation.Longitude = stations[index].Longitude;
 
                 }
@@ -181,7 +181,7 @@ namespace IBL.BO
                 double DroneLongit = drone.CurrentLocation.Longitude;
                 Location nearestStation = new Location();
                 nearestStation.Longitude = NearestStation(drone.CurrentLocation.Longitude, drone.CurrentLocation.Latitude, AccessToDataMethods.ReturnStationList()).Longitude;
-                nearestStation.Latitude = NearestStation(drone.CurrentLocation.Longitude, drone.CurrentLocation.Latitude, AccessToDataMethods.ReturnStationList()).Lattitude;
+                nearestStation.Latitude = NearestStation(drone.CurrentLocation.Longitude, drone.CurrentLocation.Latitude, AccessToDataMethods.ReturnStationList()).Latitude;
                 double StationDist = CalcDistanceBetweenTwoCoordinates(drone.CurrentLocation.Longitude, drone.CurrentLocation.Latitude, nearestStation.Longitude, nearestStation.Latitude);
                 double MinBattery1 = PowerConsumption[int.Parse(drone.Weight) + 1] * StationDist;
                 drone.Battery = Math.Round(rand.NextDouble() * (100 - MinBattery1) + MinBattery1);

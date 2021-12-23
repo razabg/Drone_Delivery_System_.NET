@@ -31,11 +31,11 @@ namespace IBL.BO
 
         public IDAL.DO.Station NearestStation(double longi, double lati, IEnumerable<IDAL.DO.Station> station)
         {
-            double MinDist = CalcDistanceBetweenTwoCoordinates(longi, lati, station.First().Longitude, station.First().Lattitude);
+            double MinDist = CalcDistanceBetweenTwoCoordinates(longi, lati, station.First().Longitude, station.First().Latitude);
             IDAL.DO.Station StationToReturn = station.First();
             foreach (var item in station)
             {
-                double temp = CalcDistanceBetweenTwoCoordinates(longi, lati, item.Longitude, item.Lattitude);
+                double temp = CalcDistanceBetweenTwoCoordinates(longi, lati, item.Longitude, item.Latitude);
                 if (MinDist > temp)
                 {
                     MinDist = temp;
@@ -45,11 +45,11 @@ namespace IBL.BO
             return StationToReturn;
 
         }
-
+        
         public IDAL.DO.Station NearestStationToChargeDrone(double longi, double lati, IEnumerable<IDAL.DO.Station> station)
         {
 
-            double MinDist = CalcDistanceBetweenTwoCoordinates(longi, lati, station.First().Longitude, station.First().Lattitude);
+            double MinDist = CalcDistanceBetweenTwoCoordinates(longi, lati, station.First().Longitude, station.First().Latitude);
             bool flag = true;
             List<IDAL.DO.Station> StationToskip = new List<IDAL.DO.Station>();
             IDAL.DO.Station StationToReturn = station.First();
@@ -57,7 +57,7 @@ namespace IBL.BO
             {
                 foreach (var item in station)
                 {
-                    double temp = CalcDistanceBetweenTwoCoordinates(longi, lati, item.Longitude, item.Lattitude);
+                    double temp = CalcDistanceBetweenTwoCoordinates(longi, lati, item.Longitude, item.Latitude);
                     if (MinDist > temp)
                     {
                         if (!StationToskip.Contains(item)) //it the specific item is on the "black" list which contains the full stations skip to the next station
@@ -86,6 +86,50 @@ namespace IBL.BO
           
             }
             return StationToReturn;
+        }
+
+        public IDAL.DO.Customer NearestParcel_SenderIdcustomer(double longi, double lati, IEnumerable<IDAL.DO.Parcel> parceList)
+        {
+            List<IDAL.DO.Customer> SenderOfTheParcel = new List<IDAL.DO.Customer>();//this list going to contain the customers so that we will know the location of the parcels
+            List<IDAL.DO.Parcel> helpList = parceList.ToList();//help us in the end to extract the closest parcel
+
+            foreach (var parcel in parceList)
+            {
+                foreach (var customer in AccessToDataMethods.ReturnCustomerList()) 
+                {
+                    if (parcel.SenderId == customer.Id)
+                    {
+                        SenderOfTheParcel.Add(customer);//build a new list of customers that contained the locations of the parcel list in the parameters;
+                    }//with this list can calc and finf the closest parcel to our drone
+
+                }
+
+            }
+
+            double MinDist = CalcDistanceBetweenTwoCoordinates(longi, lati, SenderOfTheParcel.First().Longitude, SenderOfTheParcel.First().Latitude);
+            IDAL.DO.Customer customerToReturn = SenderOfTheParcel.First();
+            foreach (var item in SenderOfTheParcel)
+            {
+                double temp = CalcDistanceBetweenTwoCoordinates(longi, lati, item.Longitude, item.Latitude);
+                if (MinDist > temp)
+                {
+                    MinDist = temp;
+                    customerToReturn = item;
+                }
+            }
+
+
+            var parcelToReturn = helpList.Find(x => x.SenderId == customerToReturn.Id);//we find parcel that hold the sender-customer id which he is the closest parcel to the drone
+
+            //return parcelToReturn;
+            return customerToReturn;
+
+
+        }
+
+        public IDAL.DO.Customer returnTargetCustomer(IDAL.DO.Parcel parcel)
+        {
+            return AccessToDataMethods.ReturnCustomerList().ToList().Find(x => x.Id == parcel.TargetId);
         }
     }
 

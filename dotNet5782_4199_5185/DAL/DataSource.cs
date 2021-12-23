@@ -103,7 +103,7 @@ namespace DalObject
                     Name = rand.Next(MinRange / 3, MaxRange / 3),
                     ChargeSlots = rand.Next(1, 100),
                     Longitude = Coordinates(),
-                    Lattitude = Coordinates()
+                    Latitude = Coordinates()
                 });
                 DroneChargeList.Add(new DroneINCharge()
                 {
