@@ -11,15 +11,17 @@ namespace IBL.BO
 
         public void UpdateDroneName(int droneid, string NewModel)
         {
-            List<IDAL.DO.Drone> DroneListDal = AccessToDataMethods.ReturnDroneList().ToList();
-            var index = DroneListDal.FindIndex(x => x.Id == droneid);
+
+            var index = AccessToDataMethods.ReturnDroneList().ToList().FindIndex(x => x.Id == droneid);
+            
             if (index == -1)
             {
                 throw new NotExistsException();
             }
-            IDAL.DO.Drone drone = DroneListDal[index]; //used that way because the drone entity in dal is struct data type
-            drone.Model = NewModel;
-            DroneListDal[index] = drone;
+            var DroneToUpdate = AccessToDataMethods.ReturnDroneList().ToList()[index];
+            //used that way because the drone entity in dal is struct data type
+            DroneToUpdate.Model = NewModel;
+            AccessToDataMethods.ReturnDroneList().ToList()[index] = DroneToUpdate;
         } //update the drones model
         public void UpdateBaseStationData(int baseStationId, string baseStationName, int totalChargeSlots)
         {
@@ -40,6 +42,7 @@ namespace IBL.BO
                     {
                         StationUpdate.ChargeSlots = totalChargeSlots;
                         StationUpdate.Name = int.Parse(baseStationName);
+                        AccessToDataMethods.ReturnStationList().ToList()[index] = StationUpdate;//struct be value 
 
                     }   // need to take care in case of charge slot or name is empty
                     else
@@ -67,14 +70,17 @@ namespace IBL.BO
                 {
                     customerUpdate.Name = customerName;
                     customerUpdate.Phone = phoneNumber;
+                    AccessToDataMethods.ReturnCustomerList().ToList()[index] = customerUpdate;
                 }
                 else if (customerName.Length > 0 && phoneNumber.Length == 0)
                 {
                     customerUpdate.Name = customerName;
+                    AccessToDataMethods.ReturnCustomerList().ToList()[index] = customerUpdate;
                 }
                 else if (customerName.Length == 0 && phoneNumber.Length > 0)
                 {
                     customerUpdate.Phone = phoneNumber;
+                    AccessToDataMethods.ReturnCustomerList().ToList()[index] = customerUpdate;
                 }
                 else
                 {
@@ -108,18 +114,17 @@ namespace IBL.BO
                 throw new CannotGoToChargeException(droneid);
             }
 
-
-            drone_to_charge.Battery = MinBattery;// is it ok? reference? will the insert the value onto the list
+           
+            drone_to_charge.Battery = MinBattery;//
             drone_to_charge.CurrentLocation.Longitude = StationForCharge.Longitude;
             drone_to_charge.CurrentLocation.Latitude = StationForCharge.Lattitude;
             drone_to_charge.Status = Enum.DroneStatus.TreatmentMode.ToString();
-            ListDroneBL[index] = drone_to_charge;
+            //ListDroneBL[index] = drone_to_charge;
             var DalDrone = AccessToDataMethods.ReturnDroneList().ToList().Find(x => x.Id == drone_to_charge.Id);
 
-            AccessToDataMethods.UpdateRecharge(StationForCharge, DalDrone);//check if we need list of drone charge
+            AccessToDataMethods.UpdateRecharge(StationForCharge, DalDrone);
 
         }
-
         void ReleaseDroneFromChargh(int drone_id,double SumCharge)
         {
             if (!ListDroneBL.Exists(x=>x.Id ==drone_id))
@@ -130,6 +135,8 @@ namespace IBL.BO
             {
                 throw new DroneIsNotAvailable(drone_id);
             }
+
+
 
 
 

@@ -80,12 +80,14 @@ namespace DalObject
         /// <param name="d"></param>
         public void UpdateRecharge(Station s, Drone d) //need to do here exeption  חריגה למקרה של אין מספיק עמדות טעינה
         {
-
+            var indexStation = ReturnStationList().ToList().FindIndex(x => x.Id == s.Id);
             DroneINCharge DCharge = default;
             DCharge.DroneId = d.Id;
             DCharge.StationId = s.Id;
-            ReturnDroneChargeList().ToList().Add(DCharge);
             s.ChargeSlots--;
+            DataSource.StationsList[indexStation] = s;
+            ReturnDroneChargeList().ToList().Add(DCharge);
+           
         }
 
         public double[] PowerConsumptionRequestDrone()

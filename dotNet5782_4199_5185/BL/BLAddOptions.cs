@@ -19,7 +19,7 @@ namespace IBL.BO
             station_to_list.Name = BaseToAdd.Name;
             station_to_list.ChargeSlots = new();
 
-            BaseToAdd.DroneINCharge = new List<DroneInCharging>();
+            BaseToAdd.DroneINCharge = new List<DroneInCharging>();//check this if its right
 
             try
             {
