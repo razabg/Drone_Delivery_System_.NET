@@ -253,7 +253,7 @@ namespace IBL.BO
 
 
 
-        }
+        } //make this method more efficient by creating method that will calc the battery consumtion
         public void DroneCollectParcel(int drone_id)
         {
             if (!ListDroneBL.Exists(x => x.Id == drone_id))
@@ -273,6 +273,7 @@ namespace IBL.BO
                 double BatteryConsumptionToSender = AccessToDataMethods.PowerConsumptionRequestDrone()[int.Parse(drone.Weight) + 1] * CalcDistanceBetweenTwoCoordinates(drone.CurrentLocation.Longitude, drone.CurrentLocation.Longitude, SenderCustomer.Longitude, SenderCustomer.Latitude);
 
                 drone.Battery -= BatteryConsumptionToSender;
+                drone.IdOfParcelInTransfer = parcelToPickup.Id;
                 drone.CurrentLocation.Longitude = SenderCustomer.Longitude;
                 drone.CurrentLocation.Latitude = SenderCustomer.Latitude;
                 parcelToPickup.PickedUp = DateTime.Now;
@@ -308,6 +309,7 @@ namespace IBL.BO
                 drone.Battery -= BatteryConsumptionToTarget;
                 drone.CurrentLocation.Longitude = TargetCustomer.Longitude;
                 drone.CurrentLocation.Latitude = TargetCustomer.Latitude;
+                drone.IdOfParcelInTransfer = null; //now the drone is empty
                 parcelArrived.ArrivedTime = DateTime.Now;
                 AccessToDataMethods.ReturnParcelList().ToList()[parcelToPickupIndex] = parcelArrived;
 

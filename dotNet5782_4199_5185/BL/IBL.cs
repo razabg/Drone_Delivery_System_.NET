@@ -27,6 +27,9 @@ namespace IBL.BO
         void UpdateBaseStationData(int baseStationId, string baseStationName, int totalChargeSlots);
         void UpdateCustomerData(int CustomerId, string customerName, string phoneNumber);
         void UpdateDroneName(int droneid, string NewModel);
+        BaseStation DisplayStation(int station_id);
+        public Drone DisplayDrone(int drone_id);
+
 
     }
 }

@@ -15,6 +15,8 @@ namespace IBL.BO
         public CustomerAtParcel DestOrSrc { set; get; }
 
 
+
+
         public override string ToString()
         {
             string printInfo = "";

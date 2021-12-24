@@ -28,6 +28,31 @@ namespace IBL.BO
 
 
         }
+        /// <summary>
+        /// the method check the parcel status according to its time;
+        /// </summary>
+        /// <param name="parcel"></param>
+        /// <returns></returns>
+        public string parcelStatus(IDAL.DO.Parcel parcel) 
+        {
+            if (parcel.ArrivedTime != null)
+            {
+                return Enum.ParcelStatus.Arrived.ToString();
+            }
+            else if (parcel.PickedUp != null)
+            {
+                return Enum.ParcelStatus.PickedUp.ToString();
+            }
+            else if (parcel.ParingTime != null)
+            {
+                return Enum.ParcelStatus.Paired.ToString();
+            }
+
+            return Enum.ParcelStatus.created.ToString();
+
+
+
+        }
 
         public IDAL.DO.Station NearestStation(double longi, double lati, IEnumerable<IDAL.DO.Station> station)
         {

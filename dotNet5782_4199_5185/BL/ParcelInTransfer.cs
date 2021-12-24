@@ -15,7 +15,7 @@ namespace IBL.BO
         public CustomerAtParcel Reciever { set; get; }
         public Location CollectionLocation { set; get; }
         public Location DestLocation { set; get; }
-        public int TransportDistance { set; get; }
+        public double TransportDistance { set; get; }
 
 
         public override string ToString()

@@ -14,7 +14,7 @@ namespace IBL.BO
         public double Battery{ get; set; }
         public string Status{ get; set; }
         public Location CurrentLocation{ get; set; }
-        public int IdOfParcelInTransfer {get;set; }
+        public int? IdOfParcelInTransfer {get;set; }
 
         public override string ToString()
         {
