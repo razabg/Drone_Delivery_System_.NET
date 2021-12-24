@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public partial class BLObject
+    public partial class BLObject //check if need to use the dal methods here.
     {
 
-        public void UpdateDroneName(int droneid, string NewModel) //shuld i 
+        public void UpdateDroneName(int droneid, string NewModel) //should i 
         {
 
             var index = AccessToDataMethods.ReturnDroneList().ToList().FindIndex(x => x.Id == droneid);

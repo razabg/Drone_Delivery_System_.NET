@@ -20,54 +20,16 @@ namespace IBL.BO
         public double HeavyWeightConsump;
         public double ChargingPaceDrone;
 
-        /// <summary>
-        /// ////////////////////////////////////
-        /// </summary>
-        public BaseStation getStationStringByID(int id)
-        {
-            IEnumerable<IDAL.DO.Station> StationListDal = AccessToDataMethods.ReturnStationList();
-            IEnumerable<IDAL.DO.DroneINCharge> DroneINChargeListDal = AccessToDataMethods.ReturnDroneChargeList();
-            List<DroneInCharging> droneInChargingList = new List<DroneInCharging>();
-            foreach (var drone in DroneINChargeListDal)
-            {
-                if (drone.StationId == id)
-                {
-                    // we have to add the battery
-                    droneInChargingList.Add(new DroneInCharging() { Id = drone.DroneId });
-                }
-            }
-            foreach (IDAL.DO.Station station in StationListDal)
-            {
-                if (station.Id == id)
-                {
-                    var b = new BaseStation()
-                    {
-                        Id = station.Id,
-                        location = new Location(station.Longitude, station.Longitude),
-                        Name = station.Name,
-                        NumberOfavailableChargingStations = station.ChargeSlots - droneInChargingList.Count,
-                        DroneINCharge = droneInChargingList
-                    };
-                    return b;
-                }
-
-            }
-            //didnt find any station with this id
-            throw new Exception("Not found");
-        }
-
-       /// <summary>
-       /// 
-       /// </summary>
-        public BLObject() //ctor
-        {
-            AccessToDataMethods = new DalObject.DalObject();
-            double[] PowerConsumption = AccessToDataMethods.PowerConsumptionRequestDrone();
-            AvailableWeightConsump = PowerConsumption[0];
-            LightWeightConsump = PowerConsumption[1];
-            AverageWeightConsump = PowerConsumption[2];
-            HeavyWeightConsump = PowerConsumption[3];
-            ChargingPaceDrone = PowerConsumption[4];
+       
+    public BLObject() //ctor
+    {
+        AccessToDataMethods = new DalObject.DalObject();
+        double[] PowerConsumption = AccessToDataMethods.PowerConsumptionRequestDrone();
+        AvailableWeightConsump = PowerConsumption[0];
+        LightWeightConsump = PowerConsumption[1];
+        AverageWeightConsump = PowerConsumption[2];
+        HeavyWeightConsump = PowerConsumption[3];
+        ChargingPaceDrone = PowerConsumption[4];
 
             // init the data layer entities;
             IEnumerable<IDAL.DO.Drone> DroneListDal = AccessToDataMethods.ReturnDroneList();

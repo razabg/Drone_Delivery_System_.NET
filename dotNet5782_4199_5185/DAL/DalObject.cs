@@ -59,7 +59,7 @@ namespace DalObject
         /// <param name="p"></param>
         /// <param name="d"></param>
         public void UpdateArrived(int p)
-        {//לבדוק מצב סוללה של הרחפן
+        {
             var indexParcel = DataSource.ParcelsList.FindIndex(x => x.Id == p);
 
             if (indexParcel != -1)
@@ -87,7 +87,7 @@ namespace DalObject
             s.ChargeSlots--;
             DataSource.StationsList[indexStation] = s;
             ReturnDroneChargeList().ToList().Add(DCharge);
-           
+
         }
 
         public double[] PowerConsumptionRequestDrone()
@@ -121,7 +121,6 @@ namespace DalObject
         {
             return DataSource.DroneChargeList;
         }
-
 
         public int ReturnParcelStatus(Parcel par)
         {
