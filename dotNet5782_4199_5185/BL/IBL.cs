@@ -17,7 +17,6 @@ namespace IBL.BO
         void DroneCollectParcel(int drone_id);
         void DroneToCharge(int droneid);
         IDAL.DO.Customer GetCustomerDetails(int id);
-        BaseStation getStationStringByID(int id);
         IDAL.DO.Customer NearestParcel_SenderIdcustomer(double longi, double lati, IEnumerable<IDAL.DO.Parcel> parceList);
         IDAL.DO.Station NearestStation(double longi, double lati, IEnumerable<IDAL.DO.Station> station);
         IDAL.DO.Station NearestStationToChargeDrone(double longi, double lati, IEnumerable<IDAL.DO.Station> station);

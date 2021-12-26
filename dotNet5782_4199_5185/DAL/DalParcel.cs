@@ -54,7 +54,7 @@ namespace DalObject
         {
             foreach (Parcel parcel in DataSource.ParcelsList)
             {
-                if (parcel.Id == 0)
+                if (parcel.DroneId == 0)
                 {
                     Console.WriteLine(parcel);
                     Console.WriteLine($"\n");
