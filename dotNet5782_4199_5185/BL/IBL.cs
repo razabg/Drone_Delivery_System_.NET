@@ -34,6 +34,8 @@ namespace IBL.BO
         IEnumerable<BaseStationToList> GetBaseStationToLists();
         IEnumerable<DroneToList> GetDroneToLists();
         IEnumerable<CustomerToList> GetCustomerToLists();
+        IEnumerable<ParcelToList> GetParcelToLists();
+        IEnumerable<ParcelToList> GetNotPairedParcels();
 
 
     }
