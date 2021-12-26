@@ -12,7 +12,7 @@ namespace IBL.BO
         public string Name{ get; set; }
         public int PhoneNumber{ get; set; }
         public Int32 NumOfParcelsThatSentAndDelivered{ get; set; }
-        public Int32 NumOfParcelsThatSentAndNotDelivered{ get; set; }
+        public Int32 NumOfParceThatIsSentAndNotDelivered{ get; set; }
         public Int32 NumOfReceviedParcels{ get; set; }
         public Int32 NumOfParcelsOnTheWay{ get; set; }
 
