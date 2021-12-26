@@ -75,7 +75,7 @@ namespace IBL.BO
                     Name = targetCustomer.Name
                 };
 
-                 parcel_to_add_drone = new ParcelInTransfer
+                parcel_to_add_drone = new ParcelInTransfer
                 {
                     Id = parcel.Id,
                     Weight = parcel.Weight.ToString(),
@@ -85,7 +85,7 @@ namespace IBL.BO
                     DestLocation = new Location(targetCustomer.Longitude, targetCustomer.Latitude),
                     CollectionLocation = new Location(senderCustomer.Longitude, senderCustomer.Latitude),
                     TransportDistance = CalcDistanceBetweenTwoCoordinates(senderCustomer.Longitude, senderCustomer.Latitude, targetCustomer.Longitude, targetCustomer.Latitude)
-                    
+
                 };
 
             }
@@ -111,7 +111,6 @@ namespace IBL.BO
 
 
         }
-
         public Customer DisplayCustomer(int customer_id)
         {
             int index = AccessToDataMethods.ReturnCustomerList().ToList().FindIndex(x => x.Id == customer_id);
@@ -125,7 +124,7 @@ namespace IBL.BO
             List<ParcelAtCustomer> parcelToSend = new List<ParcelAtCustomer>();
             List<ParcelAtCustomer> parcelToget = new List<ParcelAtCustomer>();
 
-            foreach (var parcelSender in senderIDparcels)
+            foreach (var parcelSender in senderIDparcels) //create list of parcels that the customer should send
             {
                 var name = AccessToDataMethods.ReturnCustomerList().ToList().Find(x => x.Id == parcelSender.TargetId).Name;
                 CustomerAtParcel ToADD = new CustomerAtParcel();
@@ -133,19 +132,94 @@ namespace IBL.BO
                 ToADD.Name = name;
                 parcelToSend.Add(new ParcelAtCustomer
                 {
-                    
+
                     Id = parcelSender.Id,
                     Priority = parcelSender.Priority.ToString(),
                     Status = parcelStatus(parcelSender),
                     Weight = parcelSender.Weight.ToString(),
                     DestOrSrc = ToADD,
-           
-                }) ;
 
-
+                });
             }
 
+            foreach (var parcelTarget in targetIDparcels)// create list of parcels that the customer should get
+            {
+                var name = AccessToDataMethods.ReturnCustomerList().ToList().Find(x => x.Id == parcelTarget.SenderId).Name;
+                CustomerAtParcel ToADD = new CustomerAtParcel();
+                ToADD.Id = parcelTarget.TargetId;
+                ToADD.Name = name;
+                parcelToSend.Add(new ParcelAtCustomer
+                {
+
+                    Id = parcelTarget.Id,
+                    Priority = parcelTarget.Priority.ToString(),
+                    Status = parcelStatus(parcelTarget),
+                    Weight = parcelTarget.Weight.ToString(),
+                    DestOrSrc = ToADD,
+
+                });
+            }
+
+            Customer customerToDisplay = new Customer
+            {
+                Id = customer.Id,
+                location = new Location(customer.Longitude, customer.Latitude),
+                Name = customer.Name,
+                FromCustomer = parcelToSend,
+                ToCustomer = parcelToget,
+                PhoneNumber = int.Parse(customer.Phone)
+
+            };
+
+            return customerToDisplay;
+
         }
+        public Parcel DisplayParcel(int parcel_id)
+        {
+            int index = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_id);
+            if (index == -1)
+            {
+                throw new NotExistsException();
+            }
+
+            var parcelDisplay = AccessToDataMethods.ReturnParcelList().ToList().Find(x => x.Id == parcel_id);//the parcel we want to display
+
+
+            //insert the customers of the entity to the relevent bl entity
+            var customerSender = AccessToDataMethods.ReturnCustomerList().ToList().Find(x => x.Id == parcelDisplay.SenderId);
+            var customerTarget = AccessToDataMethods.ReturnCustomerList().ToList().Find(x => x.Id == parcelDisplay.TargetId);
+            CustomerAtParcel sender = new CustomerAtParcel { Id = customerSender.Id, Name = customerSender.Name };
+            CustomerAtParcel target = new CustomerAtParcel { Id = customerTarget.Id, Name = customerTarget.Name };
+
+            //insert the drone id to a bl entity
+            var drone = ListDroneBL.Find(x => x.Id == parcelDisplay.DroneId);
+            DroneAtParcel droneAt = new DroneAtParcel { Id = drone.Id, Battary = drone.Battery, CurrentLocation = drone.CurrentLocation };
+
+
+            Parcel parcelTOreturn = new Parcel
+            {
+                Id = parcelDisplay.Id,
+                Priority = parcelDisplay.Priority.ToString(),
+                Weight = parcelDisplay.Weight.ToString(),
+                sender = sender,
+                target = target,
+                DroneParcel = droneAt,
+                TimeOfCreation = parcelDisplay.CreationTime,
+                PairTime = parcelDisplay.ParingTime,
+                CollectTime = parcelDisplay.PickedUp,
+                DeliveryTime = parcelDisplay.ArrivedTime
+
+            };
+
+
+            return parcelTOreturn;
+
+        }
+
+
+
+
+
 
 
 

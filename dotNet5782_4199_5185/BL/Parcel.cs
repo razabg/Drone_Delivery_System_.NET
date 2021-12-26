@@ -11,7 +11,7 @@ namespace IBL.BO
         public int Id { get; set; }
         public CustomerAtParcel sender { get; set; }
         public CustomerAtParcel target { get; set; }
-        public string Weight { get; set; }//NEED TO MAKE ENUM CLASS FOR BOTH ATTRIBUTES
+        public string Weight { get; set; }
         public string Priority { get; set; }
         public DroneAtParcel DroneParcel { get; set; }
         public DateTime? TimeOfCreation { get; set; }
