@@ -21,7 +21,7 @@ namespace PL
     public partial class MainWindow : Window
     {
         IBL.BO.Ibl BLAccess = new IBL.BO.BLObject(); //access to bl layer through ibl interface
-        public MainWindow( IBL.BO.Ibl  BLAccess)
+        public MainWindow( )
         {
             
             InitializeComponent();

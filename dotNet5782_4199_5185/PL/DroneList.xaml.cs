@@ -19,7 +19,7 @@ namespace PL
     /// </summary>
     public partial class DroneList : Window
     {
-        
+
         private IBL.BO.Ibl BLAccess;//access to bl layer through ibl interface
         public DroneList(IBL.BO.Ibl BLAccess)
         {
