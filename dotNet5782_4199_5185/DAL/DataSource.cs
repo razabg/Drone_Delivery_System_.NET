@@ -53,7 +53,7 @@ namespace DalObject
             return RandCustomer;
         }
 
-        public enum TopWeight { Light, Average, heavy };
+        public enum TopWeight { available, light, average, heavy };
         public static Enum genRandTop()
         {
 
@@ -116,7 +116,7 @@ namespace DalObject
             {
                 DronesList.Add(new Drone()
                 {
-                    Id = 0,    //RandomIdFunc(),
+                    Id = RandomIdFunc(),
                     MaxWeight = genRandTop().ToString(),
                     Model = RandomIdFunc().ToString(),
 
@@ -136,7 +136,7 @@ namespace DalObject
                 DateTime currentDate = DateTime.Now;
                 ParcelsList.Add(new Parcel
                 {
-                    Id =  0,      // RandomIdFunc(),
+                    Id = RandomIdFunc(),
                     SenderId = RandomIdFunc(),
                     TargetId = RandomIdFunc(),
                     Weight = rand.Next(1, 300),

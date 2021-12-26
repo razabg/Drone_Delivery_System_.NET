@@ -20,11 +20,11 @@ namespace IBL.BO
         public override string ToString()
         {
             string printInfo = "";
-            printInfo += $" the ID is {Id}\n";
-            printInfo += $"the weight is{Weight},\n";
-            printInfo += $"the status is{Status},\n";
-            printInfo += $"the priority is{Priority},\n";
-            printInfo += $"the dest or src is{DestOrSrc},\n";
+            printInfo += $" the ID is :{Id}\n";
+            printInfo += $"the weight is:{Weight},\n";
+            printInfo += $"the status is:{Status},\n";
+            printInfo += $"the priority is:{Priority},\n";
+            printInfo += $"the dest or src is:{DestOrSrc},\n";
             return printInfo;
         }
 

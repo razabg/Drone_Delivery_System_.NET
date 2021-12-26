@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using IBL.BO;
 
 namespace PL
 {
@@ -20,16 +21,33 @@ namespace PL
     public partial class DroneList : Window
     {
 
-        private IBL.BO.Ibl BLAccess;//access to bl layer through ibl interface
-        public DroneList(IBL.BO.Ibl BLAccess)
+        private Ibl BLAccess ;//access to bl layer through ibl interface
+        public DroneList(Ibl access)
         {
-            BLAccess = new IBL.BO.BLObject();
             InitializeComponent();
+            BLAccess = new BLObject();
+            DroneListView.ItemsSource = BLAccess.GetDroneToLists();
+            dronestatus.ItemsSource = Enum.GetValues(typeof(statusEnum.DroneStatus));
+            MaxWeight.ItemsSource = Enum.GetValues(typeof(statusEnum.Weight));
+
         }
 
-        private void DroneListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DroneListView.ItemsSource = BLAccess.GetDroneToLists();//add the fuc
+           
+        }
+
+        private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            statusEnum.DroneStatus status = (statusEnum.DroneStatus)dronestatus.SelectedItem;
+            this.DroneListView.ItemsSource = BLAccess.GetDroneToLists().ToList().FindAll(x=>x.Status == status.ToString());
+            
+        }
+
+        private void MaxWeight_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            statusEnum.Weight maxweight = (statusEnum.Weight)MaxWeight.SelectedItem;
+            this.DroneListView.ItemsSource = BLAccess.GetDroneToLists().ToList().FindAll(x => x.Weight == maxweight.ToString());
         }
     }
 }

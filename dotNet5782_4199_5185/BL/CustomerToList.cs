@@ -19,13 +19,13 @@ namespace IBL.BO
         public override string ToString()
         {
             string printInfo = "";
-            printInfo += $" the ID is {Id}\n";
-            printInfo += $"the Name is{Name},\n";
-            printInfo += $"the phone number is{PhoneNumber},\n";
-            printInfo += $"the number of parcels that sent and deliverd is{NumOfParcelsThatSentAndArrived},\n";
-            printInfo += $"the the number of parcels that sent and not deliverd yet is{ NumOfParcelsThatSentAndNotArrived},\n";
-            printInfo += $"the number of recevied parcels is{NumOfArrivedParcels},\n";
-            printInfo += $"the number of parcels that on the way is{NumOfParcelsOnTheWay},\n";
+            printInfo += $" the ID is :{Id}\n";
+            printInfo += $"the Name is:{Name},\n";
+            printInfo += $"the phone number is:{PhoneNumber},\n";
+            printInfo += $"the number of parcels that sent and deliverd is:{NumOfParcelsThatSentAndArrived},\n";
+            printInfo += $"the the number of parcels that sent and not deliverd yet is:{ NumOfParcelsThatSentAndNotArrived},\n";
+            printInfo += $"the number of recevied parcels is:{NumOfArrivedParcels},\n";
+            printInfo += $"the number of parcels that on the way is:{NumOfParcelsOnTheWay},\n";
             return printInfo;
         }
 

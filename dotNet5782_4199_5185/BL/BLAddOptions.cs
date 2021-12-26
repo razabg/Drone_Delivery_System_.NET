@@ -56,7 +56,7 @@ namespace IBL.BO
             }
             DroneToBl.CurrentLocation = new(TempStation.Longitude, TempStation.Latitude);
             DroneToBl.Battery = rand.Next(20, 40);
-            DroneToBl.Status = Enum.DroneStatus.TreatmentMode.ToString();
+            DroneToBl.Status = statusEnum.DroneStatus.TreatmentMode.ToString();
             ListDroneBL.Add(DroneToBl); //the bl drone list which hold the specific drone with its location
         }
         public void AddCustomer(Customer CustomerToAdd)

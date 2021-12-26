@@ -22,15 +22,15 @@ namespace IBL.BO
         public override string ToString()
         {
             string printInfo = "";
-            printInfo += $" the ID is {Id}\n";
-            printInfo += $"the sender is{sender},\n";
-            printInfo += $"the target is{target},\n";
-            printInfo += $"the weight is{Weight},\n";
-            printInfo += $"the the drone at parcel is{DroneParcel},\n";
-            printInfo += $"the collection time  is{CollectTime}\n";
-            printInfo += $"the time of pairing  is{PairTime},\n";
-            printInfo += $"the time of creation  is{TimeOfCreation},\n";
-            printInfo += $"the time of delivery  is{DeliveryTime},\n";
+            printInfo += $" the ID is :{Id}\n";
+            printInfo += $"the sender is:{sender},\n";
+            printInfo += $"the target is:{target},\n";
+            printInfo += $"the weight is:{Weight},\n";
+            printInfo += $"the the drone at parcel is:{DroneParcel},\n";
+            printInfo += $"the collection time is:{CollectTime}\n";
+            printInfo += $"the time of pairing is:{PairTime},\n";
+            printInfo += $"the time of creation is:{TimeOfCreation},\n";
+            printInfo += $"the time of delivery is:{DeliveryTime},\n";
 
             return printInfo;
         }

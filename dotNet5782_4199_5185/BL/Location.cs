@@ -24,8 +24,8 @@ namespace IBL.BO
         public override string ToString()
         {
             string printlocationInfo = "";
-            printlocationInfo += $" the longitude is {Longitude}\n";
-            printlocationInfo += $"the latitude is{Latitude},\n";
+            printlocationInfo += $" the longitude is :{Longitude}\n";
+            printlocationInfo += $"the latitude is:{Latitude},\n";
 
             return printlocationInfo;
         }

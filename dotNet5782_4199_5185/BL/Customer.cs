@@ -18,12 +18,12 @@ namespace IBL.BO
         public override string ToString()
         {
             string printInfo = "";
-            printInfo += $" the ID is {Id}\n";
-            printInfo += $"the Name is{Name},\n";
-            printInfo += $"the phone number is{PhoneNumber},\n";
-            printInfo += $"the location is{location},\n";
-            printInfo += $"the list of customers at client (from) is{FromCustomer},\n";
-            printInfo += $"the list of customers at client (to) is{ToCustomer},\n";
+            printInfo += $" the ID is :{Id}\n";
+            printInfo += $"the Name is:{Name},\n";
+            printInfo += $"the phone number is:{PhoneNumber},\n";
+            printInfo += $"the location is:{location},\n";
+            printInfo += $"the list of customers at client (from) is:{FromCustomer},\n";
+            printInfo += $"the list of customers at client (to) is:{ToCustomer},\n";
             return printInfo;
         }
 

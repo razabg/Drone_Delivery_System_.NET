@@ -19,13 +19,13 @@ namespace IBL.BO
         public override string ToString()
         {
             string printDroneInfo = "";
-            printDroneInfo += $" the Id is {Id},\n";
-            printDroneInfo += $"the model is{Model},\n";
-            printDroneInfo += $"the MaxWeight is{MaxWeight},\n";
-            printDroneInfo += $"the Status is {Status},\n";
-            printDroneInfo += $"Battary left {Battery},\n";
-            printDroneInfo += $"Parcel  {Parcel},\n";
-            printDroneInfo += $"the location is {CurrentLocation},\n";
+            printDroneInfo += $" the Id is :{Id},\n";
+            printDroneInfo += $"the model is:{Model},\n";
+            printDroneInfo += $"the MaxWeight is:{MaxWeight},\n";
+            printDroneInfo += $"the Status is :{Status},\n";
+            printDroneInfo += $"Battary left :{Battery},\n";
+            printDroneInfo += $"Parcel  :{Parcel},\n";
+            printDroneInfo += $"the location is :{CurrentLocation},\n";
             return printDroneInfo;
         }
 

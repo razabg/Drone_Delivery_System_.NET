@@ -14,11 +14,11 @@
                 public override string ToString()
                 {
                     string printCustomerInfo = "";
-                    printCustomerInfo += $" the Id is {Id},\n";
-                    printCustomerInfo += $"the name is{Name},\n";
-                    printCustomerInfo += $"the phone number is {Phone},\n";
-                    printCustomerInfo += $"Longitude {Longitude},\n";
-                    printCustomerInfo += $"latitude {Latitude},\n";
+                    printCustomerInfo += $" the Id is :{Id},\n";
+                    printCustomerInfo += $"the name is:{Name},\n";
+                    printCustomerInfo += $"the phone number is :{Phone},\n";
+                    printCustomerInfo += $"Longitude :{Longitude},\n";
+                    printCustomerInfo += $"latitude :{Latitude},\n";
                     return printCustomerInfo;
                 }
             }

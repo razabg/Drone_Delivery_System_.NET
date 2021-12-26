@@ -8,10 +8,10 @@
         Title="DroneList" Height="450" Width="800">
     <Grid Name="MainGrid" Margin="10,10,0,0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="52*"/>
-            <RowDefinition Height="14*"/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="0*"/>
             <RowDefinition Height="129*"/>
-            <RowDefinition Height="229*"/>
+            <RowDefinition Height="57*"/>
         </Grid.RowDefinitions>
         <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Margin="0,-13,0,13" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="3">
             <Grid.RenderTransform>
@@ -23,26 +23,38 @@
                 </TransformGroup>
             </Grid.RenderTransform>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="185*"/>
-                <ColumnDefinition Width="169*"/>
-                <ColumnDefinition Width="46*"/>
-                <ColumnDefinition Width="200*"/>
-                <ColumnDefinition Width="200*"/>
+                <ColumnDefinition Width="102*"/>
+                <ColumnDefinition Width="129*"/>
+                <ColumnDefinition Width="88*"/>
+                <ColumnDefinition Width="56*"/>
+                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="23*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="179*"/>
+                <ColumnDefinition Width="198*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox x:Name="StatusSelector" Grid.Column="1" Margin="57,10,23,0" VerticalAlignment="Top" RenderTransformOrigin="0.555,2.567" Grid.ColumnSpan="2" Height="22"/>
-            <Label x:Name="StatusSelectorLabel" Content="Select status:" HorizontalAlignment="Left" Margin="131,10,0,0" VerticalAlignment="Top" Height="26" Width="79" Grid.ColumnSpan="2" RenderTransformOrigin="0.599,1.172"/>
-            <ComboBox x:Name="MaxWeight" Grid.Column="3" HorizontalAlignment="Left" Margin="80,7,0,0" VerticalAlignment="Top" Width="120"/>
-            <Label x:Name="MaxWeightLablel" Content="Max weight" Grid.Column="3" HorizontalAlignment="Left" Margin="0,7,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="dronestatus" Grid.Column="2" Margin="6,10,5,0" VerticalAlignment="Top" RenderTransformOrigin="0.555,2.567" Grid.ColumnSpan="3" Height="22" SelectionChanged="StatusSelector_SelectionChanged"/>
+            <Label x:Name="StatusSelectorLabel" Content="Select status:" HorizontalAlignment="Left" Margin="49,7,0,0" VerticalAlignment="Top" Height="26" Width="79" RenderTransformOrigin="0.599,1.172" Grid.Column="1"/>
+            <ComboBox x:Name="MaxWeight" Grid.Column="7" HorizontalAlignment="Left" Margin="80,7,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2" Height="22" SelectionChanged="MaxWeight_SelectionChanged"/>
+            <Label x:Name="MaxWeightLablel" Content="Max weight" Grid.Column="7" HorizontalAlignment="Left" Margin="5,7,0,0" VerticalAlignment="Top" Height="26" Width="71"/>
+            <ListView x:Name="DroneListView" Grid.ColumnSpan="9" Margin="-2,62,6,-72" RenderTransformOrigin="0.469,0.639" SelectionChanged="ListView_SelectionChanged">
+                <ListView.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="0.643"/>
+                        <RotateTransform Angle="-0.615"/>
+                        <TranslateTransform Y="1.738"/>
+                    </TransformGroup>
+                </ListView.RenderTransform>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
-        <Button x:Name="AddDrone" Content="Add new drone" HorizontalAlignment="Left" Margin="648,-5,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.296,-0.397" Width="132"/>
-        <Button Content="Close" HorizontalAlignment="Left" Margin="656,182,0,0" VerticalAlignment="Top" Width="116" RenderTransformOrigin="-0.664,-1" Grid.Row="3"/>
-        <ListView x:Name="DroneListView" Margin="-10,52,10,196" Grid.RowSpan="4" SelectionChanged="DroneListView_SelectionChanged" d:ItemsSource="{d:SampleData}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Button x:Name="AddDrone" Content="Add new drone" HorizontalAlignment="Left" Margin="630,-9,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.296,-0.397" Width="132" Height="29"/>
+        <Button Content="Close" HorizontalAlignment="Left" Margin="656,182,0,0" VerticalAlignment="Top" Width="116" RenderTransformOrigin="-0.664,-1" Grid.Row="3" Height="20"/>
 
     </Grid>
 

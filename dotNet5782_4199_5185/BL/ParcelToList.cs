@@ -20,12 +20,12 @@ namespace IBL.BO
                 public override string ToString()
         {
             string printInfo = "";
-            printInfo += $" the ID is {Id}\n";
-            printInfo += $"the weight is{Weight},\n";
-              printInfo += $"the priority is{Priority},\n";
-              printInfo += $"the status is{status},\n";
-              printInfo += $"the receiver name is{ReceiverName},\n";
-              printInfo += $"the sender name is{SenderName},\n";
+            printInfo += $" the ID is :{Id}\n";
+            printInfo += $"the weight is:{Weight},\n";
+              printInfo += $"the priority is:{Priority},\n";
+              printInfo += $"the status is:{status},\n";
+              printInfo += $"the receiver name is:{ReceiverName},\n";
+              printInfo += $"the sender name is:{SenderName},\n";
          
             return printInfo;
         }
