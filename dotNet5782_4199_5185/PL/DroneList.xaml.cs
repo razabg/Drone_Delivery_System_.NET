@@ -49,5 +49,15 @@ namespace PL
             statusEnum.Weight maxweight = (statusEnum.Weight)MaxWeight.SelectedItem;
             this.DroneListView.ItemsSource = BLAccess.GetDroneToLists().ToList().FindAll(x => x.Weight == maxweight.ToString());
         }
+
+        private void AddDrone_Click(object sender, RoutedEventArgs e)
+        {
+            new DroneWindow(BLAccess).Show();
+        }
+
+        private void close_window_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

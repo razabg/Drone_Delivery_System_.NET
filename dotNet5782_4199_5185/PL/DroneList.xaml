@@ -7,13 +7,18 @@
         mc:Ignorable="d"
         Title="DroneList" Height="450" Width="800">
     <Grid Name="MainGrid" Margin="10,10,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="151*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="26*"/>
             <RowDefinition Height="0*"/>
             <RowDefinition Height="129*"/>
             <RowDefinition Height="57*"/>
         </Grid.RowDefinitions>
-        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Margin="0,-13,0,13" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="3">
+        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Margin="0,-13,0,13" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="3" Grid.ColumnSpan="3">
             <Grid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -37,7 +42,7 @@
             <Label x:Name="StatusSelectorLabel" Content="Select status:" HorizontalAlignment="Left" Margin="49,7,0,0" VerticalAlignment="Top" Height="26" Width="79" RenderTransformOrigin="0.599,1.172" Grid.Column="1"/>
             <ComboBox x:Name="MaxWeight" Grid.Column="7" HorizontalAlignment="Left" Margin="80,7,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2" Height="22" SelectionChanged="MaxWeight_SelectionChanged"/>
             <Label x:Name="MaxWeightLablel" Content="Max weight" Grid.Column="7" HorizontalAlignment="Left" Margin="5,7,0,0" VerticalAlignment="Top" Height="26" Width="71"/>
-            <ListView x:Name="DroneListView" Grid.ColumnSpan="9" Margin="-2,62,6,-72" RenderTransformOrigin="0.469,0.639" SelectionChanged="ListView_SelectionChanged">
+            <ListView x:Name="DroneListView" Grid.ColumnSpan="9" Margin="-1,48,5,0" RenderTransformOrigin="0.469,0.639" SelectionChanged="ListView_SelectionChanged" Height="247" VerticalAlignment="Top">
                 <ListView.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -53,8 +58,9 @@
                 </ListView.View>
             </ListView>
         </Grid>
-        <Button x:Name="AddDrone" Content="Add new drone" HorizontalAlignment="Left" Margin="630,-9,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.296,-0.397" Width="132" Height="29"/>
-        <Button Content="Close" HorizontalAlignment="Left" Margin="656,182,0,0" VerticalAlignment="Top" Width="116" RenderTransformOrigin="-0.664,-1" Grid.Row="3" Height="20"/>
+        <Button x:Name="AddDrone" Content="Add new drone" HorizontalAlignment="Left" Margin="630,-9,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.296,-0.397" Width="132" Height="29" Grid.ColumnSpan="3" Click="AddDrone_Click"/>
+        <Button Content="Close" HorizontalAlignment="Left" Margin="656,182,0,0" VerticalAlignment="Top" Width="116" RenderTransformOrigin="-0.664,-1" Grid.Row="3" Height="20" Grid.ColumnSpan="3"/>
+        <Button x:Name="close_window" Content="Close" HorizontalAlignment="Left" Margin="723,68,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Grid.ColumnSpan="3" Click="close_window_Click"/>
 
     </Grid>
 

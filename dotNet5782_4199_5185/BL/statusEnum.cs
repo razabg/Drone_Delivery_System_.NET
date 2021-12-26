@@ -8,10 +8,12 @@ namespace IBL.BO
 {
     public class statusEnum
     {
-        public enum Weight { available, light, average, heavy }
+        public enum Weight { available, light, Average, Heavy }
         public enum PriorityStatus { fast = 1, regular, emergency }
-        public enum TopWeight { Heavy = 1, Average = 2, Light = 3 }
+        public enum TopWeight { Light = 1, Average = 2, Heavy = 3 }
         public enum DroneStatus { TreatmentMode = 1, Available = 2, Busy = 3 }
         public enum ParcelStatus { Paired = 1, PickedUp = 2, Arrived = 3,created = 4 }
+        public enum DroneModel { Mavic_210 = 1, TELLO = 2, AirCombo = 3, Spark = 4, Strive_5 = 5 }
+       
     }
 }
