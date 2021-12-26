@@ -28,7 +28,12 @@ namespace IBL.BO
         void UpdateCustomerData(int CustomerId, string customerName, string phoneNumber);
         void UpdateDroneName(int droneid, string NewModel);
         BaseStation DisplayStation(int station_id);
-        public Drone DisplayDrone(int drone_id);
+        Drone DisplayDrone(int drone_id);
+        Customer DisplayCustomer(int customer_id);
+        Parcel DisplayParcel(int parcel_id);
+        IEnumerable<BaseStationToList> GetBaseStationToLists();
+        IEnumerable<DroneToList> GetDroneToLists();
+        IEnumerable<CustomerToList> GetCustomerToLists();
 
 
     }

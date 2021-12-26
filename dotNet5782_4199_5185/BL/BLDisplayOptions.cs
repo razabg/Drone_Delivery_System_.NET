@@ -216,7 +216,68 @@ namespace IBL.BO
 
         }
 
+        public IEnumerable<BaseStationToList> GetBaseStationToLists()
+        {
 
+            List<BaseStationToList> BaseStation = new List<BaseStationToList>();
+
+
+            foreach (var station in AccessToDataMethods.ReturnStationList().ToList())
+            {
+                int counter = AccessToDataMethods.ReturnDroneChargeList().Count(x => x.StationId == station.Id);//count the occupied slots in the station
+                BaseStation.Add(new BaseStationToList
+                {
+                    Id = station.Id,
+                    Name = station.Name.ToString(),
+                    NumOfAvailableChargingSlots = station.ChargeSlots - counter,//the total slots - the anount of drones in the station
+                    NumOfUnavailableChargingSlots = counter
+                });
+
+            }
+
+            return BaseStation;
+
+        }
+        public IEnumerable<DroneToList> GetDroneToLists()
+        {
+
+            return ListDroneBL;
+
+        }
+        public IEnumerable<CustomerToList> GetCustomerToLists()
+        {
+            List<CustomerToList> customerToLists = new List<CustomerToList>();
+
+
+            foreach (var customer in AccessToDataMethods.ReturnCustomerList().ToList())
+            {
+
+
+                var sentAndArrived = AccessToDataMethods.ReturnParcelList().ToList().Where(x => x.SenderId == customer.Id).Where(x => x.ArrivedTime != null);
+                var sentAndNotArrived = AccessToDataMethods.ReturnParcelList().ToList().Where(x => x.SenderId == customer.Id).Where(x => x.PickedUp != null ).Where(x => x.ArrivedTime == null);
+                var arrivedToCustomers = AccessToDataMethods.ReturnParcelList().ToList().Where(x => x.TargetId == customer.Id).Where(x => x.ArrivedTime != null);
+                var OnTheWayTOcustomers = AccessToDataMethods.ReturnParcelList().ToList().Where(x => x.TargetId == customer.Id).Where(x => x.PickedUp != null);
+
+                customerToLists.Add(new CustomerToList
+                {
+                    Id = customer.Id,
+                    Name = customer.Name,
+                    PhoneNumber = int.Parse(customer.Phone),
+                    NumOfParcelsThatSentAndArrived = sentAndArrived.Count(),
+                    NumOfParcelsThatSentAndNotArrived = sentAndNotArrived.Count(),
+                    NumOfArrivedParcels = arrivedToCustomers.Count(),
+                    NumOfParcelsOnTheWay = OnTheWayTOcustomers.Count()
+
+                });
+
+
+
+
+            }
+            return customerToLists;
+
+
+        }
 
 
 
