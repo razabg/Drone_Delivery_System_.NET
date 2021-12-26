@@ -18,14 +18,14 @@ namespace IBL.BO
 
         public override string ToString()
         {
-            string printInfo = "";
-            printInfo += $" the ID is {Id}\n";
-            printInfo += $"the Name is{Model},\n";
-            printInfo += $"the weight is{Weight},\n";
-            printInfo += $"the battary status is{Battery},\n";
-            printInfo += $"the status is{Status},\n";
-            printInfo += $"the location is{CurrentLocation},\n";
-            printInfo += $"the id of the parcel in transport is{IdOfParcelInTransfe},\n";
+            string printInfo = " ";
+            printInfo += $"ID:{Id}, ";
+            printInfo += $"Model:{Model}, ";
+            printInfo += $"Weight:{Weight}, ";
+            printInfo += $"Battary:{Battery}%, ";
+            printInfo += $"Status:{Status}, ";
+            printInfo += $"Location is:{CurrentLocation} ";
+            printInfo += $"the Id of the parcel in transport:{IdOfParcelInTransfer} ";
             return printInfo;
         }
 

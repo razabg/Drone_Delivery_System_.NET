@@ -56,7 +56,7 @@ namespace IBL.BO
                 {
                     if (parcel.DroneId == drone.Id && parcel.ArrivedTime == null)//in case the parcel is already paird but didnt arrived yet
                     {
-                        drone.Status = Enum.DroneStatus.Busy.ToString();
+                        drone.Status = statusEnum.DroneStatus.Busy.ToString();
                         if (parcel.ParingTime != null && parcel.PickedUp == null)
                         { //in case the parcel is already paird but didnt picked up yet
                             double senderLon = GetCustomerDetails(parcel.SenderId).Longitude;
@@ -81,12 +81,12 @@ namespace IBL.BO
                     }
                 }
                 //If the drone is not busy
-                if (drone.Status != Enum.DroneStatus.Busy.ToString())
+                if (drone.Status != statusEnum.DroneStatus.Busy.ToString())
                 {
-                    Enum.DroneStatus status = (Enum.DroneStatus)rand.Next(1, 2);
+                    statusEnum.DroneStatus status = (statusEnum.DroneStatus)rand.Next(1, 2);
                     drone.Status = status.ToString();
                 }
-                if (drone.Status == Enum.DroneStatus.TreatmentMode.ToString())
+                if (drone.Status == statusEnum.DroneStatus.TreatmentMode.ToString())
                 {
                     double longi = 0;
                     double latit = 0;
@@ -111,7 +111,7 @@ namespace IBL.BO
                     drone.Battery = rand.Next(0, 20);
 
                 }
-                if (drone.Status == Enum.DroneStatus.Available.ToString())
+                if (drone.Status == statusEnum.DroneStatus.Available.ToString())
                 {
                     List<IDAL.DO.Parcel> ParcelList = (List<IDAL.DO.Parcel>)ParcelListDal;
                     List<IDAL.DO.Parcel> ArrivedParcels = ParcelList.FindAll(x => x.ArrivedTime != null);

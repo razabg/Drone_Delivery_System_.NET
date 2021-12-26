@@ -17,11 +17,11 @@ namespace IBL.BO
         public override string ToString()
         {
             string printInfo = "";
-            printInfo += $" the ID is {Id}\n";
-            printInfo += $"the Name is{Name},\n";
-            printInfo += $"the location is{location},\n";
-            printInfo += $"the list of available stations is{NumberOfavailableChargingSlots},\n";
-            printInfo += $"the list of drone in charging is{DroneINCharge},\n";
+            printInfo += $" the ID is: {Id}\n";
+            printInfo += $"the Name is:{Name},\n";
+            printInfo += $"the location is:{location},\n";
+            printInfo += $"the list of available stations is:{NumberOfavailableChargingSlots},\n";
+            printInfo += $"the list of drone in charging is:{DroneINCharge},\n";
             return printInfo;
         }
     }

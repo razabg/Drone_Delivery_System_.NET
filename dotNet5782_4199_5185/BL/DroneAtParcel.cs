@@ -15,9 +15,9 @@ namespace IBL.BO
         public override string ToString()
         {
             string printInfo = "";
-            printInfo += $" the ID is {Id}\n";
-            printInfo += $"the battary status is{Battary},\n";
-            printInfo += $"the location is{CurrentLocation},\n";
+            printInfo += $" the ID is :{Id}\n";
+            printInfo += $"the battary status is:{Battary},\n";
+            printInfo += $"the location is:{CurrentLocation},\n";
             return printInfo;
         }
     }

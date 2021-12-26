@@ -20,7 +20,7 @@ namespace IBL.BO
         public int ID;
         public NotExistsException() : base() { }
         public NotExistsException(string msg) { Console.WriteLine(msg); }
-        public NotExistsException(int id, string message, Exception innerException) : base(message, innerException) => ID = ((IDAL.DO.NotExistException)innerException).ID;
+        public NotExistsException(int id, string message, Exception innerException) : base(message, innerException) => ID = ((IDAL.DO.NotExistsException)innerException).ID;
         public override string ToString() => base.ToString() + $",The id does not exist";
 
     }

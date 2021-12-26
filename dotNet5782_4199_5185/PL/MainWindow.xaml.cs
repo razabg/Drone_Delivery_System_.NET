@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using IBL.BO;
 namespace PL
 {
     /// <summary>
@@ -20,10 +20,9 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        IBL.BO.IBL BLAccess = new IBL.BO.BLObject(); //access to bl layer through ibl interface
-        public MainWindow(/*ref*/ IBL.BO.IBL  BLAccess)
+       private Ibl BLAccess = new BLObject(); //access to bl layer through ibl interface
+        public MainWindow()
         {
-            
             InitializeComponent();
         }
 

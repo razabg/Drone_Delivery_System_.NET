@@ -37,18 +37,18 @@ namespace IBL.BO
         {
             if (parcel.ArrivedTime != null)
             {
-                return Enum.ParcelStatus.Arrived.ToString();
+                return statusEnum.ParcelStatus.Arrived.ToString();
             }
             else if (parcel.PickedUp != null)
             {
-                return Enum.ParcelStatus.PickedUp.ToString();
+                return statusEnum.ParcelStatus.PickedUp.ToString();
             }
             else if (parcel.ParingTime != null)
             {
-                return Enum.ParcelStatus.Paired.ToString();
+                return statusEnum.ParcelStatus.Paired.ToString();
             }
 
-            return Enum.ParcelStatus.created.ToString();
+            return statusEnum.ParcelStatus.created.ToString();
 
 
 
@@ -156,6 +156,14 @@ namespace IBL.BO
         {
             return AccessToDataMethods.ReturnCustomerList().ToList().Find(x => x.Id == parcel.TargetId);
         }
+
+        
+
+      
+
+
+        
+
     }
 
 }

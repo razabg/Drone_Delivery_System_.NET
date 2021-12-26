@@ -99,7 +99,7 @@ namespace IBL.BO
             {
                 throw new NotExistsException();
             }
-            if (!ListDroneBL.Exists(x => x.Status == Enum.DroneStatus.Available.ToString()))
+            if (!ListDroneBL.Exists(x => x.Status == statusEnum.DroneStatus.Available.ToString()))
             {
                 throw new DroneIsNotAvailable(droneid);
             }
@@ -118,7 +118,7 @@ namespace IBL.BO
             drone_to_charge.Battery = MinBattery;//
             drone_to_charge.CurrentLocation.Longitude = StationForCharge.Longitude;
             drone_to_charge.CurrentLocation.Latitude = StationForCharge.Latitude;
-            drone_to_charge.Status = Enum.DroneStatus.TreatmentMode.ToString();
+            drone_to_charge.Status = statusEnum.DroneStatus.TreatmentMode.ToString();
             //ListDroneBL[index] = drone_to_charge;
             var DalDrone = AccessToDataMethods.ReturnDroneList().ToList().Find(x => x.Id == drone_to_charge.Id);
 
@@ -131,13 +131,13 @@ namespace IBL.BO
             {
                 throw new NotExistsException();
             }
-            if (!ListDroneBL.Exists(x => x.Status == Enum.DroneStatus.TreatmentMode.ToString()))
+            if (!ListDroneBL.Exists(x => x.Status == statusEnum.DroneStatus.TreatmentMode.ToString()))
             {
                 throw new DroneIsNotAvailable(drone_id);
             }
 
             var DroneToRelease = ListDroneBL.Find(x => x.Id == drone_id);
-            DroneToRelease.Status = Enum.DroneStatus.Available.ToString();
+            DroneToRelease.Status = statusEnum.DroneStatus.Available.ToString();
             DroneToRelease.Battery = 100;//check this because its not acurrate,need to calc the time the drone was in charge
             var DroneCharge = AccessToDataMethods.ReturnDroneChargeList().ToList().Find(x => x.DroneId == drone_id);
             var stationIndex = AccessToDataMethods.ReturnStationList().ToList().FindIndex(x => x.Id == DroneCharge.StationId);
@@ -156,7 +156,7 @@ namespace IBL.BO
             {
                 throw new NotExistsException();
             }
-            if (!ListDroneBL.Exists(x => x.Status == Enum.DroneStatus.Available.ToString()))
+            if (!ListDroneBL.Exists(x => x.Status == statusEnum.DroneStatus.Available.ToString()))
             {
                 throw new DroneIsNotAvailable(drone_id);
 
@@ -166,9 +166,9 @@ namespace IBL.BO
             var droneToPare = ListDroneBL.Find(x => x.Id == drone_id); //we will update here the field and then we will insert it back to dal 
 
             //list sorted by priority
-            IEnumerable<IDAL.DO.Parcel> EmergencyParcel = AccessToDataMethods.ReturnParcelList().ToList().Where(x => x.Priority == int.Parse(Enum.PriorityStatus.emergency.ToString())).Where(x => x.Weight == int.Parse(droneToPare.Weight));
-            IEnumerable<IDAL.DO.Parcel> FastParcel = AccessToDataMethods.ReturnParcelList().ToList().Where(x => x.Priority == int.Parse(Enum.PriorityStatus.fast.ToString())).Where(x => x.Weight == int.Parse(droneToPare.Weight));
-            IEnumerable<IDAL.DO.Parcel> RegualrParcel = AccessToDataMethods.ReturnParcelList().ToList().Where(x => x.Priority == int.Parse(Enum.PriorityStatus.regular.ToString())).Where(x => x.Weight == int.Parse(droneToPare.Weight));
+            IEnumerable<IDAL.DO.Parcel> EmergencyParcel = AccessToDataMethods.ReturnParcelList().ToList().Where(x => x.Priority == int.Parse(statusEnum.PriorityStatus.emergency.ToString())).Where(x => x.Weight == int.Parse(droneToPare.Weight));
+            IEnumerable<IDAL.DO.Parcel> FastParcel = AccessToDataMethods.ReturnParcelList().ToList().Where(x => x.Priority == int.Parse(statusEnum.PriorityStatus.fast.ToString())).Where(x => x.Weight == int.Parse(droneToPare.Weight));
+            IEnumerable<IDAL.DO.Parcel> RegualrParcel = AccessToDataMethods.ReturnParcelList().ToList().Where(x => x.Priority == int.Parse(statusEnum.PriorityStatus.regular.ToString())).Where(x => x.Weight == int.Parse(droneToPare.Weight));
 
             if (EmergencyParcel.Any())
             {
@@ -190,7 +190,7 @@ namespace IBL.BO
                 {
                     throw new CannotAssignDroneToParcelException(NearestParcel.First().Id);
                 }
-                droneToPare.Status = Enum.DroneStatus.Busy.ToString();
+                droneToPare.Status = statusEnum.DroneStatus.Busy.ToString();
                 var parcel_edit = NearestParcel.First();
                 var parcelIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_edit.Id); parcel_edit.ParingTime = DateTime.Now;
                 AccessToDataMethods.ReturnParcelList().ToList()[parcelIndex] = parcel_edit;
@@ -216,7 +216,7 @@ namespace IBL.BO
                 {
                     throw new CannotAssignDroneToParcelException(NearestParcel.First().Id);
                 }
-                droneToPare.Status = Enum.DroneStatus.Busy.ToString();
+                droneToPare.Status = statusEnum.DroneStatus.Busy.ToString();
                 var parcel_edit = NearestParcel.First();
                 var parcelIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_edit.Id); parcel_edit.ParingTime = DateTime.Now;
                 AccessToDataMethods.ReturnParcelList().ToList()[parcelIndex] = parcel_edit;
@@ -242,7 +242,7 @@ namespace IBL.BO
                 {
                     throw new CannotAssignDroneToParcelException(NearestParcel.First().Id);
                 }
-                droneToPare.Status = Enum.DroneStatus.Busy.ToString();
+                droneToPare.Status = statusEnum.DroneStatus.Busy.ToString();
                 var parcel_edit = NearestParcel.First();
                 var parcelIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_edit.Id); parcel_edit.ParingTime = DateTime.Now;
                 AccessToDataMethods.ReturnParcelList().ToList()[parcelIndex] = parcel_edit;
@@ -260,7 +260,7 @@ namespace IBL.BO
             {
                 throw new NotExistsException();
             }
-            if (!ListDroneBL.Exists(x => x.Status == Enum.DroneStatus.Busy.ToString()))
+            if (!ListDroneBL.Exists(x => x.Status == statusEnum.DroneStatus.Busy.ToString()))
             {
                 throw new CannotPickUpException(drone_id);
             }
@@ -293,7 +293,7 @@ namespace IBL.BO
             {
                 throw new NotExistsException();
             }
-            if (!ListDroneBL.Exists(x => x.Status == Enum.DroneStatus.Busy.ToString()))
+            if (!ListDroneBL.Exists(x => x.Status == statusEnum.DroneStatus.Busy.ToString()))
             {
                 throw new CannotPickUpException(drone_id);
             }

@@ -30,11 +30,11 @@ namespace IDAL
             public override string ToString()
             {
                 string printStationInfo = "";
-                printStationInfo += $" the Id is {Id},\n";
-                printStationInfo += $"the name is{Name},\n";
-                printStationInfo += $"Longitude {Longitude},\n";
-                printStationInfo += $"Latitude {Latitude},\n";
-                printStationInfo += $"ChargeSlots {ChargeSlots},\n";
+                printStationInfo += $" the Id is :{Id},\n";
+                printStationInfo += $"the name is :{Name},\n";
+                printStationInfo += $"Longitude :{Longitude},\n";
+                printStationInfo += $"Latitude :{Latitude},\n";
+                printStationInfo += $"ChargeSlots :{ChargeSlots},\n";
                 return printStationInfo;
             }
 

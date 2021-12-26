@@ -21,14 +21,14 @@ namespace IBL.BO
         public override string ToString()
         {
             string printInfo = "";
-            printInfo += $" the ID is {Id}\n";
-            printInfo += $"the weight is{Weight},\n";
-            printInfo += $"the priority is{Priority},\n";
-            printInfo += $"the sender parcel  is{Sender},\n";
-            printInfo += $"the reciever parcel is{Reciever},\n";
-            printInfo += $"the collection location is{ CollectionLocation},\n";
-            printInfo += $"the destination location is{DestLocation},\n";
-            printInfo += $"the transport distance is{TransportDistance},\n";
+            printInfo += $" the ID is :{Id}\n";
+            printInfo += $"the weight is:{Weight},\n";
+            printInfo += $"the priority is:{Priority},\n";
+            printInfo += $"the sender parcel is:{Sender},\n";
+            printInfo += $"the reciever parcel is:{Reciever},\n";
+            printInfo += $"the collection location is:{ CollectionLocation},\n";
+            printInfo += $"the destination location is:{DestLocation},\n";
+            printInfo += $"the transport distance is:{TransportDistance},\n";
             return printInfo;
         }
 
