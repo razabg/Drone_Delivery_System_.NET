@@ -25,7 +25,7 @@ namespace IBL.BO
             printInfo += $"the battary status is{Battery},\n";
             printInfo += $"the status is{Status},\n";
             printInfo += $"the location is{CurrentLocation},\n";
-            printInfo += $"the id of the parcel in transport is{IdOfParcelInTransfe},\n";
+            printInfo += $"the id of the parcel in transport is{IdOfParcelInTransfer},\n";
             return printInfo;
         }
 

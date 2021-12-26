@@ -20,4 +20,16 @@ namespace IDAL.DO
         public override string ToString() => base.ToString() + $",The id does not exist";
 
     }
+
+
+
+    [Serializable]
+    public class NotExistsException : Exception
+    {
+        public int ID;
+        public NotExistsException() : base() { }
+        public NotExistsException(string msg) { Console.WriteLine(msg); }
+        public override string ToString() => base.ToString() + $",The id does not exist";
+
+    }
 }

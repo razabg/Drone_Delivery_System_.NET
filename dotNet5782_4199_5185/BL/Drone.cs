@@ -23,7 +23,7 @@ namespace IBL.BO
             printDroneInfo += $"the model is{Model},\n";
             printDroneInfo += $"the MaxWeight is{MaxWeight},\n";
             printDroneInfo += $"the Status is {Status},\n";
-            printDroneInfo += $"Battary left {Battary},\n";
+            printDroneInfo += $"Battary left {Battery},\n";
             printDroneInfo += $"Parcel  {Parcel},\n";
             printDroneInfo += $"the location is {CurrentLocation},\n";
             return printDroneInfo;
