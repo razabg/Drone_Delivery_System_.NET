@@ -42,7 +42,7 @@
             <Label x:Name="StatusSelectorLabel" Content="Select status:" HorizontalAlignment="Left" Margin="49,7,0,0" VerticalAlignment="Top" Height="26" Width="79" RenderTransformOrigin="0.599,1.172" Grid.Column="1"/>
             <ComboBox x:Name="MaxWeight" Grid.Column="7" HorizontalAlignment="Left" Margin="80,7,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2" Height="22" SelectionChanged="MaxWeight_SelectionChanged"/>
             <Label x:Name="MaxWeightLablel" Content="Max weight" Grid.Column="7" HorizontalAlignment="Left" Margin="5,7,0,0" VerticalAlignment="Top" Height="26" Width="71"/>
-            <ListView x:Name="DroneListView" Grid.ColumnSpan="9" Margin="-1,48,5,0" RenderTransformOrigin="0.469,0.639" SelectionChanged="ListView_SelectionChanged" Height="247" VerticalAlignment="Top">
+            <ListView x:Name="DroneListView" Grid.ColumnSpan="9" Margin="-4,42,8,-42" RenderTransformOrigin="0.469,0.639" SelectionChanged="ListView_SelectionChanged" MouseDoubleClick="List_viewDC">
                 <ListView.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>

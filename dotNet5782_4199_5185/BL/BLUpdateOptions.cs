@@ -23,76 +23,6 @@ namespace IBL.BO
             DroneToUpdate.Model = NewModel;
             AccessToDataMethods.ReturnDroneList().ToList()[index] = DroneToUpdate;
         } //update the drones model
-        public void UpdateBaseStationData(int baseStationId, string baseStationName, int totalChargeSlots)
-        {
-            int numOfDronesInCharge = 0;
-            List<IDAL.DO.Station> StationListDal = AccessToDataMethods.ReturnStationList().ToList();
-            var StationUpdate = StationListDal.Find(x => x.Id == baseStationId);
-            var index = StationListDal.FindIndex(x => x.Id == baseStationId);
-            if (index == -1)
-            {
-                throw new NotExistsException();
-            }
-
-            {
-                if (baseStationName.Length > 0 && totalChargeSlots > 0)
-                {
-                    numOfDronesInCharge = AccessToDataMethods.ReturnDroneChargeList().Count(x => x.StationId == baseStationId);
-                    if (totalChargeSlots >= numOfDronesInCharge)
-                    {
-                        StationUpdate.ChargeSlots = totalChargeSlots;
-                        StationUpdate.Name = int.Parse(baseStationName);
-                        AccessToDataMethods.ReturnStationList().ToList()[index] = StationUpdate;//struct be value 
-
-                    }   // need to take care in case of charge slot or name is empty
-                    else
-                    {
-                        throw new NotEnoughChargeSlotsInThisStation(baseStationId);
-                    }
-
-                }
-            }
-
-
-        }
-        public void UpdateCustomerData(int CustomerId, string customerName, string phoneNumber)
-        {
-            List<IDAL.DO.Customer> StationListDal = AccessToDataMethods.ReturnCustomerList().ToList();
-            var customerUpdate = AccessToDataMethods.ReturnCustomerList().ToList().Find(x => x.Id == CustomerId);
-            var index = AccessToDataMethods.ReturnCustomerList().ToList().FindIndex(x => x.Id == CustomerId);
-            if (index == -1)
-            {
-                throw new NotExistsException();
-            }
-            try
-            {
-                if (customerName.Length > 0 && phoneNumber.Length < 0)
-                {
-                    customerUpdate.Name = customerName;
-                    customerUpdate.Phone = phoneNumber;
-                    AccessToDataMethods.ReturnCustomerList().ToList()[index] = customerUpdate;
-                }
-                else if (customerName.Length > 0 && phoneNumber.Length == 0)
-                {
-                    customerUpdate.Name = customerName;
-                    AccessToDataMethods.ReturnCustomerList().ToList()[index] = customerUpdate;
-                }
-                else if (customerName.Length == 0 && phoneNumber.Length > 0)
-                {
-                    customerUpdate.Phone = phoneNumber;
-                    AccessToDataMethods.ReturnCustomerList().ToList()[index] = customerUpdate;
-                }
-                else
-                {
-                    throw new NotExistsException("input is empty");
-                }
-            }
-            catch
-            {
-                Console.WriteLine("input is empty");
-            }
-
-        }
         public void DroneToCharge(int droneid)
         {
             if (!ListDroneBL.Exists(x => x.Id == droneid))
@@ -114,7 +44,7 @@ namespace IBL.BO
                 throw new CannotGoToChargeException(droneid);
             }
 
-           
+
             drone_to_charge.Battery = MinBattery;//
             drone_to_charge.CurrentLocation.Longitude = StationForCharge.Longitude;
             drone_to_charge.CurrentLocation.Latitude = StationForCharge.Latitude;
@@ -321,7 +251,78 @@ namespace IBL.BO
 
 
         }
+        public void UpdateBaseStationData(int baseStationId, string baseStationName, int totalChargeSlots)
+        {
+            int numOfDronesInCharge = 0;
+            List<IDAL.DO.Station> StationListDal = AccessToDataMethods.ReturnStationList().ToList();
+            var StationUpdate = StationListDal.Find(x => x.Id == baseStationId);
+            var index = StationListDal.FindIndex(x => x.Id == baseStationId);
+            if (index == -1)
+            {
+                throw new NotExistsException();
+            }
 
+            {
+                if (baseStationName.Length > 0 && totalChargeSlots > 0)
+                {
+                    numOfDronesInCharge = AccessToDataMethods.ReturnDroneChargeList().Count(x => x.StationId == baseStationId);
+                    if (totalChargeSlots >= numOfDronesInCharge)
+                    {
+                        StationUpdate.ChargeSlots = totalChargeSlots;
+                        StationUpdate.Name = int.Parse(baseStationName);
+                        AccessToDataMethods.ReturnStationList().ToList()[index] = StationUpdate;//struct be value 
+
+                    }   // need to take care in case of charge slot or name is empty
+                    else
+                    {
+                        throw new NotEnoughChargeSlotsInThisStation(baseStationId);
+                    }
+
+                }
+            }
+
+
+        }
+        public void UpdateCustomerData(int CustomerId, string customerName, string phoneNumber)
+        {
+            List<IDAL.DO.Customer> StationListDal = AccessToDataMethods.ReturnCustomerList().ToList();
+            var customerUpdate = AccessToDataMethods.ReturnCustomerList().ToList().Find(x => x.Id == CustomerId);
+            var index = AccessToDataMethods.ReturnCustomerList().ToList().FindIndex(x => x.Id == CustomerId);
+            if (index == -1)
+            {
+                throw new NotExistsException();
+            }
+            try
+            {
+                if (customerName.Length > 0 && phoneNumber.Length < 0)
+                {
+                    customerUpdate.Name = customerName;
+                    customerUpdate.Phone = phoneNumber;
+                    AccessToDataMethods.ReturnCustomerList().ToList()[index] = customerUpdate;
+                }
+                else if (customerName.Length > 0 && phoneNumber.Length == 0)
+                {
+                    customerUpdate.Name = customerName;
+                    AccessToDataMethods.ReturnCustomerList().ToList()[index] = customerUpdate;
+                }
+                else if (customerName.Length == 0 && phoneNumber.Length > 0)
+                {
+                    customerUpdate.Phone = phoneNumber;
+                    AccessToDataMethods.ReturnCustomerList().ToList()[index] = customerUpdate;
+                }
+                else
+                {
+                    throw new NotExistsException("input is empty");
+                }
+            }
+            catch
+            {
+                Console.WriteLine("input is empty");
+            }
+
+        }
+       
+       
     }
 }
 

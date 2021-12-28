@@ -55,6 +55,32 @@ namespace PL
             new DroneWindow(BLAccess).Show();
         }
 
+       
+
+        private void List_viewDClick(object sender, MouseButtonEventArgs e)
+        {
+            if (DroneListView.SelectedItem == null)
+                return;
+            Drone drone = new Drone();
+            DroneToList drL = DroneListView.SelectedItem as DroneToList;
+
+            try
+            {
+                drone = BLAccess.DisplayDrone(drL.Id);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+            DroneWindow droneWindow = new DroneWindow(BLAccess, drone);
+            droneWindow.Show();
+            //droneWindow.Update += DroneWindow_Update;
+
+        }
+
+
         private void close_window_Click(object sender, RoutedEventArgs e)
         {
             Close();

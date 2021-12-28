@@ -53,7 +53,7 @@ namespace DalObject
             return RandCustomer;
         }
 
-        public enum TopWeight { available, light, average, heavy };
+        public enum TopWeight { available, Light, Average, Heavy };
         public static Enum genRandTop()
         {
 

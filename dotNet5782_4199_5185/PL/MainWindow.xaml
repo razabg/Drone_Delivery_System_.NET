@@ -5,18 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="412" Width="477">
+    <Grid Margin="-9,0,10,11">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="189*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="191*"/>
+            <RowDefinition Height="0*"/>
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <ImageBrush/>
+        </Grid.Background>
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="97*"/>
+            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="168*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="46*"/>
+            <ColumnDefinition Width="134*"/>
+            <ColumnDefinition Width="109*"/>
+            <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="Drone_list_button" Content="Drone list" HorizontalAlignment="Left" Margin="647,30,0,0" VerticalAlignment="Top" Click="DroneList_click" Width="92" Grid.Column="1" Visibility="Visible">
-            <Button.Effect>
-                <DropShadowEffect/>
-            </Button.Effect>
-        </Button>
-        <Image Source="/istockphoto-1155027994-612x612.jpg" Margin="-60,0,84,0" Width="Auto" Grid.ColumnSpan="2" Visibility="Visible"/>
+        <Grid Name="myGird" Grid.ColumnSpan="7" Margin="10,0,-9,-9" Grid.RowSpan="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="69*"/>
+                <RowDefinition Height="365*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="264*"/>
+                <ColumnDefinition Width="93*"/>
+                <ColumnDefinition Width="118*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Background>
+                <ImageBrush ImageSource="/istockphoto-1155027994-612x612.jpg" Stretch="Fill" TileMode="None"></ImageBrush>
+            </Grid.Background>
+            <Button x:Name="Drone_list_button" Content="Drone list" HorizontalAlignment="Left" Margin="35,27,0,0" VerticalAlignment="Top" Click="DroneList_click" Width="125" Visibility="Visible" Height="50" Grid.RowSpan="2">
+
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+        </Grid>
+
 
     </Grid>
 </Window>
