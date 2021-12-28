@@ -16,10 +16,10 @@ namespace IBL.BO
         public override string ToString()
         {
             string printInfo = "";
-            printInfo += $" the ID is :{Id}\n";
-            printInfo += $"the name is:{Name},\n";
-            printInfo += $"the number of available charging stations is:{NumOfAvailableChargingSlots},\n";
-            printInfo += $"the number of unavailable charging stations is:{NumOfUnavailableChargingSlots},\n";
+            printInfo += $"ID:{Id}\n";
+            printInfo += $" Name:{Name},\n";
+            printInfo += $" Available Charging Stations :{NumOfAvailableChargingSlots},\n";
+            printInfo += $" Unavailable Charging Stations :{NumOfUnavailableChargingSlots},\n";
             return printInfo;
         }
 

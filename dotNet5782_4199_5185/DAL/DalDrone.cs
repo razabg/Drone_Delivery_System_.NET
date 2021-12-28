@@ -15,9 +15,9 @@ namespace DalObject
         /// </summary>
         public void AddDrone(Drone drone_add)
         {
-            if (!DataSource.DronesList.ToList().Exists(x=>x.Id==drone_add.Id))
+            if (DataSource.DronesList.ToList().Exists(x=>x.Id==drone_add.Id))
             {
-                throw new AlreadyExistsException("the drone is alreay exists");
+                throw new AlreadyExistsException("Already exists drone");
             }
 
             DataSource.DronesList.Add(new Drone()

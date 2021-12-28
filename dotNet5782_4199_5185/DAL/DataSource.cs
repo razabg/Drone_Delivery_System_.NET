@@ -53,7 +53,7 @@ namespace DalObject
             return RandCustomer;
         }
 
-        public enum TopWeight { available, light, average, heavy };
+        public enum TopWeight { available, Light, Average, Heavy };
         public static Enum genRandTop()
         {
 
@@ -73,10 +73,13 @@ namespace DalObject
 
 
 
-        const int MinRange = 1111111;
-        const int MaxRange = 9999999;
+        const int MinRange = 111;
+        const int MaxRange = 999;
 
-
+        public static int RandomModelFunc()
+        {
+            return rand.Next(1, 5);
+        }
 
         public static int RandomIdFunc()
         {
@@ -110,7 +113,7 @@ namespace DalObject
                     DroneId = 0,
                     StationId = 0,
                 });
-                    
+
             }
             for (int i = 0; i < 5; ++i)
             {
@@ -118,10 +121,11 @@ namespace DalObject
                 {
                     Id = RandomIdFunc(),
                     MaxWeight = genRandTop().ToString(),
-                    Model = RandomIdFunc().ToString(),
+                    Model = RandomModelFunc().ToString(),
 
                 });
             }
+            Random rnd = new Random();
             for (int i = 0; i < 10; i++)
             {
                 CustomersList.Add(new Customer()
@@ -132,19 +136,23 @@ namespace DalObject
                     Longitude = Coordinates(),
                     Latitude = Coordinates()
                 });
+                List<int> randIdOfCustomers = new List<int>();
+                randIdOfCustomers.Add(CustomersList[i].Id);
+            }
+            for (int i = 0; i < 1; i++) {
 
                 DateTime currentDate = DateTime.Now;
                 ParcelsList.Add(new Parcel
                 {
                     Id = RandomIdFunc(),
-                    SenderId = RandomIdFunc(),
-                    TargetId = RandomIdFunc(),
+                    SenderId = rnd.Next(CustomersList[i].Id),
+                    TargetId = CustomersList[i].Id,
                     Weight = rand.Next(1, 300),
                     Priority = genRandPriority(),
                     DroneId = RandomIdFunc(),
                     ParingTime = null,
                     PickedUp = null,
-                    ArrivedTime =null,
+                    ArrivedTime = null,
                     CreationTime = null
 
                 });

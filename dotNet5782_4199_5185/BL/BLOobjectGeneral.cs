@@ -97,12 +97,12 @@ namespace IBL.BO
                 if (numOfDronesInCharge < StationToReturn.ChargeSlots) // if the station has room for another drone
                 {
                     return StationToReturn;
-                    flag = false; //stop the outer while loop
+                    //flag = false; //stop the outer while loop
                 }
                 else if (numOfDronesInCharge >= StationToReturn.ChargeSlots)  // if there is no room in the station add the station to the "black list
                 {
                     StationToskip.Add(StationToReturn);
-                    flag = true;
+                   // flag = true;
                 }
                 else if (StationToskip.Equals(station))
                 {

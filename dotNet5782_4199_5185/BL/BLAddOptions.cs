@@ -42,7 +42,7 @@ namespace IBL.BO
 
             if (!AccessToDataMethods.ReturnStationList().ToList().Exists(x => x.Id == StationId))//check if the given station id is exist;
             {
-                throw new AlreadyExistsException();
+                throw new NotExistsException();
             }
 
             try
@@ -51,8 +51,7 @@ namespace IBL.BO
             }
             catch (AlreadyExistsException ex1)
             {
-
-                Console.WriteLine(ex1); ;
+                throw ex1;
             }
             DroneToBl.CurrentLocation = new(TempStation.Longitude, TempStation.Latitude);
             DroneToBl.Battery = rand.Next(20, 40);
