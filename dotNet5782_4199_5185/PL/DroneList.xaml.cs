@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using IBL.BO;
+using BO;
+using BlApi;
 
 namespace PL
 {
@@ -21,14 +23,18 @@ namespace PL
     public partial class DroneList : Window
     {
 
-        private Ibl BLAccess ;//access to bl layer through ibl interface
-        public DroneList(Ibl access)
+        private IBL BLAccess ;//access to bl layer through ibl interface
+        private ObservableCollection<DroneToList> collection;
+        public DroneList(IBL access)
         {
             InitializeComponent();
-            BLAccess = new BLObject();
+            BLAccess = BlFactory.GetBl();
             DroneListView.ItemsSource = BLAccess.GetDroneToLists();
             dronestatus.ItemsSource = Enum.GetValues(typeof(statusEnum.DroneStatus));
             MaxWeight.ItemsSource = Enum.GetValues(typeof(statusEnum.Weight));
+
+            collection = new ObservableCollection<DroneToList>(BLAccess.GetDroneToLists());
+            DroneListView.ItemsSource = collection;
 
         }
 
@@ -57,16 +63,16 @@ namespace PL
 
        
 
-        private void List_viewDClick(object sender, MouseButtonEventArgs e)
+        private void List_viewDC(object sender, MouseButtonEventArgs e)
         {
             if (DroneListView.SelectedItem == null)
                 return;
-            Drone drone = new Drone();
+            DroneToList drone = new DroneToList();
             DroneToList drL = DroneListView.SelectedItem as DroneToList;
 
             try
             {
-                drone = BLAccess.DisplayDrone(drL.Id);
+                drone = BLAccess.GetDroneToLists().ToList().Find(x=>x.Id==drL.Id);
 
             }
             catch (Exception ex)
@@ -76,10 +82,15 @@ namespace PL
             }
             DroneWindow droneWindow = new DroneWindow(BLAccess, drone);
             droneWindow.Show();
-            //droneWindow.Update += DroneWindow_Update;
+            droneWindow.Update += DroneWindow_Update;
 
         }
 
+        private void DroneWindow_Update()
+        {
+            collection = new ObservableCollection<DroneToList>(BLAccess.GetDroneToLists());
+            DroneListView.ItemsSource = collection;
+        }
 
         private void close_window_Click(object sender, RoutedEventArgs e)
         {

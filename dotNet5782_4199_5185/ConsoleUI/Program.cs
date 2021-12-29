@@ -1,9 +1,9 @@
-﻿using IDAL.DO;
-using IDAL;
+﻿using DO.DO;
+using DO;
 using System;
 
 
-namespace DalObject
+namespace Dalobject
 {
     class Program
     {
@@ -29,7 +29,7 @@ namespace DalObject
                     case MenuOptions.Add:
                         Console.WriteLine("I want to add:\n1 - A station\n2 - A drone\n3 - A customer\n4 - A parcel\n 0 - Exit\n");
                         EntitiesOptions entityChoiceOption = (EntitiesOptions)int.Parse(Console.ReadLine()); // Creatint a variable of enum- "EntitiesOptions" for the user choice
-                            IDal addFunc = new DalObject();
+                            IDal addFunc = new DALobject();
                         switch (entityChoiceOption)
                         {
                             case EntitiesOptions.Station:
@@ -57,7 +57,7 @@ namespace DalObject
                         Console.WriteLine("Which entity from the follow list do you want to update:\n");
                         Console.WriteLine("1 - An assignment\n2 - A pickedup\n3 - A dalivary\n4 - A recharge\n0 - Exit\n");
                         UpdateOptions updateChoceOption = (UpdateOptions)int.Parse(Console.ReadLine()); // Creatint a variable of enum- "UpdateOptions" for the user choice
-                         IDal UpdateFunc = new DalObject();
+                         IDal UpdateFunc = new DALobject();
                         switch (updateChoceOption)
                         {
                             case UpdateOptions.Paring:
@@ -92,7 +92,7 @@ namespace DalObject
                         EntitiesOptions entityChoice = (EntitiesOptions)int.Parse(Console.ReadLine()); // Creatint a variable of enum- "EntitiesOptions" for the user choice
                         Console.WriteLine("Please enter the entetity's Id:\n");
                         int key = int.Parse(Console.ReadLine());
-                        IDal ShowEntites = new DalObject();
+                        IDal ShowEntites = new DALobject();
 
                         switch (entityChoice)
                         {
@@ -120,7 +120,7 @@ namespace DalObject
                         Console.WriteLine("Which list from the follow lists are you looking for:\n");
                         Console.WriteLine("1 - Stations\n2 - Drones\n3 - Customers\n4 - Parcels\n5 - UnAssignmentParcels\n6 - AvailableChargingStations\n0 - Exit\n");
                         ListOptions listChoceOption = (ListOptions)int.Parse(Console.ReadLine()); // Creatint a variable of enum- "ListOptions" for the user choice
-                        IDal ShowLists = new DalObject();
+                        IDal ShowLists = new DALobject();
                         switch (listChoceOption)
                         {
                             case ListOptions.Exit:
