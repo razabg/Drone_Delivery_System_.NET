@@ -91,13 +91,10 @@ namespace PL
             Longitude.Text = drone.CurrentLocation.Longitude.ToString();
         }
 
-        private void Refresh()
-        {
+      
 
 
-
-
-        }
+       
 
         private void choose_model_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
