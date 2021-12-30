@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DO;
 
-
-namespace DAL
+namespace DALObject
 {
-    internal sealed partial class DALobject
+    class DalEnum
     {
-
+        public enum PriorityStatus { fast = 1, regular, emergency };
 
     }
 }

@@ -24,10 +24,13 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-       private IBL BLAccess = BlFactory.GetBl(); //access to bl layer through ibl interface
+       private IBL BLAccess; //access to bl layer through ibl interface
         public MainWindow()
         {
+            var lp = new LoginPage();
+            lp.ShowDialog();
             InitializeComponent();
+            BLAccess = BlFactory.GetBl();
         }
 
         private void DroneList_click(object sender, RoutedEventArgs e)

@@ -5,27 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="412" Width="477">
+        Title="MainWindow" Height="412" Width="477"
+        ResizeMode="NoResize"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid Margin="-9,0,10,11">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="189*"/>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="191*"/>
-            <RowDefinition Height="0*"/>
-        </Grid.RowDefinitions>
+
         <Grid.Background>
             <ImageBrush/>
         </Grid.Background>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="11*"/>
-            <ColumnDefinition Width="168*"/>
-            <ColumnDefinition Width="8*"/>
-            <ColumnDefinition Width="46*"/>
-            <ColumnDefinition Width="134*"/>
-            <ColumnDefinition Width="109*"/>
-            <ColumnDefinition Width="0*"/>
-        </Grid.ColumnDefinitions>
+
         <Grid Name="myGird" Grid.ColumnSpan="7" Margin="10,0,-9,-9" Grid.RowSpan="4">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0*"/>

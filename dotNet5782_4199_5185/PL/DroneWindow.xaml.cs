@@ -22,13 +22,13 @@ namespace PL
     {
         private IBL BLAccess;
         DroneToList drone = new DroneToList();// insert the input of user to this object
-        public event Action Update = delegate { };
+        //public event Action Update = delegate { };
         public DroneWindow(IBL accsess)
         {
             InitializeComponent();
 
             BLAccess = BlFactory.GetBl();
-            choose_model.ItemsSource = Enum.GetValues(typeof(statusEnum.DroneModel));
+            choose_model.DataContext = Enum.GetValues(typeof(statusEnum.DroneModel));
             StationForCharge.ItemsSource = BLAccess.GetBaseStationToLists().ToList();
             MaxWeight.ItemsSource = Enum.GetValues(typeof(statusEnum.TopWeight));
 
@@ -84,9 +84,19 @@ namespace PL
             Status.IsEnabled = false;
             MaxWeight.IsEnabled = false;
             labelBattery.IsEnabled = false;
-
             labelLatitude.IsEnabled = false;
             labelLongitude.IsEnabled = false;
+
+
+            Longitude.Text = drone.CurrentLocation.Longitude.ToString();
+        }
+
+        private void Refresh()
+        {
+
+
+
+
         }
 
         private void choose_model_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -126,7 +136,6 @@ namespace PL
             }
             catch (AlreadyExistsException ex)//check why the massage in not shown
             {
-
                 MessageBox.Show("this id already exist");
                 flag = false;
             }
@@ -146,7 +155,7 @@ namespace PL
             if (flag)
                 this.Close();
 
-            Update();
+            //Update();
 
 
 

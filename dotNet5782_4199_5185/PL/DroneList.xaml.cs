@@ -29,7 +29,7 @@ namespace PL
         {
             InitializeComponent();
             BLAccess = BlFactory.GetBl();
-            DroneListView.ItemsSource = BLAccess.GetDroneToLists();
+            DroneListView.DataContext = BLAccess.GetDroneToLists();
             dronestatus.ItemsSource = Enum.GetValues(typeof(statusEnum.DroneStatus));
             MaxWeight.ItemsSource = Enum.GetValues(typeof(statusEnum.Weight));
 
@@ -37,6 +37,8 @@ namespace PL
             DroneListView.ItemsSource = collection;
 
         }
+
+       
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -82,7 +84,7 @@ namespace PL
             }
             DroneWindow droneWindow = new DroneWindow(BLAccess, drone);
             droneWindow.Show();
-            droneWindow.Update += DroneWindow_Update;
+            //droneWindow.Update += DroneWindow_Update;
 
         }
 

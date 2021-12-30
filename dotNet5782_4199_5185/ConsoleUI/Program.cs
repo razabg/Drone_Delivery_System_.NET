@@ -3,7 +3,7 @@ using DO;
 using System;
 
 
-namespace Dalobject
+namespace DAL
 {
     class Program
     {

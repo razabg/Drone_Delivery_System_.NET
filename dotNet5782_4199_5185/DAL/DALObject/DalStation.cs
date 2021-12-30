@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using DO;
 
 
-namespace Dalobject
+namespace DAL
 {
     /// <summary>
     /// method that add new station to stations list
