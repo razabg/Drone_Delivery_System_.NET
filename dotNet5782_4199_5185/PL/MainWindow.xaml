@@ -28,18 +28,19 @@
         </Grid.ColumnDefinitions>
         <Grid Name="myGird" Grid.ColumnSpan="7" Margin="10,0,-9,-9" Grid.RowSpan="4">
             <Grid.RowDefinitions>
-                <RowDefinition Height="69*"/>
-                <RowDefinition Height="365*"/>
+                <RowDefinition Height="0*"/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="264*"/>
-                <ColumnDefinition Width="93*"/>
-                <ColumnDefinition Width="118*"/>
+                <ColumnDefinition Width="0*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0*"/>
+                <ColumnDefinition Width="0*"/>
             </Grid.ColumnDefinitions>
             <Grid.Background>
-                <ImageBrush ImageSource="C:\Users\razab\Source\Repos\dotNet5782_4199_5185\dotNet5782_4199_5185\PL\imageforproject.jpg" Stretch="Fill" TileMode="None"></ImageBrush>
+                <ImageBrush ImageSource="C:\Users\USER001\source\repos\Elyashiv-T\dotNet5782_4199_5185\dotNet5782_4199_5185\PL\imageforproject.jpg" Stretch="Fill" TileMode="None"></ImageBrush>
             </Grid.Background>
-            <Button x:Name="Drone_list_button" Content="Drone list" HorizontalAlignment="Left" Margin="35,27,0,0" VerticalAlignment="Top" Click="DroneList_click" Width="125" Visibility="Visible" Height="50" Grid.RowSpan="2">
+            <Button x:Name="Drone_list_button" Content="Drone list" HorizontalAlignment="Left" Margin="22,25,0,0" VerticalAlignment="Top" Click="DroneList_click" Width="125" Visibility="Visible" Height="50" Grid.Column="1" Grid.Row="1">
 
                 <Button.Effect>
                     <DropShadowEffect/>

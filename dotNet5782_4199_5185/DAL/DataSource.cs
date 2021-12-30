@@ -17,7 +17,7 @@ namespace DalObject
         internal static List<DroneINCharge> DroneChargeList = new List<DroneINCharge>();
         internal class Config
         {
-            public static int RunIdParcel = 10000001;
+            public static int RunIdParcel = 101;
 
             // the battery numbers refers  to consumption  % per km
             internal static double Available  { get{return 5; } }
@@ -30,7 +30,7 @@ namespace DalObject
 
         }
 
-        #region initialize rand method
+          #region initialize rand method
         /// random intel:
         /// we made a few random functions in order to generate random information. like id,locations,phone number etc.
         /// 
@@ -144,7 +144,7 @@ namespace DalObject
                 DateTime currentDate = DateTime.Now;
                 ParcelsList.Add(new Parcel
                 {
-                    Id = RandomIdFunc(),
+                    Id = DataSource.Config.RunIdParcel++,
                     SenderId = rnd.Next(CustomersList[i].Id),
                     TargetId = CustomersList[i].Id,
                     Weight = rand.Next(1, 300),

@@ -12,13 +12,13 @@ namespace DalObject
     {
         public void AddParcel(Parcel parcel)
         {
-            if (!DataSource.ParcelsList.ToList().Exists(x => x.Id == parcel.Id))
+            if (DataSource.ParcelsList.ToList().Exists(x => x.Id == parcel.Id))
             {
                 throw new AlreadyExistsException("the parcel is alreay exists");
             }
             DataSource.ParcelsList.Add(new Parcel
             {
-                Id = DataSource.Config.RunIdParcel++,
+                Id = DataSource.Config.RunIdParcel++,//CHECK RUN ID PARCEL
                 SenderId = parcel.SenderId,
                 TargetId = parcel.TargetId,
                 Weight = parcel.Weight,
@@ -28,10 +28,10 @@ namespace DalObject
                 ParingTime = null,
                 PickedUp = null,
                 ArrivedTime = null,
-            }) ;
-
+            });
+             
         }
-        public  void findAndPrint_Parcel(int key)
+        public void findAndPrint_Parcel(int key)
         {
             Parcel ForPrint = DataSource.ParcelsList.Find(x => x.Id == key);
             Console.WriteLine(ForPrint);
@@ -50,7 +50,7 @@ namespace DalObject
         /// <summary>
         /// run on the items of ParcelsList - checks the drone-id - and print every parcel that her droneid' isn't equal to one from the drones
         /// </summary>
-        public  void show_UnassignmentParcel_list()
+        public void show_UnassignmentParcel_list()
         {
             foreach (Parcel parcel in DataSource.ParcelsList)
             {

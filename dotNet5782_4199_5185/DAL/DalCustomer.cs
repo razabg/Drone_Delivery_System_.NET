@@ -12,7 +12,7 @@ namespace DalObject
     {
         public void AddCustomer(Customer CustomerToAdd)
         {
-            if (!DataSource.CustomersList.ToList().Exists(x => x.Id == CustomerToAdd.Id))
+            if (DataSource.CustomersList.ToList().Exists(x => x.Id == CustomerToAdd.Id))
             {
                 throw new AlreadyExistsException("the customer is alreay exists");
             }

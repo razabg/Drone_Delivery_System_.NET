@@ -16,7 +16,7 @@ namespace DalObject
         public void AddStation(Station tolist)
         {
            
-            if (!DataSource.StationsList.ToList().Exists(x=>x.Id==tolist.Id))
+            if (DataSource.StationsList.ToList().Exists(x=>x.Id==tolist.Id))
             {
                 throw new AlreadyExistsException("the station is already exists");
             }
