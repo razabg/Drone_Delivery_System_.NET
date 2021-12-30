@@ -19,7 +19,7 @@ namespace DAL
         DALobject() { DataSource.Initialize(); } // default => private
         public static DALobject Instance { get => instance.Value; }// The public Instance property to use
         #endregion
-         
+
 
         /// <summary>
         /// Pairing parcel to drone & Update the status of the drone
@@ -147,11 +147,19 @@ namespace DAL
         }
 
 
+
+
+
+
+
     }
-
-
-
 }
+
+
+
+
+
+
 
 
 

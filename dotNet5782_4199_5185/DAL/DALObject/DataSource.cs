@@ -53,7 +53,7 @@ namespace DAL
             return RandCustomer;
         }
 
-        public enum TopWeight { available, Light, Average, Heavy };
+        public enum TopWeight { Light, Average, Heavy };
         public static Enum genRandTop()
         {
 
@@ -78,7 +78,7 @@ namespace DAL
 
         public static int RandomModelFunc()
         {
-            return rand.Next(1, 5);
+            return rand.Next(1, 6);
         }
 
         public static int RandomIdFunc()
@@ -104,7 +104,7 @@ namespace DAL
                 {
                     Id = RandomIdFunc(),
                     Name = rand.Next(MinRange / 3, MaxRange / 3),
-                    ChargeSlots = rand.Next(1, 100),
+                    ChargeSlots = rand.Next(1, 20),
                     Longitude = Coordinates(),
                     Latitude = Coordinates()
                 });
@@ -139,17 +139,17 @@ namespace DAL
                 List<int> randIdOfCustomers = new List<int>();
                 randIdOfCustomers.Add(CustomersList[i].Id);
             }
-            for (int i = 0; i < 1; i++) {
+            for (int i = 0; i < 5; i++) {
 
                 DateTime currentDate = DateTime.Now;
                 ParcelsList.Add(new Parcel
                 {
                     Id = DataSource.Config.RunIdParcel++,
-                    SenderId = rnd.Next(CustomersList[i].Id),
-                    TargetId = CustomersList[i].Id,
+                    SenderId = RandomIdFunc(),
+                    TargetId = RandomIdFunc(),
                     Weight = rand.Next(1, 300),
                     Priority = genRandPriority(),
-                    DroneId = RandomIdFunc(),
+                    DroneId = null,
                     ParingTime = null,
                     PickedUp = null,
                     ArrivedTime = null,

@@ -29,8 +29,9 @@ namespace PL
         {
             var lp = new LoginPage();
             lp.ShowDialog();
-            InitializeComponent();
             BLAccess = BlFactory.GetBl();
+            InitializeComponent();
+           
         }
 
         private void DroneList_click(object sender, RoutedEventArgs e)

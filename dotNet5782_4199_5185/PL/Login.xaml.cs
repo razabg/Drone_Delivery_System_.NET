@@ -36,7 +36,7 @@ namespace PL
 
         private void UIElement_OnMouseLeave(object sender, MouseEventArgs e)
         {
-            if (UserNameTextBox.Text == "admin" && PasswordBox.Password == "admin")
+            if (UserNameTextBox.Text == "1" && PasswordBox.Password == "1")
             {
                 Close();
             }

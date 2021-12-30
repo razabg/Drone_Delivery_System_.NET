@@ -20,9 +20,9 @@ namespace BL
 
 
         public IDal AccessToDataMethods;
-        public static Random rand = new();
+        public static Random rand = new Random();
         public List<DroneToList> ListDroneBL = new List<DroneToList>();
-       
+
 
         public double AvailableWeightConsump;
         public double LightWeightConsump;
@@ -55,7 +55,7 @@ namespace BL
                     Id = item.Id,
                     Weight = item.MaxWeight,
                     Model = item.Model,
-                    CurrentLocation = new(),
+                    CurrentLocation = new()
                 });
 
             }
@@ -91,9 +91,10 @@ namespace BL
                     }
                 }
                 //If the drone is not busy
+               
                 if (drone.Status != statusEnum.DroneStatus.Busy.ToString())
                 {
-                    statusEnum.DroneStatus status = (statusEnum.DroneStatus)rand.Next(1, 2);
+                    statusEnum.DroneStatus status = (statusEnum.DroneStatus)rand.Next(0, 2);
                     drone.Status = status.ToString();
                 }
                 if (drone.Status == statusEnum.DroneStatus.TreatmentMode.ToString())
@@ -105,7 +106,7 @@ namespace BL
                     {
                         count++;
                     }
-                    int index = rand.Next(0, count);
+                    int index = rand.Next(0, count+1);
                     int count2 = 0;
                     foreach (var item in StationListDal)
                     {
@@ -118,7 +119,7 @@ namespace BL
                     }
                     drone.CurrentLocation.Longitude = longi;
                     drone.CurrentLocation.Latitude = latit;
-                    drone.Battery = rand.Next(0, 20);
+                    drone.Battery = rand.Next(0, 21);
 
                 }
                 if (drone.Status == statusEnum.DroneStatus.Available.ToString())
@@ -157,7 +158,7 @@ namespace BL
                     nearestStation.Longitude = NearestStation(drone.CurrentLocation.Longitude, drone.CurrentLocation.Latitude, AccessToDataMethods.ReturnStationList()).Longitude;
                     nearestStation.Latitude = NearestStation(drone.CurrentLocation.Longitude, drone.CurrentLocation.Latitude, AccessToDataMethods.ReturnStationList()).Latitude;
                     double StationDist = CalcDistanceBetweenTwoCoordinates(drone.CurrentLocation.Longitude, drone.CurrentLocation.Latitude, nearestStation.Longitude, nearestStation.Latitude);
-                    double MinBattery1 = PowerConsumption[int.Parse(drone.Weight) + 1] * StationDist;
+                    double MinBattery1 = (PowerConsumption[POWERindex(drone)] * StationDist) + 20;
                     drone.Battery = Math.Round(rand.NextDouble() * (100 - MinBattery1) + MinBattery1);
 
                 }
