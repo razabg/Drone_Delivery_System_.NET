@@ -11,7 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using IBL.BO;
+using BO;
+using BlApi;
 namespace PL
 {
     /// <summary>
@@ -19,14 +20,14 @@ namespace PL
     /// </summary>
     public partial class DroneWindow : Window
     {
-        private Ibl BLAccess;
+        private IBL BLAccess;
         DroneToList drone = new DroneToList();// insert the input of user to this object
         public event Action Update = delegate { };
-        public DroneWindow(Ibl accsess)
+        public DroneWindow(IBL accsess)
         {
             InitializeComponent();
 
-            BLAccess = new BLObject();
+            BLAccess = BlFactory.GetBl();
             choose_model.ItemsSource = Enum.GetValues(typeof(statusEnum.DroneModel));
             StationForCharge.ItemsSource = BLAccess.GetBaseStationToLists().ToList();
             MaxWeight.ItemsSource = Enum.GetValues(typeof(statusEnum.TopWeight));
@@ -37,55 +38,55 @@ namespace PL
             Longitude.Visibility = Visibility.Hidden;
             Status.Visibility = Visibility.Hidden;
             labelLatitude.Visibility = Visibility.Hidden;
-            lableLongitude.Visibility = Visibility.Hidden;
-            lableBattery.Visibility = Visibility.Hidden;
-            lableStatus.Visibility = Visibility.Hidden;
+            labelLongitude.Visibility = Visibility.Hidden;
+            labelBattery.Visibility = Visibility.Hidden;
+            labelStatus.Visibility = Visibility.Hidden;
 
 
 
 
         }
 
-        public DroneWindow(Ibl BLaccess, Drone drone_arg)
+        public DroneWindow(IBL BLaccess, DroneToList drone_arg)
         {
 
             InitializeComponent();
 
             //to remove close box from window
-            Loaded += ToolWindow_Loaded;
+            //Loaded += ToolWindow_Loaded;
             this.BLAccess = BLaccess;
             drone = new DroneToList();
             drone = drone_arg;
-            grdAdd.Visibility = Visibility.Hidden;
+            add_drone.Visibility = Visibility.Hidden;
             MaxWeight.Visibility = Visibility.Hidden;
-            comboStatus.Visibility = Visibility.Hidden;
-            grdRelease.Visibility = Visibility.Hidden;
-            fillTextbox(drone);
-            if (d.Status == statusEnum.DroneStatus.Available.ToString())
+            Status.Visibility = Visibility.Hidden;
+            //grdRelease.Visibility = Visibility.Hidden;
+            //fillTextbox(drone);
+            if (drone.Status == statusEnum.DroneStatus.Available.ToString())
             {
                 btnCharge.Visibility = Visibility.Visible;
-                btnAssignment.Visibility = Visibility.Visible;
+                btnPairDrone_parcel.Visibility = Visibility.Visible;
             }
 
-            if (d.Status == statusEnum.DroneStatus.TreatmentMode.ToString())
+            if (drone.Status == statusEnum.DroneStatus.TreatmentMode.ToString())
             {
-                btnRelease.Visibility = Visibility.Visible;
+                btnRelease_from_charge.Visibility = Visibility.Visible;
             }
 
-            if (d.Status == statusEnum.DroneStatus.Busy.ToString())
+            if (drone.Status == statusEnum.DroneStatus.Busy.ToString())
             {
-                btnDelivery.Visibility = Visibility.Visible;
+                btnArrived.Visibility = Visibility.Visible;
                 btnPickedup.Visibility = Visibility.Visible;
             }
-            txtStatus.IsEnabled = false;
-            txtMaxWeight.IsEnabled = false;
-            txtId.IsEnabled = false;
-            comboStatus.IsEnabled = false;
-            comboMaxWeight.IsEnabled = false;
-            txtBattery.IsEnabled = false;
+            labelStatus.IsEnabled = false;
+            labelMaxWeight.IsEnabled = false;
+            labelInsertId.IsEnabled = false;
+            Status.IsEnabled = false;
+            MaxWeight.IsEnabled = false;
+            labelBattery.IsEnabled = false;
 
-            txtLongtitude.IsEnabled = false;
-            txtLatitude.IsEnabled = false;
+            labelLatitude.IsEnabled = false;
+            labelLongitude.IsEnabled = false;
         }
 
         private void choose_model_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -145,13 +146,15 @@ namespace PL
             if (flag)
                 this.Close();
 
+            Update();
+
 
 
         }
 
 
 
-        private void btnRelease_Click(object sender, RoutedEventArgs e)
+        private void BtnRelease_Click(object sender, RoutedEventArgs e)
         {
 
         }

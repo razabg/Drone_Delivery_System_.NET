@@ -12,7 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using IBL.BO;
+using BO;
+using BlApi;
+
+
+
 namespace PL
 {
     /// <summary>
@@ -20,7 +24,7 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-       private Ibl BLAccess = new BLObject(); //access to bl layer through ibl interface
+       private IBL BLAccess = BlFactory.GetBl(); //access to bl layer through ibl interface
         public MainWindow()
         {
             InitializeComponent();
