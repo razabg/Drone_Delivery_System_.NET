@@ -7,7 +7,7 @@ using DO;
 
 namespace DAL
 {
-   public class DataSource
+    public class DataSource
     {
 
         internal static List<Drone> DronesList = new List<Drone>();
@@ -20,7 +20,7 @@ namespace DAL
             public static int RunIdParcel = 101;
 
             // the battery numbers refers  to consumption  % per km
-            internal static double Available  { get{return 5; } }
+            internal static double Available { get { return 5; } }
             internal static double Light { get { return 10; } }
             internal static double Average { get { return 15; } }
             internal static double Heavy { get { return 20; } }
@@ -30,56 +30,57 @@ namespace DAL
 
         }
 
-          #region initialize rand method
+        #region initialize rand method
         /// random intel:
         /// we made a few random functions in order to generate random information. like id,locations,phone number etc.
         /// 
-        public enum PriorityStatus { fast = 1, regular, emergency };
+       
+        public static Enum ModelRand()
+        {
+
+            Random rand = new Random();
+            DalEnum.DroneModel RandModel = (DalEnum.DroneModel)rand.Next(1, Enum.GetNames(typeof(DalEnum.DroneModel)).Length);
+            return RandModel;
+        }
+
 
         public static int genRandPriority()
         {
             Random rand4 = new Random();
-            int RandPri = (int)rand4.Next(1, Enum.GetNames(typeof(PriorityStatus)).Length);
+            int RandPri = (int)rand4.Next(1, Enum.GetNames(typeof(DalEnum.PriorityStatus)).Length);
             return RandPri;
         }
 
 
-        public enum CustomerName { david, shlomo, brook, barak, rachel, pnina, eyal, yosi, winston, leo, ayelet, rico, raz, addie };
-
+       
         public static Enum genRandCustomer()
         {
             Random rand3 = new Random();
-            CustomerName RandCustomer = (CustomerName)rand3.Next(1, Enum.GetNames(typeof(CustomerName)).Length);
+            DalEnum.CustomerName RandCustomer = (DalEnum.CustomerName)rand3.Next(1, Enum.GetNames(typeof(DalEnum.CustomerName)).Length);
             return RandCustomer;
         }
 
-        public enum TopWeight { Light, Average, Heavy };
+        
         public static Enum genRandTop()
         {
 
             Random rand2 = new Random();
-            TopWeight RandomEnum = (TopWeight)rand2.Next(1, Enum.GetNames(typeof(TopWeight)).Length);
+            DalEnum.TopWeight RandomEnum = (DalEnum.TopWeight)rand2.Next(1, Enum.GetNames(typeof(DalEnum.TopWeight)).Length);
             return RandomEnum;
         }
-        public enum DroneStatus { Available = 1, Busy = 2, TreatmentMode = 3 }
+        
         public static Enum genRandStatus()
         {
             Random rand3 = new Random();
-            DroneStatus RandomEnum = (DroneStatus)rand3.Next(1, Enum.GetNames(typeof(DroneStatus)).Length);
+            DalEnum.DroneStatus RandomEnum = (DalEnum.DroneStatus)rand3.Next(1, Enum.GetNames(typeof(DalEnum.DroneStatus)).Length);
             return RandomEnum;
         }
         public static Random rand = new Random();
 
-
-
-
         const int MinRange = 111;
         const int MaxRange = 999;
 
-        public static int RandomModelFunc()
-        {
-            return rand.Next(1, 6);
-        }
+       
 
         public static int RandomIdFunc()
         {
@@ -121,7 +122,7 @@ namespace DAL
                 {
                     Id = RandomIdFunc(),
                     MaxWeight = genRandTop().ToString(),
-                    Model = RandomModelFunc().ToString(),
+                    Model = ModelRand().ToString(),
 
                 });
             }
@@ -139,7 +140,8 @@ namespace DAL
                 List<int> randIdOfCustomers = new List<int>();
                 randIdOfCustomers.Add(CustomersList[i].Id);
             }
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 5; i++)
+            {
 
                 DateTime currentDate = DateTime.Now;
                 ParcelsList.Add(new Parcel

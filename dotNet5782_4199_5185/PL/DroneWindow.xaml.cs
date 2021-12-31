@@ -22,7 +22,7 @@ namespace PL
     {
         private IBL BLAccess;
         DroneToList drone = new DroneToList();// insert the input of user to this object
-        //public event Action Update = delegate { };
+        public event Action Update = delegate { };
         public DroneWindow(IBL accsess)
         {
             InitializeComponent();
@@ -57,11 +57,8 @@ namespace PL
             this.BLAccess = BLaccess;
             drone = new DroneToList();
             drone = drone_arg;
-            add_drone.Visibility = Visibility.Hidden;
-            MaxWeight.Visibility = Visibility.Hidden;
-            Status.Visibility = Visibility.Hidden;
-            //grdRelease.Visibility = Visibility.Hidden;
-            //fillTextbox(drone);
+           
+
             if (drone.Status == statusEnum.DroneStatus.Available.ToString())
             {
                 btnCharge.Visibility = Visibility.Visible;
@@ -78,23 +75,40 @@ namespace PL
                 btnArrived.Visibility = Visibility.Visible;
                 btnPickedup.Visibility = Visibility.Visible;
             }
-            labelStatus.IsEnabled = false;
-            labelMaxWeight.IsEnabled = false;
+            add_drone.Visibility = Visibility.Hidden;
+            StationForCharge.Visibility = Visibility.Hidden;
+            labelStation.Visibility = Visibility.Hidden;
             labelInsertId.IsEnabled = false;
-            Status.IsEnabled = false;
-            MaxWeight.IsEnabled = false;
-            labelBattery.IsEnabled = false;
-            labelLatitude.IsEnabled = false;
-            labelLongitude.IsEnabled = false;
+            choose_model.Visibility = Visibility.Hidden;
+            MaxWeight.Visibility = Visibility.Hidden;
 
 
+            txtBattery.Text = drone.Battery.ToString();
+            ShowWeight.Text = drone.Weight;
+            ShowModel.Text = drone.Status;
+            IDfill.Text = drone.Id.ToString();
+            Status.Text = drone.Status.ToString();
+            Latitude.Text = drone.CurrentLocation.Latitude.ToString();
             Longitude.Text = drone.CurrentLocation.Longitude.ToString();
+
+
         }
 
-      
+
+        private void fillTextbox(DroneToList d)
+        {
+
+            Status.Text = d.Status.ToString();
+            ShowModel.Text = d.Weight.ToString();
+            IDfill.Text = d.Id.ToString();
+            ShowModel.Text = d.Model.ToString();
+            txtBattery.Text = d.Battery.ToString() + "%";
+
+            Longitude.Text = d.CurrentLocation.Longitude.ToString();
+            Latitude.Text = d.CurrentLocation.Latitude.ToString();
+        }
 
 
-       
 
         private void choose_model_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -152,7 +166,7 @@ namespace PL
             if (flag)
                 this.Close();
 
-            //Update();
+            Update();
 
 
 
@@ -167,6 +181,23 @@ namespace PL
 
         private void btnCharge_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+
+                BLAccess.DroneToCharge(drone.Id);
+                MessageBox.Show("the drone was sent to charge");
+                DroneToList dr = BLAccess.GetDroneToLists().FirstOrDefault(X => X.Id == drone.Id);
+                fillTextbox(dr);
+                btnRelease_from_charge.Visibility = Visibility.Visible;
+                btnCharge.Visibility = Visibility.Hidden;
+                btnPairDrone_parcel.Visibility = Visibility.Hidden;
+                Update();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("faild to send the drone to charge");
+
+            }
 
         }
 

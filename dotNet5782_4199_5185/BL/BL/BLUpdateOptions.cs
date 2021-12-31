@@ -38,7 +38,7 @@ namespace BL
             DroneToList drone_to_charge = ListDroneBL.Find(x => x.Id == droneid);
             DO.Station StationForCharge = NearestStationToChargeDrone(drone_to_charge.CurrentLocation.Longitude, drone_to_charge.CurrentLocation.Latitude, AccessToDataMethods.ReturnStationList().ToList());
             double DistFromStation = CalcDistanceBetweenTwoCoordinates(drone_to_charge.CurrentLocation.Longitude, drone_to_charge.CurrentLocation.Latitude, StationForCharge.Longitude, StationForCharge.Latitude);
-            double MinBattery = AccessToDataMethods.PowerConsumptionRequestDrone()[int.Parse(drone_to_charge.Weight) + 1] * DistFromStation;//The battery consumption that let the drone to get to station  successfully
+            double MinBattery = AccessToDataMethods.PowerConsumptionRequestDrone()[POWERindex(drone_to_charge)] * DistFromStation;//The battery consumption that let the drone to get to station  successfully
 
             if (drone_to_charge.Battery < MinBattery)// check if there is enough battery to get the station
             {
