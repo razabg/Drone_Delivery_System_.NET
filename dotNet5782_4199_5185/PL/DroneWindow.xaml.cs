@@ -177,6 +177,8 @@ namespace PL
         private void BtnRelease_Click(object sender, RoutedEventArgs e)
         {
 
+
+
         }
 
         private void btnCharge_Click(object sender, RoutedEventArgs e)
@@ -203,7 +205,23 @@ namespace PL
 
         private void btnAssignment_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                BLAccess.ParingParcelToDrone(drone.Id);
+                MessageBox.Show("The drone paired to parcel");
+                DroneToList dr = BLAccess.GetDroneToLists().FirstOrDefault(x=>x.Id==drone.Id);
+                fillTextbox(dr);
+                btnPickedup.Visibility = Visibility.Visible;
+                btnArrived.Visibility = Visibility.Hidden;
+                btnCharge.Visibility = Visibility.Hidden;
+                btnPairDrone_parcel.Visibility = Visibility.Hidden;
+                Update();
+            }
+            catch (Exception ex)
+            {
 
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnDelivery_Click(object sender, RoutedEventArgs e)
@@ -218,6 +236,7 @@ namespace PL
 
         private void btnUpdateModel_Click(object sender, RoutedEventArgs e)
         {
+
 
         }
 
