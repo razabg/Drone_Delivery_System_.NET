@@ -13,8 +13,8 @@ namespace DO
         public int Id { get; set; }
         public int SenderId { get; set; }
         public int TargetId { get; set; }
-        public int Weight { get; set; }
-        public int Priority { get; set; }
+        public string Weight { get; set; }
+        public string Priority { get; set; }
         public int? DroneId { get; set; }
         public DateTime? ParingTime { get; set; }//drone pair
         public DateTime? PickedUp { get; set; }//time of collection
@@ -25,16 +25,16 @@ namespace DO
         public override string ToString()
         {
             string printParcelInfo = "";
-            printParcelInfo += $" the Id is :{Id},\n";
-            printParcelInfo += $"the SenderId is:{SenderId},\n";
-            printParcelInfo += $"the TargetId is:{TargetId},\n";
-            printParcelInfo += $"the Weight is :{Weight},\n";
-            printParcelInfo += $"Priority :{Priority},\n";
-            printParcelInfo += $"the DroneId is :{DroneId},\n";
-            printParcelInfo += $"Connection time between the drone and the parcel:{ParingTime },\n";
-            printParcelInfo += $" Picked up time:{PickedUp},\n";
-            printParcelInfo += $"UpdateArrived time :{ArrivedTime},\n";
-            printParcelInfo += $"Request time :{CreationTime},\n";
+            printParcelInfo += $"Id:{Id},\n";
+            printParcelInfo += $"SenderId:{SenderId},\n";
+            printParcelInfo += $"TargetId:{TargetId},\n";
+            printParcelInfo += $"Weight:{Weight},\n";
+            printParcelInfo += $"Priority:{Priority},\n";
+            printParcelInfo += $"DroneId:{DroneId},\n";
+            printParcelInfo += $"Pair time:{ParingTime },\n";
+            printParcelInfo += $"Picked up time:{PickedUp},\n";
+            printParcelInfo += $"Arrived time:{ArrivedTime},\n";
+            printParcelInfo += $"Creation time:{CreationTime},\n";
             return printParcelInfo;
         }
 

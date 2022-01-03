@@ -38,7 +38,7 @@ namespace BL
             DroneToList drone_to_charge = ListDroneBL.Find(x => x.Id == droneid);
             DO.Station StationForCharge = NearestStationToChargeDrone(drone_to_charge.CurrentLocation.Longitude, drone_to_charge.CurrentLocation.Latitude, AccessToDataMethods.ReturnStationList().ToList());
             double DistFromStation = CalcDistanceBetweenTwoCoordinates(drone_to_charge.CurrentLocation.Longitude, drone_to_charge.CurrentLocation.Latitude, StationForCharge.Longitude, StationForCharge.Latitude);
-            double MinBattery = AccessToDataMethods.PowerConsumptionRequestDrone()[int.Parse(drone_to_charge.Weight) + 1] * DistFromStation;//The battery consumption that let the drone to get to station  successfully
+            double MinBattery = AccessToDataMethods.PowerConsumptionRequestDrone()[POWERindex(drone_to_charge)] * DistFromStation;//The battery consumption that let the drone to get to station  successfully
 
             if (drone_to_charge.Battery < MinBattery)// check if there is enough battery to get the station
             {
@@ -82,24 +82,34 @@ namespace BL
         public void ParingParcelToDrone(int drone_id)
         {
 
+           
 
             if (!ListDroneBL.Exists(x => x.Id == drone_id))
             {
                 throw new NotExistsException();
             }
-            if (!ListDroneBL.Exists(x => x.Status == statusEnum.DroneStatus.Available.ToString()))
+            if (!ListDroneBL.Exists( x => x.Status == statusEnum.DroneStatus.Available.ToString()))
             {
                 throw new DroneIsNotAvailable(drone_id);
-
-
             }
-
             var droneToPare = ListDroneBL.Find(x => x.Id == drone_id); //we will update here the field and then we will insert it back to dal 
 
+
             //list sorted by priority
-            IEnumerable<DO.Parcel> EmergencyParcel = AccessToDataMethods.ReturnParcelList().ToList().Where(x => x.Priority == int.Parse(statusEnum.PriorityStatus.emergency.ToString())).Where(x => x.Weight == int.Parse(droneToPare.Weight));
-            IEnumerable<DO.Parcel> FastParcel = AccessToDataMethods.ReturnParcelList().ToList().Where(x => x.Priority == int.Parse(statusEnum.PriorityStatus.fast.ToString())).Where(x => x.Weight == int.Parse(droneToPare.Weight));
-            IEnumerable<DO.Parcel> RegualrParcel = AccessToDataMethods.ReturnParcelList().ToList().Where(x => x.Priority == int.Parse(statusEnum.PriorityStatus.regular.ToString())).Where(x => x.Weight == int.Parse(droneToPare.Weight));
+            IEnumerable<DO.Parcel> EmergencyParcel = from item in AccessToDataMethods.ReturnParcelList()
+                                                     where item.Priority == statusEnum.PriorityStatus.Emergency.ToString()
+                                                     where item.Weight == droneToPare.Weight
+                                                     select item;
+
+            IEnumerable<DO.Parcel> FastParcel = from item in AccessToDataMethods.ReturnParcelList()
+                                                where item.Priority == statusEnum.PriorityStatus.Fast.ToString()
+                                                where item.Weight == droneToPare.Weight
+                                                select item;
+
+            IEnumerable<DO.Parcel> RegualrParcel = from item in AccessToDataMethods.ReturnParcelList()
+                                                   where item.Priority == statusEnum.PriorityStatus.Regular.ToString()
+                                                   where item.Weight == droneToPare.Weight
+                                                   select item;
 
             if (EmergencyParcel.Any())
             {
@@ -113,9 +123,9 @@ namespace BL
                 double DistFromCustomer = CalcDistanceBetweenTwoCoordinates(droneToPare.CurrentLocation.Longitude, droneToPare.CurrentLocation.Latitude, nearestCustomer.Longitude, nearestCustomer.Latitude);
                 double DistFromTarget = CalcDistanceBetweenTwoCoordinates(droneToPare.CurrentLocation.Longitude, droneToPare.CurrentLocation.Latitude, TargetCustomer.Longitude, TargetCustomer.Latitude);
                 double DistFromStation = CalcDistanceBetweenTwoCoordinates(droneToPare.CurrentLocation.Longitude, droneToPare.CurrentLocation.Latitude, nearestStaion.Longitude, nearestStaion.Latitude);
-                double MinBattery_to_get_customer = AccessToDataMethods.PowerConsumptionRequestDrone()[int.Parse(droneToPare.Weight) + 1] * DistFromCustomer;//The battery consumption that let the drone to get to the closest customer successfully
-                double MinBattery_to_get_target = AccessToDataMethods.PowerConsumptionRequestDrone()[int.Parse(droneToPare.Weight) + 1] * DistFromTarget;//The battery consumption that let the drone to get to the traget successfully
-                double MinBattery_to_get_station = AccessToDataMethods.PowerConsumptionRequestDrone()[int.Parse(droneToPare.Weight) + 1] * DistFromStation;//The battery consumption that let the drone to get to the closest station successfully
+                double MinBattery_to_get_customer = AccessToDataMethods.PowerConsumptionRequestDrone()[POWERindex(droneToPare)] * DistFromCustomer;//The battery consumption that let the drone to get to the closest customer successfully
+                double MinBattery_to_get_target = AccessToDataMethods.PowerConsumptionRequestDrone()[POWERindex(droneToPare)] * DistFromTarget;//The battery consumption that let the drone to get to the traget successfully
+                double MinBattery_to_get_station = AccessToDataMethods.PowerConsumptionRequestDrone()[POWERindex(droneToPare)] * DistFromStation;//The battery consumption that let the drone to get to the closest station successfully
                 #endregion
                 if (MinBattery_to_get_customer + MinBattery_to_get_target + MinBattery_to_get_target < droneToPare.Battery)
                 {
@@ -123,7 +133,9 @@ namespace BL
                 }
                 droneToPare.Status = statusEnum.DroneStatus.Busy.ToString();
                 var parcel_edit = NearestParcel.First();
-                var parcelIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_edit.Id); parcel_edit.ParingTime = DateTime.Now;
+                var parcelIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_edit.Id);
+                parcel_edit.ParingTime = DateTime.Now;
+                parcel_edit.DroneId = droneToPare.Id;
                 AccessToDataMethods.ReturnParcelList().ToList()[parcelIndex] = parcel_edit;
 
             }
@@ -139,9 +151,9 @@ namespace BL
                 double DistFromCustomer = CalcDistanceBetweenTwoCoordinates(droneToPare.CurrentLocation.Longitude, droneToPare.CurrentLocation.Latitude, nearestCustomer.Longitude, nearestCustomer.Latitude);
                 double DistFromTarget = CalcDistanceBetweenTwoCoordinates(droneToPare.CurrentLocation.Longitude, droneToPare.CurrentLocation.Latitude, TargetCustomer.Longitude, TargetCustomer.Latitude);
                 double DistFromStation = CalcDistanceBetweenTwoCoordinates(droneToPare.CurrentLocation.Longitude, droneToPare.CurrentLocation.Latitude, nearestStaion.Longitude, nearestStaion.Latitude);
-                double MinBattery_to_get_customer = AccessToDataMethods.PowerConsumptionRequestDrone()[int.Parse(droneToPare.Weight) + 1] * DistFromCustomer;//The battery consumption that let the drone to get to the closest customer successfully
-                double MinBattery_to_get_target = AccessToDataMethods.PowerConsumptionRequestDrone()[int.Parse(droneToPare.Weight) + 1] * DistFromTarget;//The battery consumption that let the drone to get to the traget successfully
-                double MinBattery_to_get_station = AccessToDataMethods.PowerConsumptionRequestDrone()[int.Parse(droneToPare.Weight) + 1] * DistFromStation;//The battery consumption that let the drone to get to the closest station successfully
+                double MinBattery_to_get_customer = AccessToDataMethods.PowerConsumptionRequestDrone()[POWERindex(droneToPare)] * DistFromCustomer;//The battery consumption that let the drone to get to the closest customer successfully
+                double MinBattery_to_get_target = AccessToDataMethods.PowerConsumptionRequestDrone()[POWERindex(droneToPare)] * DistFromTarget;//The battery consumption that let the drone to get to the traget successfully
+                double MinBattery_to_get_station = AccessToDataMethods.PowerConsumptionRequestDrone()[POWERindex(droneToPare)] * DistFromStation;//The battery consumption that let the drone to get to the closest station successfully
                 #endregion
                 if (MinBattery_to_get_customer + MinBattery_to_get_target + MinBattery_to_get_target < droneToPare.Battery)
                 {
@@ -149,7 +161,9 @@ namespace BL
                 }
                 droneToPare.Status = statusEnum.DroneStatus.Busy.ToString();
                 var parcel_edit = NearestParcel.First();
-                var parcelIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_edit.Id); parcel_edit.ParingTime = DateTime.Now;
+                var parcelIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_edit.Id);
+                parcel_edit.ParingTime = DateTime.Now;
+                parcel_edit.DroneId = droneToPare.Id;
                 AccessToDataMethods.ReturnParcelList().ToList()[parcelIndex] = parcel_edit;
             }
             else if (RegualrParcel.Any())
@@ -165,19 +179,25 @@ namespace BL
                 double DistFromCustomer = CalcDistanceBetweenTwoCoordinates(droneToPare.CurrentLocation.Longitude, droneToPare.CurrentLocation.Latitude, nearestCustomer.Longitude, nearestCustomer.Latitude);
                 double DistFromTarget = CalcDistanceBetweenTwoCoordinates(droneToPare.CurrentLocation.Longitude, droneToPare.CurrentLocation.Latitude, TargetCustomer.Longitude, TargetCustomer.Latitude);
                 double DistFromStation = CalcDistanceBetweenTwoCoordinates(droneToPare.CurrentLocation.Longitude, droneToPare.CurrentLocation.Latitude, nearestStaion.Longitude, nearestStaion.Latitude);
-                double MinBattery_to_get_customer = AccessToDataMethods.PowerConsumptionRequestDrone()[int.Parse(droneToPare.Weight) + 1] * DistFromCustomer;//The battery consumption that let the drone to get to the closest customer successfully
-                double MinBattery_to_get_target = AccessToDataMethods.PowerConsumptionRequestDrone()[int.Parse(droneToPare.Weight) + 1] * DistFromTarget;//The battery consumption that let the drone to get to the traget successfully
-                double MinBattery_to_get_station = AccessToDataMethods.PowerConsumptionRequestDrone()[int.Parse(droneToPare.Weight) + 1] * DistFromStation;//The battery consumption that let the drone to get to the closest station successfully
+                double MinBattery_to_get_customer = AccessToDataMethods.PowerConsumptionRequestDrone()[POWERindex(droneToPare)] * DistFromCustomer;//The battery consumption that let the drone to get to the closest customer successfully
+                double MinBattery_to_get_target = AccessToDataMethods.PowerConsumptionRequestDrone()[POWERindex(droneToPare)] * DistFromTarget;//The battery consumption that let the drone to get to the traget successfully
+                double MinBattery_to_get_station = AccessToDataMethods.PowerConsumptionRequestDrone()[POWERindex(droneToPare)] * DistFromStation;//The battery consumption that let the drone to get to the closest station successfully
                 #endregion
-                if (MinBattery_to_get_customer + MinBattery_to_get_target + MinBattery_to_get_target < droneToPare.Battery)
+                if (MinBattery_to_get_customer + MinBattery_to_get_target + MinBattery_to_get_station < droneToPare.Battery)
                 {
                     throw new CannotAssignDroneToParcelException(NearestParcel.First().Id);
                 }
                 droneToPare.Status = statusEnum.DroneStatus.Busy.ToString();
                 var parcel_edit = NearestParcel.First();
-                var parcelIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_edit.Id); parcel_edit.ParingTime = DateTime.Now;
+                var parcelIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_edit.Id);
+                parcel_edit.ParingTime = DateTime.Now;
+                parcel_edit.DroneId = droneToPare.Id;
                 AccessToDataMethods.ReturnParcelList().ToList()[parcelIndex] = parcel_edit;
 
+            }
+            else 
+            {
+                throw new Exception("There is no parcel that can be paired");
             }
 
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Collections;
 using BlApi;
 using DalApi;
-
+using System.Linq;
 
 namespace BL
 {
@@ -33,7 +33,7 @@ namespace BL
 
         public BLObject() //ctor
         {
-            AccessToDataMethods = DalFactory.GetDal("blobject");
+            AccessToDataMethods = DalFactory.GetDal("1");
             double[] PowerConsumption = AccessToDataMethods.PowerConsumptionRequestDrone();
             AvailableWeightConsump = PowerConsumption[0];
             LightWeightConsump = PowerConsumption[1];
@@ -91,7 +91,7 @@ namespace BL
                     }
                 }
                 //If the drone is not busy
-               
+
                 if (drone.Status != statusEnum.DroneStatus.Busy.ToString())
                 {
                     statusEnum.DroneStatus status = (statusEnum.DroneStatus)rand.Next(0, 2);
@@ -99,26 +99,12 @@ namespace BL
                 }
                 if (drone.Status == statusEnum.DroneStatus.TreatmentMode.ToString())
                 {
-                    double longi = 0;
-                    double latit = 0;
-                    int count = 0;
-                    foreach (var item in StationListDal)
-                    {
-                        count++;
-                    }
-                    int index = rand.Next(0, count+1);
-                    int count2 = 0;
-                    foreach (var item in StationListDal)
-                    {
-                        count2++;
-                        if (count2 == index)
-                        {
-                            longi = item.Longitude;
-                            latit = item.Latitude;
-                        }
-                    }
-                    drone.CurrentLocation.Longitude = longi;
-                    drone.CurrentLocation.Latitude = latit;
+                   
+                    var RandomStation = AccessToDataMethods.ReturnStationList().ToList();
+                    int index =rand.Next(RandomStation.Count);
+
+                    drone.CurrentLocation.Longitude = RandomStation[index].Longitude;
+                    drone.CurrentLocation.Latitude = RandomStation[index].Latitude;
                     drone.Battery = rand.Next(0, 21);
 
                 }

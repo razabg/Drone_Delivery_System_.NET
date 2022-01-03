@@ -90,8 +90,8 @@ namespace BL
             parcelToDal.Id = ParcelToAdd.Id;
             parcelToDal.SenderId = ParcelToAdd.sender.Id;
             parcelToDal.TargetId = ParcelToAdd.target.Id;
-            parcelToDal.Priority = int.Parse(ParcelToAdd.Priority);
-            parcelToDal.Weight = int.Parse(ParcelToAdd.Weight);
+            parcelToDal.Priority = ParcelToAdd.Priority;
+            parcelToDal.Weight = ParcelToAdd.Weight;
 
             try // two exeptions checks whether the sender and target exists or not
             {

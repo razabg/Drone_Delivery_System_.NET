@@ -14,9 +14,9 @@ namespace DalApi
 
             switch (wayOfImplement)
             {
-                case "blobject":
+                case "1":
                     return DALobject.instance.Value; //class DALobject lazy init
-                case "B":
+                case "2":
                 // xml TBD
                 default:
                     throw new Exception("the factory class didnt work well");

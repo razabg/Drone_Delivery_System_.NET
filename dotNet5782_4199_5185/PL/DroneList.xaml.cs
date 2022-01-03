@@ -35,10 +35,17 @@ namespace PL
 
             collection = new ObservableCollection<DroneToList>(BLAccess.GetDroneToLists());
             DroneListView.ItemsSource = collection;
+            Refresh();
 
         }
 
        
+        private void Refresh()
+        {
+
+            DroneListView.DataContext = BLAccess.GetDroneToLists();
+
+        }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -54,14 +61,15 @@ namespace PL
 
         private void MaxWeight_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            statusEnum.Weight maxweight = (statusEnum.Weight)MaxWeight.SelectedItem;
+            statusEnum.TopWeight maxweight = (statusEnum.TopWeight)MaxWeight.SelectedItem;
             this.DroneListView.ItemsSource = BLAccess.GetDroneToLists().ToList().FindAll(x => x.Weight == maxweight.ToString());
         }
 
         private void AddDrone_Click(object sender, RoutedEventArgs e)
         {
-            new DroneWindow(BLAccess).Show();
-
+           DroneWindow ToShow = new DroneWindow(BLAccess);
+            ToShow.Show();
+            Refresh();
 
         }
 
@@ -86,7 +94,7 @@ namespace PL
             }
             DroneWindow droneWindow = new DroneWindow(BLAccess, drone);
             droneWindow.Show();
-            //droneWindow.Update += DroneWindow_Update;
+            droneWindow.Update += DroneWindow_Update;
 
         }
 

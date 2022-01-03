@@ -7,7 +7,7 @@ using DO;
 
 namespace DAL
 {
-   public class DataSource
+    public class DataSource
     {
 
         internal static List<Drone> DronesList = new List<Drone>();
@@ -20,74 +20,97 @@ namespace DAL
             public static int RunIdParcel = 101;
 
             // the battery numbers refers  to consumption  % per km
-            internal static double Available  { get{return 5; } }
-            internal static double Light { get { return 10; } }
-            internal static double Average { get { return 15; } }
-            internal static double Heavy { get { return 20; } }
+            internal static double Available => 5;
+            internal static double Light => 10;
+            internal static double Average => 15;
+            internal static double Heavy => 20;
 
             internal static double ChargingPaceDrone = 40;
 
 
         }
 
-          #region initialize rand method
+        #region initialize rand method
         /// random intel:
         /// we made a few random functions in order to generate random information. like id,locations,phone number etc.
         /// 
-        public enum PriorityStatus { fast = 1, regular, emergency };
 
-        public static int genRandPriority()
+
+        public static Random rand = new Random();
+        const int MinRange = 111;
+        const int MaxRange = 999;
+        public static string ConvertDecimalDegreesToSexagesimal(double decimalValueToConvert, string LongOrLat)
+        {
+            string direction = null;
+            if (LongOrLat == "Longitude")
+            {
+                if (decimalValueToConvert >= 0)
+                    direction = "N";
+                else direction = "S";
+            }
+
+            if (LongOrLat == "Latitude")
+            {
+                if (decimalValueToConvert >= 0)
+                    direction = "E";
+                else direction = "W";
+            }
+            int sec = (int)Math.Round(decimalValueToConvert * 3600);
+            int deg = sec / 3600;
+            sec = Math.Abs(sec % 3600);
+            int min = sec / 60;
+            sec %= 60;
+
+            return string.Format("{0}° {1}' {2}'' {3}", Math.Abs(deg), Math.Abs(min), Math.Abs(sec), direction);// return the complited number
+        }
+        public static Enum ModelRand()
+        {
+
+            Random rand = new Random();
+            DalEnum.DroneModel RandModel = (DalEnum.DroneModel)rand.Next(1, Enum.GetNames(typeof(DalEnum.DroneModel)).Length + 1);
+            return RandModel;
+        }
+
+
+        public static Enum genRandPriority()
         {
             Random rand4 = new Random();
-            int RandPri = (int)rand4.Next(1, Enum.GetNames(typeof(PriorityStatus)).Length);
+            DalEnum.PriorityStatus RandPri = (DalEnum.PriorityStatus)rand4.Next(1, Enum.GetNames(typeof(DalEnum.PriorityStatus)).Length + 1);
             return RandPri;
         }
 
 
-        public enum CustomerName { david, shlomo, brook, barak, rachel, pnina, eyal, yosi, winston, leo, ayelet, rico, raz, addie };
-
         public static Enum genRandCustomer()
         {
             Random rand3 = new Random();
-            CustomerName RandCustomer = (CustomerName)rand3.Next(1, Enum.GetNames(typeof(CustomerName)).Length);
+            DalEnum.CustomerName RandCustomer = (DalEnum.CustomerName)rand3.Next(1, Enum.GetNames(typeof(DalEnum.CustomerName)).Length + 1);
             return RandCustomer;
         }
 
-        public enum TopWeight { Light, Average, Heavy };
         public static Enum genRandTop()
         {
 
             Random rand2 = new Random();
-            TopWeight RandomEnum = (TopWeight)rand2.Next(1, Enum.GetNames(typeof(TopWeight)).Length);
+            DalEnum.TopWeight RandomEnum = (DalEnum.TopWeight)rand2.Next(0, Enum.GetNames(typeof(DalEnum.TopWeight)).Length);
             return RandomEnum;
         }
-        public enum DroneStatus { Available = 1, Busy = 2, TreatmentMode = 3 }
         public static Enum genRandStatus()
         {
             Random rand3 = new Random();
-            DroneStatus RandomEnum = (DroneStatus)rand3.Next(1, Enum.GetNames(typeof(DroneStatus)).Length);
+            DalEnum.DroneStatus RandomEnum = (DalEnum.DroneStatus)rand3.Next(1, Enum.GetNames(typeof(DalEnum.DroneStatus)).Length + 1);
             return RandomEnum;
-        }
-        public static Random rand = new Random();
-
-
-
-
-        const int MinRange = 111;
-        const int MaxRange = 999;
-
-        public static int RandomModelFunc()
-        {
-            return rand.Next(1, 6);
         }
 
         public static int RandomIdFunc()
         {
             return rand.Next(MinRange, MaxRange);
         }
+
         public static double Coordinates()
         {
-            return rand.Next(111111111, 999999999);
+            double Location = rand.Next(111111111, 999999999);
+            return Location;
+
         }
         #endregion
 
@@ -96,15 +119,15 @@ namespace DAL
         /// </summary>
         public static void Initialize()
         {
+            List<int> randIdOfCustomers = new List<int>();//this list used to init the customer id nunmbers to target and sender id's in the parcel entity
 
-
-            for (int i = 0; i < 2; ++i)
+            for (int i = 0; i < 5; ++i)
             {
                 StationsList.Add(new Station()
                 {
                     Id = RandomIdFunc(),
                     Name = rand.Next(MinRange / 3, MaxRange / 3),
-                    ChargeSlots = rand.Next(1, 20),
+                    ChargeSlots = rand.Next(1, 15),
                     Longitude = Coordinates(),
                     Latitude = Coordinates()
                 });
@@ -121,7 +144,7 @@ namespace DAL
                 {
                     Id = RandomIdFunc(),
                     MaxWeight = genRandTop().ToString(),
-                    Model = RandomModelFunc().ToString(),
+                    Model = ModelRand().ToString(),
 
                 });
             }
@@ -136,19 +159,23 @@ namespace DAL
                     Longitude = Coordinates(),
                     Latitude = Coordinates()
                 });
-                List<int> randIdOfCustomers = new List<int>();
-                randIdOfCustomers.Add(CustomersList[i].Id);
-            }
-            for (int i = 0; i < 5; i++) {
 
-                DateTime currentDate = DateTime.Now;
+                randIdOfCustomers.Add(CustomersList[i].Id);//list of customers ,used to rand id numbers in sender and target in parcel entity
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                int index = rand.Next(0, randIdOfCustomers.Count);
+                int index2 = rand.Next(0, randIdOfCustomers.Count);
+                _ = DateTime.Now;
+
+
                 ParcelsList.Add(new Parcel
                 {
                     Id = DataSource.Config.RunIdParcel++,
-                    SenderId = RandomIdFunc(),
-                    TargetId = RandomIdFunc(),
-                    Weight = rand.Next(1, 300),
-                    Priority = genRandPriority(),
+                    SenderId = randIdOfCustomers[index],
+                    TargetId = randIdOfCustomers[index2],//check for future tests. Maybe create list of tun parcel id and then insert rand value to target and sender
+                    Weight = genRandTop().ToString(),
+                    Priority = genRandPriority().ToString(),
                     DroneId = null,
                     ParingTime = null,
                     PickedUp = null,
@@ -157,9 +184,8 @@ namespace DAL
 
                 });
             }
+
         }
-
-
 
     }
 }
