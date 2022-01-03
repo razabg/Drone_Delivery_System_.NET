@@ -31,7 +31,7 @@ namespace PL
             BLAccess = BlFactory.GetBl();
             DroneListView.DataContext = BLAccess.GetDroneToLists();
             dronestatus.ItemsSource = Enum.GetValues(typeof(statusEnum.DroneStatus));
-            MaxWeight.ItemsSource = Enum.GetValues(typeof(statusEnum.Weight));
+            MaxWeight.ItemsSource = Enum.GetValues(typeof(statusEnum.TopWeight));
 
             collection = new ObservableCollection<DroneToList>(BLAccess.GetDroneToLists());
             DroneListView.ItemsSource = collection;
@@ -99,6 +99,11 @@ namespace PL
         private void close_window_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void updateList_Click(object sender, RoutedEventArgs e)
+        {
+            DroneListView.DataContext = BLAccess.GetDroneToLists();
         }
     }
 }
