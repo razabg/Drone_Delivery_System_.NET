@@ -82,24 +82,34 @@ namespace BL
         public void ParingParcelToDrone(int drone_id)
         {
 
+           
 
             if (!ListDroneBL.Exists(x => x.Id == drone_id))
             {
                 throw new NotExistsException();
             }
-            if (!ListDroneBL.Exists(x => x.Status == statusEnum.DroneStatus.Available.ToString()))
+            if (!ListDroneBL.Exists( x => x.Status == statusEnum.DroneStatus.Available.ToString()))
             {
                 throw new DroneIsNotAvailable(drone_id);
-
-
             }
-
             var droneToPare = ListDroneBL.Find(x => x.Id == drone_id); //we will update here the field and then we will insert it back to dal 
 
+
             //list sorted by priority
-            IEnumerable<DO.Parcel> EmergencyParcel = AccessToDataMethods.ReturnParcelList().ToList().Where(x => x.Priority == statusEnum.PriorityStatus.emergency.ToString()).Where(x => x.Weight == droneToPare.Weight);
-            IEnumerable<DO.Parcel> FastParcel = AccessToDataMethods.ReturnParcelList().ToList().Where(x => x.Priority == statusEnum.PriorityStatus.fast.ToString()).Where(x => x.Weight == droneToPare.Weight);
-            IEnumerable<DO.Parcel> RegualrParcel = AccessToDataMethods.ReturnParcelList().ToList().Where(x => x.Priority == statusEnum.PriorityStatus.regular.ToString()).Where(x => x.Weight == droneToPare.Weight);
+            IEnumerable<DO.Parcel> EmergencyParcel = from item in AccessToDataMethods.ReturnParcelList()
+                                                     where item.Priority == statusEnum.PriorityStatus.Emergency.ToString()
+                                                     where item.Weight == droneToPare.Weight
+                                                     select item;
+
+            IEnumerable<DO.Parcel> FastParcel = from item in AccessToDataMethods.ReturnParcelList()
+                                                where item.Priority == statusEnum.PriorityStatus.Fast.ToString()
+                                                where item.Weight == droneToPare.Weight
+                                                select item;
+
+            IEnumerable<DO.Parcel> RegualrParcel = from item in AccessToDataMethods.ReturnParcelList()
+                                                   where item.Priority == statusEnum.PriorityStatus.Regular.ToString()
+                                                   where item.Weight == droneToPare.Weight
+                                                   select item;
 
             if (EmergencyParcel.Any())
             {
@@ -123,7 +133,9 @@ namespace BL
                 }
                 droneToPare.Status = statusEnum.DroneStatus.Busy.ToString();
                 var parcel_edit = NearestParcel.First();
-                var parcelIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_edit.Id); parcel_edit.ParingTime = DateTime.Now;
+                var parcelIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_edit.Id);
+                parcel_edit.ParingTime = DateTime.Now;
+                parcel_edit.DroneId = droneToPare.Id;
                 AccessToDataMethods.ReturnParcelList().ToList()[parcelIndex] = parcel_edit;
 
             }
@@ -149,7 +161,9 @@ namespace BL
                 }
                 droneToPare.Status = statusEnum.DroneStatus.Busy.ToString();
                 var parcel_edit = NearestParcel.First();
-                var parcelIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_edit.Id); parcel_edit.ParingTime = DateTime.Now;
+                var parcelIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_edit.Id);
+                parcel_edit.ParingTime = DateTime.Now;
+                parcel_edit.DroneId = droneToPare.Id;
                 AccessToDataMethods.ReturnParcelList().ToList()[parcelIndex] = parcel_edit;
             }
             else if (RegualrParcel.Any())
@@ -175,7 +189,9 @@ namespace BL
                 }
                 droneToPare.Status = statusEnum.DroneStatus.Busy.ToString();
                 var parcel_edit = NearestParcel.First();
-                var parcelIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_edit.Id); parcel_edit.ParingTime = DateTime.Now;
+                var parcelIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_edit.Id);
+                parcel_edit.ParingTime = DateTime.Now;
+                parcel_edit.DroneId = droneToPare.Id;
                 AccessToDataMethods.ReturnParcelList().ToList()[parcelIndex] = parcel_edit;
 
             }
