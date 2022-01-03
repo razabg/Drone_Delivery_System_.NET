@@ -44,7 +44,7 @@
             <Label x:Name="StatusSelectorLabel" Content="Select status:" HorizontalAlignment="Left" Margin="347,18,0,0" VerticalAlignment="Top" Height="26" Width="79" RenderTransformOrigin="0.599,1.172" Grid.Column="3"/>
             <ComboBox x:Name="MaxWeight" HorizontalAlignment="Left" Margin="166,16,0,0" VerticalAlignment="Top" Width="159" Height="33" SelectionChanged="MaxWeight_SelectionChanged" Grid.Column="3"/>
             <Label x:Name="MaxWeightLablel" Content="Max weight" HorizontalAlignment="Left" Margin="67,21,0,0" VerticalAlignment="Top" Height="26" Width="71" Grid.Column="3"/>
-            <ListView x:Name="DroneListView" ItemsSource="{Binding}" Margin="-7,65,7,-65"  SelectionChanged="ListView_SelectionChanged" MouseDoubleClick="List_viewDC" Grid.RowSpan="2" Grid.ColumnSpan="4"  >
+            <ListView x:Name="DroneListView" ItemsSource="{Binding}" Margin="-7,65,7,2"  SelectionChanged="ListView_SelectionChanged" MouseDoubleClick="List_viewDC" Grid.RowSpan="2" Grid.ColumnSpan="4"  >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Drone ID" DisplayMemberBinding="{Binding Path=Id}"/>
@@ -59,9 +59,10 @@
                 </ListView.View>
             </ListView>
         </Grid>
-        <Button x:Name="AddDrone" Content="Add new drone" HorizontalAlignment="Left" Margin="769,-3,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.296,-0.397" Width="132" Height="29" Click="AddDrone_Click"/>
+        <Button x:Name="AddDrone" Content="Add new drone" HorizontalAlignment="Left" Margin="768,6,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.296,-0.397" Width="132" Height="29" Click="AddDrone_Click"/>
         <Button Content="Close" HorizontalAlignment="Left" Margin="656,182,0,0" VerticalAlignment="Top" Width="116" RenderTransformOrigin="-0.664,-1" Grid.Row="3" Height="20"/>
         <Button x:Name="close_window" Content="Close" HorizontalAlignment="Left" Margin="796,57,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Click="close_window_Click" Height="32" Width="77"/>
+        <Button x:Name="updateList" Content="Update List" HorizontalAlignment="Left" Margin="41,57,0,0" Grid.Row="3" VerticalAlignment="Top" Click="updateList_Click"/>
 
     </Grid>
 
