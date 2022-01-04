@@ -19,9 +19,11 @@ namespace BL
             {
                 throw new NotExistsException();
             }
+            var droneBL = ListDroneBL.Find(x => x.Id == droneid);//update in bl drone list
             var DroneToUpdate = AccessToDataMethods.ReturnDroneList().ToList()[index];
             //used that way because the drone entity in dal is struct data type
             DroneToUpdate.Model = NewModel;
+            droneBL.Model = NewModel;
             AccessToDataMethods.ReturnDroneList().ToList()[index] = DroneToUpdate;
         } //update the drones model
         public void DroneToCharge(int droneid)
@@ -56,7 +58,7 @@ namespace BL
             AccessToDataMethods.UpdateRecharge(StationForCharge, DalDrone);
 
         }
-        public void ReleaseDroneFromCharge(int drone_id/*,double SumCharge*/)
+        public void ReleaseDroneFromCharge(int drone_id,int SumCharge)
         {
             if (!ListDroneBL.Exists(x => x.Id == drone_id))
             {
@@ -69,7 +71,9 @@ namespace BL
 
             var DroneToRelease = ListDroneBL.Find(x => x.Id == drone_id);
             DroneToRelease.Status = statusEnum.DroneStatus.Available.ToString();
-            DroneToRelease.Battery = 100;//check this because its not acurrate,need to calc the time the drone was in charge
+
+
+            DroneToRelease.Battery = CalcBattery(SumCharge);//check this because its not acurrate,need to calc the time the drone was in charge
             var DroneCharge = AccessToDataMethods.ReturnDroneChargeList().ToList().Find(x => x.DroneId == drone_id);
             var stationIndex = AccessToDataMethods.ReturnStationList().ToList().FindIndex(x => x.Id == DroneCharge.StationId);
             var station = AccessToDataMethods.ReturnStationList().ToList().Find(x => x.Id == DroneCharge.StationId);
@@ -82,13 +86,13 @@ namespace BL
         public void ParingParcelToDrone(int drone_id)
         {
 
-           
+
 
             if (!ListDroneBL.Exists(x => x.Id == drone_id))
             {
                 throw new NotExistsException();
             }
-            if (!ListDroneBL.Exists( x => x.Status == statusEnum.DroneStatus.Available.ToString()))
+            if (!ListDroneBL.Exists(x => x.Status == statusEnum.DroneStatus.Available.ToString()))
             {
                 throw new DroneIsNotAvailable(drone_id);
             }
@@ -195,7 +199,7 @@ namespace BL
                 AccessToDataMethods.ReturnParcelList().ToList()[parcelIndex] = parcel_edit;
 
             }
-            else 
+            else
             {
                 throw new Exception("There is no parcel that can be paired");
             }

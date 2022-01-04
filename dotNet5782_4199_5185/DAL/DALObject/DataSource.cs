@@ -20,12 +20,12 @@ namespace DAL
             public static int RunIdParcel = 101;
 
             // the battery numbers refers  to consumption  % per km
-            internal static double Available { get { return 5; } }
-            internal static double Light { get { return 10; } }
-            internal static double Average { get { return 15; } }
-            internal static double Heavy { get { return 20; } }
+            internal static double Available => 5;
+            internal static double Light => 10;
+            internal static double Average => 15;
+            internal static double Heavy => 20;
 
-            internal static double ChargingPaceDrone = 40;
+            internal static double ChargingPaceDrone = 0.666666667; //% per minute;
 
 
         }
@@ -91,7 +91,7 @@ namespace DAL
         {
 
             Random rand2 = new Random();
-            DalEnum.TopWeight RandomEnum = (DalEnum.TopWeight)rand2.Next(0, Enum.GetNames(typeof(DalEnum.TopWeight)).Length );
+            DalEnum.TopWeight RandomEnum = (DalEnum.TopWeight)rand2.Next(0, Enum.GetNames(typeof(DalEnum.TopWeight)).Length);
             return RandomEnum;
         }
         public static Enum genRandStatus()
@@ -160,31 +160,31 @@ namespace DAL
                     Latitude = Coordinates()
                 });
 
-                randIdOfCustomers.Add(CustomersList[i].Id);//check how to insert this to target an
+                randIdOfCustomers.Add(CustomersList[i].Id);//list of customers ,used to rand id numbers in sender and target in parcel entity
             }
             for (int i = 0; i < 6; i++)
             {
                 int index = rand.Next(0, randIdOfCustomers.Count);
-                DateTime currentDate = DateTime.Now;
-                if (index < 9)
+                int index2 = rand.Next(0, randIdOfCustomers.Count);
+                _ = DateTime.Now;
+
+
+                ParcelsList.Add(new Parcel
                 {
+                    Id = DataSource.Config.RunIdParcel++,
+                    SenderId = randIdOfCustomers[index],
+                    TargetId = randIdOfCustomers[index2],//check for future tests. Maybe create list of tun parcel id and then insert rand value to target and sender
+                    Weight = genRandTop().ToString(),
+                    Priority = genRandPriority().ToString(),
+                    DroneId = null,
+                    ParingTime = null,
+                    PickedUp = null,
+                    ArrivedTime = null,
+                    CreationTime = null
 
-                    ParcelsList.Add(new Parcel
-                    {
-                        Id = DataSource.Config.RunIdParcel++,
-                        SenderId = randIdOfCustomers[index],
-                        TargetId = randIdOfCustomers[index + 1],//check for future tests
-                        Weight = genRandTop().ToString(),
-                        Priority = genRandPriority().ToString(),
-                        DroneId = null,
-                        ParingTime = null,
-                        PickedUp = null,
-                        ArrivedTime = null,
-                        CreationTime = null
-
-                    });
-                }
+                });
             }
+
         }
 
     }

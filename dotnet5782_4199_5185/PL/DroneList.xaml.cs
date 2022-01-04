@@ -108,5 +108,10 @@ namespace PL
         {
             Close();
         }
+
+        private void updateList_Click(object sender, RoutedEventArgs e)
+        {
+            DroneListView.DataContext = BLAccess.GetDroneToLists();
+        }
     }
 }
