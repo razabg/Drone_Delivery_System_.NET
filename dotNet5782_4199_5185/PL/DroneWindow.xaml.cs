@@ -57,7 +57,7 @@ namespace PL
             this.BLAccess = BLaccess;
             drone = new DroneToList();
             drone = drone_arg;
-           
+
 
             if (drone.Status == statusEnum.DroneStatus.Available.ToString())
             {
@@ -178,7 +178,7 @@ namespace PL
         {
             BLAccess.ReleaseDroneFromCharge(drone.Id, int.Parse(charging_time.Text));
             MessageBox.Show("the drone was relase from charge");
-            DroneToList dr = BLAccess.GetDroneToLists().ToList().Find(x=>x.Id == drone.Id);
+            DroneToList dr = BLAccess.GetDroneToLists().ToList().Find(x => x.Id == drone.Id);
             fillTextbox(dr);
             btnRelease_from_charge.Visibility = Visibility.Hidden;
 
@@ -221,7 +221,7 @@ namespace PL
             {
                 BLAccess.ParingParcelToDrone(drone.Id);
                 MessageBox.Show("The drone paired to parcel");
-                DroneToList dr = BLAccess.GetDroneToLists().FirstOrDefault(x=>x.Id==drone.Id);
+                DroneToList dr = BLAccess.GetDroneToLists().FirstOrDefault(x => x.Id == drone.Id);
                 fillTextbox(dr);
                 btnPickedup.Visibility = Visibility.Visible;
                 btnArrived.Visibility = Visibility.Hidden;
@@ -244,63 +244,75 @@ namespace PL
         private void btnPickedup_Click(object sender, RoutedEventArgs e)
         {
 
-        }
-
-        private void btnUpdateModel_Click(object sender, RoutedEventArgs e)
-        {
             try
             {
-
-                string model = ShowModel.Text;
-                BLAccess.UpdateDroneName(drone.Id, model);
-                MessageBox.Show("the model of the drone was successfully updated");
-
-                DroneToList dr = BLAccess.GetDroneToLists().ToList().Find(x=>x.Id == drone.Id);
+                BLAccess.DroneCollectParcel(drone.Id);
+                DroneToList dr = BLAccess.GetDroneToLists().FirstOrDefault(x => x.Id == drone.Id);
                 fillTextbox(dr);
+                MessageBox.Show("the parcel was collected by the parcel");
                 Update();
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+            private void btnUpdateModel_Click(object sender, RoutedEventArgs e)
+            {
+                try
+                {
+
+                    string model = ShowModel.Text;
+                    BLAccess.UpdateDroneName(drone.Id, model);
+                    MessageBox.Show("the model of the drone was successfully updated");
+
+                    DroneToList dr = BLAccess.GetDroneToLists().ToList().Find(x => x.Id == drone.Id);
+                    fillTextbox(dr);
+                    Update();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+
+                }
 
             }
 
-        }
+            private void Close_Click(object sender, RoutedEventArgs e)
+            {
+                Close();
+            }
 
-        private void Close_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+            private void txtBattery_TextChanged(object sender, TextChangedEventArgs e)
+            {
 
-        private void txtBattery_TextChanged(object sender, TextChangedEventArgs e)
-        {
+            }
 
-        }
+            private void Longitude_TextChanged(object sender, TextChangedEventArgs e)
+            {
 
-        private void Longitude_TextChanged(object sender, TextChangedEventArgs e)
-        {
+            }
 
-        }
+            private void Latitude_TextChanged(object sender, TextChangedEventArgs e)
+            {
 
-        private void Latitude_TextChanged(object sender, TextChangedEventArgs e)
-        {
+            }
 
-        }
+            private void Status_TextChanged(object sender, TextChangedEventArgs e)
+            {
 
-        private void Status_TextChanged(object sender, TextChangedEventArgs e)
-        {
+            }
 
-        }
+            private void ShowWeight_TextChanged(object sender, TextChangedEventArgs e)
+            {
 
-        private void ShowWeight_TextChanged(object sender, TextChangedEventArgs e)
-        {
+            }
 
-        }
+            private void charging_time_TextChanged(object sender, TextChangedEventArgs e)
+            {
 
-        private void charging_time_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
+            }
         }
     }
-}
