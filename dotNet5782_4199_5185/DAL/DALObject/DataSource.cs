@@ -108,7 +108,7 @@ namespace DAL
 
         public static double Coordinates()
         {
-            double Location = rand.Next(111111111, 999999999);
+            double Location = rand.Next(11111, 99999);
             return Location;
 
         }
@@ -162,7 +162,7 @@ namespace DAL
 
                 randIdOfCustomers.Add(CustomersList[i].Id);//list of customers ,used to rand id numbers in sender and target in parcel entity
             }
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 7; i++)
             {
                 int index = rand.Next(0, randIdOfCustomers.Count);
                 int index2 = rand.Next(0, randIdOfCustomers.Count);

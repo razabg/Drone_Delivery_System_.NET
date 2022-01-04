@@ -187,7 +187,7 @@ namespace BL
 
 
 
-        public double CalcBattery(int timeInMin)
+        public int CalcBattery(int timeInMin)
         {
             double pace = AccessToDataMethods.PowerConsumptionRequestDrone().Last();
             double battery;
@@ -195,11 +195,11 @@ namespace BL
             if (timeInMin > 150)
             {
                 battery = 100;
-                return battery;
+                return (int)battery;
             }
 
             battery = pace * timeInMin;
-            return battery;
+            return (int)battery;
             
 
 
