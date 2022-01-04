@@ -113,7 +113,5 @@ namespace PL
         {
             DroneListView.DataContext = BLAccess.GetDroneToLists();
         }
-
-      
     }
 }
