@@ -23,7 +23,7 @@ namespace BlApi
         public DO.Station NearestStation(double longi, double lati, IEnumerable<DO.Station> station);
         public DO.Station NearestStationToChargeDrone(double longi, double lati, IEnumerable<DO.Station> station);
         public void ParingParcelToDrone(int drone_id);
-        public void ReleaseDroneFromCharge(int drone_id);
+        public void ReleaseDroneFromCharge(int drone_id , int time);
         public DO.Customer returnTargetCustomer(DO.Parcel parcel);
         public void UpdateBaseStationData(int baseStationId, string baseStationName, int totalChargeSlots);
         public void UpdateCustomerData(int CustomerId, string customerName, string phoneNumber);

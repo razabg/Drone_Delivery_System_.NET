@@ -85,7 +85,7 @@ namespace PL
 
             txtBattery.Text = drone.Battery.ToString();
             ShowWeight.Text = drone.Weight;
-            ShowModel.Text = drone.Status;
+            ShowModel.Text = drone.Model;
             IDfill.Text = drone.Id.ToString();
             Status.Text = drone.Status.ToString();
             Latitude.Text = drone.CurrentLocation.Latitude.ToString();
@@ -176,7 +176,19 @@ namespace PL
 
         private void BtnRelease_Click(object sender, RoutedEventArgs e)
         {
+            BLAccess.ReleaseDroneFromCharge(drone.Id, int.Parse(charging_time.Text));
+            MessageBox.Show("the drone was relase from charge");
+            DroneToList dr = BLAccess.GetDroneToLists().ToList().Find(x=>x.Id == drone.Id);
+            fillTextbox(dr);
+            btnRelease_from_charge.Visibility = Visibility.Hidden;
 
+            btnCharge.Visibility = Visibility.Visible;
+            btnPairDrone_parcel.Visibility = Visibility.Visible;
+
+            btnUpdateModel.Visibility = Visibility.Visible;
+            charging_time.Visibility = Visibility.Hidden;
+            labelCharging.Visibility = Visibility.Hidden;
+            Update();
 
 
         }
@@ -236,7 +248,23 @@ namespace PL
 
         private void btnUpdateModel_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
 
+                string model = ShowModel.Text;
+                BLAccess.UpdateDroneName(drone.Id, model);
+                MessageBox.Show("the model of the drone was successfully updated");
+
+                DroneToList dr = BLAccess.GetDroneToLists().ToList().Find(x=>x.Id == drone.Id);
+                fillTextbox(dr);
+                Update();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
 
         }
 
@@ -261,6 +289,16 @@ namespace PL
         }
 
         private void Status_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void ShowWeight_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void charging_time_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }

@@ -88,12 +88,12 @@ namespace DAL
         public void UpdateRecharge(Station s, Drone d) //need to do here exeption  
         {
             var indexStation = ReturnStationList().ToList().FindIndex(x => x.Id == s.Id);
-            DroneINCharge DCharge = default;
+            DroneINCharge DCharge = new DroneINCharge();
             DCharge.DroneId = d.Id;
             DCharge.StationId = s.Id;
             s.ChargeSlots--;
             DataSource.StationsList[indexStation] = s;
-            ReturnDroneChargeList().ToList().Add(DCharge);
+            DataSource.DroneChargeList.Add(DCharge);
 
         }
 

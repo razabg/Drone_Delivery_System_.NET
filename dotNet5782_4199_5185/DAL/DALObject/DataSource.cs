@@ -25,7 +25,7 @@ namespace DAL
             internal static double Average => 15;
             internal static double Heavy => 20;
 
-            internal static double ChargingPaceDrone = 40;
+            internal static double ChargingPaceDrone = 0.666666667; //% per minute;
 
 
         }
