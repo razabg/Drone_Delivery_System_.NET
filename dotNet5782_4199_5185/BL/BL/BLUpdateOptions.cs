@@ -80,8 +80,8 @@ namespace BL
             var station = AccessToDataMethods.ReturnStationList().ToList().Find(x => x.Id == DroneCharge.StationId);
             station.ChargeSlots++;
             AccessToDataMethods.UpdateStation(station);
-            AccessToDataMethods.ReturnDroneChargeList().ToList().RemoveAll(x => x.DroneId == drone_id);
-
+            AccessToDataMethods.UpdateDeleteDroneInCharge(drone_id);
+          
 
         }
         public void ParingParcelToDrone(int drone_id)
