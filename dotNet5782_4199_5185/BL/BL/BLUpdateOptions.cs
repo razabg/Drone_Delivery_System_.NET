@@ -224,7 +224,7 @@ namespace BL
             if (parcelToPickup.ParingTime != null && parcelToPickup.PickedUp == null)
             {
                 var SenderCustomer = AccessToDataMethods.ReturnCustomerList().ToList().Find(x => x.Id == parcelToPickup.SenderId);
-                double BatteryConsumptionToSender = AccessToDataMethods.PowerConsumptionRequestDrone()[int.Parse(drone.Weight) + 1] * CalcDistanceBetweenTwoCoordinates(drone.CurrentLocation.Longitude, drone.CurrentLocation.Longitude, SenderCustomer.Longitude, SenderCustomer.Latitude);
+                double BatteryConsumptionToSender = AccessToDataMethods.PowerConsumptionRequestDrone()[POWERindex(drone)] * CalcDistanceBetweenTwoCoordinates(drone.CurrentLocation.Longitude, drone.CurrentLocation.Longitude, SenderCustomer.Longitude, SenderCustomer.Latitude);
 
                 drone.Battery -= BatteryConsumptionToSender;
                 drone.IdOfParcelInTransfer = parcelToPickup.Id;
