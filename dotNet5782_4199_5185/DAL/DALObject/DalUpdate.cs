@@ -29,6 +29,11 @@ namespace DAL
             DataSource.DroneChargeList.Add(DCharge);
         }
 
+        public void UpdateCustomer(Customer c)
+        {
+            var indexCustomer= 
+        }
+
         public void UpdateParcel(Parcel p)
         {
             var indexParcel = DataSource.ParcelsList.FindIndex(x => x.Id == p.Id);
@@ -50,14 +55,14 @@ namespace DAL
             }
             (DataSource.DronesList[indexDrone]) = d;
         }
-        public void UpdateStation(Station stationTemp)
+        public void UpdateStation(Station s)
         {
-            int stationIndex = DataSource.StationsList.FindIndex(x => x.Id == stationTemp.Id);
+            int stationIndex = DataSource.StationsList.FindIndex(x => x.Id == s.Id);
             if (stationIndex == -1)
             {
                 throw new NotExistsException();
             }
-            DataSource.StationsList[stationIndex] = stationTemp;
+            DataSource.StationsList[stationIndex] = s;
         }
 
 

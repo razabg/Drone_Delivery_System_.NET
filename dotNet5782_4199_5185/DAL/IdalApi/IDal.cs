@@ -28,6 +28,7 @@ namespace DalApi
         public void UpdateRecharge(Station s, Drone d);
         public void UpdateParcel(Parcel p);
         public void UpdateDrone(Drone d);
+        public void UpdateStation(Station s);
         #endregion
 
         #region SHOW LISTS METHODS
