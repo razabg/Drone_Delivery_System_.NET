@@ -142,7 +142,7 @@ namespace BL
                 var parcelIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_edit.Id);
                 parcel_edit.ParingTime = DateTime.Now;
                 parcel_edit.DroneId = droneToPare.Id;
-                AccessToDataMethods.UpdateParing(parcel_edit, drone_id);
+                AccessToDataMethods.UpdateParcel(parcel_edit);
                //AccessToDataMethods.ReturnParcelList().Select(x=>x.Id == parcel_edit.Id) = parcel_edit;
             }
             else if (FastParcel.Any())
@@ -170,7 +170,7 @@ namespace BL
                 var parcelIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_edit.Id);
                 parcel_edit.ParingTime = DateTime.Now;
                 parcel_edit.DroneId = droneToPare.Id;
-                AccessToDataMethods.UpdateParing(parcel_edit, drone_id);
+                AccessToDataMethods.UpdateParcel(parcel_edit);
                 //AccessToDataMethods.ReturnParcelList().ToList().Insert(parcelIndex, parcel_edit);
             }
             else if (RegualrParcel.Any())
@@ -199,7 +199,7 @@ namespace BL
                 var parcelIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_edit.Id);
                 parcel_edit.ParingTime = DateTime.Now;
                 parcel_edit.DroneId = droneToPare.Id;
-                AccessToDataMethods.UpdateParing(parcel_edit, drone_id);
+                AccessToDataMethods.UpdateParcel(parcel_edit);
                 //AccessToDataMethods.ReturnParcelList().ToList().Insert(parcelIndex, parcel_edit);
 
             }
