@@ -14,7 +14,7 @@ namespace BL
         /// </summary>
         /// <param name="droneid"></param>
         /// <param name="NewModel"></param>
-        public void UpdateDroneModel(int droneid, string NewModel) 
+        public void UpdateDroneModel(int droneid, string NewModel)
         {
 
             var index = AccessToDataMethods.ReturnDroneList().ToList().FindIndex(x => x.Id == droneid);
@@ -29,7 +29,7 @@ namespace BL
             DroneToUpdate.Model = NewModel;
             droneBL.Model = NewModel;
             AccessToDataMethods.UpdateDrone(DroneToUpdate);
-        } 
+        }
         public void DroneToCharge(int droneid)
         {
             if (!ListDroneBL.Exists(x => x.Id == droneid))
@@ -55,12 +55,11 @@ namespace BL
             drone_to_charge.CurrentLocation.Longitude = StationForCharge.Longitude;
             drone_to_charge.CurrentLocation.Latitude = StationForCharge.Latitude;
             drone_to_charge.Status = statusEnum.DroneStatus.TreatmentMode.ToString();
-            //ListDroneBL[index] = drone_to_charge;
             var DalDrone = AccessToDataMethods.ReturnDroneList().ToList().Find(x => x.Id == drone_to_charge.Id);
             AccessToDataMethods.UpdateRecharge(StationForCharge, DalDrone);
 
         }
-        public void ReleaseDroneFromCharge(int drone_id,int SumCharge)//check
+        public void ReleaseDroneFromCharge(int drone_id, int SumCharge)//check
         {
             if (!ListDroneBL.Exists(x => x.Id == drone_id))
             {
@@ -80,7 +79,7 @@ namespace BL
             var stationIndex = AccessToDataMethods.ReturnStationList().ToList().FindIndex(x => x.Id == DroneCharge.StationId);
             var station = AccessToDataMethods.ReturnStationList().ToList().Find(x => x.Id == DroneCharge.StationId);
             station.ChargeSlots++;
-            AccessToDataMethods.ReturnStationList().ToList()[stationIndex] = station;//struct
+            AccessToDataMethods.UpdateStation(station);
             AccessToDataMethods.ReturnDroneChargeList().ToList().RemoveAll(x => x.DroneId == drone_id);
 
 
@@ -142,7 +141,7 @@ namespace BL
                 parcel_edit.ParingTime = DateTime.Now;
                 parcel_edit.DroneId = droneToPare.Id;
                 AccessToDataMethods.UpdateParcel(parcel_edit);
-               //AccessToDataMethods.ReturnParcelList().Select(x=>x.Id == parcel_edit.Id) = parcel_edit;
+
             }
             else if (FastParcel.Any())
             {
@@ -169,7 +168,6 @@ namespace BL
                 parcel_edit.ParingTime = DateTime.Now;
                 parcel_edit.DroneId = droneToPare.Id;
                 AccessToDataMethods.UpdateParcel(parcel_edit);
-                //AccessToDataMethods.ReturnParcelList().ToList().Insert(parcelIndex, parcel_edit);
             }
             else if (RegualrParcel.Any())
             {
@@ -197,7 +195,6 @@ namespace BL
                 parcel_edit.ParingTime = DateTime.Now;
                 parcel_edit.DroneId = droneToPare.Id;
                 AccessToDataMethods.UpdateParcel(parcel_edit);
-                //AccessToDataMethods.ReturnParcelList().ToList().Insert(parcelIndex, parcel_edit);
 
             }
             else
@@ -221,7 +218,7 @@ namespace BL
                 throw new CannotPickUpException(drone_id);
             }
             var drone = ListDroneBL.Find(x => x.Id == drone_id);
-            
+
             DO.Parcel parcelToPickup = AccessToDataMethods.ReturnParcelList().ToList().Find(x => x.DroneId == drone_id);
             int parcelToPickupIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.DroneId == drone_id);
             if (parcelToPickup.ParingTime != null && parcelToPickup.PickedUp == null)
@@ -234,7 +231,8 @@ namespace BL
                 drone.CurrentLocation.Longitude = SenderCustomer.Longitude;
                 drone.CurrentLocation.Latitude = SenderCustomer.Latitude;
                 parcelToPickup.PickedUp = DateTime.Now;
-                AccessToDataMethods.ReturnParcelList().ToList().Insert(parcelToPickupIndex, parcelToPickup);
+                AccessToDataMethods.UpdateParcel(parcelToPickup);
+               
 
             }
             else
@@ -261,14 +259,15 @@ namespace BL
             if (parcelArrived.PickedUp != null && parcelArrived.ArrivedTime == null)
             {
                 var TargetCustomer = AccessToDataMethods.ReturnCustomerList().ToList().Find(x => x.Id == parcelArrived.TargetId);
-                double BatteryConsumptionToTarget = AccessToDataMethods.PowerConsumptionRequestDrone()[int.Parse(drone.Weight) + 1] * CalcDistanceBetweenTwoCoordinates(drone.CurrentLocation.Longitude, drone.CurrentLocation.Longitude, TargetCustomer.Longitude, TargetCustomer.Latitude);
+                double BatteryConsumptionToTarget = AccessToDataMethods.PowerConsumptionRequestDrone()[POWERindex(drone)] * CalcDistanceBetweenTwoCoordinates(drone.CurrentLocation.Longitude, drone.CurrentLocation.Longitude, TargetCustomer.Longitude, TargetCustomer.Latitude);
 
                 drone.Battery -= BatteryConsumptionToTarget;
                 drone.CurrentLocation.Longitude = TargetCustomer.Longitude;
                 drone.CurrentLocation.Latitude = TargetCustomer.Latitude;
                 drone.IdOfParcelInTransfer = null; //now the drone is empty
                 parcelArrived.ArrivedTime = DateTime.Now;
-                AccessToDataMethods.ReturnParcelList().ToList()[parcelToPickupIndex] = parcelArrived;
+                AccessToDataMethods.UpdateParcel(parcelArrived);
+               
 
             }
             else
@@ -289,24 +288,25 @@ namespace BL
                 throw new NotExistsException();
             }
 
+
+            if (baseStationName.Length > 0 && totalChargeSlots > 0)
             {
-                if (baseStationName.Length > 0 && totalChargeSlots > 0)
+                numOfDronesInCharge = AccessToDataMethods.ReturnDroneChargeList().Count(x => x.StationId == baseStationId);
+                if (totalChargeSlots >= numOfDronesInCharge)
                 {
-                    numOfDronesInCharge = AccessToDataMethods.ReturnDroneChargeList().Count(x => x.StationId == baseStationId);
-                    if (totalChargeSlots >= numOfDronesInCharge)
-                    {
-                        StationUpdate.ChargeSlots = totalChargeSlots;
-                        StationUpdate.Name = int.Parse(baseStationName);
-                        AccessToDataMethods.ReturnStationList().ToList()[index] = StationUpdate;//struct be value 
+                    StationUpdate.ChargeSlots = totalChargeSlots;
+                    StationUpdate.Name = int.Parse(baseStationName);
+                    AccessToDataMethods.UpdateStation(StationUpdate);
+                    
 
-                    }   // need to take care in case of charge slot or name is empty
-                    else
-                    {
-                        throw new NotEnoughChargeSlotsInThisStation(baseStationId);
-                    }
-
+                }   // need to take care in case of charge slot or name is empty
+                else
+                {
+                    throw new NotEnoughChargeSlotsInThisStation(baseStationId);
                 }
+
             }
+
 
 
         }
@@ -325,17 +325,18 @@ namespace BL
                 {
                     customerUpdate.Name = customerName;
                     customerUpdate.Phone = phoneNumber;
-                    AccessToDataMethods.ReturnCustomerList().ToList()[index] = customerUpdate;
+                    AccessToDataMethods.UpdateCustomer(customerUpdate);
+                   
                 }
                 else if (customerName.Length > 0 && phoneNumber.Length == 0)
                 {
                     customerUpdate.Name = customerName;
-                    AccessToDataMethods.ReturnCustomerList().ToList()[index] = customerUpdate;
+                    AccessToDataMethods.UpdateCustomer(customerUpdate);
                 }
                 else if (customerName.Length == 0 && phoneNumber.Length > 0)
                 {
                     customerUpdate.Phone = phoneNumber;
-                    AccessToDataMethods.ReturnCustomerList().ToList()[index] = customerUpdate;
+                    AccessToDataMethods.UpdateCustomer(customerUpdate);
                 }
                 else
                 {
