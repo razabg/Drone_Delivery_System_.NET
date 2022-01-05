@@ -60,7 +60,7 @@ namespace BL
             AccessToDataMethods.UpdateRecharge(StationForCharge, DalDrone);
 
         }
-        public void ReleaseDroneFromCharge(int drone_id,int SumCharge)
+        public void ReleaseDroneFromCharge(int drone_id,int SumCharge)//check
         {
             if (!ListDroneBL.Exists(x => x.Id == drone_id))
             {
@@ -139,11 +139,10 @@ namespace BL
                 }
                 droneToPare.Status = statusEnum.DroneStatus.Busy.ToString();
                 var parcel_edit = NearestParcel.First();
-                var parcelIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_edit.Id);
                 parcel_edit.ParingTime = DateTime.Now;
                 parcel_edit.DroneId = droneToPare.Id;
                 AccessToDataMethods.UpdateParing(parcel_edit, drone_id);
-               //AccessToDataMethods.ReturnParcelList().Select(x=>x.Id == parcel_edit.Id) = parcel_edit;
+              
             }
             else if (FastParcel.Any())
             {
@@ -167,11 +166,10 @@ namespace BL
                 }
                 droneToPare.Status = statusEnum.DroneStatus.Busy.ToString();
                 var parcel_edit = NearestParcel.First();
-                var parcelIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_edit.Id);
                 parcel_edit.ParingTime = DateTime.Now;
                 parcel_edit.DroneId = droneToPare.Id;
                 AccessToDataMethods.UpdateParing(parcel_edit, drone_id);
-                //AccessToDataMethods.ReturnParcelList().ToList().Insert(parcelIndex, parcel_edit);
+             
             }
             else if (RegualrParcel.Any())
             {
@@ -196,11 +194,10 @@ namespace BL
                 }
                 droneToPare.Status = statusEnum.DroneStatus.Busy.ToString();
                 DO.Parcel parcel_edit = NearestParcel.First();
-                var parcelIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_edit.Id);
                 parcel_edit.ParingTime = DateTime.Now;
                 parcel_edit.DroneId = droneToPare.Id;
                 AccessToDataMethods.UpdateParing(parcel_edit, drone_id);
-                //AccessToDataMethods.ReturnParcelList().ToList().Insert(parcelIndex, parcel_edit);
+              
 
             }
             else
