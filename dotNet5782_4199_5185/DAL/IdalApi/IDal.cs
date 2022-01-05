@@ -30,6 +30,8 @@ namespace DalApi
         public void UpdateDrone(Drone d);
         public void UpdateStation(Station s);
         public void UpdateCustomer(Customer c);
+        public void UpdateDeleteDroneInCharge(int DroneId);
+
         #endregion
 
         #region SHOW LISTS METHODS
