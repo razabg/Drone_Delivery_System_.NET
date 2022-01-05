@@ -24,7 +24,22 @@ namespace BL
         public double CalcDistanceBetweenTwoCoordinates(double longi1, double lati1, double longi2, double lati2)
         {
             double distance = Math.Sqrt(Math.Pow(longi1 - longi2, 2) + Math.Pow(lati1 - lati2, 2));
+            distance /= 1000;
             return distance;
+            ////1-from ,2 to
+            // int R = 6371 * 1000; // metEre
+            //double phi1 = lati1 * Math.PI / 180; // φ, λ in radians
+            //double phi2 = lati2 * Math.PI / 180;
+            //double deltaPhi = (lati2 - lati1) * Math.PI / 180;
+            //double deltaLambda = (longi2 - longi1) * Math.PI / 180;
+
+            //double a = Math.Sin(deltaPhi / 2) * Math.Sin(deltaPhi / 2) +
+            //           Math.Cos(phi1) * Math.Cos(phi2) *
+            //           Math.Sin(deltaLambda / 2) * Math.Sin(deltaLambda / 2);
+            //double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+            //double d = R * c / 1000; // in kilometres
+            //return d;
+
 
 
         }

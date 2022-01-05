@@ -26,9 +26,12 @@ namespace DalApi
 
         #region UPDATE STATUS METHODS
         public void UpdateRecharge(Station s, Drone d);
-        public void UpdateParing(int p, int d);
-        public void UpdateArrived(int p);
-        public void UpdatePickedUp(int p);
+        public void UpdateParcel(Parcel p);
+        public void UpdateDrone(Drone d);
+        public void UpdateStation(Station s);
+        public void UpdateCustomer(Customer c);
+        public void UpdateDeleteDroneInCharge(int DroneId);
+
         #endregion
 
         #region SHOW LISTS METHODS

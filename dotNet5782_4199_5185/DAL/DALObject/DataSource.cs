@@ -21,9 +21,9 @@ namespace DAL
 
             // the battery numbers refers  to consumption  % per km
             internal static double Available => 5;
-            internal static double Light => 10;
-            internal static double Average => 15;
-            internal static double Heavy => 20;
+            internal static double Light => 5;
+            internal static double Average => 7;
+            internal static double Heavy => 9;
 
             internal static double ChargingPaceDrone = 0.666666667; //% per minute;
 
