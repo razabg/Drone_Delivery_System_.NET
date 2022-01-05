@@ -29,6 +29,7 @@ namespace DalApi
         public void UpdateParcel(Parcel p);
         public void UpdateDrone(Drone d);
         public void UpdateStation(Station s);
+        public void UpdateCustomer(Customer c);
         #endregion
 
         #region SHOW LISTS METHODS

@@ -31,7 +31,12 @@ namespace DAL
 
         public void UpdateCustomer(Customer c)
         {
-            var indexCustomer= 
+            var indexCustomer = ReturnCustomerList().ToList().FindIndex(x => x.Id == c.Id);
+            if (indexCustomer == -1)
+            {
+                throw new NotExistsException();
+            }
+            DataSource.CustomersList[indexCustomer] = c;
         }
 
         public void UpdateParcel(Parcel p)
