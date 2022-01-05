@@ -108,7 +108,7 @@ namespace DAL
 
         public static double Coordinates()
         {
-            double Location = rand.Next(11111, 99999);
+            double Location = rand.Next(1111, 9999);
             return Location;
 
         }
