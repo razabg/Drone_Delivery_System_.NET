@@ -16,18 +16,16 @@ namespace DAL
         /// </summary>
         /// <param name="p"></param>
         /// <param name="d"></param>
-        public void UpdateParing(int p, int d) //
+        public void UpdateParing(Parcel p, int d) //
         {
-            var indexParcel = DataSource.ParcelsList.FindIndex(x => x.Id == p);
-            var indexDrone = DataSource.DronesList.FindIndex(x => x.Id == d);
-            if (indexDrone != -1 && indexParcel != -1)
+            var indexParcel = DataSource.ParcelsList.FindIndex(x => x.Id == p.Id);
+            
+            if ( indexParcel == -1)
             {
-                return; //
+                throw new Exception("the parcel is not here"); //
             }
-            Parcel helper = (DataSource.ParcelsList[indexParcel]); //in order to update the idrone in parcel.droneid we used helper to get the right id .
-            helper.DroneId = DataSource.DronesList[indexDrone].Id;
-            helper.ParingTime = DateTime.Now;
-            (DataSource.ParcelsList[indexParcel]) = helper;
+            //in order to update the idrone in parcel.droneid we used helper to get the right id .
+            (DataSource.ParcelsList[indexParcel]) = p;
 
 
         }
@@ -57,7 +55,7 @@ namespace DAL
         public void UpdatePickedUp(int p)
         {
             var indexParcel = DataSource.ParcelsList.FindIndex(x => x.Id == p);
-            if (indexParcel != -1)
+            if (indexParcel == -1)
             {
                 return;
             }
@@ -75,7 +73,7 @@ namespace DAL
         {
             var indexParcel = DataSource.ParcelsList.FindIndex(x => x.Id == p);
 
-            if (indexParcel != -1)
+            if (indexParcel == -1)
             {
                 return;
             }
@@ -83,6 +81,16 @@ namespace DAL
             helper.ArrivedTime = DateTime.Now; //update the arrival time of the parcel
             (DataSource.ParcelsList[indexParcel]) = helper;
 
+        }
+
+        public void UpdateDrone(Drone d)
+        {
+            var indexDrone = DataSource.ParcelsList.FindIndex(x => x.Id == d.Id);
+            if (indexDrone == -1)
+            {
+                throw new NotExistsException();
+            }
+            (DataSource.DronesList[indexDrone]) = d;
         }
         public void UpdateStation(Station stationTemp)
         {
