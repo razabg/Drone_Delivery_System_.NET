@@ -7,7 +7,7 @@ using BO;
 
 namespace BL
 {
-    internal sealed partial class BLObject //check if need to use the dal methods here.
+    internal sealed partial class BLObject 
     {
         /// <summary>
         /// update drone model
@@ -30,6 +30,10 @@ namespace BL
             droneBL.Model = NewModel;
             AccessToDataMethods.UpdateDrone(DroneToUpdate);
         }
+        /// <summary>
+        /// take to drone to charge
+        /// </summary>
+        /// <param name="droneid"></param>
         public void DroneToCharge(int droneid)
         {
             if (!ListDroneBL.Exists(x => x.Id == droneid))
@@ -51,7 +55,7 @@ namespace BL
                 throw new CannotGoToChargeException(droneid);
             }
 
-            drone_to_charge.Battery = MinBattery;//
+            drone_to_charge.Battery = (int)MinBattery;//
             drone_to_charge.CurrentLocation.Longitude = StationForCharge.Longitude;
             drone_to_charge.CurrentLocation.Latitude = StationForCharge.Latitude;
             drone_to_charge.Status = statusEnum.DroneStatus.TreatmentMode.ToString();
@@ -59,6 +63,11 @@ namespace BL
             AccessToDataMethods.UpdateRecharge(StationForCharge, DalDrone);
 
         }
+        /// <summary>
+        /// release the drone from the charging station
+        /// </summary>
+        /// <param name="drone_id"></param>
+        /// <param name="SumCharge"></param>
         public void ReleaseDroneFromCharge(int drone_id, int SumCharge)//check
         {
             if (!ListDroneBL.Exists(x => x.Id == drone_id))
@@ -84,6 +93,10 @@ namespace BL
           
 
         }
+        /// <summary>
+        /// pair between parcel and drone
+        /// </summary>
+        /// <param name="drone_id"></param>
         public void ParingParcelToDrone(int drone_id)
         {
 
@@ -199,7 +212,7 @@ namespace BL
             }
             else
             {
-                throw new Exception("There is no parcel that can be paired");
+                throw new CannotAssignDroneToParcelException(drone_id);
             }
 
 
@@ -207,6 +220,10 @@ namespace BL
 
 
         } //make this method more efficient by creating method that will calc the battery consumtion
+        /// <summary>
+        /// parcel being collected by the drone
+        /// </summary>
+        /// <param name="drone_id"></param>
         public void DroneCollectParcel(int drone_id)
         {
             if (!ListDroneBL.Exists(x => x.Id == drone_id))
@@ -226,7 +243,7 @@ namespace BL
                 var SenderCustomer = AccessToDataMethods.ReturnCustomerList().ToList().Find(x => x.Id == parcelToPickup.SenderId);
                 double BatteryConsumptionToSender = AccessToDataMethods.PowerConsumptionRequestDrone()[POWERindex(drone)] * CalcDistanceBetweenTwoCoordinates(drone.CurrentLocation.Longitude, drone.CurrentLocation.Longitude, SenderCustomer.Longitude, SenderCustomer.Latitude);
 
-                drone.Battery -= BatteryConsumptionToSender;
+                drone.Battery -= (int)BatteryConsumptionToSender;
                 drone.IdOfParcelInTransfer = parcelToPickup.Id;
                 drone.CurrentLocation.Longitude = SenderCustomer.Longitude;
                 drone.CurrentLocation.Latitude = SenderCustomer.Latitude;
@@ -242,6 +259,10 @@ namespace BL
 
 
         }
+        /// <summary>
+        /// the drone arrived to its destinastion
+        /// </summary>
+        /// <param name="drone_id"></param>
         public void DroneArrivedToDestination(int drone_id)
         {
             if (!ListDroneBL.Exists(x => x.Id == drone_id))
@@ -250,7 +271,7 @@ namespace BL
             }
             if (!ListDroneBL.Exists(x => x.Status == statusEnum.DroneStatus.Busy.ToString()))
             {
-                throw new CannotPickUpException(drone_id);
+                throw new CannotSupplyException(drone_id);
             }
 
             var drone = ListDroneBL.Find(x => x.Id == drone_id);
@@ -261,10 +282,11 @@ namespace BL
                 var TargetCustomer = AccessToDataMethods.ReturnCustomerList().ToList().Find(x => x.Id == parcelArrived.TargetId);
                 double BatteryConsumptionToTarget = AccessToDataMethods.PowerConsumptionRequestDrone()[POWERindex(drone)] * CalcDistanceBetweenTwoCoordinates(drone.CurrentLocation.Longitude, drone.CurrentLocation.Longitude, TargetCustomer.Longitude, TargetCustomer.Latitude);
 
-                drone.Battery -= BatteryConsumptionToTarget;
+                drone.Battery -= (int)BatteryConsumptionToTarget;
                 drone.CurrentLocation.Longitude = TargetCustomer.Longitude;
                 drone.CurrentLocation.Latitude = TargetCustomer.Latitude;
                 drone.IdOfParcelInTransfer = null; //now the drone is empty
+                drone.Status = statusEnum.DroneStatus.Available.ToString();
                 parcelArrived.ArrivedTime = DateTime.Now;
                 AccessToDataMethods.UpdateParcel(parcelArrived);
                
@@ -277,6 +299,12 @@ namespace BL
 
 
         }
+        /// <summary>
+        /// update base station data
+        /// </summary>
+        /// <param name="baseStationId"></param>
+        /// <param name="baseStationName"></param>
+        /// <param name="totalChargeSlots"></param>
         public void UpdateBaseStationData(int baseStationId, string baseStationName, int totalChargeSlots)
         {
             int numOfDronesInCharge = 0;
@@ -310,6 +338,12 @@ namespace BL
 
 
         }
+        /// <summary>
+        /// update customer data
+        /// </summary>
+        /// <param name="CustomerId"></param>
+        /// <param name="customerName"></param>
+        /// <param name="phoneNumber"></param>
         public void UpdateCustomerData(int CustomerId, string customerName, string phoneNumber)
         {
             List<DO.Customer> StationListDal = AccessToDataMethods.ReturnCustomerList().ToList();

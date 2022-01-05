@@ -70,6 +70,7 @@ namespace DAL
             }
             (DataSource.DronesList[indexDrone]) = d;
         }
+
         public void UpdateStation(Station s)
         {
             int stationIndex = DataSource.StationsList.FindIndex(x => x.Id == s.Id);

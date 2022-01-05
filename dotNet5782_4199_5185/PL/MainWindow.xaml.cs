@@ -24,14 +24,14 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-       private IBL BLAccess; //access to bl layer through ibl interface
+        private IBL BLAccess; //access to bl layer through ibl interface
         public MainWindow()
         {
             var lp = new LoginPage();
             lp.ShowDialog();
             BLAccess = BlFactory.GetBl();
             InitializeComponent();
-           
+
         }
 
         private void DroneList_click(object sender, RoutedEventArgs e)
@@ -39,6 +39,19 @@ namespace PL
             new DroneList(BLAccess).Show();
         }
 
-       
+        private void ParcelList_click(object sender, RoutedEventArgs e)
+        {
+            new ParceList(BLAccess).Show();
+        }
+
+        private void CustomerList_click(object sender, RoutedEventArgs e)
+        {
+            new CustomerList(BLAccess).Show();
+        }
+
+        private void StationList_click(object sender, RoutedEventArgs e)
+        {
+            new StationList(BLAccess).Show();
+        }
     }
 }

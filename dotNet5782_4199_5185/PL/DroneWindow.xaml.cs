@@ -42,6 +42,17 @@ namespace PL
             labelBattery.Visibility = Visibility.Hidden;
             labelStatus.Visibility = Visibility.Hidden;
 
+            btnPickedup.Visibility = Visibility.Hidden;
+            btnArrived.Visibility = Visibility.Hidden;
+            btnCharge.Visibility = Visibility.Hidden;
+            btnPairDrone_parcel.Visibility = Visibility.Hidden;
+            btnArrived.Visibility = Visibility.Hidden;
+            labelCharging.Visibility = Visibility.Hidden;
+            charging_time.Visibility = Visibility.Hidden;
+            btnUpdateModel.Visibility = Visibility.Hidden;
+            btnRelease_from_charge.Visibility = Visibility.Hidden;
+
+
 
 
 
@@ -81,6 +92,8 @@ namespace PL
             labelInsertId.IsEnabled = false;
             choose_model.Visibility = Visibility.Hidden;
             MaxWeight.Visibility = Visibility.Hidden;
+            labelCharging.Visibility = Visibility.Hidden;
+            charging_time.Visibility = Visibility.Hidden;
 
 
             txtBattery.Text = drone.Battery.ToString();
@@ -176,20 +189,33 @@ namespace PL
 
         private void BtnRelease_Click(object sender, RoutedEventArgs e)
         {
-            BLAccess.ReleaseDroneFromCharge(drone.Id, int.Parse(charging_time.Text));
-            MessageBox.Show("the drone was relase from charge");
-            DroneToList dr = BLAccess.GetDroneToLists().ToList().Find(x => x.Id == drone.Id);
-            fillTextbox(dr);
-            btnRelease_from_charge.Visibility = Visibility.Hidden;
+            try
+            {
+                BLAccess.ReleaseDroneFromCharge(drone.Id, int.Parse(charging_time.Text));
+                MessageBox.Show("the drone was relase from charge");
+                DroneToList dr = BLAccess.GetDroneToLists().ToList().Find(x => x.Id == drone.Id);
+                fillTextbox(dr);
+                btnRelease_from_charge.Visibility = Visibility.Hidden;
 
-            btnCharge.Visibility = Visibility.Visible;
-            btnPairDrone_parcel.Visibility = Visibility.Visible;
+                btnCharge.Visibility = Visibility.Visible;
+                btnArrived.Visibility = Visibility.Visible;
+                btnPairDrone_parcel.Visibility = Visibility.Visible;
 
-            btnUpdateModel.Visibility = Visibility.Visible;
-            charging_time.Visibility = Visibility.Hidden;
-            labelCharging.Visibility = Visibility.Hidden;
-            Update();
+                btnUpdateModel.Visibility = Visibility.Visible;
+                charging_time.Visibility = Visibility.Hidden;
+                labelCharging.Visibility = Visibility.Hidden;
+                btnPickedup.Visibility = Visibility.Hidden;
+                labelCharging.Visibility = Visibility.Hidden;
+                charging_time.Visibility = Visibility.Hidden;
 
+                Update();
+            }
+            catch (CannotReleaseFromChargeException ex)
+            {
+                MessageBox.Show(ex.Message);
+
+
+            }
 
         }
 
@@ -205,9 +231,11 @@ namespace PL
                 btnRelease_from_charge.Visibility = Visibility.Visible;
                 btnCharge.Visibility = Visibility.Hidden;
                 btnPairDrone_parcel.Visibility = Visibility.Hidden;
+                labelCharging.Visibility = Visibility.Visible;
+                charging_time.Visibility = Visibility.Visible;
                 Update();
             }
-            catch (Exception ex)
+            catch (CannotGoToChargeException ex)
             {
                 MessageBox.Show("faild to send the drone to charge");
 
@@ -226,19 +254,42 @@ namespace PL
                 btnPickedup.Visibility = Visibility.Visible;
                 btnArrived.Visibility = Visibility.Hidden;
                 btnCharge.Visibility = Visibility.Hidden;
+                btnRelease_from_charge.Visibility = Visibility.Hidden;
                 btnPairDrone_parcel.Visibility = Visibility.Hidden;
+                labelCharging.Visibility = Visibility.Hidden;
+                charging_time.Visibility = Visibility.Hidden;
                 Update();
             }
-            catch (Exception ex)
+            catch (CannotAssignDroneToParcelException ex)
             {
 
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("cannot pair");
             }
         }
 
         private void btnDelivery_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
 
+                BLAccess.DroneArrivedToDestination(drone.Id);
+                MessageBox.Show("the parcel was delivered to the customer");
+                DroneToList dr = BLAccess.GetDroneToLists().ToList().Find(x=>x.Id == drone.Id);
+                fillTextbox(dr);
+
+                btnPickedup.Visibility = Visibility.Hidden;
+                btnPickedup.Visibility = Visibility.Hidden;
+                btnCharge.Visibility = Visibility.Visible;
+                btnPairDrone_parcel.Visibility = Visibility.Visible;
+                btnArrived.Visibility = Visibility.Hidden;
+                Update();
+
+            }
+            catch (CannotSupplyException ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnPickedup_Click(object sender, RoutedEventArgs e)
@@ -250,69 +301,79 @@ namespace PL
                 DroneToList dr = BLAccess.GetDroneToLists().FirstOrDefault(x => x.Id == drone.Id);
                 fillTextbox(dr);
                 MessageBox.Show("the parcel was collected by the parcel");
+               
+                
+                btnPickedup.Visibility = Visibility.Hidden;
+                btnArrived.Visibility = Visibility.Hidden;
+                btnCharge.Visibility = Visibility.Hidden;
+                btnPairDrone_parcel.Visibility = Visibility.Hidden;
+                btnArrived.Visibility = Visibility.Visible;
+                labelCharging.Visibility = Visibility.Hidden;
+                charging_time.Visibility = Visibility.Hidden;
                 Update();
+               
             }
-            catch (Exception ex)
+            catch (CannotPickUpException ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
 
-            private void btnUpdateModel_Click(object sender, RoutedEventArgs e)
+        private void btnUpdateModel_Click(object sender, RoutedEventArgs e)
+        {
+            try
             {
-                try
-                {
 
-                    string model = ShowModel.Text;
-                    BLAccess.UpdateDroneModel(drone.Id, model);
-                    MessageBox.Show("the model of the drone was successfully updated");
+                string model = ShowModel.Text;
+                BLAccess.UpdateDroneModel(drone.Id, model);
+                MessageBox.Show("the model of the drone was successfully updated");
 
-                    DroneToList dr = BLAccess.GetDroneToLists().ToList().Find(x => x.Id == drone.Id);
-                    fillTextbox(dr);
-                    Update();
+                DroneToList dr = BLAccess.GetDroneToLists().ToList().Find(x => x.Id == drone.Id);
+                fillTextbox(dr);
+                Update();
 
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
 
             }
 
-            private void Close_Click(object sender, RoutedEventArgs e)
-            {
-                Close();
-            }
+        }
 
-            private void txtBattery_TextChanged(object sender, TextChangedEventArgs e)
-            {
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
 
-            }
+        private void txtBattery_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
-            private void Longitude_TextChanged(object sender, TextChangedEventArgs e)
-            {
+        }
 
-            }
+        private void Longitude_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
-            private void Latitude_TextChanged(object sender, TextChangedEventArgs e)
-            {
+        }
 
-            }
+        private void Latitude_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
-            private void Status_TextChanged(object sender, TextChangedEventArgs e)
-            {
+        }
 
-            }
+        private void Status_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
-            private void ShowWeight_TextChanged(object sender, TextChangedEventArgs e)
-            {
+        }
 
-            }
+        private void ShowWeight_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
-            private void charging_time_TextChanged(object sender, TextChangedEventArgs e)
-            {
+        }
 
-            }
+        private void charging_time_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
+}
