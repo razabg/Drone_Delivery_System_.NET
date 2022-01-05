@@ -39,6 +39,16 @@ namespace DAL
             DataSource.CustomersList[indexCustomer] = c;
         }
 
+        public void UpdateDeleteDroneInCharge(int DroneId)
+        {
+            var indexDrone = ReturnDroneChargeList().ToList().FindIndex(x => x.DroneId == DroneId);
+            if (indexDrone == -1)
+            {
+                throw new NotExistsException();
+            }
+            DataSource.DroneChargeList.RemoveAt(indexDrone);
+        }
+
         public void UpdateParcel(Parcel p)
         {
             var indexParcel = DataSource.ParcelsList.FindIndex(x => x.Id == p.Id);
