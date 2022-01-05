@@ -47,7 +47,6 @@ namespace DAL
             s.ChargeSlots--;
             DataSource.StationsList[indexStation] = s;
             DataSource.DroneChargeList.Add(DCharge);
-
         }
 
         /// <summary>
@@ -65,7 +64,6 @@ namespace DAL
             Parcel helper = (DataSource.ParcelsList[indexParcel]); //in order to update the idrone in parcel.droneid we used helper to get the right id .
             helper.PickedUp = DateTime.Now;
             (DataSource.ParcelsList[indexParcel]) = helper;
-
         }
 
         /// <summary>
@@ -86,10 +84,20 @@ namespace DAL
             (DataSource.ParcelsList[indexParcel]) = helper;
 
         }
+        public void UpdateStation(Station stationTemp)
+        {
+            int stationIndex = DataSource.StationsList.FindIndex(x => x.Id == stationTemp.Id);
+            if (stationIndex == -1)
+            {
+                throw new NotExistsException();
+            }
+            DataSource.StationsList[stationIndex] = stationTemp;
+        }
 
-        #endregion
 
-    }
+            #endregion
+
+        }
 
 }
 
