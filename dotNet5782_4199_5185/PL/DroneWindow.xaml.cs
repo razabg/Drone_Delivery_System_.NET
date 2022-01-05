@@ -264,7 +264,7 @@ namespace PL
                 {
 
                     string model = ShowModel.Text;
-                    BLAccess.UpdateDroneName(drone.Id, model);
+                    BLAccess.UpdateDroneModel(drone.Id, model);
                     MessageBox.Show("the model of the drone was successfully updated");
 
                     DroneToList dr = BLAccess.GetDroneToLists().ToList().Find(x => x.Id == drone.Id);

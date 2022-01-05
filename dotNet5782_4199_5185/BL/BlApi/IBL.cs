@@ -27,7 +27,7 @@ namespace BlApi
         public DO.Customer returnTargetCustomer(DO.Parcel parcel);
         public void UpdateBaseStationData(int baseStationId, string baseStationName, int totalChargeSlots);
         public void UpdateCustomerData(int CustomerId, string customerName, string phoneNumber);
-        public void UpdateDroneName(int droneid, string NewModel);
+        public void UpdateDroneModel(int droneid, string NewModel);
         public BaseStation DisplayStation(int station_id);
         public Drone DisplayDrone(int drone_id);
         public Customer DisplayCustomer(int customer_id);

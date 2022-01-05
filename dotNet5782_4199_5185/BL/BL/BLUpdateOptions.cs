@@ -9,8 +9,12 @@ namespace BL
 {
     internal sealed partial class BLObject //check if need to use the dal methods here.
     {
-
-        public void UpdateDroneName(int droneid, string NewModel) //should i 
+        /// <summary>
+        /// update drone model
+        /// </summary>
+        /// <param name="droneid"></param>
+        /// <param name="NewModel"></param>
+        public void UpdateDroneModel(int droneid, string NewModel) 
         {
 
             var index = AccessToDataMethods.ReturnDroneList().ToList().FindIndex(x => x.Id == droneid);
@@ -20,12 +24,12 @@ namespace BL
                 throw new NotExistsException();
             }
             var droneBL = ListDroneBL.Find(x => x.Id == droneid);//update in bl drone list
-            var DroneToUpdate = AccessToDataMethods.ReturnDroneList().ToList()[index];
+            DO.Drone DroneToUpdate = AccessToDataMethods.ReturnDroneList().ToList()[index];
             //used that way because the drone entity in dal is struct data type
             DroneToUpdate.Model = NewModel;
             droneBL.Model = NewModel;
-            AccessToDataMethods.ReturnDroneList().ToList()[index] = DroneToUpdate;
-        } //update the drones model
+            AccessToDataMethods.UpdateDrone(DroneToUpdate);
+        } 
         public void DroneToCharge(int droneid)
         {
             if (!ListDroneBL.Exists(x => x.Id == droneid))
@@ -47,14 +51,12 @@ namespace BL
                 throw new CannotGoToChargeException(droneid);
             }
 
-
             drone_to_charge.Battery = MinBattery;//
             drone_to_charge.CurrentLocation.Longitude = StationForCharge.Longitude;
             drone_to_charge.CurrentLocation.Latitude = StationForCharge.Latitude;
             drone_to_charge.Status = statusEnum.DroneStatus.TreatmentMode.ToString();
             //ListDroneBL[index] = drone_to_charge;
             var DalDrone = AccessToDataMethods.ReturnDroneList().ToList().Find(x => x.Id == drone_to_charge.Id);
-
             AccessToDataMethods.UpdateRecharge(StationForCharge, DalDrone);
 
         }
@@ -118,7 +120,7 @@ namespace BL
             if (EmergencyParcel.Any())
             {
                 DO.Customer nearestCustomer = NearestParcel_SenderIdcustomer(droneToPare.CurrentLocation.Longitude, droneToPare.CurrentLocation.Latitude, EmergencyParcel);//the function returns first of all the cloesest customer for calc the distance
-                var NearestParcel = EmergencyParcel.Where(x => x.SenderId == nearestCustomer.Id);//this the actual the nearset parcel
+                var NearestParcel = EmergencyParcel.ToList().FindAll(x => x.SenderId == nearestCustomer.Id);//this the actual the nearset parcel
                 var TargetCustomer = returnTargetCustomer(NearestParcel.First());
 
                 DO.Station nearestStaion = NearestStation(droneToPare.CurrentLocation.Longitude, droneToPare.CurrentLocation.Latitude, AccessToDataMethods.ReturnStationList().ToList());
@@ -140,12 +142,13 @@ namespace BL
                 var parcelIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_edit.Id);
                 parcel_edit.ParingTime = DateTime.Now;
                 parcel_edit.DroneId = droneToPare.Id;
-                AccessToDataMethods.ReturnParcelList().ToList().Insert(parcelIndex, parcel_edit);
+                AccessToDataMethods.UpdateParing(parcel_edit, drone_id);
+               //AccessToDataMethods.ReturnParcelList().Select(x=>x.Id == parcel_edit.Id) = parcel_edit;
             }
             else if (FastParcel.Any())
             {
                 DO.Customer nearestCustomer = NearestParcel_SenderIdcustomer(droneToPare.CurrentLocation.Longitude, droneToPare.CurrentLocation.Latitude, FastParcel);//the function returns first of all the cloesest customer for calc the distance
-                var NearestParcel = FastParcel.Where(x => x.SenderId == nearestCustomer.Id);//this the actual the nearset parcel
+                var NearestParcel = FastParcel.ToList().FindAll(x => x.SenderId == nearestCustomer.Id);//this the actual the nearset parcel
                 var TargetCustomer = returnTargetCustomer(NearestParcel.First());
 
                 DO.Station nearestStaion = NearestStation(droneToPare.CurrentLocation.Longitude, droneToPare.CurrentLocation.Latitude, AccessToDataMethods.ReturnStationList().ToList());
@@ -167,13 +170,14 @@ namespace BL
                 var parcelIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_edit.Id);
                 parcel_edit.ParingTime = DateTime.Now;
                 parcel_edit.DroneId = droneToPare.Id;
-                AccessToDataMethods.ReturnParcelList().ToList().Insert(parcelIndex, parcel_edit);
+                AccessToDataMethods.UpdateParing(parcel_edit, drone_id);
+                //AccessToDataMethods.ReturnParcelList().ToList().Insert(parcelIndex, parcel_edit);
             }
             else if (RegualrParcel.Any())
             {
 
                 DO.Customer nearestCustomer = NearestParcel_SenderIdcustomer(droneToPare.CurrentLocation.Longitude, droneToPare.CurrentLocation.Latitude, RegualrParcel);//the function returns first of all the cloesest customer for calc the distance
-                var NearestParcel = RegualrParcel.Where(x => x.SenderId == nearestCustomer.Id);//this the actual the nearset parcel
+                var NearestParcel = RegualrParcel.ToList().FindAll(x => x.SenderId == nearestCustomer.Id);//this the actual  nearset parcel
                 var TargetCustomer = returnTargetCustomer(NearestParcel.First());
 
                 DO.Station nearestStaion = NearestStation(droneToPare.CurrentLocation.Longitude, droneToPare.CurrentLocation.Latitude, AccessToDataMethods.ReturnStationList().ToList());
@@ -195,7 +199,8 @@ namespace BL
                 var parcelIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_edit.Id);
                 parcel_edit.ParingTime = DateTime.Now;
                 parcel_edit.DroneId = droneToPare.Id;
-                AccessToDataMethods.ReturnParcelList().ToList().Insert(parcelIndex, parcel_edit);
+                AccessToDataMethods.UpdateParing(parcel_edit, drone_id);
+                //AccessToDataMethods.ReturnParcelList().ToList().Insert(parcelIndex, parcel_edit);
 
             }
             else
@@ -219,6 +224,7 @@ namespace BL
                 throw new CannotPickUpException(drone_id);
             }
             var drone = ListDroneBL.Find(x => x.Id == drone_id);
+            
             DO.Parcel parcelToPickup = AccessToDataMethods.ReturnParcelList().ToList().Find(x => x.DroneId == drone_id);
             int parcelToPickupIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.DroneId == drone_id);
             if (parcelToPickup.ParingTime != null && parcelToPickup.PickedUp == null)
