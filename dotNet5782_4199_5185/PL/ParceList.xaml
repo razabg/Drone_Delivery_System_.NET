@@ -5,8 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="ParceList" Height="450" Width="800">
+        Title="ParceList" Height="450" Width="700">
+
     <Grid>
-        
+
+        <!--<Grid.Background>
+
+            <ImageBrush ImageSource="C:\Users\razab\Source\Repos\dotNet5782_4199_5185\dotNet5782_4199_5185\PL\imageforproject.jpg" Stretch="Fill" TileMode="None"></ImageBrush>
+        </Grid.Background>-->
+        <Grid RenderTransformOrigin="0.507,0.513" Margin="0,113,10,124">
+            <ListView x:Name="ParcelListView" ItemsSource="{Binding}" Margin="10,0,-10,0" Background="#FFCBB218" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=Id}"/>
+                        <GridViewColumn Header="Sender Name" DisplayMemberBinding="{Binding Path=SenderName}"/>
+                        <GridViewColumn Header="Receiver Name" DisplayMemberBinding="{Binding Path=ReceiverName}"/>
+                        <GridViewColumn Header="Weight" DisplayMemberBinding="{Binding Path=Weight}"/>
+                        <GridViewColumn Header="Priority" DisplayMemberBinding="{Binding Path=Priority}"/>
+                        <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Path=Status}"/>
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
     </Grid>
 </Window>

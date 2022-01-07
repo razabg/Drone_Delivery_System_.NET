@@ -290,7 +290,7 @@ namespace BL
                 {
                     Id = Item.Id,
                     Weight = Item.Weight.ToString(),
-                    status = parcelStatus(Item),
+                    Status = parcelStatus(Item),
                     Priority = Item.Priority.ToString(),
 
                     SenderName = find_SenderCustomer_Name.Name,
@@ -314,7 +314,7 @@ namespace BL
                     myNotPairedList.Add(new ParcelToList
                     {
                         Id = Item.Id,
-                        status = parcelStatus(Item),
+                        Status = parcelStatus(Item),
                         Weight = Item.Weight.ToString(),
                         Priority = Item.Priority.ToString(),
 

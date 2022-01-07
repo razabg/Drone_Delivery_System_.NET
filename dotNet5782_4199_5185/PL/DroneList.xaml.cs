@@ -35,12 +35,12 @@ namespace PL
 
             collection = new ObservableCollection<DroneToList>(BLAccess.GetDroneToLists());
             DroneListView.ItemsSource = collection;
-            Refresh();
+           
 
         }
 
        
-        private void Refresh()
+        public void Refresh()
         {
 
             DroneListView.DataContext = BLAccess.GetDroneToLists();
@@ -69,7 +69,7 @@ namespace PL
         {
            DroneWindow ToShow = new DroneWindow(BLAccess);
             ToShow.Show();
-            Refresh();
+
 
         }
 
@@ -111,7 +111,7 @@ namespace PL
 
         private void updateList_Click(object sender, RoutedEventArgs e)
         {
-            DroneListView.DataContext = BLAccess.GetDroneToLists();
+            DroneListView.ItemsSource = BLAccess.GetDroneToLists();
         }
     }
 }

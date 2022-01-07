@@ -13,7 +13,7 @@ namespace BO
         public string ReceiverName { set; get; }
         public string Weight { set; get; }
         public string Priority { set; get; }
-        public string status { set; get; }
+        public string Status { set; get; }
 
 
 
@@ -23,7 +23,7 @@ namespace BO
             printInfo += $"ID:{Id}\n";
             printInfo += $"weight:{Weight},\n";
             printInfo += $"Priority:{Priority},\n";
-            printInfo += $"Status:{status},\n";
+            printInfo += $"Status:{Status},\n";
             printInfo += $"Receiver:{ReceiverName},\n";
             printInfo += $"Sender name:{SenderName},\n";
 

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BO;
 using BlApi;
+
 namespace PL
 {
     /// <summary>
@@ -154,6 +155,7 @@ namespace PL
                 drone.Weight = MaxWeight.SelectedItem.ToString();
                 BaseStationToList stationId = (BaseStationToList)StationForCharge.SelectedItem;
                 BLAccess.AddDrone(drone, Convert.ToInt32(stationId.Id));
+               
                 MessageBox.Show("the drone was successfully added");
 
 
@@ -177,9 +179,12 @@ namespace PL
             }
             new DroneWindow(BLAccess);
             if (flag)
+            {
+                DroneList droneList = new DroneList(BLAccess);
+                droneList.Refresh();
                 this.Close();
-
-            Update();
+            }
+           
 
 
 
