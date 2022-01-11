@@ -10,6 +10,23 @@ using System.Threading.Tasks;
 namespace DO
 
 {
+    public class XMLFileLoadOrCreateException : Exception
+    {
+        private string xmlFilePath;
+        public XMLFileLoadOrCreateException(string xmlPath) : base() { xmlFilePath = xmlPath; }
+        public XMLFileLoadOrCreateException(string xmlPath, string message) :
+            base(message)
+        { xmlFilePath = xmlPath; }
+        public XMLFileLoadOrCreateException(string xmlPath, string message, Exception innerException) :
+            base(message, innerException)
+        { xmlFilePath = xmlPath; }
+
+        public override string ToString() => base.ToString() + $", fail to load or create xml file: {xmlFilePath}";
+    }
+
+
+
+
     [Serializable]
     public class AlreadyExistsException : Exception
     {

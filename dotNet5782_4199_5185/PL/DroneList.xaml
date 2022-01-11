@@ -5,22 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DroneList" Height="450" Width="923">
-    <Grid Name="MainGrid" Margin="10,10,0,0">
+        Title="DroneList" Height="450" Width="923" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}">
+    <Grid Name="MainGrid" Margin="0,10,0,-6" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" HorizontalAlignment="Center" Width="923" OpacityMask="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="344*"/>
+            <ColumnDefinition Width="27*"/>
+            <ColumnDefinition Width="28*"/>
+            <ColumnDefinition Width="9*"/>
+            <ColumnDefinition Width="31*"/>
+            <ColumnDefinition Width="322*"/>
+            <ColumnDefinition Width="108*"/>
+            <ColumnDefinition Width="54*"/>
             <ColumnDefinition Width="0*"/>
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="26*"/>
+            <RowDefinition Height="52*"/>
             <RowDefinition Height="0*"/>
-            <RowDefinition Height="129*"/>
-            <RowDefinition Height="57*"/>
+            <RowDefinition Height="258*"/>
+            <RowDefinition Height="111*"/>
+            <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
-        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Margin="0,-13,0,13" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="3">
+        <Grid Name="UpGrid" Height="314" Grid.Row="0" Width="auto" Margin="5,0,0,13" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="3" Grid.ColumnSpan="8" VerticalAlignment="Bottom">
             <Grid.RowDefinitions>
-                <RowDefinition Height="199*"/>
+                <RowDefinition Height="9*"/>
+                <RowDefinition Height="190*"/>
                 <RowDefinition Height="111*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -40,14 +49,14 @@
                 </TransformGroup>
             </Grid.RenderTransform>
 
-            <ComboBox x:Name="dronestatus" Margin="448,12,201,0" VerticalAlignment="Top" RenderTransformOrigin="0.555,2.567" Height="34" SelectionChanged="StatusSelector_SelectionChanged" Grid.Column="3"/>
-            <Label x:Name="StatusSelectorLabel" Content="Select status:" HorizontalAlignment="Left" Margin="347,18,0,0" VerticalAlignment="Top" Height="26" Width="79" RenderTransformOrigin="0.599,1.172" Grid.Column="3"/>
-            <ComboBox x:Name="MaxWeight" HorizontalAlignment="Left" Margin="166,16,0,0" VerticalAlignment="Top" Width="159" Height="33" SelectionChanged="MaxWeight_SelectionChanged" Grid.Column="3"/>
-            <Label x:Name="MaxWeightLablel" Content="Max weight" HorizontalAlignment="Left" Margin="67,21,0,0" VerticalAlignment="Top" Height="26" Width="71" Grid.Column="3"/>
-            <ListView x:Name="DroneListView" ItemsSource="{Binding}" Margin="-7,65,7,2"  SelectionChanged="ListView_SelectionChanged" MouseDoubleClick="List_viewDC" Grid.RowSpan="2" Grid.ColumnSpan="4"  >
+            <ComboBox x:Name="dronestatus" Margin="457,13,192,0" VerticalAlignment="Top" RenderTransformOrigin="0.555,2.567" Height="34" SelectionChanged="StatusSelector_SelectionChanged" Grid.Column="3" Grid.Row="1"/>
+            <Label x:Name="StatusSelectorLabel" Content="Select status:" HorizontalAlignment="Left" Margin="371,18,0,0" VerticalAlignment="Top" Height="26" Width="79" RenderTransformOrigin="0.599,1.172" Grid.Column="3" Grid.Row="1" FontWeight="Bold"/>
+            <ComboBox x:Name="MaxWeight" HorizontalAlignment="Left" Margin="166,11,0,0" VerticalAlignment="Top" Width="159" Height="33" SelectionChanged="MaxWeight_SelectionChanged" Grid.Column="3" Grid.Row="1"/>
+            <Label x:Name="MaxWeightLablel" Content="Max weight" HorizontalAlignment="Left" Margin="82,16,0,0" VerticalAlignment="Top" Height="26" Width="85" Grid.Column="3" Grid.Row="1" FontWeight="Bold"/>
+            <ListView x:Name="DroneListView" ItemsSource="{Binding}" Margin="-7,54,7,2"  SelectionChanged="ListView_SelectionChanged" MouseDoubleClick="List_viewDC" Grid.RowSpan="2" Grid.ColumnSpan="4" Grid.Row="1"  >
                 <ListView.View>
                     <GridView>
-                        
+
                         <GridViewColumn Header="Drone ID"  DisplayMemberBinding="{Binding Path=Id,NotifyOnSourceUpdated=True}"/>
                         <GridViewColumn Header="Model" DisplayMemberBinding="{Binding Path=Model}"/>
                         <GridViewColumn Header="Weight" DisplayMemberBinding="{Binding Path=Weight}"/>
@@ -60,8 +69,8 @@
                 </ListView.View>
             </ListView>
         </Grid>
-        <Button x:Name="AddDrone" Content="Add new drone" HorizontalAlignment="Left" Margin="741,6,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.296,-0.397" Width="132" Height="29" Click="AddDrone_Click" Background="#FFDEC262"/>
-        <Button x:Name="close_window" Content="Close" HorizontalAlignment="Left" Margin="796,57,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Click="close_window_Click" Height="32" Width="77" Background="#FFDEC262"/>
+        <Button x:Name="AddDrone" Content="Add new drone" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.296,-0.397" Width="129" Height="29" Click="AddDrone_Click" Background="#FFDEC262" Grid.ColumnSpan="2" Grid.Column="6"/>
+        <Button x:Name="close_window" Content="Close" HorizontalAlignment="Left" Margin="43,57,0,0" Grid.Row="3" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Click="close_window_Click" Height="32" Width="77" Background="#FFDEC262" Grid.ColumnSpan="2" Grid.Column="6"/>
         <Button x:Name="updateList" Content="Update List"  HorizontalAlignment="Left" Margin="38,59,0,0" Grid.Row="3" VerticalAlignment="Top" Click="updateList_Click" Background="#FFDEC262"/>
 
     </Grid>

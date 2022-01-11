@@ -5,8 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="StationList" Height="450" Width="800">
-    <Grid>
-        
+        Title="Stationlist" Height="450" Width="700">
+
+    <Grid Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}">
+
+        <Grid RenderTransformOrigin="0.507,0.513" Margin="0,113,10,124">
+            <ListView x:Name="StationListView" ItemsSource="{Binding}" Margin="0,-11,-13,-47" Background="#FFCBB218" BorderBrush="#FFD7E013" FontFamily="Arial" FontWeight="Bold" SelectionChanged="StationListView_SelectionChanged"  >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="ID"   DisplayMemberBinding="{Binding Path=Id}"/>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
+                        <GridViewColumn Header="Available Charging Slots" DisplayMemberBinding="{Binding Path=NumOfAvailableChargingSlots}"/>
+
+                        <GridViewColumn Header="Unavailable Charging Slots" DisplayMemberBinding="{Binding Path=NumOfUnavailableChargingSlots}"/>
+
+
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Button x:Name="AddStation" Content="Add Station" HorizontalAlignment="Left" Margin="567,10,0,0" Background="#FFDEC262" VerticalAlignment="Top" Width="118" Height="29"/>
+        <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Background="#FFDEC262" Margin="604,369,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="Refresh" Content="Refresh" HorizontalAlignment="Left" Background="#FFDEC262" Margin="25,369,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="Group_By" Content="Group by" HorizontalAlignment="Left" Background="#FFDEC262" Margin="567,48,0,0" VerticalAlignment="Top" Width="118" Height="28"/>
+
     </Grid>
 </Window>

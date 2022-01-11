@@ -29,6 +29,9 @@ namespace PL
 
         }
 
+        private void ParcelListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
+        }
     }
 }

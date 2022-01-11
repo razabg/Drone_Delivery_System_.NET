@@ -17,39 +17,36 @@ namespace DalApi
         void AddStation(Station sta);
         #endregion
 
-        #region FIND AND PRINT METHODS
-        void findAndPrint_Customer(int key);
-        void findAndPrint_Drone(int key);
-        void findAndPrint_Parcel(int key);
-        void findAndPrint_Station(int key);
+        #region FIND entity
+        Customer GetCustomer(int key);
+        Drone GetDrone(int key);
+        Parcel GetParcel(int key);
+        Station GetStation(int key);
+        DroneINCharge GetDroneInCharge(int key);
         #endregion
 
         #region UPDATE STATUS METHODS
-        public void UpdateRecharge(Station s, Drone d);
-        public void UpdateParcel(Parcel p);
-        public void UpdateDrone(Drone d);
-        public void UpdateStation(Station s);
-        public void UpdateCustomer(Customer c);
-        public void UpdateDeleteDroneInCharge(int DroneId);
+        void UpdateRecharge(Station s, Drone d);
+        void UpdateParcel(Parcel p);
+        void UpdateDrone(Drone d);
+        void UpdateStation(Station s);
+        void UpdateCustomer(Customer c);
+        void UpdateDeleteDroneInCharge(int DroneId);
 
         #endregion
 
         #region SHOW LISTS METHODS
-        public void show_station_list();
-        public void show_drone_list();
-        public void show_parcel_list();
-        public void show_customer_list();
-        public void show_AvailableChargingStations_list();
-        public void show_UnassignmentParcel_list();
+         void show_AvailableChargingStations_list();
+         void show_UnassignmentParcel_list();
         #endregion
 
-        public double[] PowerConsumptionRequestDrone();
-        public int ReturnParcelStatus(Parcel par);
+         double[] PowerConsumptionRequestDrone();
+         int ReturnParcelStatus(Parcel par);
 
-        public IEnumerable<Drone> ReturnDroneList();
-        public IEnumerable<Parcel> ReturnParcelList();
-        public IEnumerable<DroneINCharge> ReturnDroneChargeList();
-        public IEnumerable<Station> ReturnStationList();
-        public IEnumerable<Customer> ReturnCustomerList();
+         IEnumerable<Drone> ReturnDroneList(Func<Drone, bool> predicate = null);
+         IEnumerable<Parcel> ReturnParcelList(Func<Parcel, bool> predicate = null);
+         IEnumerable<DroneINCharge> ReturnDroneChargeList(Func<DroneINCharge, bool> predicate = null);
+         IEnumerable<Station> ReturnStationList(Func<Station, bool> predicate = null);
+         IEnumerable<Customer> ReturnCustomerList(Func<Customer, bool> predicate = null);
     }
 }

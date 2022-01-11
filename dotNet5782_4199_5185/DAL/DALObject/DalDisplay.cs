@@ -11,34 +11,11 @@ namespace DAL
     internal sealed partial class DALobject
     {
         #region Show methods
-        /// <summary>
-        /// uses foreach loop to print the list of the entity' type the user asked
-        /// </summary>
-        /// <param name="key"></param>
-        public void show_customer_list()
-        {
-
-            foreach (Customer item in DataSource.CustomersList)
-            {
-                Console.WriteLine(item);
-                Console.WriteLine($"\n");
-            }
-        }
-        /// <summary>
-        /// uses foreach loop to print the list of the entity' type the user asked
-        /// </summary>
-        public void show_parcel_list()
-        {
-            foreach (Parcel item in DataSource.ParcelsList)
-            {
-                Console.WriteLine(item);
-                Console.WriteLine($"\n");
-            }
-        }
+       
         /// <summary>
         /// run on the items of ParcelsList - checks the drone-id - and print every parcel that her droneid' isn't equal to one from the drones
         /// </summary>
-        public void show_UnassignmentParcel_list()
+        public void show_UnassignmentParcel_list()// FIX
         {
             foreach (Parcel parcel in DataSource.ParcelsList)
             {
@@ -49,32 +26,12 @@ namespace DAL
                 }
             }
         }
-        /// <summary>
-        /// /// uses foreach loop to print the list of the entity' type the user asked
-        /// </summary>
-        public void show_drone_list()
-        {
-            foreach (Drone item in DataSource.DronesList)
-            {
-                Console.WriteLine(item);
-                Console.WriteLine($"\n");
-            }
-        }
-        /// <summary>
-        /// uses foreach loop to print the list of the entity' type the user asked
-        /// </summary>
-        public void show_station_list()
-        {
-            foreach (Station item in DataSource.StationsList)
-            {
-                Console.WriteLine(item);
-                Console.WriteLine($"\n");
-            }
-        }
+      
+        
         /// <summary>
         /// Print a list of available Charging Stations
         /// </summary>
-        public void show_AvailableChargingStations_list()
+        public void show_AvailableChargingStations_list()//FIX
         {
             foreach (Station item in DataSource.StationsList)
             {
@@ -91,40 +48,81 @@ namespace DAL
 
         #region Find and print methods
         /// <summary>
-        /// Use the "key" to find a Customer and print his data
+        /// Use the "key" to find a Customer and return it
         /// </summary>
         /// <param name="key"></param>
-        public void findAndPrint_Customer(int key)
+        public Customer GetCustomer(int key)
         {
-            Customer ForPrint = DataSource.CustomersList.Find(x => x.Id == key);
-            Console.WriteLine(ForPrint);
+            Customer customer = DataSource.CustomersList.Find(x => x.Id == key);
+            if (customer.Id != 0)
+            {
+                return customer;
+            }
+            else
+            {
+                throw new NotExistsException();
+            }
         }
         /// <summary>
-        /// Use the "key" to find a station and print his data
+        /// Use the "key" to find a station and return it
         /// </summary>
         /// <param name="key"></param>
-        public void findAndPrint_Station(int key)
+        public Station GetStation(int key)
         {
-            Station ForPrint = DataSource.StationsList.Find(x => x.Id == key);
-            Console.WriteLine(ForPrint);
+            Station station = DataSource.StationsList.Find(x => x.Id == key);
+            if (station.Id != 0)
+            {
+                return station;
+            }
+            else
+            {
+                throw new NotExistsException();
+            }
         }
         /// <summary>
-        /// Use the "key" to find a drone and print his data
+        /// Use the "key" to find a drone and return it 
         /// </summary>
         /// <param name="key"></param>
-        public void findAndPrint_Drone(int key)
+        public Drone GetDrone(int key)
         {
-            Drone ForPrint = DataSource.DronesList.Find(x => x.Id == key);
-            Console.WriteLine(ForPrint);
+            Drone drone= DataSource.DronesList.Find(x => x.Id == key);
+            if (drone.Id != 0)
+            {
+                return drone;
+            }
+            else
+            {
+                throw new NotExistsException();
+            }
         }
         /// <summary>
-        /// Use the "key" to find a Parcel and print his data
-        /// </summary>
+        /// Use the "key" to find a Parcel and return it
         /// <param name="key"></param>
-        public void findAndPrint_Parcel(int key)
+        public Parcel GetParcel(int key)
         {
-            Parcel ForPrint = DataSource.ParcelsList.Find(x => x.Id == key);
-            Console.WriteLine(ForPrint);
+            Parcel parcel = DataSource.ParcelsList.Find(x => x.Id == key);
+            if (parcel.Id != 0)
+            {
+                return parcel;
+            }
+            else
+            {
+                throw new NotExistsException();
+            }
+        }
+
+
+        public DroneINCharge GetDroneInCharge(int key)
+        {
+            DroneINCharge droneINCharge = DataSource.DroneChargeList.Find(x => x.DroneId == key);
+            if (droneINCharge.DroneId != 0)
+            {
+                return droneINCharge;
+            }
+            else
+            {
+                throw new NotExistsException();
+            }
         }
         #endregion
 
@@ -132,7 +130,7 @@ namespace DAL
         /// Method to return drone list
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Drone> ReturnDroneList()
+        public IEnumerable<Drone> ReturnDroneList(Func<Drone, bool> predicate = null)
         {
             return DataSource.DronesList;
         }
@@ -140,7 +138,7 @@ namespace DAL
         /// Method to return parcel list
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Parcel> ReturnParcelList()
+        public IEnumerable<Parcel> ReturnParcelList(Func<Parcel, bool> predicate = null)
         {
             return  DataSource.ParcelsList;
         }
@@ -148,7 +146,7 @@ namespace DAL
         /// Method to return station list
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Station> ReturnStationList()
+        public IEnumerable<Station> ReturnStationList(Func<Station, bool> predicate = null)
         {
             return DataSource.StationsList;
         }
@@ -156,7 +154,7 @@ namespace DAL
         /// Method to return customer list
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Customer> ReturnCustomerList()
+        public IEnumerable<Customer> ReturnCustomerList(Func<Customer, bool> predicate = null)
         {
             return DataSource.CustomersList;
         }
@@ -164,7 +162,7 @@ namespace DAL
         /// Method to return drone charge list
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<DroneINCharge> ReturnDroneChargeList()
+        public IEnumerable<DroneINCharge> ReturnDroneChargeList(Func<DroneINCharge, bool> predicate = null)
         {
             return DataSource.DroneChargeList;
         }

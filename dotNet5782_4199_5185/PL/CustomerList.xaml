@@ -5,8 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="CustomerList" Height="450" Width="800">
-    <Grid>
-        
+        Title="Custotmerlist" Height="450" Width="1061">
+
+    <Grid Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Margin="10,0,0,-6">
+
+        <Grid RenderTransformOrigin="0.507,0.513" Margin="0,113,10,124">
+            <ListView x:Name="CustomerListView" ItemsSource="{Binding}" Margin="0,-11,10,-47" Background="#FFCBB218" BorderBrush="#FFD7E013" FontFamily="Arial" FontWeight="Bold" SelectionChanged="CustomerListView_SelectionChanged"  >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="ID"   DisplayMemberBinding="{Binding Path=Id}"/>
+                        <GridViewColumn Header="Name"   DisplayMemberBinding="{Binding Path=Name}"/>
+                        <GridViewColumn Header="Phone-number"   DisplayMemberBinding="{Binding Path=PhoneNumber}"/>
+                        <GridViewColumn Header="Sent  Arrived Parcels"   DisplayMemberBinding="{Binding Path=NumOfParcelsThatSentAndArrived}"/>
+                        <GridViewColumn Header="Sent  didnt arrive Parcel"   DisplayMemberBinding="{Binding Path=NumOfParcelsThatSentAndNotArrived}"/>
+                        <GridViewColumn Header="On the way" DisplayMemberBinding="{Binding Path=NumOfParcelsOnTheWay}"/>
+                        <GridViewColumn Header="Arrived to customer" DisplayMemberBinding="{Binding Path=NumOfArrivedParcels}"/>
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Button x:Name="AddStation" Content="Add Station" HorizontalAlignment="Left" Margin="900,10,0,0" Background="#FFDEC262" VerticalAlignment="Top" Width="118" Height="29"/>
+        <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Background="#FFDEC262" Margin="952,369,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.693,0.38"/>
+        <Button x:Name="Refresh" Content="Refresh" HorizontalAlignment="Left" Background="#FFDEC262" Margin="25,369,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="Group_By" Content="Group by" HorizontalAlignment="Left" Background="#FFDEC262" Margin="900,57,0,0" VerticalAlignment="Top" Width="118" Height="28"/>
+
     </Grid>
 </Window>

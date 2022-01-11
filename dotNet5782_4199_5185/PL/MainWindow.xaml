@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="412" Width="505"
+        Title="MainWindow" Height="379" Width="498"
         ResizeMode="NoResize"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -43,13 +43,13 @@
                     <DropShadowEffect/>
                 </Button.Effect>
             </Button>
-            <Button x:Name="Parcel_list" Content="Parcel list" HorizontalAlignment="Left" Margin="358,25,0,0" VerticalAlignment="Top" Click="ParcelList_click" Width="126" Visibility="Visible" Height="50" Grid.Column="1" Grid.Row="1"  Background="#FFDEC262">
+            <Button x:Name="Parcel_list" Content="Parcel list" HorizontalAlignment="Left" Margin="344,25,0,0" VerticalAlignment="Top" Click="ParcelList_click" Width="126" Visibility="Visible" Height="50" Grid.Column="1" Grid.Row="1"  Background="#FFDEC262">
 
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
             </Button>
-            <Button x:Name="Customers_list" Content="Customers list" HorizontalAlignment="Left" Margin="359,250,0,0" VerticalAlignment="Top" Click="CustomerList_click" Width="125" Visibility="Visible" Height="50" Grid.Column="1" Grid.Row="1" Background="#FFDEC262">
+            <Button x:Name="Customers_list" Content="Customers list" HorizontalAlignment="Left" Margin="345,250,0,0" VerticalAlignment="Top" Click="CustomerList_click" Width="125" Visibility="Visible" Height="50" Grid.Column="1" Grid.Row="1" Background="#FFDEC262">
 
                 <Button.Effect>
                     <DropShadowEffect/>

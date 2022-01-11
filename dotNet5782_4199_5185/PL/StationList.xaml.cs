@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BO;
+using BlApi;
 
 namespace PL
 {
@@ -19,9 +21,16 @@ namespace PL
     /// </summary>
     public partial class StationList : Window
     {
-        public StationList(BlApi.IBL bLAccess)
+        public StationList(BlApi.IBL BLAccess)
         {
             InitializeComponent();
+            BLAccess = BlFactory.GetBl();
+            StationListView.DataContext = BLAccess.GetBaseStationToLists();
+        }
+
+        private void StationListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

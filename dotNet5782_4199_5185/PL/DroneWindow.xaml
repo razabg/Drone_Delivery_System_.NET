@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="Window1" Height="567" Width="802">
-    <Grid Margin="10,0,34,-6">
+    <Grid Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Margin="10,0,0,-6">
+        <Grid Margin="10,0,34,-6">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="315*"/>
             <ColumnDefinition Width="12*"/>
@@ -64,5 +65,6 @@
 
 
 
+    </Grid>
     </Grid>
 </Window>

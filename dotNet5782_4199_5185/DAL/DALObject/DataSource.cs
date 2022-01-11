@@ -83,7 +83,7 @@ namespace DAL
         public static Enum genRandCustomer()
         {
             Random rand3 = new Random();
-            DalEnum.CustomerName RandCustomer = (DalEnum.CustomerName)rand3.Next(1, Enum.GetNames(typeof(DalEnum.CustomerName)).Length + 1);
+            DalEnum.CustomerName RandCustomer = (DalEnum.CustomerName)rand3.Next(0, Enum.GetNames(typeof(DalEnum.CustomerName)).Length);
             return RandCustomer;
         }
 
