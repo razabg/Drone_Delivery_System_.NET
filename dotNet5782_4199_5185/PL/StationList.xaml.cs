@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BO;
 using BlApi;
+using System.Collections.ObjectModel;
 
 namespace PL
 {
@@ -21,15 +22,34 @@ namespace PL
     /// </summary>
     public partial class StationList : Window
     {
+        private IBL BLAccess;//access to bl layer through ibl interface
+        private ObservableCollection<BaseStationToList> collection = new ObservableCollection<BaseStationToList>();
         public StationList(BlApi.IBL BLAccess)
         {
             InitializeComponent();
             BLAccess = BlFactory.GetBl();
-            StationListView.DataContext = BLAccess.GetBaseStationToLists();
+            collection = new ObservableCollection<BaseStationToList>(BLAccess.GetBaseStationToLists());
+            StationListView.DataContext = collection;
         }
 
         private void StationListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
+
+        }
+
+        private void Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(StationListView.ItemsSource);
+            view.GroupDescriptions.Clear();
+        }
+
+        private void Group_By_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(StationListView.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("NumOfAvailableChargingSlots");
+            view.GroupDescriptions.Add(groupDescription);
+            
 
         }
     }

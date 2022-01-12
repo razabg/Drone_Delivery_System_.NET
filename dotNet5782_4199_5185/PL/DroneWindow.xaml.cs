@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BO;
 using BlApi;
+using System.Collections.ObjectModel;
 
 namespace PL
 {
@@ -21,14 +22,17 @@ namespace PL
     /// </summary>
     public partial class DroneWindow : Window
     {
-        private IBL BLAccess;
+       private IBL BLAccess;
+        ObservableCollection<DroneToList> collection;
         DroneToList drone = new DroneToList();// insert the input of user to this object
+
         public event Action Update = delegate { };
-        public DroneWindow(IBL accsess)
+        public DroneWindow(IBL BLAccess)
         {
+            this.BLAccess = BLAccess;
             InitializeComponent();
 
-            BLAccess = BlFactory.GetBl();
+          
             choose_model.DataContext = Enum.GetValues(typeof(statusEnum.DroneModel));
             StationForCharge.ItemsSource = BLAccess.GetBaseStationToLists().ToList();
             MaxWeight.ItemsSource = Enum.GetValues(typeof(statusEnum.TopWeight));
@@ -66,7 +70,7 @@ namespace PL
 
             //to remove close box from window
             //Loaded += ToolWindow_Loaded;
-            this.BLAccess = BLaccess;
+           this.BLAccess = BLaccess;
             drone = new DroneToList();
             drone = drone_arg;
 
@@ -155,9 +159,8 @@ namespace PL
                 drone.Weight = MaxWeight.SelectedItem.ToString();
                 BaseStationToList stationId = (BaseStationToList)StationForCharge.SelectedItem;
                 BLAccess.AddDrone(drone, Convert.ToInt32(stationId.Id));
-               
                 MessageBox.Show("the drone was successfully added");
-
+               
 
             }
             catch (AlreadyExistsException ex)//check why the massage in not shown
@@ -177,11 +180,10 @@ namespace PL
                 IDfill.BorderBrush = (Brush)bc.ConvertFrom("#FFE92617");
 
             }
-            new DroneWindow(BLAccess);
+           // new DroneWindow(BLAccess);
             if (flag)
             {
-                DroneList droneList = new DroneList(BLAccess);
-                droneList.Refresh();
+               
                 this.Close();
             }
            

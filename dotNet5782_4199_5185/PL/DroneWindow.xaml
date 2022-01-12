@@ -23,7 +23,7 @@
         <Label x:Name="labelStation" Content="Station for Charge" HorizontalAlignment="Left" Margin="17,142,0,0" VerticalAlignment="Top" Height="24" Width="104"/>
         <ComboBox x:Name="MaxWeight"  HorizontalAlignment="Left" Margin="134,96,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="MaxWeight_SelectionChanged" Height="25" />
         <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Margin="41,467,0,0" VerticalAlignment="Top" Width="81" Click="Close_Click" RenderTransformOrigin="0.984,0.873" Height="32"/>
-        <Button x:Name="add_drone" Content="Add Drone" HorizontalAlignment="Left" Margin="87,350,0,0" VerticalAlignment="Top" Width="198" RenderTransformOrigin="0.261,0.603" Click="add_drone_Click" Height="37" FontSize="18" FontWeight="Bold">
+            <Button x:Name="add_drone" Content="Add Drone"  HorizontalAlignment="Left" Margin="87,350,0,0" VerticalAlignment="Top" Width="198" RenderTransformOrigin="0.261,0.603" Click="add_drone_Click" Height="37" FontSize="18" FontWeight="Bold">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
