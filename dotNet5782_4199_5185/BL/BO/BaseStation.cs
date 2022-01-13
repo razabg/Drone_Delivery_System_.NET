@@ -9,7 +9,7 @@ namespace BO
     public class BaseStation
     {
         public int Id{ get; set; }
-        public int Name{ get; set; }
+        public string Name{ get; set; }
         public Location location{ get; set; }
         public int NumberOfavailableChargingSlots{ get; set; }
         public IEnumerable<DroneInCharging> DroneINCharge{ get; set; }

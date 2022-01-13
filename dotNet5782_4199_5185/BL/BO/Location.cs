@@ -23,11 +23,17 @@ namespace BO
 
         public override string ToString()
         {
-            string printlocationInfo = "";
-            printlocationInfo += $"Longitude:{Longitude}\n";
-            printlocationInfo += $"Latitude:{Latitude},\n";
-
-            return printlocationInfo;
+            string sLatit = ConvertCoordinates(Latitude), sLong = ConvertCoordinates(Longitude);    /// Converts the coordinates to be in base 60 (bonus).
+            return sLatit + "N, " + sLong + "E";
+        }
+        public string ConvertCoordinates(double number)
+        {
+            int sec = (int)Math.Round(number * 3600);
+            int deg = sec / 3600;
+            sec = Math.Abs(sec % 3600);
+            int min = sec / 60;
+            sec %= 60;
+            return deg + "" + (char)176 + " " + min + " " + sec;
         }
 
     }

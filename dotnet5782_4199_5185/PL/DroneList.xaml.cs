@@ -23,57 +23,58 @@ namespace PL
     public partial class DroneList : Window
     {
 
-        private IBL BLAccess ;//access to bl layer through ibl interface
+        private IBL BLAccess;//access to bl layer through ibl interface
         private ObservableCollection<DroneToList> collection;
+        
         public DroneList(IBL access)
         {
             InitializeComponent();
-            BLAccess = BlFactory.GetBl();
-            DroneListView.DataContext = BLAccess.GetDroneToLists();
+            this.BLAccess = access;
+            collection = new ObservableCollection<DroneToList>(BLAccess.GetDroneToLists());
+            DataContext = collection;
             dronestatus.ItemsSource = Enum.GetValues(typeof(statusEnum.DroneStatus));
             MaxWeight.ItemsSource = Enum.GetValues(typeof(statusEnum.TopWeight));
 
-            collection = new ObservableCollection<DroneToList>(BLAccess.GetDroneToLists());
-            DroneListView.ItemsSource = collection;
-           
+
 
         }
 
-       
+
         public void Refresh()
         {
-
-            DroneListView.DataContext = BLAccess.GetDroneToLists();
-
+            collection = new ObservableCollection<DroneToList>(BLAccess.GetDroneToLists());
+            DroneListView.DataContext = collection;
         }
 
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           
+
         }
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             statusEnum.DroneStatus status = (statusEnum.DroneStatus)dronestatus.SelectedItem;
-            this.DroneListView.ItemsSource = BLAccess.GetDroneToLists().ToList().FindAll(x=>x.Status == status.ToString());
-            
+            this.DroneListView.DataContext = collection.Where(x => x.Status == status.ToString());//BLAccess.GetDroneToLists().ToList().FindAll(x => x.Status == status.ToString());
+
         }
 
         private void MaxWeight_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             statusEnum.TopWeight maxweight = (statusEnum.TopWeight)MaxWeight.SelectedItem;
-            this.DroneListView.ItemsSource = BLAccess.GetDroneToLists().ToList().FindAll(x => x.Weight == maxweight.ToString());
+            this.DroneListView.DataContext = collection.Where(x => x.Weight == maxweight.ToString());
+            //this.DroneListView.DataContext = BLAccess.GetDroneToLists().ToList().FindAll(x => x.Weight == maxweight.ToString());
         }
 
         private void AddDrone_Click(object sender, RoutedEventArgs e)
         {
-           DroneWindow ToShow = new DroneWindow(BLAccess);
-            ToShow.Show();
-
+            DroneWindow ToShow = new DroneWindow(BLAccess);
+            ToShow.ShowDialog();
+            collection = new ObservableCollection<DroneToList>(BLAccess.GetDroneToLists());
+            DroneListView.DataContext = collection;
 
         }
 
-       
+
 
         private void List_viewDC(object sender, MouseButtonEventArgs e)
         {
@@ -84,7 +85,7 @@ namespace PL
 
             try
             {
-                drone = BLAccess.GetDroneToLists().ToList().Find(x=>x.Id==drL.Id);
+                drone = BLAccess.GetDroneToLists().ToList().Find(x => x.Id == drL.Id);
 
             }
             catch (Exception ex)
@@ -98,10 +99,10 @@ namespace PL
 
         }
 
-        private void DroneWindow_Update()
+        public void DroneWindow_Update()
         {
             collection = new ObservableCollection<DroneToList>(BLAccess.GetDroneToLists());
-            DroneListView.ItemsSource = collection;
+            DroneListView.DataContext = collection;
         }
 
         private void close_window_Click(object sender, RoutedEventArgs e)
@@ -109,9 +110,11 @@ namespace PL
             Close();
         }
 
-        private void updateList_Click(object sender, RoutedEventArgs e)
+        public void updateList_Click(object sender, RoutedEventArgs e)
         {
-            DroneListView.ItemsSource = BLAccess.GetDroneToLists();
+            collection = new ObservableCollection<DroneToList>(BLAccess.GetDroneToLists());
+            DroneListView.DataContext = collection;
+
         }
     }
 }

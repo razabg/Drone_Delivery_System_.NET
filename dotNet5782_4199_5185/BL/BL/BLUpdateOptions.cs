@@ -323,7 +323,7 @@ namespace BL
                 if (totalChargeSlots >= numOfDronesInCharge)
                 {
                     StationUpdate.ChargeSlots = totalChargeSlots;
-                    StationUpdate.Name = int.Parse(baseStationName);
+                    StationUpdate.Name = baseStationName;
                     AccessToDataMethods.UpdateStation(StationUpdate);
                     
 

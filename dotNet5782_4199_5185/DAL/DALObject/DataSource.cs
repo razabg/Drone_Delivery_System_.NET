@@ -39,30 +39,7 @@ namespace DAL
         public static Random rand = new Random();
         const int MinRange = 111;
         const int MaxRange = 999;
-        public static string ConvertDecimalDegreesToSexagesimal(double decimalValueToConvert, string LongOrLat)
-        {
-            string direction = null;
-            if (LongOrLat == "Longitude")
-            {
-                if (decimalValueToConvert >= 0)
-                    direction = "N";
-                else direction = "S";
-            }
-
-            if (LongOrLat == "Latitude")
-            {
-                if (decimalValueToConvert >= 0)
-                    direction = "E";
-                else direction = "W";
-            }
-            int sec = (int)Math.Round(decimalValueToConvert * 3600);
-            int deg = sec / 3600;
-            sec = Math.Abs(sec % 3600);
-            int min = sec / 60;
-            sec %= 60;
-
-            return string.Format("{0}° {1}' {2}'' {3}", Math.Abs(deg), Math.Abs(min), Math.Abs(sec), direction);// return the complited number
-        }
+      
         public static Enum ModelRand()
         {
 
@@ -106,12 +83,7 @@ namespace DAL
             return rand.Next(MinRange, MaxRange);
         }
 
-        public static double Coordinates()
-        {
-            double Location = rand.Next(1111, 9999);
-            return Location;
-
-        }
+      
         #endregion
 
         /// <summary>
@@ -120,17 +92,17 @@ namespace DAL
         public static void Initialize()
         {
             List<int> randIdOfCustomers = new List<int>();//this list used to init the customer id nunmbers to target and sender id's in the parcel entity
-
+           
             for (int i = 0; i < 5; ++i)
             {
                 StationsList.Add(new Station()
                 {
                     Id = RandomIdFunc(),
-                    Name = rand.Next(MinRange / 3, MaxRange / 3),
+                    Name = "Station" + i+1,
                     ChargeSlots = rand.Next(1, 15),
-                    Longitude = Coordinates(),
-                    Latitude = Coordinates()
-                });
+                    Longitude = 35 + ((double)rand.Next(1400, 2700) / 10000),//we used coordinates of jerusalem
+                    Latitude = 31 + ((double)rand.Next(7300, 8300) / 10000)
+                }) ;
                 DroneChargeList.Add(new DroneINCharge()
                 {
                     DroneId = 0,
@@ -156,8 +128,8 @@ namespace DAL
                     Id = RandomIdFunc(),
                     Name = genRandCustomer().ToString(),
                     Phone = rand.Next(111111111, 999999999).ToString(),
-                    Longitude = Coordinates(),
-                    Latitude = Coordinates()
+                    Longitude = 35 + ((double)rand.Next(1400, 2700) / 10000),
+                    Latitude = 31 + ((double)rand.Next(7300, 8300) / 10000)
                 });
 
                 randIdOfCustomers.Add(CustomersList[i].Id);//list of customers ,used to rand id numbers in sender and target in parcel entity

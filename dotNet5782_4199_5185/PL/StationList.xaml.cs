@@ -27,7 +27,7 @@ namespace PL
         public StationList(BlApi.IBL BLAccess)
         {
             InitializeComponent();
-            BLAccess = BlFactory.GetBl();
+            this.BLAccess = BLAccess;
             collection = new ObservableCollection<BaseStationToList>(BLAccess.GetBaseStationToLists());
             StationListView.DataContext = collection;
         }
@@ -51,6 +51,19 @@ namespace PL
             view.GroupDescriptions.Add(groupDescription);
             
 
+        }
+
+        private void AddStation_Click(object sender, RoutedEventArgs e)
+        {
+            StationWindow ToShow = new StationWindow(BLAccess);
+            ToShow.ShowDialog();
+            //collection = new ObservableCollection<BaseStationToList>(BLAccess.GetBaseStationToLists());
+            //StationListView.DataContext = collection;
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

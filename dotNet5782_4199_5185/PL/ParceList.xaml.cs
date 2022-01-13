@@ -21,10 +21,11 @@ namespace PL
     /// </summary>
     public partial class ParceList : Window
     {
+        private IBL BLAccess;
         public ParceList(IBL BLAccess)
         {
             InitializeComponent();
-            BLAccess = BlFactory.GetBl();
+            this.BLAccess = BLAccess;
             ParcelListView.DataContext = BLAccess.GetParcelToLists();
 
         }

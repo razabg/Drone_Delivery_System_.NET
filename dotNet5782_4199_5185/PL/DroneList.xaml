@@ -55,14 +55,13 @@
                 <ListView.View>
                     <GridView>
 
-                        <GridViewColumn Header="Drone ID"  DisplayMemberBinding="{Binding Path=Id}"/>
-                        <GridViewColumn Header="Model" DisplayMemberBinding="{Binding Path=Model}"/>
-                        <GridViewColumn Header="Weight" DisplayMemberBinding="{Binding Path=Weight}"/>
-                        <GridViewColumn Header="Battery" DisplayMemberBinding="{Binding Path=Battery}"/>
-                        <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Path=Status}"/>
-                        <GridViewColumn Header="Longitude" DisplayMemberBinding="{Binding Path=CurrentLocation.Longitude}"/>
-                        <GridViewColumn Header="Latitude" DisplayMemberBinding="{Binding Path=CurrentLocation.Latitude}"/>
-                        <GridViewColumn Header="ID of parcel" DisplayMemberBinding="{Binding Path=IdOfParcelInTransfer}"/>
+                        <GridViewColumn Header="Drone ID"  DisplayMemberBinding="{Binding Id}"/>
+                        <GridViewColumn Header="Model" DisplayMemberBinding="{Binding Model}"/>
+                        <GridViewColumn Header="Weight" DisplayMemberBinding="{Binding Weight}"/>
+                        <GridViewColumn Header="Battery" DisplayMemberBinding="{Binding Battery}"/>
+                        <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}"/>
+                        <GridViewColumn Header="Longitude" DisplayMemberBinding="{Binding CurrentLocation}"/>
+                        <GridViewColumn Header="ID of parcel" DisplayMemberBinding="{Binding IdOfParcelInTransfer}"/>
                     </GridView>
                 </ListView.View>
             </ListView>

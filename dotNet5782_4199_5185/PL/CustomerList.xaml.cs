@@ -21,10 +21,11 @@ namespace PL
     /// </summary>
     public partial class CustomerList : Window
     {
+        private IBL BLAccess;
         public CustomerList(BlApi.IBL BLAccess)
         {
             InitializeComponent();
-            BLAccess = BlFactory.GetBl();
+            this.BLAccess = BLAccess;
             CustomerListView.DataContext = BLAccess.GetCustomerToLists();
 
         }

@@ -50,8 +50,8 @@
                 </ListView.GroupStyle>
             </ListView>
         </Grid>
-        <Button x:Name="AddStation" Content="Add Station" HorizontalAlignment="Left" Margin="567,10,0,0" Background="#FFDEC262" VerticalAlignment="Top" Width="118" Height="29"/>
-        <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Background="#FFDEC262" Margin="604,369,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="AddStation" Content="Add Station" HorizontalAlignment="Left" Margin="567,10,0,0" Background="#FFDEC262" VerticalAlignment="Top" Width="118" Height="29" Click="AddStation_Click"/>
+        <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Background="#FFDEC262" Margin="604,369,0,0" VerticalAlignment="Top" Click="Close_Click"/>
         <Button x:Name="Refresh" Content="Refresh" HorizontalAlignment="Left" Background="#FFDEC262" Margin="25,369,0,0" VerticalAlignment="Top" Click="Refresh_Click"/>
         <Button x:Name="Group_By" Content="Group by Available slots" HorizontalAlignment="Left" Background="#FFDEC262" Margin="350,10,0,0" VerticalAlignment="Top" Width="198" Height="29" Click="Group_By_Click" RenderTransformOrigin="0.424,0.537"/>
 
