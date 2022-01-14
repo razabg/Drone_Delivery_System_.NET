@@ -49,7 +49,7 @@ namespace PL
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(StationListView.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("NumOfAvailableChargingSlots");
             view.GroupDescriptions.Add(groupDescription);
-            
+
 
         }
 
@@ -57,13 +57,41 @@ namespace PL
         {
             StationWindow ToShow = new StationWindow(BLAccess);
             ToShow.ShowDialog();
-            //collection = new ObservableCollection<BaseStationToList>(BLAccess.GetBaseStationToLists());
-            //StationListView.DataContext = collection;
+            update();
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
+
+        private void DClick_event(object sender, MouseButtonEventArgs e)
+        {
+            if (StationListView.SelectedItem == null)
+                return;
+            BaseStation station = new BaseStation();
+            BaseStationToList baseStation = StationListView.SelectedItem as BaseStationToList;
+
+            try
+            {
+                station = BLAccess.DisplayStation(baseStation.Id);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            StationWindow stationWindow = new StationWindow(BLAccess, station);
+            stationWindow.ShowDialog();
+            update();
+
+
+        }
+
+        public void update()
+        {
+            collection = new ObservableCollection<BaseStationToList>(BLAccess.GetBaseStationToLists());
+            StationListView.DataContext = collection;
+        }
+
     }
 }

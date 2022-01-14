@@ -98,7 +98,7 @@ namespace DAL
                 StationsList.Add(new Station()
                 {
                     Id = RandomIdFunc(),
-                    Name = "Station" + i+1,
+                    Name = "Station" + (i+1),
                     ChargeSlots = rand.Next(1, 15),
                     Longitude = 35 + ((double)rand.Next(1400, 2700) / 10000),//we used coordinates of jerusalem
                     Latitude = 31 + ((double)rand.Next(7300, 8300) / 10000)

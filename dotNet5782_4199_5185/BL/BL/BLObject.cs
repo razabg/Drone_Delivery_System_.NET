@@ -99,13 +99,26 @@ namespace BL
                 }
                 if (drone.Status == statusEnum.DroneStatus.TreatmentMode.ToString())
                 {
-                   
+
                     var RandomStation = AccessToDataMethods.ReturnStationList().ToList();
-                    int index =rand.Next(RandomStation.Count);
+                    int index = rand.Next(RandomStation.Count);
 
                     drone.CurrentLocation.Longitude = RandomStation[index].Longitude;
                     drone.CurrentLocation.Latitude = RandomStation[index].Latitude;
                     drone.Battery = rand.Next(0, 21);
+                    if (RandomStation[index].ChargeSlots >= 1)
+                    {
+                        AccessToDataMethods.UpdateRecharge(RandomStation[index], AccessToDataMethods.ReturnDroneList().ToList().Find(x => x.Id == drone.Id));
+                    }
+                    else
+                    {
+                        DO.Station station = RandomStation[index];
+                        station.ChargeSlots++;
+                        AccessToDataMethods.UpdateStation(station);
+                        AccessToDataMethods.UpdateRecharge(RandomStation[index], AccessToDataMethods.ReturnDroneList().ToList().Find(x => x.Id == drone.Id));
+                    }
+                   
+
 
                 }
                 if (drone.Status == statusEnum.DroneStatus.Available.ToString())
@@ -129,7 +142,7 @@ namespace BL
                         drone.CurrentLocation.Latitude = CustomerThatReceiveParcels[index].Latitude;
                         drone.CurrentLocation.Longitude = CustomerThatReceiveParcels[index].Longitude;
                     }
-                    else    //rand a base station from the list and set the location of the drone in the station
+                    else    //rand a base station from the list and set the Location of the drone in the station
                     {
                         List<DO.Station> stations = (List<DO.Station>)StationListDal;
                         int index = rand.Next(0, stations.Count);

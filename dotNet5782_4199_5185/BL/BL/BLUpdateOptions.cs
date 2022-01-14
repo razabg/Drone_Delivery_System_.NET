@@ -68,7 +68,7 @@ namespace BL
         /// </summary>
         /// <param name="drone_id"></param>
         /// <param name="SumCharge"></param>
-        public void ReleaseDroneFromCharge(int drone_id, int SumCharge)//check
+        public void ReleaseDroneFromCharge(int drone_id/*, int SumCharge*/)//check
         {
             if (!ListDroneBL.Exists(x => x.Id == drone_id))
             {
@@ -83,7 +83,7 @@ namespace BL
             DroneToRelease.Status = statusEnum.DroneStatus.Available.ToString();
 
 
-            DroneToRelease.Battery = CalcBattery(SumCharge);//check this because its not acurrate,need to calc the time the drone was in charge
+            DroneToRelease.Battery = 100; //CalcBattery(SumCharge);//check this because its not acurrate,need to calc the time the drone was in charge
             var DroneCharge = AccessToDataMethods.ReturnDroneChargeList().ToList().Find(x => x.DroneId == drone_id);
             var stationIndex = AccessToDataMethods.ReturnStationList().ToList().FindIndex(x => x.Id == DroneCharge.StationId);
             var station = AccessToDataMethods.ReturnStationList().ToList().Find(x => x.Id == DroneCharge.StationId);

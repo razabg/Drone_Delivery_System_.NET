@@ -22,7 +22,7 @@ namespace BO
             printInfo += $"ID:{Id}, ";
             printInfo += $"Model:{Model}, ";
             printInfo += $"Weight:{Weight}, ";
-            printInfo += $"Battary:{Battery}%, ";
+            printInfo += $"Battery:{Battery}%, ";
             printInfo += $"Status:{Status}, ";
             printInfo += $"Location is:{CurrentLocation} ";
             printInfo += $"the Id of the parcel in transport:{IdOfParcelInTransfer} ";

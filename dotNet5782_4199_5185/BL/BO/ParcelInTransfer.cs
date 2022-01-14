@@ -26,8 +26,8 @@ namespace BO
             printInfo += $"Priority:{Priority},\n";
             printInfo += $"Sender of the parcel:{Sender},\n";
             printInfo += $"Reciever of the parcel is:{Reciever},\n";
-            printInfo += $"Collection location:{ CollectionLocation},\n";
-            printInfo += $"Destination location:{DestLocation},\n";
+            printInfo += $"Collection Location:{ CollectionLocation},\n";
+            printInfo += $"Destination Location:{DestLocation},\n";
             printInfo += $"Transport distance:{TransportDistance},\n";
             return printInfo;
         }

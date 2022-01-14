@@ -23,7 +23,7 @@ namespace BO
             printDroneInfo += $"model:{Model},\n";
             printDroneInfo += $"MaxWeight:{MaxWeight},\n";
             printDroneInfo += $"Status:{Status},\n";
-            printDroneInfo += $"Battary left :{Battery},\n";
+            printDroneInfo += $"Battery left :{Battery},\n";
             printDroneInfo += $"Parcel:{Parcel},\n";
             printDroneInfo += $"Location:{CurrentLocation},\n";
             return printDroneInfo;

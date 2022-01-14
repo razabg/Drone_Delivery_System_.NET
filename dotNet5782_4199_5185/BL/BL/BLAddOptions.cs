@@ -16,10 +16,10 @@ namespace BL
             DO.Station station_to_list = new DO.Station();
 
             station_to_list.Id = BaseToAdd.Id;
-            station_to_list.Latitude = BaseToAdd.location.Latitude;
-            station_to_list.Longitude = BaseToAdd.location.Longitude;
+            station_to_list.Latitude = BaseToAdd.Location.Latitude;
+            station_to_list.Longitude = BaseToAdd.Location.Longitude;
             station_to_list.Name = BaseToAdd.Name;
-            station_to_list.ChargeSlots = new();
+            station_to_list.ChargeSlots = BaseToAdd.NumberOfavailableChargingSlots;
 
             BaseToAdd.DroneINCharge = new List<DroneInCharging>();//check this if its right
 
@@ -57,7 +57,7 @@ namespace BL
             DroneToBl.CurrentLocation = new(TempStation.Longitude, TempStation.Latitude);
             DroneToBl.Battery = rand.Next(20, 40);
             DroneToBl.Status = statusEnum.DroneStatus.TreatmentMode.ToString();
-            ListDroneBL.Add(DroneToBl); //the bl drone list which hold the specific drone with its location
+            ListDroneBL.Add(DroneToBl); //the bl drone list which hold the specific drone with its Location
         }
         public void AddCustomer(Customer CustomerToAdd)
         {

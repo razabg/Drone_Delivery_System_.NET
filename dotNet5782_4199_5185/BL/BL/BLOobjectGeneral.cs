@@ -130,7 +130,7 @@ namespace BL
 
         public DO.Customer NearestParcel_SenderIdcustomer(double longi, double lati, IEnumerable<DO.Parcel> parceList)
         {
-            List<DO.Customer> SenderOfTheParcel = new List<DO.Customer>();//this list going to contain the customers so that we will know the location of the parcels
+            List<DO.Customer> SenderOfTheParcel = new List<DO.Customer>();//this list going to contain the customers so that we will know the Location of the parcels
             List<DO.Parcel> helpList = parceList.ToList();//help us in the end to extract the closest parcel
 
             foreach (var parcel in parceList)
@@ -178,7 +178,7 @@ namespace BL
         /// </summary>
         /// <param name="decimalValueToConvert">The number to convert</param>
         /// <param name="side"></param>
-        /// <returns>string that hold the convert location</returns>
+        /// <returns>string that hold the convert Location</returns>
      
 
 

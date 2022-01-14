@@ -9,13 +9,13 @@ namespace BO
     public class DroneInCharging
     {
         public int Id { get; set; }
-        public double Battary { get; set; }
+        public double Battery { get; set; }
 
         public override string ToString()
         {
             string printInfo = "";
             printInfo += $"ID:{Id}\n";
-            printInfo += $"Battary:{Battary},\n";
+            printInfo += $"Battery:{Battery},\n";
             return printInfo;
         }
     }

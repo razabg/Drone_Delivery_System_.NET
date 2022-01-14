@@ -26,6 +26,11 @@ namespace BO
             string sLatit = ConvertCoordinates(Latitude), sLong = ConvertCoordinates(Longitude);    /// Converts the coordinates to be in base 60 (bonus).
             return sLatit + "N, " + sLong + "E";
         }
+        /// <summary>
+        /// the method convert the Location to sexagesimal representaion
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
         public string ConvertCoordinates(double number)
         {
             int sec = (int)Math.Round(number * 3600);

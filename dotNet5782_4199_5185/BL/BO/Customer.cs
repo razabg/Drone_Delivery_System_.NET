@@ -21,7 +21,7 @@ namespace BO
             printInfo += $"ID:{Id}\n";
             printInfo += $"Name:{Name},\n";
             printInfo += $"phone number :{PhoneNumber},\n";
-            printInfo += $"location :{location},\n";
+            printInfo += $"Location :{location},\n";
             printInfo += $"List parcels that sent:{FromCustomer},\n";
             printInfo += $"List parcels that get/on the way:{ToCustomer},\n";
             return printInfo;

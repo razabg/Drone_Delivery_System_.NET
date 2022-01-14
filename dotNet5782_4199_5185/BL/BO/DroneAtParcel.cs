@@ -16,7 +16,7 @@ namespace BO
         {
             string printInfo = "";
             printInfo += $"ID:{Id}\n";
-            printInfo += $"Battary:{Battary},\n";
+            printInfo += $"Battery:{Battary},\n";
             printInfo += $"Location:{CurrentLocation},\n";
             return printInfo;
         }

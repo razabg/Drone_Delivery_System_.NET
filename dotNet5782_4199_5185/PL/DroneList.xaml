@@ -60,7 +60,7 @@
                         <GridViewColumn Header="Weight" DisplayMemberBinding="{Binding Weight}"/>
                         <GridViewColumn Header="Battery" DisplayMemberBinding="{Binding Battery}"/>
                         <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}"/>
-                        <GridViewColumn Header="Longitude" DisplayMemberBinding="{Binding CurrentLocation}"/>
+                        <GridViewColumn Header="Location" DisplayMemberBinding="{Binding CurrentLocation}"/>
                         <GridViewColumn Header="ID of parcel" DisplayMemberBinding="{Binding IdOfParcelInTransfer}"/>
                     </GridView>
                 </ListView.View>

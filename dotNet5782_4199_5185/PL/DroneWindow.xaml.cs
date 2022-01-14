@@ -68,8 +68,6 @@ namespace PL
 
             InitializeComponent();
 
-            //to remove close box from window
-            //Loaded += ToolWindow_Loaded;
            this.BLAccess = BLaccess;
             drone = new DroneToList();
             drone = drone_arg;
@@ -84,6 +82,7 @@ namespace PL
             if (drone.Status == statusEnum.DroneStatus.TreatmentMode.ToString())
             {
                 btnRelease_from_charge.Visibility = Visibility.Visible;
+                btnCharge.Visibility = Visibility.Hidden;
             }
 
             if (drone.Status == statusEnum.DroneStatus.Busy.ToString())
@@ -163,7 +162,7 @@ namespace PL
                
 
             }
-            catch (AlreadyExistsException ex)//check why the massage in not shown
+            catch (AlreadyExistsException )//check why the massage in not shown
             {
                 MessageBox.Show("this id already exist");
                 flag = false;
@@ -198,7 +197,7 @@ namespace PL
         {
             try
             {
-                BLAccess.ReleaseDroneFromCharge(drone.Id, int.Parse(charging_time.Text));
+                BLAccess.ReleaseDroneFromCharge(drone.Id/*int.Parse(charging_time.Text)*/);
                 MessageBox.Show("the drone was relase from charge");
                 DroneToList dr = BLAccess.GetDroneToLists().ToList().Find(x => x.Id == drone.Id);
                 fillTextbox(dr);

@@ -30,7 +30,7 @@ namespace BL
                 {
                     if (drone.Id == drone_in_charge.DroneId)
                     {
-                        droneInChargingList.Add(new DroneInCharging { Battary = drone.Battery, Id = drone.Id });
+                        droneInChargingList.Add(new DroneInCharging { Battery = drone.Battery, Id = drone.Id });
                     }
                 }
             }
@@ -39,7 +39,7 @@ namespace BL
             {
                 Id = DLstationToDisplay.Id,
                 Name = DLstationToDisplay.Name,
-                location = new Location(DLstationToDisplay.Longitude, DLstationToDisplay.Latitude),
+                Location = new Location(DLstationToDisplay.Longitude, DLstationToDisplay.Latitude),
                 DroneINCharge = droneInChargingList,
                 NumberOfavailableChargingSlots = DLstationToDisplay.ChargeSlots - droneInChargingList.Count()
             };
