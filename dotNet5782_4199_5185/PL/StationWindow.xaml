@@ -6,8 +6,16 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="Station Window" Height="567" Width="802">
-    <Grid Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Margin="10,0,0,-6">
-        <Grid Margin="0,0,44,-6">
+    <Grid Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Margin="0,0,10,-6">
+        <Grid Margin="-10,0,44,4" RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.164"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="411*"/>
                 <ColumnDefinition Width="337*"/>
@@ -15,7 +23,7 @@
             </Grid.ColumnDefinitions>
             <TextBox x:Name="IDfill"  Text="{Binding Id}" HorizontalAlignment="Left" Margin="179,17,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24"   MaxLength="3" TextChanged="IDfill_TextChanged" />
             <Label x:Name="labelInsertId" Content="ID" HorizontalAlignment="Left" Margin="134,17,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.237,1.119" Width="25" Height="24"/>
-            <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Margin="21,494,0,0" VerticalAlignment="Top" Width="81" Click="Close_Click" RenderTransformOrigin="0.984,0.873" Height="32"/>
+            <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Margin="25,485,0,0" VerticalAlignment="Top" Width="81" Click="Close_Click" RenderTransformOrigin="0.984,0.873" Height="32"/>
             <Button x:Name="add_station" Content="Add Station"  HorizontalAlignment="Left" Margin="144,430,0,0" VerticalAlignment="Top" Width="198" RenderTransformOrigin="0.261,0.603" Click="add_Station_Click" Height="37" FontSize="18" FontWeight="Bold">
                 <Button.RenderTransform>
                     <TransformGroup>
@@ -28,8 +36,8 @@
             </Button>
 
 
-            <Button x:Name="btnUpdateName" Content="Update Name" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Width="226"  FontWeight="Bold" FontSize="18" Background="#FFDEC262" Margin="0,42,0,0" RenderTransformOrigin="0.49,0.101" Grid.Column="1"/>
-            <Button x:Name="btnUpdateChargeSlots"  Content="Update Charge Slots" HorizontalAlignment="Center" Margin="0,88,0,0" VerticalAlignment="Top"  Background="#FFDEC262" Width="228" FontSize="16" Grid.Column="1" Height="32"/>
+            <Button x:Name="btnUpdateName" Content="Update Name" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Width="226"  FontWeight="Bold" FontSize="18" Background="#FFDEC262" Margin="0,42,0,0" RenderTransformOrigin="0.49,0.101" Grid.Column="1" Click="btnUpdateName_Click"/>
+            <Button x:Name="btnUpdateChargeSlots"  Content="Update Charge Slots" HorizontalAlignment="Center" Margin="0,88,0,0" VerticalAlignment="Top"  Background="#FFDEC262" Width="228" FontSize="18" Grid.Column="1" Height="32" Click="btnUpdateChargeSlots_Click"/>
             <Label x:Name="labelNname" Content="Name" HorizontalAlignment="Left" Margin="114,59,0,0" VerticalAlignment="Top" Height="24" Width="45"/>
             <Label x:Name="labelAvailableSlots" Content="Available slots" HorizontalAlignment="Left" Margin="82,103,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.471,0.233" Height="24" Width="88"/>
             <Label x:Name="Labellocation" Content="Location:" HorizontalAlignment="Left" Margin="12,156,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.053,1.504" Height="24" Width="70" FontWeight="Bold" FontStyle="Normal" FontSize="14"/>
@@ -38,7 +46,7 @@
             <TextBox x:Name="AvailableSlots"  Text="{Binding NumberOfavailableChargingSlots}" HorizontalAlignment="Left" Margin="179,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"  Height="24"/>
             <TextBox x:Name="Location_longi" Text="{Binding Location.Longitude}" MaxLength="8" HorizontalAlignment="Left" Margin="179,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"  Height="25" RenderTransformOrigin="0.556,0.548"/>
             <TextBox x:Name="Location_lati" Text="{Binding Location.Latitude}"  MaxLength="8" HorizontalAlignment="Left" Margin="179,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="25" RenderTransformOrigin="0.463,0.66"/>
-            <ListView x:Name="DroneINchargeListView" ItemsSource="{Binding}" Margin="136,0,53,158" BorderBrush="#894F0AE2" SelectionChanged="DroneINchargeListView_SelectionChanged" Height="148" VerticalAlignment="Bottom">
+            <ListView x:Name="DroneINchargeListView" ItemsSource="{Binding}" Margin="136,0,53,158" BorderBrush="#894F0AE2" SelectionChanged="DroneINchargeListView_SelectionChanged" Height="148" VerticalAlignment="Bottom" MouseDoubleClick="DClick_event">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"  />
@@ -49,6 +57,8 @@
             </ListView>
             <Label Content="Latitude" HorizontalAlignment="Left" Margin="114,144,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.056,0.586" Height="24" Width="51"/>
             <Label Content="Longitude" HorizontalAlignment="Left" Margin="108,191,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.276,0.461" Height="24" Width="62"/>
+            <TextBox x:Name="totalSlots" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Label x:Name="enterSlots" Content="Enter Total Slots" HorizontalAlignment="Center" Margin="0,80,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="100"/>
 
 
         </Grid>

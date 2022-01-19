@@ -20,27 +20,19 @@ namespace BL
             }
             return CustomerListDal[index];
         }
-
+        /// <summary>
+        /// calc distance between two locations
+        /// </summary>
+        /// <param name="longi1"></param>
+        /// <param name="lati1"></param>
+        /// <param name="longi2"></param>
+        /// <param name="lati2"></param>
+        /// <returns></returns>
         public double CalcDistanceBetweenTwoCoordinates(double longi1, double lati1, double longi2, double lati2)
         {
             double distance = Math.Sqrt(Math.Pow(longi1 - longi2, 2) + Math.Pow(lati1 - lati2, 2));
-            distance /= 1000;
+
             return distance;
-            ////1-from ,2 to
-            // int R = 6371 * 1000; // metEre
-            //double phi1 = lati1 * Math.PI / 180; // φ, λ in radians
-            //double phi2 = lati2 * Math.PI / 180;
-            //double deltaPhi = (lati2 - lati1) * Math.PI / 180;
-            //double deltaLambda = (longi2 - longi1) * Math.PI / 180;
-
-            //double a = Math.Sin(deltaPhi / 2) * Math.Sin(deltaPhi / 2) +
-            //           Math.Cos(phi1) * Math.Cos(phi2) *
-            //           Math.Sin(deltaLambda / 2) * Math.Sin(deltaLambda / 2);
-            //double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
-            //double d = R * c / 1000; // in kilometres
-            //return d;
-
-
 
         }
         /// <summary>
@@ -179,10 +171,10 @@ namespace BL
         /// <param name="decimalValueToConvert">The number to convert</param>
         /// <param name="side"></param>
         /// <returns>string that hold the convert Location</returns>
-     
 
 
-      public  int POWERindex(DroneToList check)
+
+        public int POWERindex(DroneToList check)
         {
             if (check.Weight == statusEnum.TopWeight.Light.ToString())
             {
@@ -202,27 +194,23 @@ namespace BL
 
 
 
-        public int CalcBattery(int timeInMin)
+        public double CalcBattery(DroneToList drone)
         {
             double pace = AccessToDataMethods.PowerConsumptionRequestDrone().Last();
-            double battery;
-
-            if (timeInMin > 150)
-            {
-                battery = 100;
-                return (int)battery;
-            }
-
-            battery = pace * timeInMin;
-            return (int)battery;
-            
+            double timeDifference = (DateTime.Now - (DateTime)AccessToDataMethods.GetDroneInCharge(drone.Id).ChargeTime).TotalSeconds;
+            drone.Battery += pace * timeDifference;
 
 
+            if (drone.Battery > 100)
+                return 100;
+
+
+            return drone.Battery;
 
 
         }
 
-       
+
     }
 
 }

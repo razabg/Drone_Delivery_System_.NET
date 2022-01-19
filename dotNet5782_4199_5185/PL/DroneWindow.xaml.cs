@@ -22,7 +22,7 @@ namespace PL
     /// </summary>
     public partial class DroneWindow : Window
     {
-       private IBL BLAccess;
+        private IBL BLAccess;
         ObservableCollection<DroneToList> collection;
         DroneToList drone = new DroneToList();// insert the input of user to this object
 
@@ -32,7 +32,7 @@ namespace PL
             this.BLAccess = BLAccess;
             InitializeComponent();
 
-          
+
             choose_model.DataContext = Enum.GetValues(typeof(statusEnum.DroneModel));
             StationForCharge.ItemsSource = BLAccess.GetBaseStationToLists().ToList();
             MaxWeight.ItemsSource = Enum.GetValues(typeof(statusEnum.TopWeight));
@@ -47,16 +47,16 @@ namespace PL
             labelBattery.Visibility = Visibility.Hidden;
             labelStatus.Visibility = Visibility.Hidden;
 
-            btnPickedup.Visibility = Visibility.Hidden;
-            btnArrived.Visibility = Visibility.Hidden;
-            btnCharge.Visibility = Visibility.Hidden;
-            btnPairDrone_parcel.Visibility = Visibility.Hidden;
-            btnArrived.Visibility = Visibility.Hidden;
-            labelCharging.Visibility = Visibility.Hidden;
-            charging_time.Visibility = Visibility.Hidden;
-            btnUpdateModel.Visibility = Visibility.Hidden;
-            btnRelease_from_charge.Visibility = Visibility.Hidden;
-
+            btnPickedup.IsEnabled = false;
+            btnArrived.IsEnabled = false;
+            btnCharge.IsEnabled = false;
+            btnPairDrone_parcel.IsEnabled = false;
+            btnArrived.IsEnabled = false;
+            btnUpdateModel.IsEnabled = false;
+            btnRelease_from_charge.IsEnabled = false;
+           
+            ShowModel.Visibility = Visibility.Hidden;
+            ShowWeight.Visibility = Visibility.Hidden;
 
 
 
@@ -68,7 +68,7 @@ namespace PL
 
             InitializeComponent();
 
-           this.BLAccess = BLaccess;
+            this.BLAccess = BLaccess;
             drone = new DroneToList();
             drone = drone_arg;
 
@@ -82,7 +82,7 @@ namespace PL
             if (drone.Status == statusEnum.DroneStatus.TreatmentMode.ToString())
             {
                 btnRelease_from_charge.Visibility = Visibility.Visible;
-                btnCharge.Visibility = Visibility.Hidden;
+                btnCharge.IsEnabled = false;
             }
 
             if (drone.Status == statusEnum.DroneStatus.Busy.ToString())
@@ -96,8 +96,7 @@ namespace PL
             labelInsertId.IsEnabled = false;
             choose_model.Visibility = Visibility.Hidden;
             MaxWeight.Visibility = Visibility.Hidden;
-            labelCharging.Visibility = Visibility.Hidden;
-            charging_time.Visibility = Visibility.Hidden;
+           
 
 
             txtBattery.Text = drone.Battery.ToString();
@@ -159,10 +158,10 @@ namespace PL
                 BaseStationToList stationId = (BaseStationToList)StationForCharge.SelectedItem;
                 BLAccess.AddDrone(drone, Convert.ToInt32(stationId.Id));
                 MessageBox.Show("the drone was successfully added");
-               
+
 
             }
-            catch (AlreadyExistsException )//check why the massage in not shown
+            catch (AlreadyExistsException)//check why the massage in not shown
             {
                 MessageBox.Show("this id already exist");
                 flag = false;
@@ -179,13 +178,13 @@ namespace PL
                 IDfill.BorderBrush = (Brush)bc.ConvertFrom("#FFE92617");
 
             }
-           // new DroneWindow(BLAccess);
+            // new DroneWindow(BLAccess);
             if (flag)
             {
-               
+
                 this.Close();
             }
-           
+
 
 
 
@@ -198,21 +197,19 @@ namespace PL
             try
             {
                 BLAccess.ReleaseDroneFromCharge(drone.Id/*int.Parse(charging_time.Text)*/);
-                MessageBox.Show("the drone was relase from charge");
+                MessageBox.Show("the drone was release from charge");
                 DroneToList dr = BLAccess.GetDroneToLists().ToList().Find(x => x.Id == drone.Id);
                 fillTextbox(dr);
-                btnRelease_from_charge.Visibility = Visibility.Hidden;
+                btnRelease_from_charge.IsEnabled = false;
 
                 btnCharge.Visibility = Visibility.Visible;
-                btnArrived.Visibility = Visibility.Visible;
-                btnPairDrone_parcel.Visibility = Visibility.Visible;
+                btnArrived.IsEnabled = false;
+                btnPairDrone_parcel.IsEnabled = true;
 
                 btnUpdateModel.Visibility = Visibility.Visible;
-                charging_time.Visibility = Visibility.Hidden;
-                labelCharging.Visibility = Visibility.Hidden;
-                btnPickedup.Visibility = Visibility.Hidden;
-                labelCharging.Visibility = Visibility.Hidden;
-                charging_time.Visibility = Visibility.Hidden;
+               
+                btnPickedup.IsEnabled = false;
+              
 
                 Update();
             }
@@ -234,11 +231,13 @@ namespace PL
                 MessageBox.Show("the drone was sent to charge");
                 DroneToList dr = BLAccess.GetDroneToLists().FirstOrDefault(X => X.Id == drone.Id);
                 fillTextbox(dr);
-                btnRelease_from_charge.Visibility = Visibility.Visible;
-                btnCharge.Visibility = Visibility.Hidden;
-                btnPairDrone_parcel.Visibility = Visibility.Hidden;
-                labelCharging.Visibility = Visibility.Visible;
-                charging_time.Visibility = Visibility.Visible;
+                btnRelease_from_charge.IsEnabled = true;
+                btnCharge.IsEnabled = false;
+                btnPairDrone_parcel.IsEnabled = false;
+                btnPickedup.IsEnabled = false;
+                btnArrived.IsEnabled = false;
+
+
                 Update();
             }
             catch (CannotGoToChargeException ex)
@@ -257,13 +256,12 @@ namespace PL
                 MessageBox.Show("The drone paired to parcel");
                 DroneToList dr = BLAccess.GetDroneToLists().FirstOrDefault(x => x.Id == drone.Id);
                 fillTextbox(dr);
-                btnPickedup.Visibility = Visibility.Visible;
-                btnArrived.Visibility = Visibility.Hidden;
-                btnCharge.Visibility = Visibility.Hidden;
-                btnRelease_from_charge.Visibility = Visibility.Hidden;
-                btnPairDrone_parcel.Visibility = Visibility.Hidden;
-                labelCharging.Visibility = Visibility.Hidden;
-                charging_time.Visibility = Visibility.Hidden;
+                btnPickedup.IsEnabled = true;
+                btnArrived.IsEnabled = false;
+                btnCharge.IsEnabled = true;
+                btnRelease_from_charge.IsEnabled = false;
+                btnPairDrone_parcel.IsEnabled = false;
+                
                 Update();
             }
             catch (CannotAssignDroneToParcelException ex)
@@ -280,14 +278,15 @@ namespace PL
 
                 BLAccess.DroneArrivedToDestination(drone.Id);
                 MessageBox.Show("the parcel was delivered to the customer");
-                DroneToList dr = BLAccess.GetDroneToLists().ToList().Find(x=>x.Id == drone.Id);
+                DroneToList dr = BLAccess.GetDroneToLists().ToList().Find(x => x.Id == drone.Id);
                 fillTextbox(dr);
 
-                btnPickedup.Visibility = Visibility.Hidden;
-                btnPickedup.Visibility = Visibility.Hidden;
-                btnCharge.Visibility = Visibility.Visible;
-                btnPairDrone_parcel.Visibility = Visibility.Visible;
-                btnArrived.Visibility = Visibility.Hidden;
+
+                btnPickedup.IsEnabled = false;
+                btnCharge.IsEnabled = true;
+                btnPairDrone_parcel.IsEnabled = true;
+                btnArrived.IsEnabled = false;
+                btnRelease_from_charge.IsEnabled = false;
                 Update();
 
             }
@@ -307,17 +306,17 @@ namespace PL
                 DroneToList dr = BLAccess.GetDroneToLists().FirstOrDefault(x => x.Id == drone.Id);
                 fillTextbox(dr);
                 MessageBox.Show("the parcel was collected by the parcel");
+
+
+                btnPickedup.IsEnabled = false;
+                btnCharge.IsEnabled = true;
+                btnPairDrone_parcel.IsEnabled = false;
+                btnArrived.IsEnabled = true;
+                btnRelease_from_charge.IsEnabled = false;
+
                
-                
-                btnPickedup.Visibility = Visibility.Hidden;
-                btnArrived.Visibility = Visibility.Hidden;
-                btnCharge.Visibility = Visibility.Hidden;
-                btnPairDrone_parcel.Visibility = Visibility.Hidden;
-                btnArrived.Visibility = Visibility.Visible;
-                labelCharging.Visibility = Visibility.Hidden;
-                charging_time.Visibility = Visibility.Hidden;
                 Update();
-               
+
             }
             catch (CannotPickUpException ex)
             {

@@ -8,8 +8,13 @@
         Title="ParceList" Height="450" Width="700">
 
     <Grid Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="96*"/>
+            <ColumnDefinition Width="307*"/>
+            <ColumnDefinition Width="297*"/>
+        </Grid.ColumnDefinitions>
 
-        <Grid RenderTransformOrigin="0.507,0.513" Margin="0,113,10,124">
+        <Grid RenderTransformOrigin="0.507,0.513" Margin="0,113,10,124" Grid.ColumnSpan="3">
             <ListView x:Name="ParcelListView" ItemsSource="{Binding}" Margin="0,-11,-9,-47" Background="#FFCBB218" BorderBrush="#FFD7E013" FontFamily="Arial" FontWeight="Bold" SelectionChanged="ParcelListView_SelectionChanged" >
                 <ListView.View>
                     <GridView>
@@ -22,12 +27,43 @@
 
                     </GridView>
                 </ListView.View>
+                <ListView.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.ContainerStyle>
+                            <Style TargetType="{x:Type GroupItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Expander IsExpanded="True">
+                                                <Expander.Header>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="Gray" FontSize="22" VerticalAlignment="Bottom" />
+                                                        <TextBlock Text="{Binding ItemCount}" FontSize="22" Foreground="Green" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom" />
+                                                        <TextBlock Text=" item(s)" FontSize="22" Foreground="Silver" FontStyle="Italic" VerticalAlignment="Bottom" />
+                                                    </StackPanel>
+                                                </Expander.Header>
+                                                <ItemsPresenter />
+                                            </Expander>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </GroupStyle.ContainerStyle>
+                    </GroupStyle>
+                </ListView.GroupStyle>
             </ListView>
         </Grid>
-        <Button x:Name="AddParcel" Content="Add Parcel" HorizontalAlignment="Left" Margin="581,10,0,0" Background="#FFDEC262" VerticalAlignment="Top" Width="104" Height="29"/>
-        <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Background="#FFDEC262" Margin="604,369,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="Refresh" Content="Refresh" HorizontalAlignment="Left" Background="#FFDEC262" Margin="25,369,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="Group_By" Content="Group by" HorizontalAlignment="Left" Background="#FFDEC262" Margin="581,48,0,0" VerticalAlignment="Top" Width="104" Height="28"/>
+        <Button x:Name="AddParcel" Content="Add Parcel" HorizontalAlignment="Left" Margin="178,10,0,0" Background="#FFDEC262" VerticalAlignment="Top" Width="104" Height="29" Grid.Column="2" Click="AddParcel_Click"/>
+        <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Background="#FFDEC262" Margin="201,369,0,0" VerticalAlignment="Top" Grid.Column="2" Click="Close_Click"/>
+        <Button x:Name="Refresh" Content="Refresh" HorizontalAlignment="Left" Background="#FFDEC262" Margin="25,369,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Click="Refresh_Click"/>
+        <Button x:Name="Group_By" Content="Group by sender" HorizontalAlignment="Left" Background="#FFDEC262" Margin="19,11,0,0" VerticalAlignment="Top" Width="145" Height="28" Grid.Column="2" Click="Group_By_Click"/>
+        <ComboBox x:Name="FilterByStatus" HorizontalAlignment="Left" Margin="18,39,0,0" VerticalAlignment="Top" Width="93" Grid.ColumnSpan="2" SelectionChanged="FilterByStatus_SelectionChanged"/>
+        <Button x:Name="Group_By_receiver" Content="Group by receiver" HorizontalAlignment="Left" Background="#FFDEC262" Margin="19,50,0,0" VerticalAlignment="Top" Width="145" Height="28" Grid.Column="2" Click="Group_By_receiver_Click" />
+        <ComboBox x:Name="FilterByWeight" HorizontalAlignment="Left" Margin="40,39,0,0" VerticalAlignment="Top" Width="92" RenderTransformOrigin="0.505,0.482" Grid.Column="1" SelectionChanged="FilterByWeight_SelectionChanged"/>
+        <ComboBox x:Name="FilterByPriority" HorizontalAlignment="Left" Margin="161,39,0,0" VerticalAlignment="Top" Width="93" RenderTransformOrigin="0.806,0.683" Grid.Column="1" SelectionChanged="FilterByPriority_SelectionChanged"/>
+        <Label x:Name="Status_filter" Content="Status filter" HorizontalAlignment="Left" Margin="29,13,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="75" FontWeight="Bold"/>
+        <Label x:Name="Priority_filter" Content="Priority filter" HorizontalAlignment="Left" Margin="168,13,0,0" VerticalAlignment="Top" Grid.Column="1" FontWeight="Bold"/>
+        <Label x:Name="Weight_filter" Content="Weight filter" HorizontalAlignment="Left" Margin="46,13,0,0" VerticalAlignment="Top" Grid.Column="1" FontWeight="Bold"/>
 
     </Grid>
 </Window>

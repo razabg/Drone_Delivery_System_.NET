@@ -7,7 +7,7 @@ using BO;
 
 namespace BL
 {
-    internal sealed partial class BLObject 
+    internal sealed partial class BLObject
     {
         /// <summary>
         /// update drone model
@@ -60,7 +60,7 @@ namespace BL
             drone_to_charge.CurrentLocation.Latitude = StationForCharge.Latitude;
             drone_to_charge.Status = statusEnum.DroneStatus.TreatmentMode.ToString();
             var DalDrone = AccessToDataMethods.ReturnDroneList().ToList().Find(x => x.Id == drone_to_charge.Id);
-            AccessToDataMethods.UpdateRecharge(StationForCharge, DalDrone);
+            AccessToDataMethods.UpdateRecharge(StationForCharge, DalDrone,DateTime.Now);
 
         }
         /// <summary>
@@ -83,14 +83,14 @@ namespace BL
             DroneToRelease.Status = statusEnum.DroneStatus.Available.ToString();
 
 
-            DroneToRelease.Battery = 100; //CalcBattery(SumCharge);//check this because its not acurrate,need to calc the time the drone was in charge
+            DroneToRelease.Battery = CalcBattery(DroneToRelease); //CalcBattery(SumCharge);//check this because its not acurrate,need to calc the time the drone was in charge
             var DroneCharge = AccessToDataMethods.ReturnDroneChargeList().ToList().Find(x => x.DroneId == drone_id);
             var stationIndex = AccessToDataMethods.ReturnStationList().ToList().FindIndex(x => x.Id == DroneCharge.StationId);
             var station = AccessToDataMethods.ReturnStationList().ToList().Find(x => x.Id == DroneCharge.StationId);
             station.ChargeSlots++;
             AccessToDataMethods.UpdateStation(station);
             AccessToDataMethods.UpdateDeleteDroneInCharge(drone_id);
-          
+
 
         }
         /// <summary>
@@ -249,7 +249,7 @@ namespace BL
                 drone.CurrentLocation.Latitude = SenderCustomer.Latitude;
                 parcelToPickup.PickedUp = DateTime.Now;
                 AccessToDataMethods.UpdateParcel(parcelToPickup);
-               
+
 
             }
             else
@@ -289,7 +289,7 @@ namespace BL
                 drone.Status = statusEnum.DroneStatus.Available.ToString();
                 parcelArrived.ArrivedTime = DateTime.Now;
                 AccessToDataMethods.UpdateParcel(parcelArrived);
-               
+
 
             }
             else
@@ -305,7 +305,7 @@ namespace BL
         /// <param name="baseStationId"></param>
         /// <param name="baseStationName"></param>
         /// <param name="totalChargeSlots"></param>
-        public void UpdateBaseStationData(int baseStationId, string baseStationName, int totalChargeSlots)
+        public void UpdateBaseStationData(int baseStationId, string baseStationName, int totalChargeSlots = 0)
         {
             int numOfDronesInCharge = 0;
             List<DO.Station> StationListDal = AccessToDataMethods.ReturnStationList().ToList();
@@ -317,25 +317,24 @@ namespace BL
             }
 
 
-            if (baseStationName.Length > 0 && totalChargeSlots > 0)
+            if (baseStationName == null && totalChargeSlots > 0)
             {
                 numOfDronesInCharge = AccessToDataMethods.ReturnDroneChargeList().Count(x => x.StationId == baseStationId);
                 if (totalChargeSlots >= numOfDronesInCharge)
                 {
                     StationUpdate.ChargeSlots = totalChargeSlots;
-                    StationUpdate.Name = baseStationName;
-                    AccessToDataMethods.UpdateStation(StationUpdate);
-                    
-
-                }   // need to take care in case of charge slot or name is empty
+                }  
                 else
                 {
                     throw new NotEnoughChargeSlotsInThisStation(baseStationId);
                 }
-
+            }
+            else if (baseStationName != null && totalChargeSlots == 0)
+            {
+                StationUpdate.Name = baseStationName;
             }
 
-
+            AccessToDataMethods.UpdateStation(StationUpdate);
 
         }
         /// <summary>
@@ -360,7 +359,7 @@ namespace BL
                     customerUpdate.Name = customerName;
                     customerUpdate.Phone = phoneNumber;
                     AccessToDataMethods.UpdateCustomer(customerUpdate);
-                   
+
                 }
                 else if (customerName.Length > 0 && phoneNumber.Length == 0)
                 {

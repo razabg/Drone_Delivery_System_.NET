@@ -229,7 +229,7 @@ namespace BL
                 {
                     Id = station.Id,
                     Name = station.Name.ToString(),
-                    NumOfAvailableChargingSlots = station.ChargeSlots - counter,//the total slots - the anount of drones in the station
+                    NumOfAvailableChargingSlots = station.ChargeSlots - counter,//the total slots - the amount of drones in the station
                     NumOfUnavailableChargingSlots = counter
                 });
 

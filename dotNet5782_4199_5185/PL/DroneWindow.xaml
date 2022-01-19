@@ -60,11 +60,9 @@
         <TextBox x:Name="Status" HorizontalAlignment="Left" Margin="134,292,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="Status_TextChanged" Height="25"/>
         <TextBox x:Name="ShowWeight" HorizontalAlignment="Left" Margin="134,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" Height="24" TextChanged="ShowWeight_TextChanged"/>
         <TextBox x:Name="ShowModel" HorizontalAlignment="Left" Margin="134,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" Height="24"/>
-        <TextBox x:Name="charging_time" HorizontalAlignment="Left" Margin="194,361,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="2" TextChanged="charging_time_TextChanged"/>
-        <Label x:Name="labelCharging" Content="Enter charging time (Minutes)" Grid.Column="2" HorizontalAlignment="Left" Margin="10,362,0,0" VerticalAlignment="Top" Width="176" HorizontalContentAlignment="Right" FontWeight="Bold"/>
 
 
 
-    </Grid>
+        </Grid>
     </Grid>
 </Window>

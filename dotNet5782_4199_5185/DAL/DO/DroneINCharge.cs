@@ -11,7 +11,7 @@ namespace DO
     {
         public int DroneId { get; set; }
         public int StationId { get; set; }
-        public TimeSpan ChargeTime { get; set; }
+        public DateTime? ChargeTime { get; set; }
         public override string ToString()
         {
             string printChargeInfo = "";

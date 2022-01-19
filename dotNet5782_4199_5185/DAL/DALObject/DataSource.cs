@@ -20,12 +20,12 @@ namespace DAL
             public static int RunIdParcel = 101;
 
             // the battery numbers refers  to consumption  % per km
-            internal static double Available => 5;
-            internal static double Light => 5;
-            internal static double Average => 7;
-            internal static double Heavy => 9;
+            internal static double Available => 3.3;
+            internal static double Light => 4;
+            internal static double Average => 5;
+            internal static double Heavy => 6.6;
 
-            internal static double ChargingPaceDrone = 0.666666667; //% per minute;
+            internal static double ChargingPaceDrone = 60; //1% per minute;
 
 
         }
@@ -103,7 +103,7 @@ namespace DAL
                     Longitude = 35 + ((double)rand.Next(1400, 2700) / 10000),//we used coordinates of jerusalem
                     Latitude = 31 + ((double)rand.Next(7300, 8300) / 10000)
                 }) ;
-                DroneChargeList.Add(new DroneINCharge()
+                DroneChargeList.Add(new DroneINCharge()//RAND ID'S TO THE FIELD
                 {
                     DroneId = 0,
                     StationId = 0,
@@ -138,7 +138,7 @@ namespace DAL
             {
                 int index = rand.Next(0, randIdOfCustomers.Count);
                 int index2 = rand.Next(0, randIdOfCustomers.Count);
-                _ = DateTime.Now;
+                
 
 
                 ParcelsList.Add(new Parcel
@@ -152,7 +152,7 @@ namespace DAL
                     ParingTime = null,
                     PickedUp = null,
                     ArrivedTime = null,
-                    CreationTime = null
+                    CreationTime = DateTime.Now
 
                 });
             }

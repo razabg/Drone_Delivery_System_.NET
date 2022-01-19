@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BO;
 using BlApi;
+using System.Collections.ObjectModel;
 
 namespace PL
 {
@@ -22,16 +23,104 @@ namespace PL
     public partial class ParceList : Window
     {
         private IBL BLAccess;
+        private ObservableCollection<ParcelToList> collection = new ObservableCollection<ParcelToList>();
         public ParceList(IBL BLAccess)
         {
             InitializeComponent();
             this.BLAccess = BLAccess;
-            ParcelListView.DataContext = BLAccess.GetParcelToLists();
-
+            FilterByPriority.ItemsSource = Enum.GetValues(typeof(statusEnum.PriorityStatus));
+            FilterByStatus.ItemsSource = Enum.GetValues(typeof(statusEnum.ParcelStatus));
+            FilterByWeight.ItemsSource = Enum.GetValues(typeof(statusEnum.TopWeight));
+            collection = new ObservableCollection<ParcelToList>(BLAccess.GetParcelToLists());
+            ParcelListView.DataContext = collection;
         }
+
 
         private void ParcelListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        public void FilterByStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            statusEnum.ParcelStatus status = (statusEnum.ParcelStatus)FilterByStatus.SelectedItem;
+            this.ParcelListView.DataContext = collection.Where(x => x.Status == status.ToString());
+        }
+
+        public void FilterByWeight_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            statusEnum.TopWeight weight = (statusEnum.TopWeight)FilterByWeight.SelectedItem;
+            this.ParcelListView.DataContext = collection.Where(x => x.Weight == weight.ToString());
+        }
+
+        public void FilterByPriority_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            statusEnum.PriorityStatus Priority = (statusEnum.PriorityStatus)FilterByPriority.SelectedItem;
+            this.ParcelListView.DataContext = collection.Where(x => x.Priority == Priority.ToString());
+        }
+
+        public void Filters()
+        {
+
+
+
+
+        }
+
+        private void Group_By_Click(object sender, RoutedEventArgs e)//by sender
+        {
+
+            CollectionView viewClear = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
+            viewClear.GroupDescriptions.Clear();
+
+
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("SenderName");
+            view.GroupDescriptions.Add(groupDescription);
+
+        }
+
+        private void Group_By_receiver_Click(object sender, RoutedEventArgs e)
+        {
+
+            CollectionView viewClear = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
+            viewClear.GroupDescriptions.Clear();
+
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("ReceiverName");
+            view.GroupDescriptions.Add(groupDescription);
+
+
+        }
+
+        private void Refresh_Click(object sender, RoutedEventArgs e)
+        {
+           
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ParcelListView.ItemsSource);
+            view.GroupDescriptions.Clear();
+            this.ParcelListView.DataContext = collection;
+
+
+
+        }
+
+        private void AddParcel_Click(object sender, RoutedEventArgs e)
+        {
+            ParcelWindow ToShow = new ParcelWindow(BLAccess);
+            ToShow.ShowDialog();
+            Update();
+        }
+
+        private void Update()
+        {
+            collection = new ObservableCollection<ParcelToList>(BLAccess.GetParcelToLists());
+            ParcelListView.DataContext = collection;
 
         }
     }

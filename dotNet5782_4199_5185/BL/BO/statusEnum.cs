@@ -8,7 +8,7 @@ namespace BO
 {
     public class statusEnum
     {
-        public enum Weight { available, Light, Average, Heavy }
+       // public enum Weight { available, Light, Average, Heavy }
         public enum PriorityStatus { Fast = 1, Regular, Emergency }
         public enum TopWeight { Light, Average, Heavy }
         public enum DroneStatus { TreatmentMode , Available , Busy  }

@@ -82,7 +82,7 @@ namespace BL
                         double TargetLongi = GetCustomerDetails(parcel.TargetId).Longitude;
                         double TargerLatit = GetCustomerDetails(parcel.TargetId).Latitude;
                         double TargetDist = CalcDistanceBetweenTwoCoordinates(drone.CurrentLocation.Longitude, drone.CurrentLocation.Latitude, TargetLongi, TargerLatit);
-                        double MinBattery1 = PowerConsumption[int.Parse(drone.Weight) + 1] * TargetDist;//The battery consumption that enables the drone to supply the parcel successfully
+                        double MinBattery1 = PowerConsumption[POWERindex(drone)] * TargetDist;//The battery consumption that enables the drone to supply the parcel successfully
                         Location nearestStation = new Location();
                         nearestStation.Longitude = NearestStation(drone.CurrentLocation.Longitude, drone.CurrentLocation.Latitude, AccessToDataMethods.ReturnStationList()).Longitude;
                         nearestStation.Latitude = NearestStation(drone.CurrentLocation.Longitude, drone.CurrentLocation.Latitude, AccessToDataMethods.ReturnStationList()).Latitude;
@@ -106,18 +106,18 @@ namespace BL
                     drone.CurrentLocation.Longitude = RandomStation[index].Longitude;
                     drone.CurrentLocation.Latitude = RandomStation[index].Latitude;
                     drone.Battery = rand.Next(0, 21);
-                    if (RandomStation[index].ChargeSlots >= 1)
+                    if (RandomStation[index].ChargeSlots >= AccessToDataMethods.ReturnDroneChargeList().Count(x => x.StationId == RandomStation[index].Id))
                     {
-                        AccessToDataMethods.UpdateRecharge(RandomStation[index], AccessToDataMethods.ReturnDroneList().ToList().Find(x => x.Id == drone.Id));
+                        AccessToDataMethods.UpdateRecharge(RandomStation[index], AccessToDataMethods.ReturnDroneList().ToList().Find(x => x.Id == drone.Id),DateTime.Now);
                     }
                     else
                     {
                         DO.Station station = RandomStation[index];
                         station.ChargeSlots++;
                         AccessToDataMethods.UpdateStation(station);
-                        AccessToDataMethods.UpdateRecharge(RandomStation[index], AccessToDataMethods.ReturnDroneList().ToList().Find(x => x.Id == drone.Id));
+                        AccessToDataMethods.UpdateRecharge(RandomStation[index], AccessToDataMethods.ReturnDroneList().ToList().Find(x => x.Id == drone.Id), DateTime.Now);
                     }
-                   
+
 
 
                 }

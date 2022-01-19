@@ -26,7 +26,7 @@ namespace DalApi
         #endregion
 
         #region UPDATE STATUS METHODS
-        void UpdateRecharge(Station s, Drone d);
+        void UpdateRecharge(Station s, Drone d,DateTime charge);
         void UpdateParcel(Parcel p);
         void UpdateDrone(Drone d);
         void UpdateStation(Station s);

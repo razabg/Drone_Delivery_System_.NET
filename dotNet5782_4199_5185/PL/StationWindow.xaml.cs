@@ -38,16 +38,16 @@ namespace PL
 
             InitializeComponent();
             baseStation = BaseStation;
-          
+            this.BLAccess = BLAccess;
             DroneINchargeListView.DataContext = baseStation.DroneINCharge;
-            
+
             DataContext = baseStation;
             txtName.Text = baseStation.Name.ToString();
             IDfill.Text = baseStation.Id.ToString();
             AvailableSlots.Text = baseStation.NumberOfavailableChargingSlots.ToString();
             Location_longi.Text = baseStation.Location.Longitude.ToString();
             Location_lati.Text = baseStation.Location.Latitude.ToString();
-            
+
 
             add_station.Visibility = Visibility.Hidden;
 
@@ -114,6 +114,57 @@ namespace PL
 
         private void IDfill_TextChanged(object sender, TextChangedEventArgs e)
         {
+
+        }
+
+        private void btnUpdateName_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+             
+                BLAccess.UpdateBaseStationData(Convert.ToInt32(IDfill.Text), txtName.Text, 0);
+                   MessageBox.Show("The name of the station was successfully updated");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("cannot update the name of the station");
+
+            }
+        }
+
+        private void btnUpdateChargeSlots_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                BLAccess.UpdateBaseStationData(Convert.ToInt32(IDfill.Text),null, Convert.ToInt32(totalSlots.Text));
+                MessageBox.Show("The total slots amount of the station was successfully updated");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("cannot update the name of the station");
+
+            }
+        }
+
+        private void DClick_event(object sender, MouseButtonEventArgs e)
+        {
+            if (DroneINchargeListView.SelectedItem == null)
+                return;
+            DroneToList drone = new DroneToList();
+            DroneInCharging droneToList = DroneINchargeListView.SelectedItem as DroneInCharging;
+
+            try
+            {
+                drone = BLAccess.GetDroneToLists().ToList().Find(x=>x.Id == droneToList.Id);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            DroneWindow droneWindow = new DroneWindow(BLAccess, drone);
+            droneWindow.ShowDialog();
+           // update();
+
 
         }
     }

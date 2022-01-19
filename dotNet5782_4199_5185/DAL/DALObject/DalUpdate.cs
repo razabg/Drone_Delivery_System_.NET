@@ -18,12 +18,13 @@ namespace DAL
         /// </summary>
         /// <param name="s"></param>
         /// <param name="d"></param>
-        public void UpdateRecharge(Station s, Drone d) //need to do here exeption  
+        public void UpdateRecharge(Station s, Drone d,DateTime chargeTime) //need to do here exeption  
         {
             var indexStation = ReturnStationList().ToList().FindIndex(x => x.Id == s.Id);
             DroneINCharge DCharge = new DroneINCharge();
             DCharge.DroneId = d.Id;
             DCharge.StationId = s.Id;
+            DCharge.ChargeTime = chargeTime;
             s.ChargeSlots--;
             DataSource.StationsList[indexStation] = s;
             DataSource.DroneChargeList.Add(DCharge);
