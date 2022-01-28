@@ -123,5 +123,26 @@ namespace PL
             ParcelListView.DataContext = collection;
 
         }
+
+        private void DoubleClickEvent(object sender, MouseButtonEventArgs e)
+        {
+            if (ParcelListView.SelectedItem == null)
+                return;
+            Parcel parcel = new Parcel();
+            ParcelToList parcelToList = ParcelListView.SelectedItem as ParcelToList;
+            
+
+            try
+            {
+                parcel = BLAccess.DisplayParcel(parcelToList.Id);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            ParcelWindow stationWindow = new ParcelWindow(BLAccess, parcel);
+            stationWindow.ShowDialog();
+            Update();
+        }
     }
 }

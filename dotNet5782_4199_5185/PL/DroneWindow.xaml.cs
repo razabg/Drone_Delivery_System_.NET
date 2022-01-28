@@ -253,7 +253,7 @@ namespace PL
             try
             {
                 BLAccess.ParingParcelToDrone(drone.Id);
-                MessageBox.Show("The drone paired to parcel");
+                MessageBox.Show("The drone paired to parcelTo");
                 DroneToList dr = BLAccess.GetDroneToLists().FirstOrDefault(x => x.Id == drone.Id);
                 fillTextbox(dr);
                 btnPickedup.IsEnabled = true;
@@ -277,7 +277,7 @@ namespace PL
             {
 
                 BLAccess.DroneArrivedToDestination(drone.Id);
-                MessageBox.Show("the parcel was delivered to the customer");
+                MessageBox.Show("the parcelTo was delivered to the customer");
                 DroneToList dr = BLAccess.GetDroneToLists().ToList().Find(x => x.Id == drone.Id);
                 fillTextbox(dr);
 
@@ -305,7 +305,7 @@ namespace PL
                 BLAccess.DroneCollectParcel(drone.Id);
                 DroneToList dr = BLAccess.GetDroneToLists().FirstOrDefault(x => x.Id == drone.Id);
                 fillTextbox(dr);
-                MessageBox.Show("the parcel was collected by the parcel");
+                MessageBox.Show("the parcelTo was collected by the parcelTo");
 
 
                 btnPickedup.IsEnabled = false;

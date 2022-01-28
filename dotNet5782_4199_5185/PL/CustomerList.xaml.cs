@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BO;
 using BlApi;
+using System.Collections.ObjectModel;
 
 namespace PL
 {
@@ -21,13 +22,16 @@ namespace PL
     /// </summary>
     public partial class CustomerList : Window
     {
+        private ObservableCollection<CustomerToList> collection = new ObservableCollection<CustomerToList>();
         private IBL BLAccess;
         public CustomerList(BlApi.IBL BLAccess)
         {
             InitializeComponent();
             this.BLAccess = BLAccess;
-            CustomerListView.DataContext = BLAccess.GetCustomerToLists();
-
+            collection = new ObservableCollection<CustomerToList>(BLAccess.GetCustomerToLists());
+            CustomerListView.DataContext = collection;
+           
+           
         }
 
         private void CustomerListView_SelectionChanged(object sender, SelectionChangedEventArgs e)

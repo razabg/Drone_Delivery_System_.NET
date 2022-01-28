@@ -11,13 +11,18 @@ namespace BO
         public int Id { get; set; }
         public string Name { get; set; }
 
+        public CustomerAtParcel() { }
+
+       public CustomerAtParcel(int id ,string name)
+        {
+            Id = id;
+            Name = name;
+        }
+
 
         public override string ToString()
         {
-            string printInfo = "";
-            printInfo += $"ID:{Id}\n";
-            printInfo += $"Name:{Name},\n";
-            return printInfo;
+            return $"{Name} #{Id}";
         }
     }
 }

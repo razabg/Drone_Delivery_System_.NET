@@ -37,7 +37,9 @@ namespace BlApi
         public IEnumerable<CustomerToList> GetCustomerToLists();
         public IEnumerable<ParcelToList> GetParcelToLists();
         public IEnumerable<ParcelToList> GetNotPairedParcels();
-       
+        public IEnumerable<CustomerAtParcel> GetCustomerAtParcels();
+
+
 
 
     }

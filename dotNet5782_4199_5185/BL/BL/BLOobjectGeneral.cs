@@ -164,16 +164,6 @@ namespace BL
             return AccessToDataMethods.ReturnCustomerList().ToList().Find(x => x.Id == parcel.TargetId);
         }
 
-
-        /// <summary>
-        /// A function that converts from decimal to Sexagesimal
-        /// </summary>
-        /// <param name="decimalValueToConvert">The number to convert</param>
-        /// <param name="side"></param>
-        /// <returns>string that hold the convert Location</returns>
-
-
-
         public int POWERindex(DroneToList check)
         {
             if (check.Weight == statusEnum.TopWeight.Light.ToString())
@@ -191,8 +181,6 @@ namespace BL
             return 0;
 
         }
-
-
 
         public double CalcBattery(DroneToList drone)
         {

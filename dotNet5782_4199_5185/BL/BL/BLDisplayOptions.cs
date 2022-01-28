@@ -192,8 +192,14 @@ namespace BL
             CustomerAtParcel target = new CustomerAtParcel { Id = customerTarget.Id, Name = customerTarget.Name };
 
             //insert the drone id to a bl entity
-            var drone = ListDroneBL.Find(x => x.Id == parcelDisplay.DroneId);
-            DroneAtParcel droneAt = new DroneAtParcel { Id = drone.Id, Battary = drone.Battery, CurrentLocation = drone.CurrentLocation };
+            DroneToList drone = ListDroneBL.Find(x => x.Id == parcelDisplay.DroneId);
+            DroneAtParcel droneAt = new();
+
+            if (drone != null)
+            {
+                 droneAt = new(drone.Id, drone.Battery, drone.CurrentLocation);
+            }
+            
 
 
             Parcel parcelTOreturn = new Parcel
@@ -215,6 +221,8 @@ namespace BL
             return parcelTOreturn;
 
         }
+
+
 
         public IEnumerable<BaseStationToList> GetBaseStationToLists()
         {
@@ -327,6 +335,16 @@ namespace BL
             }
 
             return myNotPairedList;
+        }
+
+        public IEnumerable<CustomerAtParcel> GetCustomerAtParcels()
+        {
+
+            IEnumerable<CustomerAtParcel> customerAtParcels = from item in AccessToDataMethods.ReturnCustomerList()
+                                                              select (new CustomerAtParcel(item.Id, item.Name));
+
+            return customerAtParcels;
+
         }
 
 
