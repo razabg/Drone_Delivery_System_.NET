@@ -38,5 +38,53 @@ namespace PL
         {
 
         }
+
+        private void DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+            if (CustomerListView.SelectedItem == null)
+                return;
+            Customer customer = new Customer();
+            CustomerToList customerToList = CustomerListView.SelectedItem as CustomerToList;
+
+
+            try
+            {
+                customer = BLAccess.DisplayCustomer(customerToList.Id);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            CustomerWindow customerWindow = new CustomerWindow(BLAccess, customer);
+            customerWindow.ShowDialog();
+            Update();
+        }
+
+        private void Update()
+        {
+
+            collection = new ObservableCollection<CustomerToList>(BLAccess.GetCustomerToLists());
+            CustomerListView.DataContext = collection;
+
+        }
+
+        private void Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            Update();
+        }
+
+        private void AddCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            CustomerWindow ToShow = new CustomerWindow(BLAccess);
+            ToShow.ShowDialog();
+            Update();
+
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

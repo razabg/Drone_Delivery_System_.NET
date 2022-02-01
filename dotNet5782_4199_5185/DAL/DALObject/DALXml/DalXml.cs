@@ -11,7 +11,7 @@ using System.Xml.Serialization;
 
 namespace DAL
 {
-    internal sealed partial class DalXml //: IDal
+    internal sealed partial class DalXml : IDal
     {
         #region singelton
         static readonly DalXml instance = new DalXml();
@@ -28,7 +28,7 @@ namespace DAL
         string configPath = @"ConfigXml.xml";
         string usersPath = @"UsersXml.xml";//XMLSerializer
 
-        
+
 
 
         #region station
@@ -54,7 +54,6 @@ namespace DAL
             XMLTools.SaveListToXMLElement(stationsRoot, stationPath);
         }
 
-
         public void DeleteStation(int stationID)
         {
             XElement stationsRoot = XMLTools.LoadListFromXMLElement(stationPath);
@@ -69,8 +68,6 @@ namespace DAL
             XMLTools.SaveListToXMLElement(stationsRoot, stationPath);
         }
 
-
-
         public IEnumerable<Station> ReturnStationList(Func<Station, bool> predicate = null)
         {
             List<Station> listOfAllStations = XMLTools.LoadListFromXMLSerializer<Station>(stationPath);
@@ -80,7 +77,6 @@ namespace DAL
 
 
         }
-
 
         public Station GetStation(int stationID)
         {
@@ -97,15 +93,32 @@ namespace DAL
         public void UpdateStation(Station station)
         {
             XElement stationsRoot = XMLTools.LoadListFromXMLElement(stationPath);
-            var stations = (from stationElem in stationsRoot.Elements()
-                            where stationElem.Element("ID").Value == station.Id.ToString()
-                            select stationElem).FirstOrDefault();
+            XElement stations = (from stationElem in stationsRoot.Elements()
+                                 where stationElem.Element("ID").Value == station.Id.ToString()
+                                 select stationElem).FirstOrDefault();
 
             if (stations == null)
                 throw new NotExistsException("the station dosn't exists");
 
             stations.Element("Name").Value = station.Name.ToString();
             stations.Element("ChargeSlots").Value = station.ChargeSlots.ToString();
+        }
+
+        public IEnumerable<Station> show_AvailableChargingStations_list()
+        {
+            XElement stationsRoot = XMLTools.LoadListFromXMLElement(stationPath);
+            var stations = (from s in stationsRoot.Elements()
+                            select new Station()
+                            {
+                                Id = Convert.ToInt32(s.Element("ID").Value),
+                                ChargeSlots = Convert.ToInt32(s.Element("ChargeSlots").Value),
+                                Latitude = Convert.ToDouble(s.Element("Latitude").Value),
+                                Longitude = Convert.ToDouble(s.Element("Longitude").Value),
+                                Name = s.Element("Name").Value
+                            });
+            stations = stations.Where(x => x.ChargeSlots > 0);
+
+            return stations;
         }
 
         #endregion
@@ -125,10 +138,12 @@ namespace DAL
         {
             List<Drone> listOfAllDrones = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);
             Drone drone = listOfAllDrones.Find(x => x.Id == droneToUpdate.Id);
+            int index = listOfAllDrones.FindIndex(x => x.Id == droneToUpdate.Id);
 
             if (!listOfAllDrones.Exists(x => x.Id == droneToUpdate.Id))
                 throw new NotExistsException("This drone doesn't exist in the system");
             drone.Model = droneToUpdate.Model;
+            listOfAllDrones[index] = drone;
             XMLTools.SaveListToXMLSerializer<Drone>(listOfAllDrones, dronePath);
         }
 
@@ -163,6 +178,8 @@ namespace DAL
             return listOfAllDrones.Where(predicate);
 
         }
+
+
 
         #endregion
 
@@ -209,8 +226,9 @@ namespace DAL
 
         public void UpdateCustomer(Customer customer)
         {
-            var listOfCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(customerPath);
+            List<Customer> listOfCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(customerPath);
             Customer myCustomer = listOfCustomer.Find(x => x.Id == customer.Id);
+            int index = listOfCustomer.FindIndex(x => x.Id == customer.Id);
             if (!listOfCustomer.Exists(x => x.Id == customer.Id))
 
                 throw new NotExistsException("This customer doesn't exist in the system");
@@ -221,6 +239,8 @@ namespace DAL
             myCustomer.Phone = customer.Phone;
             myCustomer.Latitude = customer.Latitude;
             myCustomer.Longitude = customer.Longitude;
+            listOfCustomer[index] = myCustomer;
+
             XMLTools.SaveListToXMLSerializer<Customer>(listOfCustomer, customerPath);
         }
 
@@ -237,7 +257,6 @@ namespace DAL
             listOfAllParcels.Add(parcelToAdd);
             XMLTools.SaveListToXMLSerializer<Parcel>(listOfAllParcels, parcelPath);
         }
-
 
         public void DeleteParcel(int id)
         {
@@ -261,7 +280,6 @@ namespace DAL
             return parcel;
         }
 
-
         public IEnumerable<Parcel> ReturnParcelList(Func<Parcel, bool> predicate = null)
         {
             List<Parcel> listOfAllParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
@@ -271,11 +289,11 @@ namespace DAL
 
         }
 
-
         public void UpdateParcel(Parcel parceltoUpdate)
         {
             List<Parcel> listOfAllParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
             Parcel parcel = listOfAllParcels.Find(x => x.Id == parceltoUpdate.Id);
+            int index = listOfAllParcels.FindIndex(x => x.Id == parceltoUpdate.Id);
             if (!listOfAllParcels.Exists(x => x.Id == parceltoUpdate.Id))
                 throw new NotExistsException("This parcel doesn't exist in the system");
             parcel.PickedUp = parceltoUpdate.PickedUp;
@@ -286,8 +304,29 @@ namespace DAL
             parcel.CreationTime = parceltoUpdate.CreationTime;
             parcel.SenderId = parceltoUpdate.SenderId;
             parcel.TargetId = parceltoUpdate.TargetId;
+
+            listOfAllParcels[index] = parcel;
             XMLTools.SaveListToXMLSerializer<Parcel>(listOfAllParcels, parcelPath);
         }
+
+        public IEnumerable<Parcel> show_UnassignmentParcel_list()
+        {
+            List<Parcel> listOfAllParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
+            List<Parcel> listOfUnassign = new();
+
+            foreach (Parcel parcel in listOfAllParcels)
+            {
+                if (parcel.DroneId == 0)
+                {
+                    listOfUnassign.Add(parcel);
+                }
+            }
+            return listOfUnassign;
+
+        }
+
+
+
         #endregion
 
         #region droneCharge 
@@ -312,6 +351,29 @@ namespace DAL
 
         }
 
+        public void UpdateRecharge(Station s, Drone d, DateTime chargeTime)
+        {
+
+            DroneINCharge DCharge = new();
+            List<Station> listOfAllstations = XMLTools.LoadListFromXMLSerializer<Station>(stationPath);
+            List<DroneINCharge> listOfAllDroneIncharge = XMLTools.LoadListFromXMLSerializer<DroneINCharge>(droneChargePath);
+            int index = listOfAllstations.FindIndex(x => x.Id == s.Id);
+            if (listOfAllstations.Exists(x => x.Id == d.Id))
+                throw new NotExistsException("The station not exists in the path");
+
+            DCharge.DroneId = d.Id;
+            DCharge.StationId = s.Id;
+            DCharge.ChargeTime = chargeTime;
+            s.ChargeSlots--;
+
+
+            listOfAllDroneIncharge.Add(DCharge);
+            listOfAllstations[index] = s;
+            XMLTools.SaveListToXMLSerializer(listOfAllDroneIncharge, droneChargePath);
+            XMLTools.SaveListToXMLSerializer(listOfAllstations, stationPath);
+
+        }
+
         public void UpdateDeleteDroneInCharge(int DroneId)
         {
             List<DroneINCharge> listOfAllDrones = XMLTools.LoadListFromXMLSerializer<DroneINCharge>(droneChargePath);
@@ -325,5 +387,32 @@ namespace DAL
 
         #endregion
 
+        #region General Methods
+        public int ReturnParcelStatus(Parcel par)
+        {
+            if (par.ArrivedTime != null)
+            {
+                return 3;
+            }
+            if (par.PickedUp != null)
+            {
+                return 2;
+            }
+            if (par.ParingTime != null)
+            {
+                return 1;
+            }
+            return 0;
+        }
+
+        public double[] PowerConsumptionRequestDrone()
+        {
+            double[] arr = new double[] { DataSource.Config.Available, DataSource.Config.Light, DataSource.Config.Average, DataSource.Config.Heavy, DataSource.Config.ChargingPaceDrone };
+
+            return arr;
+        }
+
+
+        #endregion
     }
 }

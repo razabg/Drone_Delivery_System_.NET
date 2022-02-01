@@ -128,11 +128,11 @@ namespace BL
                     List<DO.Customer> CustomerThatReceiveParcels = new();
                     foreach (var parcel in ArrivedParcels)
                     {
-                        foreach (var customer in CustomerThatReceiveParcels)
+                        foreach (var customer in CustomerListDal)
                         {
-                            if (parcel.TargetId == customer.Id)
+                            if (parcel.TargetId == customer.Id)//fix
                             {
-                                CustomerThatReceiveParcels.Add(customer);
+                                CustomerThatReceiveParcels.Add(customer);//check this
                             }
                         }
                     }

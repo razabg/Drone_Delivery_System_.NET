@@ -49,6 +49,7 @@ namespace BL
             try
             {
                 AccessToDataMethods.AddDrone(drone_to_list);
+                AccessToDataMethods.UpdateRecharge(TempStation, drone_to_list, DateTime.Now);
             }
             catch (AlreadyExistsException ex1)
             {

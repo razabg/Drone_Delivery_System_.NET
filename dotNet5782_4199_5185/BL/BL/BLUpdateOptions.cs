@@ -81,9 +81,10 @@ namespace BL
 
             var DroneToRelease = ListDroneBL.Find(x => x.Id == drone_id);
             DroneToRelease.Status = statusEnum.DroneStatus.Available.ToString();
+           
 
 
-            DroneToRelease.Battery = CalcBattery(DroneToRelease); //CalcBattery(SumCharge);//check this because its not acurrate,need to calc the time the drone was in charge
+            DroneToRelease.Battery = (int)CalcBattery(DroneToRelease); //CalcBattery(SumCharge);//check this because its not acurrate,need to calc the time the drone was in charge
             var DroneCharge = AccessToDataMethods.ReturnDroneChargeList().ToList().Find(x => x.DroneId == drone_id);
             var stationIndex = AccessToDataMethods.ReturnStationList().ToList().FindIndex(x => x.Id == DroneCharge.StationId);
             var station = AccessToDataMethods.ReturnStationList().ToList().Find(x => x.Id == DroneCharge.StationId);
@@ -117,16 +118,25 @@ namespace BL
             IEnumerable<DO.Parcel> EmergencyParcel = from item in AccessToDataMethods.ReturnParcelList()
                                                      where item.Priority == statusEnum.PriorityStatus.Emergency.ToString()
                                                      where item.Weight == droneToPare.Weight
+                                                     where item.ParingTime == null
+                                                     where item.PickedUp == null
+                                                     where item.DroneId == null
                                                      select item;
 
             IEnumerable<DO.Parcel> FastParcel = from item in AccessToDataMethods.ReturnParcelList()
                                                 where item.Priority == statusEnum.PriorityStatus.Fast.ToString()
                                                 where item.Weight == droneToPare.Weight
+                                                where item.ParingTime == null
+                                                where item.PickedUp == null
+                                                where item.DroneId == null
                                                 select item;
 
             IEnumerable<DO.Parcel> RegualrParcel = from item in AccessToDataMethods.ReturnParcelList()
                                                    where item.Priority == statusEnum.PriorityStatus.Regular.ToString()
                                                    where item.Weight == droneToPare.Weight
+                                                   where item.ParingTime == null
+                                                   where item.PickedUp == null
+                                                   where item.DroneId == null
                                                    select item;
 
             if (EmergencyParcel.Any())
@@ -236,12 +246,18 @@ namespace BL
             }
             var drone = ListDroneBL.Find(x => x.Id == drone_id);
 
-            DO.Parcel parcelToPickup = AccessToDataMethods.ReturnParcelList().ToList().Find(x => x.DroneId == drone_id);
+            IEnumerable<DO.Parcel> parcels = from item in AccessToDataMethods.ReturnParcelList()
+                                          where item.DroneId == drone_id
+                                          where item.PickedUp == null
+                                          select item;
+
+
+            DO.Parcel parcelToPickup = parcels.First();
             int parcelToPickupIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.DroneId == drone_id);
             if (parcelToPickup.ParingTime != null && parcelToPickup.PickedUp == null)
             {
                 var SenderCustomer = AccessToDataMethods.ReturnCustomerList().ToList().Find(x => x.Id == parcelToPickup.SenderId);
-                double BatteryConsumptionToSender = AccessToDataMethods.PowerConsumptionRequestDrone()[POWERindex(drone)] * CalcDistanceBetweenTwoCoordinates(drone.CurrentLocation.Longitude, drone.CurrentLocation.Longitude, SenderCustomer.Longitude, SenderCustomer.Latitude);
+                double BatteryConsumptionToSender = AccessToDataMethods.PowerConsumptionRequestDrone()[POWERindex(drone)] * CalcDistanceBetweenTwoCoordinates(drone.CurrentLocation.Longitude, drone.CurrentLocation.Latitude, SenderCustomer.Longitude, SenderCustomer.Latitude);
 
                 drone.Battery -= (int)BatteryConsumptionToSender;
                 drone.IdOfParcelInTransfer = parcelToPickup.Id;
@@ -280,7 +296,7 @@ namespace BL
             if (parcelArrived.PickedUp != null && parcelArrived.ArrivedTime == null)
             {
                 var TargetCustomer = AccessToDataMethods.ReturnCustomerList().ToList().Find(x => x.Id == parcelArrived.TargetId);
-                double BatteryConsumptionToTarget = AccessToDataMethods.PowerConsumptionRequestDrone()[POWERindex(drone)] * CalcDistanceBetweenTwoCoordinates(drone.CurrentLocation.Longitude, drone.CurrentLocation.Longitude, TargetCustomer.Longitude, TargetCustomer.Latitude);
+                double BatteryConsumptionToTarget = AccessToDataMethods.PowerConsumptionRequestDrone()[POWERindex(drone)] * CalcDistanceBetweenTwoCoordinates(drone.CurrentLocation.Longitude, drone.CurrentLocation.Latitude, TargetCustomer.Longitude, TargetCustomer.Latitude);
 
                 drone.Battery -= (int)BatteryConsumptionToTarget;
                 drone.CurrentLocation.Longitude = TargetCustomer.Longitude;
@@ -343,7 +359,7 @@ namespace BL
         /// <param name="CustomerId"></param>
         /// <param name="customerName"></param>
         /// <param name="phoneNumber"></param>
-        public void UpdateCustomerData(int CustomerId, string customerName, string phoneNumber)
+        public void UpdateCustomerData(int CustomerId, string customerName = null, string phoneNumber = null)
         {
             List<DO.Customer> StationListDal = AccessToDataMethods.ReturnCustomerList().ToList();
             var customerUpdate = AccessToDataMethods.ReturnCustomerList().ToList().Find(x => x.Id == CustomerId);
@@ -354,19 +370,19 @@ namespace BL
             }
             try
             {
-                if (customerName.Length > 0 && phoneNumber.Length < 0)
+                if (customerName != null && phoneNumber != null)
                 {
                     customerUpdate.Name = customerName;
                     customerUpdate.Phone = phoneNumber;
                     AccessToDataMethods.UpdateCustomer(customerUpdate);
 
                 }
-                else if (customerName.Length > 0 && phoneNumber.Length == 0)
+                else if (customerName != null && phoneNumber == null)
                 {
                     customerUpdate.Name = customerName;
                     AccessToDataMethods.UpdateCustomer(customerUpdate);
                 }
-                else if (customerName.Length == 0 && phoneNumber.Length > 0)
+                else if (customerName == null && phoneNumber != null)
                 {
                     customerUpdate.Phone = phoneNumber;
                     AccessToDataMethods.UpdateCustomer(customerUpdate);

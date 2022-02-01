@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Parcel Window" Height="587" Width="835">
-    <Grid Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Margin="0,0,10,-6">
-        <Grid Margin="0,0,0,4" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Width="814">
+        Title="Parcel Window" Height="587" Width="845">
+    <Grid Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Margin="0,0,0,-6" HorizontalAlignment="Center" Width="845">
+        <Grid Margin="0,0,5,4" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="814">
             <Grid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

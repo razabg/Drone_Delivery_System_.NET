@@ -6,60 +6,60 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="Window1" Height="567" Width="802">
-    <Grid Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Margin="10,0,0,-6">
-        <Grid Margin="10,0,34,-6">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="315*"/>
-            <ColumnDefinition Width="12*"/>
-            <ColumnDefinition Width="260*"/>
-            <ColumnDefinition Width="0*"/>
-        </Grid.ColumnDefinitions>
-        <TextBox x:Name="IDfill" HorizontalAlignment="Left" Margin="134,10,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24" TextChanged="IDfill_TextChanged" MaxLength="3"/>
-        <ComboBox x:Name="choose_model" HorizontalAlignment="Left" Margin="134,55,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="-0.167,0.73" SelectionChanged="choose_model_SelectionChanged" ItemsSource="{Binding}" Height="25"/>
-        <ComboBox x:Name="StationForCharge" HorizontalAlignment="Left" Margin="134,142,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="StationForCharge_SelectionChanged" Height="25"/>
-        <Label x:Name="labelInsertId" Content="ID" HorizontalAlignment="Left" Margin="58,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.237,1.119" Width="25" Height="24"/>
-        <Label x:Name="labelModel" Content="Choose Model" HorizontalAlignment="Left" Margin="22,53,0,0" VerticalAlignment="Top" Height="24" Width="85"/>
-        <Label x:Name="labelMaxWeight" Content="Max Weight" HorizontalAlignment="Left" Margin="22,96,0,0" VerticalAlignment="Top" Height="24" Width="72"/>
-        <Label x:Name="labelStation" Content="Station for Charge" HorizontalAlignment="Left" Margin="17,142,0,0" VerticalAlignment="Top" Height="24" Width="104"/>
-        <ComboBox x:Name="MaxWeight"  HorizontalAlignment="Left" Margin="134,96,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="MaxWeight_SelectionChanged" Height="25" />
-        <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Margin="41,467,0,0" VerticalAlignment="Top" Width="81" Click="Close_Click" RenderTransformOrigin="0.984,0.873" Height="32"/>
+    <Grid Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}">
+        <Grid HorizontalAlignment="Left" Width="788" Margin="2,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="315*"/>
+                <ColumnDefinition Width="12*"/>
+                <ColumnDefinition Width="260*"/>
+                <ColumnDefinition Width="0*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="IDfill" HorizontalAlignment="Left" Margin="134,10,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24" TextChanged="IDfill_TextChanged" MaxLength="3"/>
+            <ComboBox x:Name="choose_model" HorizontalAlignment="Left" Margin="134,55,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="-0.167,0.73" SelectionChanged="choose_model_SelectionChanged" ItemsSource="{Binding}" Height="25"/>
+            <ComboBox x:Name="StationForCharge" HorizontalAlignment="Left" Margin="134,142,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="StationForCharge_SelectionChanged" Height="25"/>
+            <Label x:Name="labelInsertId" Content="ID" HorizontalAlignment="Left" Margin="58,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.237,1.119" Width="25" Height="24"/>
+            <Label x:Name="labelModel" Content="Choose Model" HorizontalAlignment="Left" Margin="22,53,0,0" VerticalAlignment="Top" Height="24" Width="85"/>
+            <Label x:Name="labelMaxWeight" Content="Max Weight" HorizontalAlignment="Left" Margin="22,96,0,0" VerticalAlignment="Top" Height="24" Width="72"/>
+            <Label x:Name="labelStation" Content="Station for Charge" HorizontalAlignment="Left" Margin="17,142,0,0" VerticalAlignment="Top" Height="24" Width="104"/>
+            <ComboBox x:Name="MaxWeight"  HorizontalAlignment="Left" Margin="134,96,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="MaxWeight_SelectionChanged" Height="25" />
+            <Button x:Name="Close" Content="Close" HorizontalAlignment="Left" Margin="41,467,0,0" VerticalAlignment="Top" Width="81" Click="Close_Click" RenderTransformOrigin="0.984,0.873" Height="32"/>
             <Button x:Name="add_drone" Content="Add Drone"  HorizontalAlignment="Left" Margin="87,350,0,0" VerticalAlignment="Top" Width="198" RenderTransformOrigin="0.261,0.603" Click="add_drone_Click" Height="37" FontSize="18" FontWeight="Bold">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.568"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Button.RenderTransform>
-        </Button>
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-0.568"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
 
 
-        <Button Name="btnUpdateModel" Content="Update Model" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Width="226" Click="btnUpdateModel_Click" FontWeight="Bold" FontSize="18" Background="#FFDEC262" Margin="0,42,0,0" RenderTransformOrigin="0.49,0.101" Grid.Column="2"/>
-        <Button x:Name="btnRelease_from_charge" Content="Release drone from charge" HorizontalAlignment="Center" Margin="0,136,0,0" VerticalAlignment="Top" Click="BtnRelease_Click" Background="#FFDEC262" Width="230" FontSize="16" Height="32" Grid.Column="2"/>
-        <Button Name="btnCharge"  Content="Send drone to charge" HorizontalAlignment="Center" Margin="0,88,0,0" VerticalAlignment="Top" Click="btnCharge_Click" Background="#FFDEC262" Width="228" FontSize="16" Grid.Column="2" Height="32"/>
-        <Button x:Name="btnPairDrone_parcel" Content=" Pair parcel to drone" HorizontalAlignment="Center" Margin="0,184,0,0" VerticalAlignment="Top" Click="btnAssignment_Click" Background="#FFDEC262" RenderTransformOrigin="0.13,0.22" Width="230" FontSize="16" Height="32" Grid.Column="2">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Button.RenderTransform>
-        </Button>
-        <Button x:Name="btnArrived" Content="Package arrived to dest" HorizontalAlignment="Center" Margin="0,282,0,0" VerticalAlignment="Top" Click="btnDelivery_Click" Height="31" Width="230" Background="#FFDEC262" FontSize="16" Grid.Column="2"/>
-        <Button Name="btnPickedup" Content="Parcel collected " HorizontalAlignment="Center" Margin="0,232,0,0" VerticalAlignment="Top" Click="btnPickedup_Click" Background="#FFDEC262" Width="228" FontSize="16" Grid.Column="2" Height="32"/>
-        <Label x:Name="labelBattery" Content="Battery" HorizontalAlignment="Left" Margin="36,180,0,0" VerticalAlignment="Top" Height="24" Width="45"/>
-        <Label x:Name="labelLongitude" Content="Longitude" HorizontalAlignment="Left" Margin="34,217,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.471,0.233" Height="24" Width="62"/>
-        <Label x:Name="labelLatitude" Content="Latitude" HorizontalAlignment="Left" Margin="36,252,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.053,1.504" Height="24" Width="51"/>
-        <Label x:Name="labelStatus" Content="Status" HorizontalAlignment="Left" Margin="41,288,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.053,1.504" Height="24" Width="40"/>
-        <TextBox x:Name="txtBattery" HorizontalAlignment="Left" Margin="134,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="txtBattery_TextChanged" Height="25"/>
-        <TextBox x:Name="Longitude" HorizontalAlignment="Left" Margin="134,221,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="Longitude_TextChanged" Height="25"/>
-        <TextBox x:Name="Latitude" HorizontalAlignment="Left" Margin="134,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="Latitude_TextChanged" Height="25"/>
-        <TextBox x:Name="Status" HorizontalAlignment="Left" Margin="134,292,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="Status_TextChanged" Height="25"/>
-        <TextBox x:Name="ShowWeight" HorizontalAlignment="Left" Margin="134,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" Height="24" TextChanged="ShowWeight_TextChanged"/>
-        <TextBox x:Name="ShowModel" HorizontalAlignment="Left" Margin="134,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" Height="24"/>
+            <Button Name="btnUpdateModel" Content="Update Model" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Width="226" Click="btnUpdateModel_Click" FontWeight="Bold" FontSize="18" Background="#FFDEC262" Margin="0,42,0,0" RenderTransformOrigin="0.49,0.101" Grid.Column="2"/>
+            <Button x:Name="btnRelease_from_charge" Content="Release drone from charge" HorizontalAlignment="Center" Margin="0,136,0,0" VerticalAlignment="Top" Click="BtnRelease_Click" Background="#FFDEC262" Width="230" FontSize="16" Height="32" Grid.Column="2"/>
+            <Button Name="btnCharge"  Content="Send drone to charge" HorizontalAlignment="Center" Margin="0,88,0,0" VerticalAlignment="Top" Click="btnCharge_Click" Background="#FFDEC262" Width="228" FontSize="16" Grid.Column="2" Height="32"/>
+            <Button x:Name="btnPairDrone_parcel" Content=" Pair parcel to drone" HorizontalAlignment="Center" Margin="0,184,0,0" VerticalAlignment="Top" Click="btnAssignment_Click" Background="#FFDEC262" RenderTransformOrigin="0.13,0.22" Width="230" FontSize="16" Height="32" Grid.Column="2">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+            <Button x:Name="btnArrived" Content="Package arrived to dest" HorizontalAlignment="Center" Margin="0,282,0,0" VerticalAlignment="Top" Click="btnDelivery_Click" Height="31" Width="230" Background="#FFDEC262" FontSize="16" Grid.Column="2"/>
+            <Button Name="btnPickedup" Content="Parcel collected " HorizontalAlignment="Center" Margin="0,232,0,0" VerticalAlignment="Top" Click="btnPickedup_Click" Background="#FFDEC262" Width="228" FontSize="16" Grid.Column="2" Height="32"/>
+            <Label x:Name="labelBattery" Content="Battery" HorizontalAlignment="Left" Margin="36,180,0,0" VerticalAlignment="Top" Height="24" Width="45"/>
+            <Label x:Name="labelLongitude" Content="Longitude" HorizontalAlignment="Left" Margin="34,217,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.471,0.233" Height="24" Width="62"/>
+            <Label x:Name="labelLatitude" Content="Latitude" HorizontalAlignment="Left" Margin="36,252,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.053,1.504" Height="24" Width="51"/>
+            <Label x:Name="labelStatus" Content="Status" HorizontalAlignment="Left" Margin="41,288,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.053,1.504" Height="24" Width="40"/>
+            <TextBox x:Name="txtBattery" HorizontalAlignment="Left" Margin="134,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="txtBattery_TextChanged" Height="25"/>
+            <TextBox x:Name="Longitude" HorizontalAlignment="Left" Margin="134,221,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="Longitude_TextChanged" Height="25"/>
+            <TextBox x:Name="Latitude" HorizontalAlignment="Left" Margin="134,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="Latitude_TextChanged" Height="25"/>
+            <TextBox x:Name="Status" HorizontalAlignment="Left" Margin="134,292,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="Status_TextChanged" Height="25"/>
+            <TextBox x:Name="ShowWeight" HorizontalAlignment="Left" Margin="134,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" Height="24" TextChanged="ShowWeight_TextChanged"/>
+            <TextBox x:Name="ShowModel" HorizontalAlignment="Left" Margin="134,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" Height="24"/>
 
 
 

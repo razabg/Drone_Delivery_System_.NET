@@ -113,15 +113,6 @@ namespace PL
             boxPriority_txt.Text = parcel.Priority;
 
 
-
-
-
-
-
-
-
-
-
         }
 
 
@@ -142,7 +133,7 @@ namespace PL
             try
             {
                 BLAccess.AddParcel(parcelTo);
-                MessageBox.Show("the parcelTo was successfully added");
+                MessageBox.Show("the parcel was successfully added");
                 //ParcelEntityAddButton.IsEnabled = false;
                 //SenderIDSelector.IsEnabled = false;
                 //TargetIDSelector.IsEnabled = false;
@@ -152,9 +143,6 @@ namespace PL
             catch (AlreadyExistsException ex)
             {
                 MessageBox.Show(ex.ToString());
-
-
-
             }
         }
 

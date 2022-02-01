@@ -30,9 +30,9 @@ namespace BL
         /// <returns></returns>
         public double CalcDistanceBetweenTwoCoordinates(double longi1, double lati1, double longi2, double lati2)
         {
-            double distance = Math.Sqrt(Math.Pow(longi1 - longi2, 2) + Math.Pow(lati1 - lati2, 2));
-
-            return distance;
+            double distance = Math.Sqrt(Math.Pow(longi2 - longi1, 2) + Math.Pow(lati2 - lati1, 2));
+            
+            return distance*10;
 
         }
         /// <summary>

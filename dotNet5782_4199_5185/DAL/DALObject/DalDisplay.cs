@@ -15,33 +15,35 @@ namespace DAL
         /// <summary>
         /// run on the items of ParcelsList - checks the drone-id - and print every parcel that her droneid' isn't equal to one from the drones
         /// </summary>
-        public void show_UnassignmentParcel_list()// FIX
+        public IEnumerable<Parcel> show_UnassignmentParcel_list()// FIX
         {
+            var listOfUnassign = new List<Parcel>();
             foreach (Parcel parcel in DataSource.ParcelsList)
             {
                 if (parcel.DroneId == 0)
                 {
-                    Console.WriteLine(parcel);
-                    Console.WriteLine($"\n");
+                    listOfUnassign.Add(parcel);
                 }
             }
+            return listOfUnassign;
         }
       
         
         /// <summary>
         /// Print a list of available Charging Stations
         /// </summary>
-        public void show_AvailableChargingStations_list()//FIX
+        public IEnumerable<Station> show_AvailableChargingStations_list()//FIX
         {
+
+            var listOfAvailable = new List<Station>();
             foreach (Station item in DataSource.StationsList)
             {
                 if (item.ChargeSlots > 0)
                 {
-                    Console.WriteLine(item);
-                    Console.WriteLine($"\n");
+                    listOfAvailable.Add(item);
                 }
             }
-
+            return listOfAvailable;
         }
         #endregion
 

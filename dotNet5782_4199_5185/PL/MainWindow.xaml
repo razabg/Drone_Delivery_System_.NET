@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="379" Width="498"
+        Title="MainWindow" Height="389" Width="498"
         ResizeMode="NoResize"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -15,14 +15,14 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
-    <Grid Margin="-9,0,10,11">
+    <Grid Margin="-9,0,10,-21">
 
         <Grid.Background>
             <ImageBrush/>
         </Grid.Background>
 
 
-        <Grid Name="myGird" Margin="10,0,-10,-9">
+        <Grid Name="myGird" Margin="10,0,-10,0" Height="394" VerticalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0*"/>
                 <RowDefinition/>

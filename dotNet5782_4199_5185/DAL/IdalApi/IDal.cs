@@ -26,7 +26,7 @@ namespace DalApi
         #endregion
 
         #region UPDATE STATUS METHODS
-        void UpdateRecharge(Station s, Drone d,DateTime charge);
+        void UpdateRecharge(Station s, Drone d, DateTime charge);
         void UpdateParcel(Parcel p);
         void UpdateDrone(Drone d);
         void UpdateStation(Station s);
@@ -36,17 +36,17 @@ namespace DalApi
         #endregion
 
         #region SHOW LISTS METHODS
-         void show_AvailableChargingStations_list();
-         void show_UnassignmentParcel_list();
+        IEnumerable<Station> show_AvailableChargingStations_list();
+        IEnumerable<Parcel> show_UnassignmentParcel_list();
         #endregion
 
-         double[] PowerConsumptionRequestDrone();
-         int ReturnParcelStatus(Parcel par);
+        double[] PowerConsumptionRequestDrone();
+        int ReturnParcelStatus(Parcel par);
 
-         IEnumerable<Drone> ReturnDroneList(Func<Drone, bool> predicate = null);
-         IEnumerable<Parcel> ReturnParcelList(Func<Parcel, bool> predicate = null);
-         IEnumerable<DroneINCharge> ReturnDroneChargeList(Func<DroneINCharge, bool> predicate = null);
-         IEnumerable<Station> ReturnStationList(Func<Station, bool> predicate = null);
-         IEnumerable<Customer> ReturnCustomerList(Func<Customer, bool> predicate = null);
+        IEnumerable<Drone> ReturnDroneList(Func<Drone, bool> predicate = null);
+        IEnumerable<Parcel> ReturnParcelList(Func<Parcel, bool> predicate = null);
+        IEnumerable<DroneINCharge> ReturnDroneChargeList(Func<DroneINCharge, bool> predicate = null);
+        IEnumerable<Station> ReturnStationList(Func<Station, bool> predicate = null);
+        IEnumerable<Customer> ReturnCustomerList(Func<Customer, bool> predicate = null);
     }
 }

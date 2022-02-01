@@ -75,20 +75,37 @@ namespace PL
 
             if (drone.Status == statusEnum.DroneStatus.Available.ToString())
             {
-                btnCharge.Visibility = Visibility.Visible;
-                btnPairDrone_parcel.Visibility = Visibility.Visible;
+                btnRelease_from_charge.IsEnabled = false;
+                btnPickedup.IsEnabled = false;
+                btnArrived.IsEnabled = false;
+
             }
 
             if (drone.Status == statusEnum.DroneStatus.TreatmentMode.ToString())
             {
-                btnRelease_from_charge.Visibility = Visibility.Visible;
                 btnCharge.IsEnabled = false;
+                btnPickedup.IsEnabled = false;
+                btnArrived.IsEnabled = false;
+                btnPairDrone_parcel.IsEnabled = false;
+
+
             }
 
             if (drone.Status == statusEnum.DroneStatus.Busy.ToString())
             {
-                btnArrived.Visibility = Visibility.Visible;
-                btnPickedup.Visibility = Visibility.Visible;
+                if (drone.IdOfParcelInTransfer != null)
+                {
+                    btnPairDrone_parcel.IsEnabled = false;
+                    btnPickedup.IsEnabled = false;
+                    btnRelease_from_charge.IsEnabled = false;
+                }
+                else
+                {
+                    btnPairDrone_parcel.IsEnabled = false;
+                    btnArrived.IsEnabled = false;
+                }
+
+
             }
             add_drone.Visibility = Visibility.Hidden;
             StationForCharge.Visibility = Visibility.Hidden;
@@ -201,14 +218,13 @@ namespace PL
                 DroneToList dr = BLAccess.GetDroneToLists().ToList().Find(x => x.Id == drone.Id);
                 fillTextbox(dr);
                 btnRelease_from_charge.IsEnabled = false;
-
-                btnCharge.Visibility = Visibility.Visible;
                 btnArrived.IsEnabled = false;
                 btnPairDrone_parcel.IsEnabled = true;
-
-                btnUpdateModel.Visibility = Visibility.Visible;
-               
                 btnPickedup.IsEnabled = false;
+                if (dr.IdOfParcelInTransfer != null)
+                {
+                    btnArrived.IsEnabled = true;
+                }
               
 
                 Update();
@@ -253,7 +269,7 @@ namespace PL
             try
             {
                 BLAccess.ParingParcelToDrone(drone.Id);
-                MessageBox.Show("The drone paired to parcelTo");
+                MessageBox.Show("The drone paired to parcel");
                 DroneToList dr = BLAccess.GetDroneToLists().FirstOrDefault(x => x.Id == drone.Id);
                 fillTextbox(dr);
                 btnPickedup.IsEnabled = true;
@@ -277,7 +293,7 @@ namespace PL
             {
 
                 BLAccess.DroneArrivedToDestination(drone.Id);
-                MessageBox.Show("the parcelTo was delivered to the customer");
+                MessageBox.Show("the parcel was delivered to the customer");
                 DroneToList dr = BLAccess.GetDroneToLists().ToList().Find(x => x.Id == drone.Id);
                 fillTextbox(dr);
 
@@ -305,7 +321,7 @@ namespace PL
                 BLAccess.DroneCollectParcel(drone.Id);
                 DroneToList dr = BLAccess.GetDroneToLists().FirstOrDefault(x => x.Id == drone.Id);
                 fillTextbox(dr);
-                MessageBox.Show("the parcelTo was collected by the parcelTo");
+                MessageBox.Show("the parcel was collected by the drone");
 
 
                 btnPickedup.IsEnabled = false;

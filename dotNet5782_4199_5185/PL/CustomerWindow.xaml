@@ -5,8 +5,68 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="CustomerWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Customer Window" Height="738" Width="802">
+    <Grid Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Height="728" VerticalAlignment="Top">
+        <Grid Margin="-10,0,-2,0" RenderTransformOrigin="0.5,0.5" Height="723" VerticalAlignment="Top">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.164"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="479*"/>
+                <ColumnDefinition Width="283*"/>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="0*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="IDfill"   HorizontalAlignment="Center" Margin="0,17,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24"   MaxLength="3"  />
+            <Label x:Name="labelInsertId" Content="ID" HorizontalAlignment="Left" Margin="134,17,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.237,1.119" Width="25" Height="24"/>
+            <Button x:Name="Close" Content="Close" HorizontalAlignment="Right" Margin="0,651,29,0" VerticalAlignment="Top" Width="81"  RenderTransformOrigin="0.984,0.873" Height="32" Grid.Column="1" Click="Close_Click"/>
+
+
+            <Button x:Name="addCustomer" Content="Add Customer" HorizontalAlignment="Left" VerticalAlignment="Top" Height="31" Width="228"  FontWeight="Bold" FontSize="18" Background="#FFDEC262" Margin="43,41,0,0" RenderTransformOrigin="0.49,0.101" Grid.Column="1" Click="addCustomer_Click" />
+            <Button x:Name="btnUpdatePhoneNumber"  Content="Update Phone Number" HorizontalAlignment="Left" Margin="42,84,0,0" VerticalAlignment="Top"  Background="#FFDEC262" Width="228" FontSize="18" Grid.Column="1" Height="31" FontWeight="Bold" Click="btnUpdatePhoneNumber_Click" />
+            <Label x:Name="labelNname" Content="Name" HorizontalAlignment="Left" Margin="114,59,0,0" VerticalAlignment="Top" Height="24" Width="45"/>
+            <Label x:Name="labelPhoneNum" Content="Phone number" HorizontalAlignment="Left" Margin="82,103,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.471,0.233" Height="24" Width="88"/>
+            <Label x:Name="Labellocation" Content="Location:" HorizontalAlignment="Left" Margin="24,165,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.053,1.504" Height="24" Width="70" FontWeight="Bold" FontStyle="Normal" FontSize="14"/>
+            <Label x:Name="labelParcelSent" Content="Parcels sent" HorizontalAlignment="Left" Margin="30,298,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.053,1.504" Height="33" Width="121" FontWeight="Bold" FontSize="14"/>
+            <TextBox x:Name="txtName"   MaxLength="9" HorizontalAlignment="Center" Margin="0,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"  Height="25" RenderTransformOrigin="0.527,0.145"/>
+            <TextBox x:Name="txtPhone" MaxLength="9"   HorizontalAlignment="Center" Margin="0,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"  Height="24"/>
+            <TextBox x:Name="Location_longi"  MaxLength="8" HorizontalAlignment="Center" Margin="0,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"  Height="25" RenderTransformOrigin="0.556,0.548"/>
+            <TextBox x:Name="Location_lati"   MaxLength="8" HorizontalAlignment="Center" Margin="0,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="25" RenderTransformOrigin="0.463,0.66"/>
+            <ListView x:Name="SentParcelListView" ItemsSource="{Binding}" Margin="145,0,0,312" BorderBrush="#894F0AE2"  Height="123" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="644" Grid.ColumnSpan="2">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"  />
+                        <GridViewColumn Header="Weight" DisplayMemberBinding="{Binding Weight}" />
+                        <GridViewColumn Header="Priority" DisplayMemberBinding="{Binding Priority}" />
+                        <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" />
+                        <GridViewColumn Header="Target" DisplayMemberBinding="{Binding DestOrSrc}" />
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Label Content="Latitude" HorizontalAlignment="Left" Margin="114,144,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.056,0.586" Height="24" Width="51"/>
+            <Label Content="Longitude" HorizontalAlignment="Left" Margin="108,191,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.276,0.461" Height="24" Width="62"/>
+            <Button x:Name="btnUpdateName_Copy" Content="Update Name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Width="228"  FontWeight="Bold" FontSize="18" Background="#FFDEC262" Margin="43,130,0,0" RenderTransformOrigin="0.49,0.101" Grid.Column="1" Click="btnUpdateName_Copy_Click" />
+            <ListView x:Name="ParcelReceivedListView" ItemsSource="{Binding}" Margin="141,464,0,133" BorderBrush="#894F0AE2"   HorizontalAlignment="Left" Width="644" Grid.ColumnSpan="2">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"  />
+                        <GridViewColumn Header="Weight" DisplayMemberBinding="{Binding Weight}" />
+                        <GridViewColumn Header="Priority" DisplayMemberBinding="{Binding Priority}" />
+                        <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" />
+                        <GridViewColumn Header="Sender" DisplayMemberBinding="{Binding DestOrSrc}" />
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Label x:Name="labelParcelRe" Content="Parcel received" HorizontalAlignment="Left" Margin="22,471,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.053,1.504" Height="33" Width="121" FontWeight="Bold" FontSize="14"/>
+
+
+        </Grid>
     </Grid>
 </Window>
