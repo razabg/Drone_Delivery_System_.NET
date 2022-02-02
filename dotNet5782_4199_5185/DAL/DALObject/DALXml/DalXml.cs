@@ -16,7 +16,29 @@ namespace DAL
         #region singelton
         static readonly DalXml instance = new DalXml();
         static DalXml() { }
-        DalXml() { /*Initialize();*/ }
+        DalXml()
+        {
+            /*****XML Initializtion, after the first run should put lines  on comments out *****/
+            #region XML Initialize
+            //DataSource.Initialize();
+            //XMLTools.SaveListToXMLSerializer(DataSource.CustomersList, customerPath);
+            //XMLTools.SaveListToXMLSerializer(DataSource.DronesList, dronePath);
+            //XMLTools.SaveListToXMLSerializer(DataSource.DroneChargeList, droneChargePath);
+            //XMLTools.SaveListToXMLSerializer(DataSource.ParcelsList, parcelPath);
+            //XMLTools.SaveListToXMLSerializer(DataSource.StationsList, stationPath);
+            //XMLTools.CreateFiles(configPath);
+            //XElement BatteryUsageEmpty = new("BatteryUsageEmpty", 3.3);
+            //XElement BatteryUsageLightWight = new("BatteryUsageLightWight", 4);
+            //XElement BatteryUsageMediumWight = new("BatteryUsageMediumWight", 5);
+            //XElement BatteryUsageHaevyWight = new("BatteryUsageHaevyWight", 6.6);
+            //XElement BatteryChargeRate = new("BatteryChargeRate", 60);
+            //XElement BatteryUsage = new("BatteryUsage", BatteryUsageEmpty, BatteryUsageLightWight, BatteryUsageMediumWight, BatteryUsageHaevyWight, BatteryChargeRate);
+            //XElement ParcelIDCounter = new("ParcelIDCounter", 101);
+            //XElement Counters = new("Counters", ParcelIDCounter);
+            //XElement configItems = new XElement("Config-Data", BatteryUsage, Counters);
+            //XMLTools.SaveListToXMLElement(configItems, configPath);
+            #endregion 
+        }
         public static DalXml Instance { get => instance; }
 
         #endregion
@@ -36,7 +58,7 @@ namespace DAL
         {
             XElement stationsRoot = XMLTools.LoadListFromXMLElement(stationPath);
             var stationElem = (from stations in stationsRoot.Elements()
-                               where stations.Element("ID").Value == station.Id.ToString()
+                               where Convert.ToInt32(stations.Element("Id").Value) == station.Id
                                select stations).FirstOrDefault();
             if (stationElem != null)
             {
@@ -45,10 +67,10 @@ namespace DAL
 
 
             XElement newStation = new("Station",
-                new XElement("ID", station.Id),
+                new XElement("Id", station.Id),
                 new XElement("Name", station.Name),
                 new XElement("Longitude", station.Longitude.ToString()),
-                new XElement("Lattitude", station.Latitude.ToString()),
+                new XElement("Latitude", station.Latitude.ToString()),
                 new XElement("ChargeSlots", station.ChargeSlots.ToString()));
             stationsRoot.Add(newStation);
             XMLTools.SaveListToXMLElement(stationsRoot, stationPath);
@@ -58,7 +80,7 @@ namespace DAL
         {
             XElement stationsRoot = XMLTools.LoadListFromXMLElement(stationPath);
             var stationElem = (from stations in stationsRoot.Elements()
-                               where stations.Element("ID").Value == stationID.ToString()
+                               where stations.Element("Id").Value == stationID.ToString()
 
                                select stations).FirstOrDefault();
             if (stationElem == null)
@@ -94,7 +116,7 @@ namespace DAL
         {
             XElement stationsRoot = XMLTools.LoadListFromXMLElement(stationPath);
             XElement stations = (from stationElem in stationsRoot.Elements()
-                                 where stationElem.Element("ID").Value == station.Id.ToString()
+                                 where stationElem.Element("Id").Value == station.Id.ToString()
                                  select stationElem).FirstOrDefault();
 
             if (stations == null)
@@ -110,7 +132,7 @@ namespace DAL
             var stations = (from s in stationsRoot.Elements()
                             select new Station()
                             {
-                                Id = Convert.ToInt32(s.Element("ID").Value),
+                                Id = Convert.ToInt32(s.Element("Id").Value),
                                 ChargeSlots = Convert.ToInt32(s.Element("ChargeSlots").Value),
                                 Latitude = Convert.ToDouble(s.Element("Latitude").Value),
                                 Longitude = Convert.ToDouble(s.Element("Longitude").Value),
@@ -188,7 +210,7 @@ namespace DAL
         {
             var listOfCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(customerPath);
             if (listOfCustomer.Exists(x => x.Id == customer.Id))
-                throw new AlreadyExistsException("The bus already exist in the system");
+                throw new AlreadyExistsException("The customer already exist in the system");
             listOfCustomer.Add(customer);
             XMLTools.SaveListToXMLSerializer<Customer>(listOfCustomer, customerPath);
         }
@@ -250,11 +272,19 @@ namespace DAL
         public void AddParcel(Parcel parcelToAdd)
         {
             List<Parcel> listOfAllParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
-            if (!listOfAllParcels.Exists(x => x.Id == parcelToAdd.Id))
+            if (listOfAllParcels.Exists(x => x.Id == parcelToAdd.Id))
                 throw new AlreadyExistsException("the parcel is alreay exists");
-            parcelToAdd.Id = DataSource.Config.RunIdParcel++; //use config.xml
+            XElement config = XMLTools.LoadData(configPath);
+            int parcelCounter = Convert.ToInt32(config.Element("Counters").Element("ParcelIDCounter").Value);
+            parcelToAdd.Id = parcelCounter;
             parcelToAdd.CreationTime = DateTime.Now;
+            config.Element("Counters").Element("ParcelIDCounter").Remove();
+            parcelCounter++;
+            config.Element("Counters").Add(new XElement("ParcelIDCounter", parcelCounter));
             listOfAllParcels.Add(parcelToAdd);
+            
+           
+            
             XMLTools.SaveListToXMLSerializer<Parcel>(listOfAllParcels, parcelPath);
         }
 
@@ -358,7 +388,7 @@ namespace DAL
             List<Station> listOfAllstations = XMLTools.LoadListFromXMLSerializer<Station>(stationPath);
             List<DroneINCharge> listOfAllDroneIncharge = XMLTools.LoadListFromXMLSerializer<DroneINCharge>(droneChargePath);
             int index = listOfAllstations.FindIndex(x => x.Id == s.Id);
-            if (listOfAllstations.Exists(x => x.Id == d.Id))
+            if (!listOfAllstations.Exists(x => x.Id == s.Id))
                 throw new NotExistsException("The station not exists in the path");
 
             DCharge.DroneId = d.Id;
@@ -382,6 +412,7 @@ namespace DAL
                 throw new NotExistsException("The droneInCharge in path doesn't exist");
 
             listOfAllDrones.Remove(droneC);
+            XMLTools.SaveListToXMLSerializer(listOfAllDrones, dronePath);
         }
 
 

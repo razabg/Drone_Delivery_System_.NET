@@ -33,7 +33,7 @@ namespace BL
 
         public BLObject() //ctor
         {
-            AccessToDataMethods = DalFactory.GetDal("1");
+            AccessToDataMethods = DalFactory.GetDal("2");
             double[] PowerConsumption = AccessToDataMethods.PowerConsumptionRequestDrone();
             AvailableWeightConsump = PowerConsumption[0];
             LightWeightConsump = PowerConsumption[1];

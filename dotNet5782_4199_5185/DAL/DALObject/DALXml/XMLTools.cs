@@ -13,7 +13,8 @@ namespace DAL
 {
     static internal class XMLTools
     {
-        static string dir = @"xml\";
+        static string dir = @"..\..\..\..\Data\";
+        static XElement Root;
         static XMLTools()
         {
             if (!Directory.Exists(dir))
@@ -27,7 +28,7 @@ namespace DAL
         {
             try
             {
-                rootElem.Save(filePath);
+                rootElem.Save(dir + filePath);
             }
             catch (Exception ex)
             {
@@ -40,16 +41,14 @@ namespace DAL
         {
             try
             {
-                if (File.Exists(filePath))
+                if (File.Exists(dir + filePath))
                 {
-                    return XElement.Load(filePath);
+                    return XElement.Load(dir + filePath);
                 }
                 else
                 {
-                    XElement rootElem = new(filePath);
-                    //if (filePath == @"configurationXml.xml")
-                    //    rootElem.Add(new XElement("BusLineID", 1));//check
-                    //rootElem.Save(filePath);
+                    XElement rootElem = new(dir + filePath);
+
                     return rootElem;
                 }
             }
@@ -68,7 +67,7 @@ namespace DAL
         {
             try
             {
-                FileStream file = new FileStream(filePath, FileMode.Create);
+                FileStream file = new FileStream(dir + filePath, FileMode.Create);
                 XmlSerializer x = new XmlSerializer(list.GetType());
                 x.Serialize(file, list);
                 file.Close();
@@ -85,11 +84,11 @@ namespace DAL
         {
             try
             {
-                if (File.Exists(filePath))
+                if (File.Exists(dir + filePath))
                 {
                     List<T> list;
                     XmlSerializer x = new XmlSerializer(typeof(List<T>));
-                    FileStream file = new FileStream(filePath, FileMode.Open);
+                    FileStream file = new FileStream(dir + filePath, FileMode.Open);
                     list = (List<T>)x.Deserialize(file);
                     file.Close();
                     return list;
@@ -103,7 +102,25 @@ namespace DAL
             }
         }
         #endregion
+        public static XElement CreateFiles(string filePath)
+        {
+            string rootName = filePath.Split(".")[0];
+            Root = new XElement(rootName);
+            Root.Save(dir + filePath);
+            return Root;
+        }
 
+        public static XElement LoadData(string filePath)
+        {
+            try
+            {
+                return XElement.Load(dir + filePath);
+            }
+            catch (FileNotFoundException ex)
+            {
+                throw new XMLFileLoadOrCreateException(filePath, $"failed to load xml file: {filePath}", ex);
+            }
+        }
 
     }
 }

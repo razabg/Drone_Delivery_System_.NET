@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<ArrayOfDroneINCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DroneINCharge>
+    <DroneId>0</DroneId>
+    <StationId>0</StationId>
+    <ChargeTime xsi:nil="true" />
+  </DroneINCharge>
+  <DroneINCharge>
+    <DroneId>0</DroneId>
+    <StationId>0</StationId>
+    <ChargeTime xsi:nil="true" />
+  </DroneINCharge>
+  <DroneINCharge>
+    <DroneId>0</DroneId>
+    <StationId>0</StationId>
+    <ChargeTime xsi:nil="true" />
+  </DroneINCharge>
+  <DroneINCharge>
+    <DroneId>0</DroneId>
+    <StationId>0</StationId>
+    <ChargeTime xsi:nil="true" />
+  </DroneINCharge>
+  <DroneINCharge>
+    <DroneId>0</DroneId>
+    <StationId>0</StationId>
+    <ChargeTime xsi:nil="true" />
+  </DroneINCharge>
+  <DroneINCharge>
+    <DroneId>527</DroneId>
+    <StationId>573</StationId>
+    <ChargeTime>2022-02-02T02:10:53.0734909+02:00</ChargeTime>
+  </DroneINCharge>
+  <DroneINCharge>
+    <DroneId>866</DroneId>
+    <StationId>836</StationId>
+    <ChargeTime>2022-02-02T02:10:53.0845042+02:00</ChargeTime>
+  </DroneINCharge>
+  <DroneINCharge>
+    <DroneId>780</DroneId>
+    <StationId>792</StationId>
+    <ChargeTime>2022-02-02T02:10:53.0950381+02:00</ChargeTime>
+  </DroneINCharge>
+  <DroneINCharge>
+    <DroneId>527</DroneId>
+    <StationId>605</StationId>
+    <ChargeTime>2022-02-02T02:11:27.8358099+02:00</ChargeTime>
+  </DroneINCharge>
+  <DroneINCharge>
+    <DroneId>766</DroneId>
+    <StationId>605</StationId>
+    <ChargeTime>2022-02-02T02:11:27.8503496+02:00</ChargeTime>
+  </DroneINCharge>
+  <DroneINCharge>
+    <DroneId>780</DroneId>
+    <StationId>836</StationId>
+    <ChargeTime>2022-02-02T02:11:27.8610818+02:00</ChargeTime>
+  </DroneINCharge>
+</ArrayOfDroneINCharge>
