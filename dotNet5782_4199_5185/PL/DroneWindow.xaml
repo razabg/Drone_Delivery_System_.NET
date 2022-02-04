@@ -14,11 +14,11 @@
                 <ColumnDefinition Width="260*"/>
                 <ColumnDefinition Width="0*"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="IDfill" HorizontalAlignment="Left" Margin="134,10,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24" TextChanged="IDfill_TextChanged" MaxLength="3"/>
+            <TextBox x:Name="IDfill" Grid.Row="1" HorizontalAlignment="Left" Margin="134,10,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="24" TextChanged="IDfill_TextChanged" MaxLength="3"/>
             <ComboBox x:Name="choose_model" HorizontalAlignment="Left" Margin="134,55,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="-0.167,0.73" SelectionChanged="choose_model_SelectionChanged" ItemsSource="{Binding}" Height="25"/>
             <ComboBox x:Name="StationForCharge" HorizontalAlignment="Left" Margin="134,142,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="StationForCharge_SelectionChanged" Height="25"/>
-            <Label x:Name="labelInsertId" Content="ID" HorizontalAlignment="Left" Margin="58,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.237,1.119" Width="25" Height="24"/>
-            <Label x:Name="labelModel" Content="Choose Model" HorizontalAlignment="Left" Margin="22,53,0,0" VerticalAlignment="Top" Height="24" Width="85"/>
+            <Label x:Name="labelInsertId" Grid.Row="1" Content="ID" HorizontalAlignment="Left" Margin="58,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.237,1.119" Width="25" Height="24"/>
+            <Label x:Name="labelModel" Grid.Row="2" Content="Choose Model" HorizontalAlignment="Left" Margin="22,53,0,0" VerticalAlignment="Top" Height="24" Width="85"/>
             <Label x:Name="labelMaxWeight" Content="Max Weight" HorizontalAlignment="Left" Margin="22,96,0,0" VerticalAlignment="Top" Height="24" Width="72"/>
             <Label x:Name="labelStation" Content="Station for Charge" HorizontalAlignment="Left" Margin="17,142,0,0" VerticalAlignment="Top" Height="24" Width="104"/>
             <ComboBox x:Name="MaxWeight"  HorizontalAlignment="Left" Margin="134,96,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="MaxWeight_SelectionChanged" Height="25" />
@@ -60,6 +60,7 @@
             <TextBox x:Name="Status" HorizontalAlignment="Left" Margin="134,292,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="Status_TextChanged" Height="25"/>
             <TextBox x:Name="ShowWeight" HorizontalAlignment="Left" Margin="134,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" Height="24" TextChanged="ShowWeight_TextChanged"/>
             <TextBox x:Name="ShowModel" HorizontalAlignment="Left" Margin="134,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" Height="24"/>
+            <ProgressBar HorizontalAlignment="Left" Height="10" Margin="294,120,0,0" VerticalAlignment="Top" Width="100" ValueChanged="ProgressBar_ValueChanged"/>
 
 
 
