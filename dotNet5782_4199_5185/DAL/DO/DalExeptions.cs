@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace DO
 
 {
+    [Serializable]
     public class XMLFileLoadOrCreateException : Exception
     {
         private string xmlFilePath;
@@ -34,7 +35,7 @@ namespace DO
         public AlreadyExistsException() : base() { }
         public AlreadyExistsException(string msg) { Console.WriteLine(msg); }
 
-        public override string ToString() => base.ToString() + $",The id does not exist";
+        public override string ToString() => base.ToString() + $",The id already exist";
 
     }
 

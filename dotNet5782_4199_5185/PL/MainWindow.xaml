@@ -15,14 +15,14 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
-    <Grid Margin="-9,0,10,-21">
+    <Grid Margin="-9,0,10,-21" Height="394" VerticalAlignment="Bottom">
 
         <Grid.Background>
             <ImageBrush/>
         </Grid.Background>
 
 
-        <Grid Name="myGird" Margin="10,0,-10,0" Height="394" VerticalAlignment="Center">
+        <Grid Name="myGird" Margin="8,0,-10,22">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0*"/>
                 <RowDefinition/>
@@ -34,7 +34,7 @@
                 <ColumnDefinition Width="0*"/>
             </Grid.ColumnDefinitions>
             <Grid.Background>
-                <ImageBrush ImageSource="C:\Users\razab\Source\Repos\dotNet5782_4199_5185\dotNet5782_4199_5185\PL\imageforproject.jpg" Stretch="Fill" TileMode="None"></ImageBrush>
+                <ImageBrush ImageSource="\aaa" Stretch="Fill" TileMode="None"></ImageBrush>
             </Grid.Background>
 
             <Button x:Name="Drone_list_button" Content="Drone list" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Click="DroneList_click" Width="125" Visibility="Visible" Height="50" Grid.Column="1" Grid.Row="1" Background="#FFDEC262">

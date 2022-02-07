@@ -93,11 +93,12 @@ namespace PL
 
             if (drone.Status == statusEnum.DroneStatus.Busy.ToString())
             {
-                if (drone.IdOfParcelInTransfer != null)
+                if (drone.IdOfParcelInTransfer != null )
                 {
                     btnPairDrone_parcel.IsEnabled = false;
                     btnPickedup.IsEnabled = false;
                     btnRelease_from_charge.IsEnabled = false;
+
                 }
                 else
                 {
@@ -231,7 +232,7 @@ namespace PL
             }
             catch (CannotReleaseFromChargeException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Cannot release the drone from charging station");
 
 
             }
@@ -283,7 +284,7 @@ namespace PL
             catch (CannotAssignDroneToParcelException ex)
             {
 
-                MessageBox.Show("cannot pair");
+                MessageBox.Show("Cannot pair");
             }
         }
 
@@ -309,7 +310,7 @@ namespace PL
             catch (CannotSupplyException ex)
             {
 
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Cannot finish the delivery");
             }
         }
 
@@ -356,7 +357,7 @@ namespace PL
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Cannot update the model");
 
             }
 

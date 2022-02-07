@@ -7,20 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="istockphoto-1155027994-612x612.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="MaterialDesignColors" Version="2.0.4" />
     <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="istockphoto-1155027994-612x612.jpg" />
   </ItemGroup>
 
 </Project>

@@ -16,8 +16,18 @@ namespace DAL
         #region singelton
         static readonly DalXml instance = new DalXml();
         static DalXml() { }
-        DalXml()
+
+        private DalXml()
         {
+            List<DroneINCharge> droneINChargesList = XMLTools.LoadListFromXMLSerializer<DroneINCharge>(droneChargePath);
+            foreach (var item in droneINChargesList)
+            {
+                UpdateDeleteDroneInCharge(item.DroneId);
+            }
+            droneINChargesList.Clear();
+            XMLTools.SaveListToXMLSerializer<DroneINCharge>(droneINChargesList, droneChargePath);
+
+
             /*****XML Initializtion, after the first run should put lines  on comments out *****/
             #region XML Initialize
             //DataSource.Initialize();
@@ -151,7 +161,7 @@ namespace DAL
         {
             List<Drone> listOfAllDrones = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);
             if (listOfAllDrones.Exists(x => x.Id == droneToAdd.Id))
-                throw new AlreadyExistsException("The point already axist in the path");
+                throw new AlreadyExistsException("The drone already exists in system");
 
             listOfAllDrones.Add(droneToAdd);
             XMLTools.SaveListToXMLSerializer(listOfAllDrones, dronePath);
@@ -412,7 +422,7 @@ namespace DAL
                 throw new NotExistsException("The droneInCharge in path doesn't exist");
 
             listOfAllDrones.Remove(droneC);
-            XMLTools.SaveListToXMLSerializer(listOfAllDrones, dronePath);
+            XMLTools.SaveListToXMLSerializer(listOfAllDrones, droneChargePath);
         }
 
 

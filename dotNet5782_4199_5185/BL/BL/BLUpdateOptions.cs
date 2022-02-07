@@ -60,7 +60,7 @@ namespace BL
             drone_to_charge.CurrentLocation.Latitude = StationForCharge.Latitude;
             drone_to_charge.Status = statusEnum.DroneStatus.TreatmentMode.ToString();
             var DalDrone = AccessToDataMethods.ReturnDroneList().ToList().Find(x => x.Id == drone_to_charge.Id);
-            AccessToDataMethods.UpdateRecharge(StationForCharge, DalDrone,DateTime.Now);
+            AccessToDataMethods.UpdateRecharge(StationForCharge, DalDrone, DateTime.Now);
 
         }
         /// <summary>
@@ -81,7 +81,7 @@ namespace BL
 
             var DroneToRelease = ListDroneBL.Find(x => x.Id == drone_id);
             DroneToRelease.Status = statusEnum.DroneStatus.Available.ToString();
-           
+
 
 
             DroneToRelease.Battery = (int)CalcBattery(DroneToRelease); //CalcBattery(SumCharge);//check this because its not acurrate,need to calc the time the drone was in charge
@@ -247,9 +247,9 @@ namespace BL
             var drone = ListDroneBL.Find(x => x.Id == drone_id);
 
             IEnumerable<DO.Parcel> parcels = from item in AccessToDataMethods.ReturnParcelList()
-                                          where item.DroneId == drone_id
-                                          where item.PickedUp == null
-                                          select item;
+                                             where item.DroneId == drone_id
+                                             where item.PickedUp == null
+                                             select item;
 
 
             DO.Parcel parcelToPickup = parcels.First();
@@ -281,7 +281,7 @@ namespace BL
         /// <param name="drone_id"></param>
         public void DroneArrivedToDestination(int drone_id)
         {
-            if (!ListDroneBL.Exists(x => x.Id == drone_id))
+            //if (!ListDroneBL.Exists(x => x.Id == drone_id))
             {
                 throw new NotExistsException();
             }
@@ -291,7 +291,7 @@ namespace BL
             }
 
             var drone = ListDroneBL.Find(x => x.Id == drone_id);
-            var parcelArrived = AccessToDataMethods.ReturnParcelList().ToList().Find(x => x.DroneId == drone_id);
+            var parcelArrived = AccessToDataMethods.ReturnParcelList().ToList().Find(x => x.DroneId == drone_id && x.ArrivedTime == null);
             var parcelToPickupIndex = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.DroneId == drone_id);
             if (parcelArrived.PickedUp != null && parcelArrived.ArrivedTime == null)
             {
@@ -339,7 +339,7 @@ namespace BL
                 if (totalChargeSlots >= numOfDronesInCharge)
                 {
                     StationUpdate.ChargeSlots = totalChargeSlots;
-                }  
+                }
                 else
                 {
                     throw new NotEnoughChargeSlotsInThisStation(baseStationId);

@@ -76,9 +76,9 @@ namespace PL
                 MessageBox.Show("the customer was successfully added");
                 
             }
-            catch (AlreadyExistsException ex)
+            catch (AlreadyExistsException)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("already there");
 
             }
 
