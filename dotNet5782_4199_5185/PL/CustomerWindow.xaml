@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
         Title="Customer Window" Height="738" Width="802">
     <Grid Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Height="728" VerticalAlignment="Top">
         <Grid Margin="-10,0,-2,0" RenderTransformOrigin="0.5,0.5" Height="723" VerticalAlignment="Top">

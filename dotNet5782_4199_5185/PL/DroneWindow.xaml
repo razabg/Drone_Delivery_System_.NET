@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Window1" Height="567" Width="802">
+        ResizeMode="NoResize"
+        Title="Drone window" Height="567" Width="802">
     <Grid Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}">
         <Grid HorizontalAlignment="Left" Width="788" Margin="2,0,0,10">
             <Grid.ColumnDefinitions>
