@@ -11,6 +11,9 @@ using System.Xml.Serialization;
 
 namespace DAL
 {
+    /// <summary>
+    /// the class implement the idal interface but with using with xml files  
+    /// </summary>
     internal sealed partial class DalXml : IDal
     {
         #region singelton

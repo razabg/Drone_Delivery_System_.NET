@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
+    /// <summary>
+    /// Dal layer enumrations.
+    /// </summary>
     class DalEnum
     {
         public enum PriorityStatus { Fast = 1, Regular, Emergency };

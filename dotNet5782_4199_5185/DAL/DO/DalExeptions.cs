@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 namespace DO
 
 {
+    /// <summary>
+    /// the class take care of all the xml exception
+    /// </summary>
     [Serializable]
     public class XMLFileLoadOrCreateException : Exception
     {
@@ -27,7 +30,9 @@ namespace DO
 
 
 
-
+    /// <summary>
+    /// the class dealing with duplicate entities exception
+    /// </summary>
     [Serializable]
     public class AlreadyExistsException : Exception
     {
@@ -40,7 +45,9 @@ namespace DO
     }
 
 
-
+    /// <summary>
+    /// the class dealing with entity that is not exists exception
+    /// </summary>
     [Serializable]
     public class NotExistsException : Exception
     {

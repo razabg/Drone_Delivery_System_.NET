@@ -7,6 +7,9 @@ using DO;
 
 namespace DAL
 {
+    /// <summary>
+    /// the class initialize and hold the lists of all the entities.
+    /// </summary>
     public class DataSource
     {
 
@@ -15,6 +18,10 @@ namespace DAL
         internal static List<Customer> CustomersList = new List<Customer>();
         internal static List<Parcel> ParcelsList = new List<Parcel>();
         internal static List<DroneINCharge> DroneChargeList = new List<DroneINCharge>();
+
+        /// <summary>
+        /// the configuration class holds the variables of the battery consumption and the run id number of the pracel
+        /// </summary>
         internal class Config
         {
             public static int RunIdParcel = 101;

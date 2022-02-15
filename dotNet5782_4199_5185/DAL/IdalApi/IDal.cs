@@ -8,6 +8,9 @@ using DO;
 
 namespace DalApi
 {
+    /// <summary>
+    /// idal is an interface that implement the "Design by contract" design pattern
+    /// </summary>
     public interface IDal
     {
         #region *Add Functions*

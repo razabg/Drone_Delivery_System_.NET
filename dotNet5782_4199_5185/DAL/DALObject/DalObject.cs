@@ -10,6 +10,9 @@ using DalApi;
 
 namespace DAL
 {
+    /// <summary>
+    /// the class implement the idal class which deal with all actions on the entities lists.
+    /// </summary>
     internal sealed partial class DALobject : IDal
     {
         //bonus lazy init

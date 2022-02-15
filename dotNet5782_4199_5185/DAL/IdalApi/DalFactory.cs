@@ -7,6 +7,9 @@ using DAL;
 
 namespace DalApi
 {
+    /// <summary>
+    /// Dalfactory class implement the "simple factory" design pattern
+    /// </summary>
     public class DalFactory
     {
         public static IDal GetDal(string wayOfImplement)
