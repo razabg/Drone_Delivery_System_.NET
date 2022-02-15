@@ -5,34 +5,34 @@
     <Name>Station1</Name>
     <Longitude>35.191</Longitude>
     <Latitude>31.7648</Latitude>
-    <ChargeSlots>0</ChargeSlots>
+    <ChargeSlots>-10</ChargeSlots>
   </Station>
   <Station>
     <Id>961</Id>
     <Name>Station2</Name>
     <Longitude>35.2332</Longitude>
     <Latitude>31.7611</Latitude>
-    <ChargeSlots>5</ChargeSlots>
+    <ChargeSlots>2</ChargeSlots>
   </Station>
   <Station>
     <Id>794</Id>
     <Name>Station3</Name>
     <Longitude>35.2309</Longitude>
     <Latitude>31.7936</Latitude>
-    <ChargeSlots>-6</ChargeSlots>
+    <ChargeSlots>-12</ChargeSlots>
   </Station>
   <Station>
     <Id>330</Id>
     <Name>Station4</Name>
     <Longitude>35.2676</Longitude>
     <Latitude>31.7802</Latitude>
-    <ChargeSlots>7</ChargeSlots>
+    <ChargeSlots>2</ChargeSlots>
   </Station>
   <Station>
     <Id>225</Id>
     <Name>Station5</Name>
     <Longitude>35.2098</Longitude>
     <Latitude>31.8216</Latitude>
-    <ChargeSlots>6</ChargeSlots>
+    <ChargeSlots>1</ChargeSlots>
   </Station>
 </ArrayOfStation>

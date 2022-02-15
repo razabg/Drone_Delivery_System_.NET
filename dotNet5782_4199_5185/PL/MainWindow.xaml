@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="389" Width="498"
+        Title="MainWindow" Height="359" Width="512"
         ResizeMode="NoResize"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -15,26 +15,34 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
-    <Grid Margin="-9,0,10,-21" Height="394" VerticalAlignment="Bottom">
+    <Grid Margin="-9,0,0,3" Height="370" VerticalAlignment="Bottom">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="0*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="516*"/>
+        </Grid.ColumnDefinitions>
 
         <Grid.Background>
             <ImageBrush/>
         </Grid.Background>
 
 
-        <Grid Name="myGird" Margin="8,0,-10,22">
+        <Grid Name="myGird" Margin="5,30,0,0" HorizontalAlignment="Left" Width="511" Grid.Column="1" Height="340" VerticalAlignment="Top">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0*"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="504"/>
                 <ColumnDefinition Width="0*"/>
                 <ColumnDefinition Width="0*"/>
             </Grid.ColumnDefinitions>
             <Grid.Background>
-                <ImageBrush ImageSource="\aaa" Stretch="Fill" TileMode="None"></ImageBrush>
+                <ImageBrush ImageSource="C:\Users\razab\Source\Repos\dotNet5782_4199_5185\dotNet5782_4199_5185\PL\aaa.jpg" Stretch="Fill" TileMode="None"></ImageBrush>
             </Grid.Background>
 
             <Button x:Name="Drone_list_button" Content="Drone list" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Click="DroneList_click" Width="125" Visibility="Visible" Height="50" Grid.Column="1" Grid.Row="1" Background="#FFDEC262">
@@ -61,7 +69,7 @@
                     <DropShadowEffect/>
                 </Button.Effect>
             </Button>
-            <materialDesign:Snackbar Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="277,172,0,0" Grid.RowSpan="2" VerticalAlignment="Top"/>
+            <materialDesign:Snackbar Grid.ColumnSpan="4" HorizontalAlignment="Left" Margin="277,170,0,0" VerticalAlignment="Top" Grid.Row="1"/>
 
         </Grid>
 
