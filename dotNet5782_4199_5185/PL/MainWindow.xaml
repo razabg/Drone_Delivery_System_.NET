@@ -42,7 +42,7 @@
                 <ColumnDefinition Width="0*"/>
             </Grid.ColumnDefinitions>
             <Grid.Background>
-                <ImageBrush ImageSource="C:\Users\razab\Source\Repos\dotNet5782_4199_5185\dotNet5782_4199_5185\PL\aaa.jpg" Stretch="Fill" TileMode="None"></ImageBrush>
+                <ImageBrush ImageSource="\aaa.jpg" Stretch="Fill" TileMode="None"></ImageBrush>
             </Grid.Background>
 
             <Button x:Name="Drone_list_button" Content="Drone list" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Click="DroneList_click" Width="125" Visibility="Visible" Height="50" Grid.Column="1" Grid.Row="1" Background="#FFDEC262">
