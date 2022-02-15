@@ -32,6 +32,7 @@ namespace PL
             BLAccess = BlFactory.GetBl();
             InitializeComponent();
 
+
         }
 
         private void DroneList_click(object sender, RoutedEventArgs e)
