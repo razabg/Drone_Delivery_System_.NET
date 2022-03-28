@@ -28,7 +28,7 @@ namespace PL
         public MainWindow()
         {
             var lp = new LoginPage();
-            lp.ShowDialog();
+            lp.ShowDialog();// init the login page
             BLAccess = BlFactory.GetBl();
             InitializeComponent();
 

@@ -24,6 +24,10 @@ namespace PL
     {
         private ObservableCollection<CustomerToList> collection = new ObservableCollection<CustomerToList>();
         private IBL BLAccess;
+        /// <summary>
+        /// ctor init the customers list window
+        /// </summary>
+        /// <param name="BLAccess"></param>
         public CustomerList(BlApi.IBL BLAccess)
         {
             InitializeComponent();
@@ -38,7 +42,11 @@ namespace PL
         {
 
         }
-
+        /// <summary>
+        /// double click event that open a window for a specific customer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DoubleClick(object sender, MouseButtonEventArgs e)
         {
 

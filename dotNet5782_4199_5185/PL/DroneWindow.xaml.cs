@@ -27,6 +27,10 @@ namespace PL
         DroneToList drone = new DroneToList();// insert the input of user to this object
 
         public event Action Update = delegate { };
+        /// <summary>
+        /// ctor for adding a drone
+        /// </summary>
+        /// <param name="BLAccess"></param>
         public DroneWindow(IBL BLAccess)
         {
             this.BLAccess = BLAccess;
@@ -63,6 +67,11 @@ namespace PL
 
         }
 
+        /// <summary>
+        /// ctor for get information and updating a drone
+        /// </summary>
+        /// <param name="BLaccess"></param>
+        /// <param name="drone_arg"></param>
         public DroneWindow(IBL BLaccess, DroneToList drone_arg)
         {
 
@@ -209,7 +218,11 @@ namespace PL
         }
 
 
-
+        /// <summary>
+        /// release the drone from chrage
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnRelease_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -238,7 +251,11 @@ namespace PL
             }
 
         }
-
+        /// <summary>
+        /// send drone to charge
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCharge_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -264,7 +281,11 @@ namespace PL
             }
 
         }
-
+        /// <summary>
+        /// pair with parcel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAssignment_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -287,7 +308,11 @@ namespace PL
                 MessageBox.Show("Cannot pair");
             }
         }
-
+        /// <summary>
+        /// drone arrived to dest
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDelivery_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -313,7 +338,11 @@ namespace PL
                 MessageBox.Show("Cannot finish the delivery");
             }
         }
-
+        /// <summary>
+        /// drone picked up the parcel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnPickedup_Click(object sender, RoutedEventArgs e)
         {
 
@@ -340,7 +369,11 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
         }
-
+        /// <summary>
+        /// update model of the drone
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnUpdateModel_Click(object sender, RoutedEventArgs e)
         {
             try

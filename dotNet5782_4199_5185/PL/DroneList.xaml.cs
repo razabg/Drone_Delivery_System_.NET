@@ -75,7 +75,11 @@ namespace PL
         }
 
 
-
+        /// <summary>
+        /// open a certatin drone window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void List_viewDC(object sender, MouseButtonEventArgs e)
         {
             if (DroneListView.SelectedItem == null)
@@ -109,7 +113,11 @@ namespace PL
         {
             Close();
         }
-
+        /// <summary>
+        /// update list method
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void updateList_Click(object sender, RoutedEventArgs e)
         {
             collection = new ObservableCollection<DroneToList>(BLAccess.GetDroneToLists());

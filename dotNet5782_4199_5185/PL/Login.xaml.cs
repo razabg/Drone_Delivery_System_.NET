@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for LoginPage.xaml
+    /// login page with password
     /// </summary>
 
     public partial class LoginPage : Window
@@ -36,7 +36,7 @@ namespace PL
 
         private void UIElement_OnMouseLeave(object sender, MouseEventArgs e)
         {
-            if (UserNameTextBox.Text == "1" && PasswordBox.Password == "1")
+            if (UserNameTextBox.Text == "1" && PasswordBox.Password == "1")//password for login
             {
                 Close();
             }

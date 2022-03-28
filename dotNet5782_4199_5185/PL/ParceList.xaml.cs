@@ -45,7 +45,11 @@ namespace PL
         {
             Close();
         }
-
+        /// <summary>
+        /// three filter method
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void FilterByStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             statusEnum.ParcelStatus status = (statusEnum.ParcelStatus)FilterByStatus.SelectedItem;
@@ -72,7 +76,11 @@ namespace PL
 
 
         }
-
+        /// <summary>
+        /// three method of grupe by without using linq
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Group_By_Click(object sender, RoutedEventArgs e)//by sender
         {
 
@@ -123,7 +131,11 @@ namespace PL
             ParcelListView.DataContext = collection;
 
         }
-
+        /// <summary>
+        /// event of opening window of specific parcel for info and update
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DoubleClickEvent(object sender, MouseButtonEventArgs e)
         {
             if (ParcelListView.SelectedItem == null)

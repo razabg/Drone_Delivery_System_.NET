@@ -27,6 +27,10 @@ namespace PL
         Parcel parcelTo = new Parcel();// insert the input of user to this object
         ObservableCollection<DroneAtParcel> ListOfInCharge = new ObservableCollection<DroneAtParcel>();
         private IBL BLAccess;
+        /// <summary>
+        /// general ctor of adding parcel
+        /// </summary>
+        /// <param name="BLAccess"></param>
         public ParcelWindow(IBL BLAccess)
         {
             this.BLAccess = BLAccess;
@@ -58,7 +62,11 @@ namespace PL
 
 
         }
-
+        /// <summary>
+        /// ctor for update and get info about a parcel
+        /// </summary>
+        /// <param name="BLAccess"></param>
+        /// <param name="parcel"></param>
         public ParcelWindow(IBL BLAccess, Parcel parcel)
         {
             parcelTo = parcel;

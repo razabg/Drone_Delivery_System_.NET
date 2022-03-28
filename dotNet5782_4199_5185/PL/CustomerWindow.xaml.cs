@@ -26,7 +26,10 @@ namespace PL
         Customer CustomerTo = new Customer();// insert the input of user to this object
         //ObservableCollection<> ListOfInCharge = new ObservableCollection<DroneAtParcel>();
         private IBL BLAccess;
-
+        /// <summary>
+        /// general ctor for adding a customer
+        /// </summary>
+        /// <param name="BlAccess"></param>
         public CustomerWindow(IBL BlAccess)
         {
             InitializeComponent();
@@ -39,7 +42,11 @@ namespace PL
             ParcelReceivedListView.Visibility = Visibility.Hidden;
             SentParcelListView.Visibility = Visibility.Hidden;
         }
-
+        /// <summary>
+        /// ctor in case of a certain customer
+        /// </summary>
+        /// <param name="BlAccess"></param>
+        /// <param name="customer"></param>
         public CustomerWindow(IBL BlAccess,Customer customer)
         {
            
@@ -62,7 +69,11 @@ namespace PL
 
 
         }
-
+        /// <summary>
+        /// add customer click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addCustomer_Click(object sender, RoutedEventArgs e)
         {
             CustomerTo.Id = Convert.ToInt32(IDfill.Text);
@@ -88,7 +99,11 @@ namespace PL
         {
             Close();
         }
-
+        /// <summary>
+        /// update phone number
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnUpdatePhoneNumber_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -105,7 +120,11 @@ namespace PL
 
 
         }
-
+        /// <summary>
+        /// update name
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnUpdateName_Copy_Click(object sender, RoutedEventArgs e)
         {
             try
