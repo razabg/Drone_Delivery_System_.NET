@@ -283,7 +283,7 @@ namespace BL
         /// <param name="drone_id"></param>
         public void DroneArrivedToDestination(int drone_id)
         {
-            //if (!ListDroneBL.Exists(x => x.Id == drone_id))
+            if (!ListDroneBL.Exists(x => x.Id == drone_id))
             {
                 throw new NotExistsException();
             }
