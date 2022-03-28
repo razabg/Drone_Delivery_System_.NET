@@ -1,73 +1,73 @@
 <?xml version="1.0"?>
 <ArrayOfCustomer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Customer>
-    <Id>481</Id>
-    <Name>yosi</Name>
-    <Phone>996187232</Phone>
-    <Longitude>35.2081</Longitude>
-    <Latitude>31.8192</Latitude>
+    <Id>925</Id>
+    <Name>eyal</Name>
+    <Phone>187416361</Phone>
+    <Longitude>35.2536</Longitude>
+    <Latitude>31.752299999999998</Latitude>
   </Customer>
   <Customer>
-    <Id>774</Id>
-    <Name>addie abe</Name>
-    <Phone>117220743</Phone>
-    <Longitude>35.1596</Longitude>
-    <Latitude>31.7835</Latitude>
+    <Id>560</Id>
+    <Name>david</Name>
+    <Phone>127897413</Phone>
+    <Longitude>35.193</Longitude>
+    <Latitude>31.8204</Latitude>
   </Customer>
   <Customer>
-    <Id>281</Id>
-    <Name>marshell</Name>
-    <Phone>921270760</Phone>
-    <Longitude>35.1522</Longitude>
-    <Latitude>31.7731</Latitude>
+    <Id>799</Id>
+    <Name>eyal</Name>
+    <Phone>403946211</Phone>
+    <Longitude>35.1402</Longitude>
+    <Latitude>31.7544</Latitude>
   </Customer>
   <Customer>
-    <Id>315</Id>
-    <Name>raz</Name>
-    <Phone>305533792</Phone>
-    <Longitude>35.1608</Longitude>
-    <Latitude>31.7313</Latitude>
-  </Customer>
-  <Customer>
-    <Id>891</Id>
-    <Name>winston</Name>
-    <Phone>936166582</Phone>
-    <Longitude>35.2382</Longitude>
-    <Latitude>31.7812</Latitude>
-  </Customer>
-  <Customer>
-    <Id>301</Id>
-    <Name>shlomo</Name>
-    <Phone>208053874</Phone>
-    <Longitude>35.1546</Longitude>
-    <Latitude>31.7944</Latitude>
-  </Customer>
-  <Customer>
-    <Id>981</Id>
-    <Name>yosi</Name>
-    <Phone>994332516</Phone>
-    <Longitude>35.2155</Longitude>
-    <Latitude>31.7631</Latitude>
-  </Customer>
-  <Customer>
-    <Id>593</Id>
-    <Name>winston</Name>
-    <Phone>417696040</Phone>
-    <Longitude>35.1828</Longitude>
-    <Latitude>31.7392</Latitude>
-  </Customer>
-  <Customer>
-    <Id>226</Id>
-    <Name>pnina</Name>
-    <Phone>763842411</Phone>
-    <Longitude>35.2103</Longitude>
-    <Latitude>31.8096</Latitude>
-  </Customer>
-  <Customer>
-    <Id>282</Id>
+    <Id>366</Id>
     <Name>ayelet</Name>
-    <Phone>484132861</Phone>
-    <Longitude>35.1428</Longitude>
-    <Latitude>31.7916</Latitude>
+    <Phone>387263041</Phone>
+    <Longitude>35.194</Longitude>
+    <Latitude>31.8167</Latitude>
+  </Customer>
+  <Customer>
+    <Id>576</Id>
+    <Name>winston</Name>
+    <Phone>813661057</Phone>
+    <Longitude>35.2696</Longitude>
+    <Latitude>31.8264</Latitude>
+  </Customer>
+  <Customer>
+    <Id>411</Id>
+    <Name>raz</Name>
+    <Phone>738404087</Phone>
+    <Longitude>35.2697</Longitude>
+    <Latitude>31.8272</Latitude>
+  </Customer>
+  <Customer>
+    <Id>986</Id>
+    <Name>yosi</Name>
+    <Phone>917435255</Phone>
+    <Longitude>35.2555</Longitude>
+    <Latitude>31.8252</Latitude>
+  </Customer>
+  <Customer>
+    <Id>840</Id>
+    <Name>winston</Name>
+    <Phone>968922633</Phone>
+    <Longitude>35.2242</Longitude>
+    <Latitude>31.816</Latitude>
+  </Customer>
+  <Customer>
+    <Id>537</Id>
+    <Name>pnina</Name>
+    <Phone>172735680</Phone>
+    <Longitude>35.2521</Longitude>
+    <Latitude>31.8037</Latitude>
+  </Customer>
+  <Customer>
+    <Id>879</Id>
+    <Name>rachel</Name>
+    <Phone>373295824</Phone>
+    <Longitude>35.218</Longitude>
+    <Latitude>31.826</Latitude>
   </Customer>
 </ArrayOfCustomer>

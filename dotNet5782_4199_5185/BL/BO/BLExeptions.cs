@@ -9,7 +9,7 @@ using DO;
 namespace BO
 {
 
-    // An exceptions class for the business layer
+    /// An exceptions class for the business layer
 
     /// <summary>
     ///This exception will be thrown when the object isn't exist

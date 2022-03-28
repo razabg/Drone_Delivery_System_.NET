@@ -50,6 +50,15 @@ namespace DAL
             DataSource.DroneChargeList.RemoveAt(indexDrone);
         }
 
+        public void ResetListDroneInCharge()
+        {
+            List<DroneINCharge> listOfAllDrones = ReturnDroneChargeList().ToList();
+
+            listOfAllDrones.Clear();
+          
+        }
+
+
         public void UpdateParcel(Parcel p)
         {
             var indexParcel = DataSource.ParcelsList.FindIndex(x => x.Id == p.Id);
@@ -79,6 +88,7 @@ namespace DAL
             {
                 throw new NotExistsException();
             }
+            s.ChargeSlots += 1;
             DataSource.StationsList[stationIndex] = s;
         }
 

@@ -33,7 +33,7 @@ namespace BL
 
         public BLObject() //ctor
         {
-            AccessToDataMethods = DalFactory.GetDal("2");
+            AccessToDataMethods = DalFactory.GetDal("2");// 2 for using xml files ,1 run without xml files
             double[] PowerConsumption = AccessToDataMethods.PowerConsumptionRequestDrone();
             AvailableWeightConsump = PowerConsumption[0];
             LightWeightConsump = PowerConsumption[1];
@@ -130,9 +130,9 @@ namespace BL
                     {
                         foreach (var customer in CustomerListDal)
                         {
-                            if (parcel.TargetId == customer.Id)//fix
+                            if (parcel.TargetId == customer.Id)
                             {
-                                CustomerThatReceiveParcels.Add(customer);//check this
+                                CustomerThatReceiveParcels.Add(customer);
                             }
                         }
                     }
@@ -162,6 +162,19 @@ namespace BL
 
                 }
             }
+
+            
+            foreach (var item in ListDroneBL)//release all the drone from charge when using xml files
+            {
+                if (item.Status == statusEnum.DroneStatus.TreatmentMode.ToString())
+                {
+                    ReleaseDroneFromCharge(item.Id);
+                }
+
+            }
+            AccessToDataMethods.ResetListDroneInCharge();
+            
+
         }
     }
 }

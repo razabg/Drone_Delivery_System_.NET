@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    /// <summary>
+    /// enum class using for get information for the entities
+    /// </summary>
     public class statusEnum
     {
        // public enum Weight { available, Light, Average, Heavy }

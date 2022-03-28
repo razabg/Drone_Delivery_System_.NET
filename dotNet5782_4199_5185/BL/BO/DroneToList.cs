@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    /// <summary>
+    /// bl entity to show the drones list
+    /// </summary>
     public class DroneToList
     {
         public int Id { get; set; }

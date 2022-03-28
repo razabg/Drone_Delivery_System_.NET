@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    /// <summary>
+    /// the class represent information about the customers that send or get parcel
+    /// </summary>
     public class CustomerAtParcel
     {
         public int Id { get; set; }

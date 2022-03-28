@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-
+    /// <summary>
+    /// bl entity of parcel in transfer
+    /// </summary>
     public class ParcelInTransfer
     {
         public int Id { set; get; }

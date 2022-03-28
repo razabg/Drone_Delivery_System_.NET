@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    /// <summary>
+    /// bl entity to show the parcels list
+    /// </summary>
     public class ParcelToList
     {
         public int Id { set; get; }

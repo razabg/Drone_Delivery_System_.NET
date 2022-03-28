@@ -68,7 +68,7 @@ namespace BL
         /// </summary>
         /// <param name="drone_id"></param>
         /// <param name="SumCharge"></param>
-        public void ReleaseDroneFromCharge(int drone_id/*, int SumCharge*/)//check
+        public void ReleaseDroneFromCharge(int drone_id/*, int SumCharge*/)
         {
             if (!ListDroneBL.Exists(x => x.Id == drone_id))
             {
@@ -88,7 +88,7 @@ namespace BL
             var DroneCharge = AccessToDataMethods.ReturnDroneChargeList().ToList().Find(x => x.DroneId == drone_id);
             var stationIndex = AccessToDataMethods.ReturnStationList().ToList().FindIndex(x => x.Id == DroneCharge.StationId);
             var station = AccessToDataMethods.ReturnStationList().ToList().Find(x => x.Id == DroneCharge.StationId);
-            station.ChargeSlots++;
+            //station.ChargeSlots++;
             AccessToDataMethods.UpdateStation(station);
             AccessToDataMethods.UpdateDeleteDroneInCharge(drone_id);
 
@@ -114,7 +114,9 @@ namespace BL
             var droneToPare = ListDroneBL.Find(x => x.Id == drone_id); //we will update here the field and then we will insert it back to dal 
 
 
-            //list sorted by priority
+            //list sorted by priority 
+
+            
             IEnumerable<DO.Parcel> EmergencyParcel = from item in AccessToDataMethods.ReturnParcelList()
                                                      where item.Priority == statusEnum.PriorityStatus.Emergency.ToString()
                                                      where item.Weight == droneToPare.Weight
@@ -138,7 +140,7 @@ namespace BL
                                                    where item.PickedUp == null
                                                    where item.DroneId == null
                                                    select item;
-
+            // we take first the most urgent cases ,afterwards well the fast and regular
             if (EmergencyParcel.Any())
             {
                 DO.Customer nearestCustomer = NearestParcel_SenderIdcustomer(droneToPare.CurrentLocation.Longitude, droneToPare.CurrentLocation.Latitude, EmergencyParcel);//the function returns first of all the cloesest customer for calc the distance

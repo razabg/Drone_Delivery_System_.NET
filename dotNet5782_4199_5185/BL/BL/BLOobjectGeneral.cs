@@ -10,6 +10,11 @@ namespace BL
 {
     internal sealed partial class BLObject
     {
+        /// <summary>
+        /// the method provide info about certain customer
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public DO.Customer GetCustomerDetails(int id)
         {
             List<DO.Customer> CustomerListDal = AccessToDataMethods.ReturnCustomerList().ToList();
@@ -60,7 +65,13 @@ namespace BL
 
 
         }
-
+        /// <summary>
+        /// the method look for the nearest station
+        /// </summary>
+        /// <param name="longi"></param>
+        /// <param name="lati"></param>
+        /// <param name="station"></param>
+        /// <returns></returns>
         public DO.Station NearestStation(double longi, double lati, IEnumerable<DO.Station> station)
         {
             double MinDist = CalcDistanceBetweenTwoCoordinates(longi, lati, station.First().Longitude, station.First().Latitude);
@@ -77,7 +88,13 @@ namespace BL
             return StationToReturn;
 
         }
-
+        /// <summary>
+        ///  the method look for the nearest station that is available for charging
+        /// </summary>
+        /// <param name="longi"></param>
+        /// <param name="lati"></param>
+        /// <param name="station"></param>
+        /// <returns></returns>
         public DO.Station NearestStationToChargeDrone(double longi, double lati, IEnumerable<DO.Station> station)
         {
 
@@ -119,7 +136,13 @@ namespace BL
             }
             return StationToReturn;
         }
-
+        /// <summary>
+        /// the method look for the nearest parcel to be collected
+        /// </summary>
+        /// <param name="longi"></param>
+        /// <param name="lati"></param>
+        /// <param name="parceList"></param>
+        /// <returns></returns>
         public DO.Customer NearestParcel_SenderIdcustomer(double longi, double lati, IEnumerable<DO.Parcel> parceList)
         {
             List<DO.Customer> SenderOfTheParcel = new List<DO.Customer>();//this list going to contain the customers so that we will know the Location of the parcels
@@ -159,11 +182,21 @@ namespace BL
 
         }
 
+
+        /// <summary>
+        /// the method return the dest customer
+        /// </summary>
+        /// <param name="parcel"></param>
+        /// <returns></returns>
         public DO.Customer returnTargetCustomer(DO.Parcel parcel)
         {
             return AccessToDataMethods.ReturnCustomerList().ToList().Find(x => x.Id == parcel.TargetId);
         }
-
+        /// <summary>
+        /// the method return the right index for the calc of battery cunsumption
+        /// </summary>
+        /// <param name="check"></param>
+        /// <returns></returns>
         public int POWERindex(DroneToList check)
         {
             if (check.Weight == statusEnum.TopWeight.Light.ToString())
@@ -181,12 +214,16 @@ namespace BL
             return 0;
 
         }
-
+        /// <summary>
+        /// the method calc the battery consumption
+        /// </summary>
+        /// <param name="drone"></param>
+        /// <returns></returns>
         public double CalcBattery(DroneToList drone)
         {
-            double pace = AccessToDataMethods.PowerConsumptionRequestDrone().Last();
-            double timeDifference = (DateTime.Now - (DateTime)AccessToDataMethods.GetDroneInCharge(drone.Id).ChargeTime).TotalSeconds;
-            drone.Battery += pace * timeDifference;
+            double pace = AccessToDataMethods.PowerConsumptionRequestDrone().Last();//the pace of charging
+            double timeDifference = (DateTime.Now - (DateTime)AccessToDataMethods.GetDroneInCharge(drone.Id).ChargeTime).TotalSeconds;// how much time has passed
+            drone.Battery += pace * timeDifference;//how much the battert should be
 
 
             if (drone.Battery > 100)

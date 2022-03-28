@@ -35,6 +35,7 @@ namespace DalApi
         void UpdateStation(Station s);
         void UpdateCustomer(Customer c);
         void UpdateDeleteDroneInCharge(int DroneId);
+        void ResetListDroneInCharge();
 
         #endregion
 

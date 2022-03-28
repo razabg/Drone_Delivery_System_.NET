@@ -47,6 +47,11 @@ namespace BL
             return BLstation;
 
         }
+        /// <summary>
+        /// display specific drone using the bl drone
+        /// </summary>
+        /// <param name="drone_id"></param>
+        /// <returns></returns>
         public Drone DisplayDrone(int drone_id)
         {
             int index = ListDroneBL.FindIndex(x => x.Id == drone_id);
@@ -111,6 +116,12 @@ namespace BL
 
 
         }
+
+        /// <summary>
+        /// display specific customer using the bl customer
+        /// </summary>
+        /// <param name="customer_id"></param>
+        /// <returns></returns>
         public Customer DisplayCustomer(int customer_id)
         {
             int index = AccessToDataMethods.ReturnCustomerList().ToList().FindIndex(x => x.Id == customer_id);
@@ -174,6 +185,12 @@ namespace BL
             return customerToDisplay;
 
         }
+
+        /// <summary>
+        /// display specific parcel using the bl parcel
+        /// </summary>
+        /// <param name="parcel_id"></param>
+        /// <returns></returns>
         public Parcel DisplayParcel(int parcel_id)
         {
             int index = AccessToDataMethods.ReturnParcelList().ToList().FindIndex(x => x.Id == parcel_id);
@@ -223,7 +240,10 @@ namespace BL
         }
 
 
-
+        /// <summary>
+        /// get base station list using bl entity
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<BaseStationToList> GetBaseStationToLists()
         {
 
@@ -246,12 +266,20 @@ namespace BL
             return BaseStation;
 
         }
+        /// <summary>
+        ///  get drone list using bl entity
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<DroneToList> GetDroneToLists()
         {
 
             return ListDroneBL;
 
         }
+        /// <summary>
+        ///  get customers list using bl entity
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<CustomerToList> GetCustomerToLists()
         {
             List<CustomerToList> customerToLists = new List<CustomerToList>();
@@ -286,6 +314,10 @@ namespace BL
 
 
         }
+        /// <summary>
+        ///  get parcels list using bl entity
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<ParcelToList> GetParcelToLists()
         {
             List<ParcelToList> myList = new();
@@ -308,6 +340,10 @@ namespace BL
 
             return myList;
         }
+        /// <summary>
+        ///  get the not paird parcels list using bl entity
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<ParcelToList> GetNotPairedParcels()
         {
             List<ParcelToList> myNotPairedList = new();
@@ -336,7 +372,10 @@ namespace BL
 
             return myNotPairedList;
         }
-
+        /// <summary>
+        ///  get customer at parcel list using bl entity
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<CustomerAtParcel> GetCustomerAtParcels()
         {
 

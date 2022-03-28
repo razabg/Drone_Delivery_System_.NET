@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    /// <summary>
+    /// bl entity of parcel's information that is in delivery process to/from customer
+    /// </summary>
     public class ParcelAtCustomer
     {
         public int Id { set; get; }

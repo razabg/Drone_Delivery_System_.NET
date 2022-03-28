@@ -8,6 +8,9 @@ using BO;
 
 namespace BlApi
 {
+    /// <summary>
+    /// the interface implement the "design by contract" design pattern
+    /// </summary>
     public interface IBL
     {
         public void AddCustomer(Customer CustomerToAdd);

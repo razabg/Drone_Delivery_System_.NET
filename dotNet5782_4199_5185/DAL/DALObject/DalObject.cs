@@ -26,7 +26,10 @@ namespace DAL
 
         
 
-      
+      /// <summary>
+      /// array with the weight and charging pace
+      /// </summary>
+      /// <returns></returns>
         public double[] PowerConsumptionRequestDrone()
         {
             double[] arr = new double[] { DataSource.Config.Available, DataSource.Config.Light, DataSource.Config.Average, DataSource.Config.Heavy, DataSource.Config.ChargingPaceDrone };
@@ -36,7 +39,11 @@ namespace DAL
 
 
        
-
+        /// <summary>
+        /// return the delivery status of the parcel
+        /// </summary>
+        /// <param name="par"></param>
+        /// <returns></returns>
         public int ReturnParcelStatus(Parcel par)
         {
             if (par.ArrivedTime != null)

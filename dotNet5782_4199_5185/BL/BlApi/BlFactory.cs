@@ -7,7 +7,10 @@ using BL;
 
 namespace BlApi
 {
-    public class BlFactory
+    /// <summary>
+    ///  the class implement the simple factory design pattern 
+    /// </summary>
+    public class BlFactory 
     {
         public static IBL GetBl()
         {

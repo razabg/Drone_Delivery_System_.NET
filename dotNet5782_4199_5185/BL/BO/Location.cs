@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    /// <summary>
+    /// bl entity the hold the location information
+    /// </summary>
     public class Location
     {
         public double Longitude { get; set; }

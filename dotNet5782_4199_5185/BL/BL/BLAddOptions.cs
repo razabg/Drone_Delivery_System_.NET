@@ -10,7 +10,10 @@ namespace BL
 {
     internal sealed partial class BLObject
     {
-
+        /// <summary>
+        /// add station to the database
+        /// </summary>
+        /// <param name="BaseToAdd"></param>
         public void AddStation(BaseStation BaseToAdd)
         {
             DO.Station station_to_list = new DO.Station();
@@ -32,6 +35,11 @@ namespace BL
                 Console.WriteLine(ex);
             }
         }
+        /// <summary>
+        /// add drone to the database
+        /// </summary>
+        /// <param name="DroneToBl"></param>
+        /// <param name="StationId"></param>
         public void AddDrone(DroneToList DroneToBl, int StationId)
         {
             DO.Drone drone_to_list = new DO.Drone();
@@ -60,6 +68,10 @@ namespace BL
             DroneToBl.Status = statusEnum.DroneStatus.TreatmentMode.ToString();
             ListDroneBL.Add(DroneToBl); //the bl drone list which hold the specific drone with its Location
         }
+        /// <summary>
+        /// add customer to the database
+        /// </summary>
+        /// <param name="CustomerToAdd"></param>
         public void AddCustomer(Customer CustomerToAdd)
         {
             DO.Customer CustomerAdd = new DO.Customer();
@@ -79,6 +91,10 @@ namespace BL
 
 
         }
+        /// <summary>
+        /// add parcel to the database
+        /// </summary>
+        /// <param name="ParcelToAdd"></param>
         public void AddParcel(Parcel ParcelToAdd)
         {
             DO.Parcel parcelToDal = new();

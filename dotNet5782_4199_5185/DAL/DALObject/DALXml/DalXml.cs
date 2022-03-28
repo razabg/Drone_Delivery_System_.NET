@@ -32,6 +32,7 @@ namespace DAL
 
 
             /*****XML Initializtion, after the first run should put lines  on comments out *****/
+
             #region XML Initialize
             //DataSource.Initialize();
             //XMLTools.SaveListToXMLSerializer(DataSource.CustomersList, customerPath);
@@ -67,6 +68,10 @@ namespace DAL
 
 
         #region station
+        /// <summary>
+        /// add station to xml 
+        /// </summary>
+        /// <param name="station"></param>
         public void AddStation(Station station)
         {
             XElement stationsRoot = XMLTools.LoadListFromXMLElement(stationPath);
@@ -89,6 +94,10 @@ namespace DAL
             XMLTools.SaveListToXMLElement(stationsRoot, stationPath);
         }
 
+        /// <summary>
+        /// delete station from xml 
+        /// </summary>
+        /// <param name="stationID"></param>
         public void DeleteStation(int stationID)
         {
             XElement stationsRoot = XMLTools.LoadListFromXMLElement(stationPath);
@@ -102,7 +111,11 @@ namespace DAL
             stationElem.Remove();
             XMLTools.SaveListToXMLElement(stationsRoot, stationPath);
         }
-
+        /// <summary>
+        /// return list of stations
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public IEnumerable<Station> ReturnStationList(Func<Station, bool> predicate = null)
         {
             List<Station> listOfAllStations = XMLTools.LoadListFromXMLSerializer<Station>(stationPath);
@@ -112,7 +125,11 @@ namespace DAL
 
 
         }
-
+        /// <summary>
+        ///get specific station according to id
+        /// </summary>
+        /// <param name="stationID"></param>
+        /// <returns></returns>
         public Station GetStation(int stationID)
         {
             var listOfStation = XMLTools.LoadListFromXMLSerializer<Station>(stationPath);
@@ -124,9 +141,13 @@ namespace DAL
             return station;
 
         }
-
+        /// <summary>
+        /// update the station information
+        /// </summary>
+        /// <param name="station"></param>
         public void UpdateStation(Station station)
         {
+            station.ChargeSlots += 1;
             XElement stationsRoot = XMLTools.LoadListFromXMLElement(stationPath);
             XElement stations = (from stationElem in stationsRoot.Elements()
                                  where stationElem.Element("Id").Value == station.Id.ToString()
@@ -138,7 +159,10 @@ namespace DAL
             stations.Element("Name").Value = station.Name.ToString();
             stations.Element("ChargeSlots").Value = station.ChargeSlots.ToString();
         }
-
+        /// <summary>
+        /// the method show available stations
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Station> show_AvailableChargingStations_list()
         {
             XElement stationsRoot = XMLTools.LoadListFromXMLElement(stationPath);
@@ -159,7 +183,10 @@ namespace DAL
         #endregion
 
         #region drone
-
+        /// <summary>
+        /// add drone method
+        /// </summary>
+        /// <param name="droneToAdd"></param>
         public void AddDrone(Drone droneToAdd)
         {
             List<Drone> listOfAllDrones = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);
@@ -169,6 +196,10 @@ namespace DAL
             listOfAllDrones.Add(droneToAdd);
             XMLTools.SaveListToXMLSerializer(listOfAllDrones, dronePath);
         }
+        /// <summary>
+        /// update drone information
+        /// </summary>
+        /// <param name="droneToUpdate"></param>
         public void UpdateDrone(Drone droneToUpdate)
         {
             List<Drone> listOfAllDrones = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);
@@ -182,7 +213,10 @@ namespace DAL
             XMLTools.SaveListToXMLSerializer<Drone>(listOfAllDrones, dronePath);
         }
 
-
+        /// <summary>
+        /// delete drone method **BONUS**
+        /// </summary>
+        /// <param name="id"></param>
         public void DeleteDrone(int id)
         {
             List<Drone> listOfAllDrones = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);
@@ -195,7 +229,11 @@ namespace DAL
         }
 
 
-
+        /// <summary>
+        /// get spesific drone according to id method
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Drone GetDrone(int id)
         {
             List<Drone> listOfAllDrones = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);
@@ -204,7 +242,11 @@ namespace DAL
                 throw new NotExistsException("The drone in path doesn't exist");
             return drone;
         }
-
+        /// <summary>
+        /// return the list of the drones
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public IEnumerable<Drone> ReturnDroneList(Func<Drone, bool> predicate = null)
         {
             List<Drone> listOfAllDrones = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);
@@ -219,6 +261,10 @@ namespace DAL
         #endregion
 
         #region customer
+        /// <summary>
+        /// add customer to database
+        /// </summary>
+        /// <param name="customer"></param>
         public void AddCustomer(Customer customer)
         {
             var listOfCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(customerPath);
@@ -227,7 +273,10 @@ namespace DAL
             listOfCustomer.Add(customer);
             XMLTools.SaveListToXMLSerializer<Customer>(listOfCustomer, customerPath);
         }
-
+        /// <summary>
+        /// delete customer **BOUNUS**
+        /// </summary>
+        /// <param name="customerID"></param>
         public void DeleteCustomer(int customerID)
         {
             var listOfCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(customerPath);
@@ -238,7 +287,11 @@ namespace DAL
             XMLTools.SaveListToXMLSerializer<Customer>(listOfCustomer, customerPath);
 
         }
-
+        /// <summary>
+        /// get certain customer according to id 
+        /// </summary>
+        /// <param name="customerID"></param>
+        /// <returns></returns>
         public Customer GetCustomer(int customerID)
         {
             var listOfCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(customerPath);
@@ -250,7 +303,11 @@ namespace DAL
         }
 
 
-
+        /// <summary>
+        /// return the list of the customers
+        /// </summary>
+        /// <param name="func"></param>
+        /// <returns></returns>
         public IEnumerable<Customer> ReturnCustomerList(Func<Customer, bool> func = null)
         {
             List<Customer> listOfAllDrones = XMLTools.LoadListFromXMLSerializer<Customer>(customerPath);
@@ -258,7 +315,10 @@ namespace DAL
                 return listOfAllDrones;
             return listOfAllDrones.Where(func);
         }
-
+        /// <summary>
+        /// update customers information
+        /// </summary>
+        /// <param name="customer"></param>
         public void UpdateCustomer(Customer customer)
         {
             List<Customer> listOfCustomer = XMLTools.LoadListFromXMLSerializer<Customer>(customerPath);
@@ -282,6 +342,10 @@ namespace DAL
         #endregion
 
         #region parcel
+        /// <summary>
+        /// add parcel to database
+        /// </summary>
+        /// <param name="parcelToAdd"></param>
         public void AddParcel(Parcel parcelToAdd)
         {
             List<Parcel> listOfAllParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
@@ -300,7 +364,10 @@ namespace DAL
             
             XMLTools.SaveListToXMLSerializer<Parcel>(listOfAllParcels, parcelPath);
         }
-
+        /// <summary>
+        /// delete parcel **BONUS**
+        /// </summary>
+        /// <param name="id"></param>
         public void DeleteParcel(int id)
         {
             XElement parcelRoot = XMLTools.LoadListFromXMLElement(parcelPath);
@@ -313,7 +380,11 @@ namespace DAL
             parcel.Remove();
             XMLTools.SaveListToXMLElement(parcelRoot, parcelPath);
         }
-
+        /// <summary>
+        /// get certain parcel according to id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Parcel GetParcel(int id)
         {
             List<Parcel> listOfAllParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
@@ -322,7 +393,11 @@ namespace DAL
                 throw new NotExistsException("The parcel in path doesn't exist");
             return parcel;
         }
-
+        /// <summary>
+        /// return the parcels list
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public IEnumerable<Parcel> ReturnParcelList(Func<Parcel, bool> predicate = null)
         {
             List<Parcel> listOfAllParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
@@ -331,7 +406,10 @@ namespace DAL
             return listOfAllParcels.Where(predicate);
 
         }
-
+        /// <summary>
+        /// update parcel information
+        /// </summary>
+        /// <param name="parceltoUpdate"></param>
         public void UpdateParcel(Parcel parceltoUpdate)
         {
             List<Parcel> listOfAllParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
@@ -351,7 +429,10 @@ namespace DAL
             listOfAllParcels[index] = parcel;
             XMLTools.SaveListToXMLSerializer<Parcel>(listOfAllParcels, parcelPath);
         }
-
+        /// <summary>
+        /// show available parcels for delivery
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Parcel> show_UnassignmentParcel_list()
         {
             List<Parcel> listOfAllParcels = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
@@ -373,7 +454,11 @@ namespace DAL
         #endregion
 
         #region droneCharge 
-
+        /// <summary>
+        /// get certain drone in charge
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public DroneINCharge GetDroneInCharge(int id)
         {
             List<DroneINCharge> listOfAllDrones = XMLTools.LoadListFromXMLSerializer<DroneINCharge>(droneChargePath);
@@ -384,7 +469,11 @@ namespace DAL
 
         }
 
-
+        /// <summary>
+        /// return list of drone in charging
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public IEnumerable<DroneINCharge> ReturnDroneChargeList(Func<DroneINCharge, bool> predicate = null)
         {
             List<DroneINCharge> listOfAllDrones = XMLTools.LoadListFromXMLSerializer<DroneINCharge>(droneChargePath);
@@ -393,7 +482,12 @@ namespace DAL
             return listOfAllDrones.Where(predicate);
 
         }
-
+        /// <summary>
+        /// update update the list with a drone that going to be charged
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="d"></param>
+        /// <param name="chargeTime"></param>
         public void UpdateRecharge(Station s, Drone d, DateTime chargeTime)
         {
 
@@ -416,15 +510,28 @@ namespace DAL
             XMLTools.SaveListToXMLSerializer(listOfAllstations, stationPath);
 
         }
-
+        /// <summary>
+        /// delete the drone from charging list
+        /// </summary>
+        /// <param name="DroneId"></param>
         public void UpdateDeleteDroneInCharge(int DroneId)
         {
+            List<Station> listOfAllstations = XMLTools.LoadListFromXMLSerializer<Station>(stationPath);
             List<DroneINCharge> listOfAllDrones = XMLTools.LoadListFromXMLSerializer<DroneINCharge>(droneChargePath);
             DroneINCharge droneC = listOfAllDrones.Find(x => x.DroneId == DroneId);
             if (!listOfAllDrones.Exists(x => x.DroneId == DroneId))
-                throw new NotExistsException("The droneInCharge in path doesn't exist");
+                throw new NotExistsException("The droneInCharge doesn't exists in path");
 
             listOfAllDrones.Remove(droneC);
+            XMLTools.SaveListToXMLSerializer(listOfAllDrones, droneChargePath);
+        }
+
+
+        public void ResetListDroneInCharge()
+        {
+            List<DroneINCharge> listOfAllDrones = XMLTools.LoadListFromXMLSerializer<DroneINCharge>(droneChargePath);
+          
+            listOfAllDrones.Clear();
             XMLTools.SaveListToXMLSerializer(listOfAllDrones, droneChargePath);
         }
 

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    /// <summary>
+    /// bl entity to show to list of stations
+    /// </summary>
     public class BaseStationToList
     {
         public int Id { set; get; }

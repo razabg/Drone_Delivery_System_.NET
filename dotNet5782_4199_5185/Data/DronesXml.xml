@@ -1,33 +1,28 @@
 <?xml version="1.0"?>
 <ArrayOfDrone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Drone>
-    <Id>968</Id>
-    <Model>Strive_5</Model>
-    <MaxWeight>Average</MaxWeight>
+    <Id>758</Id>
+    <Model>AirCombo</Model>
+    <MaxWeight>Heavy</MaxWeight>
   </Drone>
   <Drone>
-    <Id>990</Id>
-    <Model>TELLO</Model>
-    <MaxWeight>Average</MaxWeight>
-  </Drone>
-  <Drone>
-    <Id>575</Id>
+    <Id>205</Id>
     <Model>Mavic_210</Model>
     <MaxWeight>Average</MaxWeight>
   </Drone>
   <Drone>
-    <Id>344</Id>
+    <Id>492</Id>
     <Model>Spark</Model>
     <MaxWeight>Heavy</MaxWeight>
   </Drone>
   <Drone>
-    <Id>656</Id>
-    <Model>Mavic_210</Model>
-    <MaxWeight>Heavy</MaxWeight>
+    <Id>278</Id>
+    <Model>Strive_5</Model>
+    <MaxWeight>Average</MaxWeight>
   </Drone>
   <Drone>
-    <Id>111</Id>
-    <Model>tello</Model>
+    <Id>977</Id>
+    <Model>Strive_5</Model>
     <MaxWeight>Average</MaxWeight>
   </Drone>
 </ArrayOfDrone>
