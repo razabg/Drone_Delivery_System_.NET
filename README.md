@@ -10,4 +10,3 @@ The gui of the program implemented with WPF.
 Based on 3-layer model PL, BL, DAL architecture and design pattern such as observer, singleton, factory, design by contract. data handeled in XML files.
 
 
-Ex0 commit Final 
