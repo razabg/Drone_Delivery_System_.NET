@@ -15,7 +15,6 @@ A comprehensive enterprise-level drone delivery management system built with C# 
 - **Customer Management** - Comprehensive customer database with delivery history
 - **Charging Station Network** - Strategic placement and monitoring of drone charging infrastructure
 - **Real-time Status Updates** - Live tracking of drone locations, battery levels, and delivery status
-- **Automated Delivery Scheduling** - Intelligent task assignment based on drone availability and proximity
 
 
 ### Design Patterns Implemented
